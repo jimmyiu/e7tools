@@ -1,0 +1,27 @@
+$body-font-family: 'Inconsolata', monospace
+@use "sass:map"
+@import '~vuetify/src/styles/main.sass'
+
+//.background--error
+// background-color: map.get($red, "accent-2")
+
+@import '~vuetify/src/styles/styles.sass'
+// @import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900&display=swap")
+
+.placeholder--italic input::placeholder
+  font-style: italic !important
+  color: map.get($grey, "darken-2") !important
+
+.gear-filter.v-btn-toggle > .v-btn.v-btn
+  opacity: 1
+
+.gear-filter > .v-btn.v-btn
+  min-width: 42px
+  max-width: 42px
+
+.disable-events
+  pointer-events: none
+
+.gear-stat-input
+  max-width: 300px
+  min-width: 300px

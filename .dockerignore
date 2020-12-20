@@ -1,0 +1,10 @@
+.git
+.gitignore
+.dockerignore
+.idea
+.gitlab-ci.yml
+Dockerfile
+makefile
+dist
+node_modules
+vscode.code-workspace

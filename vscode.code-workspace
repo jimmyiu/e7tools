@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.formatOnSave": false,
+		"editor.tabSize": 2,
+		"files.exclude": {
+			"docs": true,
+			"node_modules": true
+		},
+		"vetur.validation.template": false,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		},
+		"eslint.validate": [
+			"vue",
+			"javascript",
+			"typescript"
+		],
+	}
+}
