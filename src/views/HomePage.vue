@@ -18,6 +18,7 @@
       </ol>
     </message-box>
     <message-box hide-default title="Latest News / Version History">
+      [2020-12-20] fix mobile ui<br />
       [2020-12-19] deploy to GitHub page<br />
       [2020-12-06] project kick start
     </message-box>
