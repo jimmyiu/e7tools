@@ -1,7 +1,7 @@
 <template>
   <v-row dense no-gutters>
     <v-col align="center">
-      <v-img :max-height="getWidth()" :max-width="getWidth()" :src="`/assets/img/gear/${type.toLowerCase()}.png`" />
+      <v-img :max-height="getWidth()" :max-width="getWidth()" :src="`assets/img/gear/${type.toLowerCase()}.png`" />
     </v-col>
   </v-row>
 </template>

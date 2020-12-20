@@ -21,7 +21,7 @@
   margin-top: -6px
 .text
   position: absolute
-  top: 6px
+  top: 5px
   left: 6px
   font-size: 12px
 .effect-1
