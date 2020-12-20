@@ -24,3 +24,16 @@ docker-push: docker-build
 docker-test: docker-build
 	@docker stop temp || true
 	@docker run -d --rm --name temp -p 8080:80 $(DK_IMAGE):$(DK_IMAGE_TAG)
+
+deploy-gh-pages:
+	@git checkout gh-pages
+	@git merge main
+	@docker run -it --rm --name temp -u $$(id -u):$$(id -g) \
+	  -v $$(pwd):/usr/local/src -w /usr/local/src \
+		-e NODE_OPTIONS=--max_old_space_size=8192 -e NODE_ENV=development \
+		-p 8080:8080 \
+		$(NODE_IMAGE) yarn build
+	@git add .
+	@git commit -m "chore: update gh-pages"
+	@git push
+	@git checkout main
