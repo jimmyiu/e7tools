@@ -27,11 +27,10 @@ docker-test: docker-build
 
 deploy-gh-pages:
 	@git checkout gh-pages
-	@git merge main
-	@docker run -it --rm --name temp -u $$(id -u):$$(id -g) \
+	@GIT_MERGE_AUTOEDIT=no git merge main
+	@docker run -it --rm --name builder -u $$(id -u):$$(id -g) \
 	  -v $$(pwd):/usr/local/src -w /usr/local/src \
 		-e NODE_OPTIONS=--max_old_space_size=8192 -e NODE_ENV=development \
-		-p 8080:8080 \
 		$(NODE_IMAGE) yarn build
 	@git add .
 	@git commit -m "chore: update gh-pages"
