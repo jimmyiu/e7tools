@@ -1,5 +1,5 @@
 <template>
-  <v-data-table dense :headers="headers" :items="gears" :items-per-page="10" multi-sort>
+  <v-data-table dense :headers="headers" :items="gears" :items-per-page="15" multi-sort>
     <template v-slot:item.type="{ item }">
       <gear-type-icon small :type="item.type" />
     </template>

@@ -35,15 +35,16 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import { mapState } from 'vuex';
 import { GearDetail, GearForm, GearTable, GearTableFilter } from '@/components';
 import { Gear } from '@/models';
 
 @Component({
-  components: { GearDetail, GearForm, GearTable, GearTableFilter }
+  components: { GearDetail, GearForm, GearTable, GearTableFilter },
+  computed: { ...mapState(['gears']) }
 })
 export default class GearPage extends Vue {
   name: string = 'gear-page';
-  gears: Gear.Gear[] = [];
   overlay = false;
   filter: Gear.TableFilter = {
     types: [],
@@ -64,111 +65,29 @@ export default class GearPage extends Vue {
     { text: 'Protein (g)', value: 'protein' },
     { text: 'Iron (%)', value: 'iron' }
   ];
-  desserts = [
-    {
-      name: 'Frozen Yogurt',
-      calories: 159,
-      fat: 6.0,
-      carbs: 24,
-      protein: 4.0,
-      iron: '1%'
-    },
-    {
-      name: 'Ice cream sandwich',
-      calories: 237,
-      fat: 9.0,
-      carbs: 37,
-      protein: 4.3,
-      iron: '1%'
-    },
-    {
-      name: 'Eclair',
-      calories: 262,
-      fat: 16.0,
-      carbs: 23,
-      protein: 6.0,
-      iron: '7%'
-    },
-    {
-      name: 'Cupcake',
-      calories: 305,
-      fat: 3.7,
-      carbs: 67,
-      protein: 4.3,
-      iron: '8%'
-    },
-    {
-      name: 'Gingerbread',
-      calories: 356,
-      fat: 16.0,
-      carbs: 49,
-      protein: 3.9,
-      iron: '16%'
-    },
-    {
-      name: 'Jelly bean',
-      calories: 375,
-      fat: 0.0,
-      carbs: 94,
-      protein: 0.0,
-      iron: '0%'
-    },
-    {
-      name: 'Lollipop',
-      calories: 392,
-      fat: 0.2,
-      carbs: 98,
-      protein: 0,
-      iron: '2%'
-    },
-    {
-      name: 'Honeycomb',
-      calories: 408,
-      fat: 3.2,
-      carbs: 87,
-      protein: 6.5,
-      iron: '45%'
-    },
-    {
-      name: 'Donut',
-      calories: 452,
-      fat: 25.0,
-      carbs: 51,
-      protein: 4.9,
-      iron: '22%'
-    },
-    {
-      name: 'KitKat',
-      calories: 518,
-      fat: 26.0,
-      carbs: 65,
-      protein: 7,
-      iron: '6%'
-    }
-  ];
 
   created() {
-    this.gears = [
-      this.dummy('1'),
-      this.dummy('2'),
-      this.dummy('3')
-      // this.dummy('4'),
-      // this.dummy('5'),
-      // this.dummy('6'),
-      // this.dummy('7'),
-      // this.dummy('8'),
-      // this.dummy('9'),
-      // this.dummy('10'),
-      // this.dummy('11'),
-      // this.dummy('12'),
-      // this.dummy('13'),
-      // this.dummy('14'),
-      // this.dummy('15'),
-      // this.dummy('16'),
-      // this.dummy('17'),
-      // this.dummy('18'),
-      // this.dummy('19')
-    ];
+    // this.gears = [
+    //   this.dummy('1'),
+    //   this.dummy('2'),
+    //   this.dummy('3')
+    // this.dummy('4'),
+    // this.dummy('5'),
+    // this.dummy('6'),
+    // this.dummy('7'),
+    // this.dummy('8'),
+    // this.dummy('9'),
+    // this.dummy('10'),
+    // this.dummy('11'),
+    // this.dummy('12'),
+    // this.dummy('13'),
+    // this.dummy('14'),
+    // this.dummy('15'),
+    // this.dummy('16'),
+    // this.dummy('17'),
+    // this.dummy('18'),
+    // this.dummy('19')
+    // ];
   }
 
   dummy(id: string): Gear.Gear {
@@ -194,7 +113,7 @@ export default class GearPage extends Vue {
   }
 
   inputGear(gear: Gear.Gear) {
-    this.gears.push(gear);
+    // this.gears.push(gear);
   }
 
   // items: Array<Hero> = new Array();

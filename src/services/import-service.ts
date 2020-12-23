@@ -61,8 +61,9 @@ const STAT_MAPPING: ReadonlyMap<number, Gear.Stat> = new Map([
 class ImportService {
   convert(item: any): Gear.Gear {
     let gear: ImportGear = item;
-    let result: Gear.Gear = {};
-    result.id = `i-${gear.ID}`;
+    let result: Gear.Gear = {
+      id: `i-${gear.ID}`
+    };
     result.type = TYPE_MAPPING.get(gear.Type);
     result.set = SET_MAPPING.get(gear.Set);
     result.grade = GRADE_MAPPING.get(gear.Grade);

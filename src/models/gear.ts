@@ -65,7 +65,7 @@ export namespace Gear {
   }
 
   export interface Gear {
-    id?: string;
+    id: string;
     type?: Type;
     set?: Set;
     grade?: Grade;
