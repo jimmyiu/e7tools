@@ -4,7 +4,7 @@
       <v-col>
         <gear-table-filter v-model="filter" />
         <v-divider class="mt-1" />
-        <gear-table :gears="gears" />
+        <gear-table :gears="filteredGears" />
       </v-col>
     </v-row>
     <v-btn fab right @click="overlay = true"><v-icon>mdi-plus</v-icon></v-btn>
@@ -40,11 +40,13 @@ import { GearDetail, GearForm, GearTable, GearTableFilter } from '@/components';
 import { Gear } from '@/models';
 
 @Component({
+  name: 'gear-page',
   components: { GearDetail, GearForm, GearTable, GearTableFilter },
   computed: { ...mapState(['gears']) }
 })
 export default class GearPage extends Vue {
-  name: string = 'gear-page';
+  gears2 = Array<Gear.Gear>();
+  gears!: Gear.Gear[];
   overlay = false;
   filter: Gear.TableFilter = {
     types: [],
@@ -52,64 +54,59 @@ export default class GearPage extends Vue {
     mode: 0
   };
 
-  headers = [
-    {
-      text: 'Dessert (100g serving)',
-      align: 'start',
-      sortable: false,
-      value: 'name'
-    },
-    { text: 'Calories', value: 'calories' },
-    { text: 'Fat (g)', value: 'fat' },
-    { text: 'Carbs (g)', value: 'carbs' },
-    { text: 'Protein (g)', value: 'protein' },
-    { text: 'Iron (%)', value: 'iron' }
-  ];
+  get filteredGears() {
+    return this.gears.filter(it => {
+      let type = this.filter.types.length == 0 || this.filter.types.indexOf(it.type!!) >= 0;
+      let set = this.filter.sets.length == 0 || this.filter.sets.indexOf(it.set!!) >= 0;
+      return type && set;
+    });
+  }
 
   created() {
-    // this.gears = [
-    //   this.dummy('1'),
-    //   this.dummy('2'),
-    //   this.dummy('3')
-    // this.dummy('4'),
-    // this.dummy('5'),
-    // this.dummy('6'),
-    // this.dummy('7'),
-    // this.dummy('8'),
-    // this.dummy('9'),
-    // this.dummy('10'),
-    // this.dummy('11'),
-    // this.dummy('12'),
-    // this.dummy('13'),
-    // this.dummy('14'),
-    // this.dummy('15'),
-    // this.dummy('16'),
-    // this.dummy('17'),
-    // this.dummy('18'),
-    // this.dummy('19')
-    // ];
+    this.gears2 = [
+      this.dummy('1'),
+      this.dummy('2'),
+      this.dummy('3')
+      // this.dummy('4'),
+      // this.dummy('5'),
+      // this.dummy('6'),
+      // this.dummy('7'),
+      // this.dummy('8'),
+      // this.dummy('9'),
+      // this.dummy('10'),
+      // this.dummy('11'),
+      // this.dummy('12'),
+      // this.dummy('13'),
+      // this.dummy('14'),
+      // this.dummy('15'),
+      // this.dummy('16'),
+      // this.dummy('17'),
+      // this.dummy('18'),
+      // this.dummy('19')
+    ];
   }
 
   dummy(id: string): Gear.Gear {
-    return {
-      id: id,
-      type: Gear.Type.Weapon,
-      set: Gear.Set.Speed,
-      grade: Gear.Grade.EPIC,
-      level: 85,
-      enhance: 15,
-      hpp: 1,
-      hp: 20000,
-      defp: 3,
-      def: 2000,
-      atkp: 5,
-      atk: 4000,
-      cri: 100,
-      cdmg: 350,
-      spd: 9,
-      eff: 10,
-      res: 11
-    };
+    let gear = new Gear.Gear(id);
+    gear.type = Gear.Type.Weapon;
+    gear.set = Gear.Set.Speed;
+    gear.grade = Gear.Grade.EPIC;
+    gear.level = 85;
+    gear.enhance = 15;
+    gear.main = Gear.Stat.ATK;
+    gear.hpp = 1;
+    gear.hp = 20000;
+    gear.defp = 3;
+    gear.def = 2000;
+    gear.atkp = 5;
+    gear.atk = 4000;
+    gear.cri = 100;
+    gear.cdmg = 350;
+    gear.spd = 9;
+    gear.eff = 10;
+    gear.res = 11;
+    gear.score = 12;
+    return gear;
   }
 
   inputGear(gear: Gear.Gear) {

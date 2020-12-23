@@ -1,5 +1,7 @@
 import { Vue } from 'vue-property-decorator';
 import { Gear } from '@/models/gear';
+import GearService from './gear-service';
+
 interface Stat {
   Name: number;
   Value: number;
@@ -61,9 +63,7 @@ const STAT_MAPPING: ReadonlyMap<number, Gear.Stat> = new Map([
 class ImportService {
   convert(item: any): Gear.Gear {
     let gear: ImportGear = item;
-    let result: Gear.Gear = {
-      id: `i-${gear.ID}`
-    };
+    let result = new Gear.Gear(`i-${gear.ID}`);
     result.type = TYPE_MAPPING.get(gear.Type);
     result.set = SET_MAPPING.get(gear.Set);
     result.grade = GRADE_MAPPING.get(gear.Grade);
@@ -73,10 +73,26 @@ class ImportService {
     [gear.Main, ...gear.SubStats].forEach(it => {
       let stat = STAT_MAPPING.get(it.Name);
       if (stat != undefined) {
-        Vue.set(result, stat.value, it.Value);
+        Vue.set(result, stat.value, this.covertStatValue(stat, it.Value));
       }
     });
+    result.score = GearService.calculateScore(result);
     return result;
+  }
+
+  covertStatValue(stat: Gear.Stat, value: number): number {
+    if (
+      stat == Gear.Stat.ATKP ||
+      stat == Gear.Stat.HPP ||
+      stat == Gear.Stat.DEFP ||
+      stat == Gear.Stat.CRI ||
+      stat == Gear.Stat.CDMG ||
+      stat == Gear.Stat.EFF ||
+      stat == Gear.Stat.RES
+    ) {
+      return Math.trunc(value * 100);
+    }
+    return value;
   }
 }
 export default new ImportService();

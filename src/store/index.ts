@@ -14,7 +14,7 @@ export default new Vuex.Store({
       state.loading = value;
     },
     updateGears(state: any, value: Array<Gear.Gear>) {
-      console.log(value);
+      // console.log(value);
       Vue.set(state, 'gears', value);
     }
   },

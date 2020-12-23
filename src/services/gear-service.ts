@@ -1,16 +1,5 @@
 import { Gear } from '@/models/gear';
-
-// // import { GearType, GearSet } from '@/models';
-
-// function getGearSetImgUrl(set: GearSet) {
-//   return require(`@/assets/img/gear/set/${set.toLowerCase()}.png`);
-// }
-
-// function getGearTypeImgUrl(type: GearType) {
-//   return require(`@/assets/img/gear/${type.toLowerCase()}.png`);
-// }
-
-// // export default GearService;
+import Stat = Gear.Stat;
 
 class GearService {
   mergeGears(original: Gear.Gear[], extra: Gear.Gear[]) {
@@ -22,6 +11,22 @@ class GearService {
       extra.forEach(it => map.set(it.id, it));
     }
     return Array.from(map.values());
+  }
+
+  calculateScore(gear: Gear.Gear) {
+    let stats = gear.getStatMap();
+    stats.delete(gear.main!!);
+    let score = 0;
+    stats.forEach((v: number | undefined, k: Stat) => {
+      if ([Stat.HPP, Stat.DEFP, Stat.ATKP, Stat.CDMG, Stat.EFF, Stat.RES].includes(k)) {
+        score += v || 0;
+      } else if (Stat.CRI == k) {
+        score += (v || 0) * 1.5;
+      } else if (Stat.SPD == k) {
+        score += (v || 0) * 2;
+      }
+    });
+    return score;
   }
 }
 export default new GearService();

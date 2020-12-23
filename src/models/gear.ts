@@ -22,11 +22,11 @@ export namespace Gear {
     Penetration = 'Penetration'
   }
   export const SETS = [
-    [Gear.Set.Speed, Gear.Set.Critical, Gear.Set.Hit],
-    [Gear.Set.Destruction, Gear.Set.Counter, Gear.Set.LifeSteal, Gear.Set.Resist],
-    [Gear.Set.Attack, Gear.Set.Health, Gear.Set.Defense],
-    [Gear.Set.Immunity, Gear.Set.Unity, Gear.Set.Rage],
-    [Gear.Set.Revenge, Gear.Set.Injury, Gear.Set.Penetration]
+    [Set.Speed, Set.Critical, Set.Hit],
+    [Set.Destruction, Set.Counter, Set.LifeSteal, Set.Resist],
+    [Set.Attack, Set.Health, Set.Defense],
+    [Set.Immunity, Set.Unity, Set.Rage],
+    [Set.Revenge, Set.Injury, Set.Penetration]
   ];
   export class Stat {
     static readonly HPP = new Stat('hpp', 'HP %');
@@ -64,25 +64,55 @@ export namespace Gear {
     private constructor(public readonly name: string, public readonly color: string) { }
   }
 
-  export interface Gear {
-    id: string;
+  export class Gear {
     type?: Type;
     set?: Set;
     grade?: Grade;
-    level?: Number;
-    enhance?: Number;
+    level?: number;
+    enhance?: number;
     main?: Stat;
-    hpp?: Number;
-    hp?: Number;
-    defp?: Number;
-    def?: Number;
-    atkp?: Number;
-    atk?: Number;
-    cri?: Number;
-    cdmg?: Number;
-    spd?: Number;
-    eff?: Number;
-    res?: Number;
+    hpp?: number;
+    hp?: number;
+    defp?: number;
+    def?: number;
+    atkp?: number;
+    atk?: number;
+    cri?: number;
+    cdmg?: number;
+    spd?: number;
+    eff?: number;
+    res?: number;
+    // calculated properties
+    score: number = 0;
+
+    // public constructor() {
+    //   this.id = ;
+    // }
+    public constructor(
+      public readonly id: string = Math.random()
+        .toString(20)
+        .substr(2, 10) // public readonly main: Stat
+    ) { }
+
+    getStatMap(): Map<Stat, number | undefined> {
+      return new Map([
+        [Stat.HPP, this.hpp],
+        [Stat.HP, this.hp],
+        [Stat.DEFP, this.defp],
+        [Stat.DEF, this.def],
+        [Stat.ATKP, this.atkp],
+        [Stat.ATK, this.atk],
+        [Stat.CRI, this.cri],
+        [Stat.CDMG, this.cdmg],
+        [Stat.SPD, this.spd],
+        [Stat.EFF, this.eff],
+        [Stat.RES, this.res]
+      ]);
+    }
+
+    getMain(): number {
+      return this.getStatMap().get(this.main!!) || 0;
+    }
   }
 
   export interface TableFilter {
