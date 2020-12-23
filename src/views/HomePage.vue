@@ -22,6 +22,7 @@
       </ol>
     </message-box>
     <message-box hide-default title="Version History">
+      [2020-12-23] add import tool<br />
       [2020-12-20] fix mobile ui<br />
       [2020-12-19] deploy to GitHub page<br />
       [2020-12-06] project kick start
