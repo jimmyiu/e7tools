@@ -41,7 +41,7 @@ export namespace Gear {
     static readonly EFF = new Stat('eff', 'EFF');
     static readonly RES = new Stat('res', 'RES');
 
-    private constructor(public readonly value: string, public readonly label: string) {}
+    private constructor(public readonly value: string, public readonly label: string) { }
   }
 
   export enum Type {
@@ -57,13 +57,11 @@ export namespace Gear {
     static readonly EPIC = new Grade('Epic', 'red');
     static readonly HERO = new Grade('Hero', 'purple');
     static readonly RARE = new Grade('Rare', 'blue');
+    static readonly GOOD = new Grade('Hero', 'green');
+    static readonly NORMAL = new Grade('Rare', 'grey');
 
     // private to disallow creating other instances of this type
-    private constructor(public readonly name: string, public readonly color: string) {}
-
-    // static values() {
-    //   return [Grade.EPIC, Grade.HERO, Grade.RARE];
-    // }
+    private constructor(public readonly name: string, public readonly color: string) { }
   }
 
   export interface Gear {

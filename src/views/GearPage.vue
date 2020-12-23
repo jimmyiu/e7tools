@@ -7,6 +7,7 @@
         <gear-table :gears="gears" />
       </v-col>
     </v-row>
+    <v-btn fab right @click="overlay = true"><v-icon>mdi-plus</v-icon></v-btn>
     <v-overlay color="secondary" opacity="0.5" :value="overlay">
       <gear-form @close="overlay = false" @input="inputGear" />
     </v-overlay>

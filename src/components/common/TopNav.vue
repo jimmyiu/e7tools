@@ -7,11 +7,9 @@
       Gear
       <!-- <v-icon right>mdi-chevron-down</v-icon> -->
     </v-btn>
-    <!-- <v-tabs>
-      <v-tab v-for="(link, index) in links" :key="index" class="font-weight-bold" :to="link.link">
-        {{ link.name }}
-      </v-tab>
-    </v-tabs> -->
+    <v-btn class="ml-2" depressed to="import">
+      Import
+    </v-btn>
     <v-spacer />
     <v-switch hide-details @change="toggleDarkMode"></v-switch>
     <!-- <v-avatar class="hidden-sm-and-down" color="grey darken-1 shrink" size="32"> </v-avatar> -->
