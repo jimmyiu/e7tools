@@ -1,6 +1,10 @@
 <template>
   <div class="about">
-    <message-box title="Project Background">
+    <message-box title="Current Status">
+      Working on the gear import tool.<br /><br />
+      2020-12-23
+    </message-box>
+    <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
       tools platform. My initiative in doing this is to due with the complicated gear system of this game. It is hard to
       determine a gear is good or bad, and also hard to optimize how to equip the gears to achieve the desired
@@ -17,7 +21,7 @@
         </li>
       </ol>
     </message-box>
-    <message-box hide-default title="Latest News / Version History">
+    <message-box hide-default title="Version History">
       [2020-12-20] fix mobile ui<br />
       [2020-12-19] deploy to GitHub page<br />
       [2020-12-06] project kick start

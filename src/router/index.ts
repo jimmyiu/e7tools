@@ -19,11 +19,16 @@ const routes = [
     path: '/gear',
     name: 'gear',
     component: () => import(/* webpackChunkName: "gear" */ '../views/GearPage.vue')
+  },
+  {
+    path: '/import',
+    name: 'import',
+    component: () => import(/* webpackChunkName: "gear" */ '../views/ImportPage.vue')
   }
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 });
