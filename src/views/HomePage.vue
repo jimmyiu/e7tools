@@ -1,8 +1,12 @@
 <template>
   <div class="about">
     <message-box title="Current Status">
-      Working on the gear import tool.<br /><br />
-      2020-12-23
+      <ul>
+        <li>As data structure is not finalized, need to import gear everytime now</li>
+        <li>Working on simple scoring</li>
+        <li>Add Gear by UI is not working now</li>
+      </ul>
+      <br />2020-12-24
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -22,6 +26,7 @@
       </ol>
     </message-box>
     <message-box hide-default title="Version History">
+      [2020-12-23] add import tool, simple score<br />
       [2020-12-20] fix mobile ui<br />
       [2020-12-19] deploy to GitHub page<br />
       [2020-12-06] project kick start

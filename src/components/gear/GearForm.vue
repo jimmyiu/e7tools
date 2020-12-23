@@ -152,16 +152,14 @@ export default class GearForm extends Vue {
 
   @Emit('input')
   submit() {
-    let gear: Gear.Gear = {
-      id: Math.random()
-        .toString(20)
-        .substr(2, 10),
-      set: this.form.set,
-      type: this.form.type,
-      grade: this.form.grade,
-      level: this.levelTicks[this.form.level],
-      enhance: this.form.enhance
-    };
+    let gear = new Gear.Gear();
+    gear.set = this.form.set;
+    gear.type = this.form.type;
+    gear.grade = this.form.grade;
+    gear.level = this.levelTicks[this.form.level];
+    gear.enhance = this.form.enhance;
+    gear.score = 0;
+    gear.main = this.form.stats[0];
     for (let i = 0; i < this.form.stats.length; i++) {
       Vue.set(gear, this.form.stats[i].value, this.form.statValues[i]);
     }
