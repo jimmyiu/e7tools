@@ -3,12 +3,11 @@
     Instruction:<br />
     <ul>
       <li>
-        This importer reads the JSON from this site:
+        This importer support the JSON format of these site:
         <a href="https://github.com/e7-tools/gear-reader" target="_blank">E7 Gear Reader</a> /
         <a href="https://github.com/Zarroc2762/E7-Gear-Optimizer" target="_blank">E7 Gear Optimizer</a>
       </li>
-      <li>A prefix i- will be added to the imported gear ID. e.g. original gear ID = zzH, the new gear ID = i-zzH</li>
-      <li>Gear will be replaced by the imported gear if the ID is the same</li>
+      <li>Gear will be replaced if the ID is the same</li>
     </ul>
     <v-divider class="my-5" />
     Paste the JSON here:
