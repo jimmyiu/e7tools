@@ -2,20 +2,24 @@
   <div>
     <v-row class="mb-1" dense no-gutters>
       <v-col>
-        <v-btn-toggle v-model="form.types" class="gear-filter" dense multiple>
+        <v-btn-toggle v-model="form.type" class="gear-filter" dense>
           <v-btn v-for="(item, index) in types" :key="index" :value="item">
             <gear-type-icon small :type="item" />
           </v-btn>
         </v-btn-toggle>
       </v-col>
-      <!-- <v-col align="right">
-        <v-btn-toggle v-model="form.mode" dense rounded>
+      <v-col align="right">
+        <v-btn-toggle v-model="form.level" dense rounded>
+          <v-btn depressed small :value="85">85</v-btn>
+          <v-btn depressed small :value="90">90</v-btn>
+        </v-btn-toggle>
+        <!-- <v-btn-toggle v-model="form.mode" dense rounded>
           <v-btn outlined small text> Full </v-btn>
           <v-btn outlined small text> Compact </v-btn>
           <v-btn outlined small text> HP </v-btn>
           <v-btn outlined small text> ATK </v-btn>
-        </v-btn-toggle>
-      </v-col> -->
+        </v-btn-toggle> -->
+      </v-col>
     </v-row>
     <v-row dense no-gutters>
       <v-col>
@@ -55,9 +59,10 @@ export default class GearTableFilter extends Vue {
   @Model() readonly form!: Gear.TableFilter;
 
   reset() {
-    this.form.types.splice(0);
+    this.form.type = undefined;
     this.form.sets.splice(0);
     this.form.mode = 0;
+    this.form.level = 0;
   }
 }
 </script>

@@ -84,6 +84,8 @@ export namespace Gear {
     res?: number;
     // calculated properties
     score: number = 0;
+    defScore: number = 0;
+    offScore: number = 0;
 
     // public constructor() {
     //   this.id = ;
@@ -116,8 +118,9 @@ export namespace Gear {
   }
 
   export interface TableFilter {
-    types: Type[];
+    type?: Type;
     sets: Set[];
-    mode: Number;
+    level: number;
+    mode: number;
   }
 }

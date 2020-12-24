@@ -24,6 +24,11 @@ const routes = [
     path: '/import',
     name: 'import',
     component: () => import(/* webpackChunkName: "gear" */ '../views/ImportPage.vue')
+  },
+  {
+    path: '/dev',
+    name: 'dev',
+    component: () => import(/* webpackChunkName: "gear" */ '../views/DevPage.vue')
   }
 ];
 
