@@ -3,7 +3,7 @@
     Instruction:<br />
     <ul>
       <li>
-        This importer support the JSON format of these site:
+        This importer supports the JSON format of these sites:
         <a href="https://github.com/e7-tools/gear-reader" target="_blank">E7 Gear Reader</a> /
         <a href="https://github.com/Zarroc2762/E7-Gear-Optimizer" target="_blank">E7 Gear Optimizer</a>
       </li>
