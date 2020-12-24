@@ -77,6 +77,8 @@ class ImportService {
       }
     });
     result.score = GearService.calculateScore(result);
+    result.defScore = GearService.calculateDefScore(result);
+    result.offScore = GearService.calculateOffScore(result);
     return result;
   }
 
@@ -90,7 +92,7 @@ class ImportService {
       stat == Gear.Stat.EFF ||
       stat == Gear.Stat.RES
     ) {
-      return Math.trunc(value * 100);
+      return Math.round(value * 100);
     }
     return value;
   }

@@ -3,13 +3,16 @@
     <!-- <v-avatar color="secondary" size="36"><v-icon>mdi-menu</v-icon></v-avatar> -->
     <!-- <v-btn class="menu" elevation="0" rounded @click="toggleMenu"><v-icon>mdi-menu</v-icon></v-btn> -->
     <site-icon />
-    <v-btn class="ml-2" depressed to="gear">
+    <v-btn class="ml-1" depressed to="gear">
       Gear
       <!-- <v-icon right>mdi-chevron-down</v-icon> -->
     </v-btn>
-    <v-btn class="ml-2" depressed to="import">
+    <v-btn class="ml-1" depressed to="import">
       Import
     </v-btn>
+    <!-- <v-btn class="ml-1" depressed to="dev">
+      Dev
+    </v-btn> -->
     <v-spacer />
     <v-switch hide-details @change="toggleDarkMode"></v-switch>
     <!-- <v-avatar class="hidden-sm-and-down" color="grey darken-1 shrink" size="32"> </v-avatar> -->

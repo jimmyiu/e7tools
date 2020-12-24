@@ -49,16 +49,18 @@ export default class GearPage extends Vue {
   gears!: Gear.Gear[];
   overlay = false;
   filter: Gear.TableFilter = {
-    types: [],
+    type: undefined,
     sets: [],
+    level: 0,
     mode: 0
   };
 
   get filteredGears() {
     return this.gears.filter(it => {
-      let type = this.filter.types.length == 0 || this.filter.types.indexOf(it.type!!) >= 0;
+      let type = this.filter.type == undefined || this.filter.type == it.type!!;
       let set = this.filter.sets.length == 0 || this.filter.sets.indexOf(it.set!!) >= 0;
-      return type && set;
+      let level = !this.filter.level || this.filter.level == it.level!!;
+      return type && set && level;
     });
   }
 
