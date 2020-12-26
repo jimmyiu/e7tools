@@ -84,8 +84,8 @@ export namespace Gear {
     res?: number;
     // calculated properties
     score: number = 0;
-    defScore: number = 0;
     offScore: number = 0;
+    defScore: number = 0;
 
     // public constructor() {
     //   this.id = ;
