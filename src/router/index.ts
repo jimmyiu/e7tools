@@ -26,10 +26,15 @@ const routes = [
     component: () => import(/* webpackChunkName: "gear" */ '../views/ImportPage.vue')
   },
   {
-    path: '/dev',
-    name: 'dev',
-    component: () => import(/* webpackChunkName: "gear" */ '../views/DevPage.vue')
+    path: '/hero',
+    name: 'hero',
+    component: () => import(/* webpackChunkName: "gear" */ '../views/HeroPage.vue')
   }
+  // {
+  //   path: '/dev',
+  //   name: 'dev',
+  //   component: () => import(/* webpackChunkName: "gear" */ '../views/DevPage.vue')
+  // }
 ];
 
 const router = new VueRouter({

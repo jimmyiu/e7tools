@@ -3,12 +3,28 @@
     <!-- <v-avatar color="secondary" size="36"><v-icon>mdi-menu</v-icon></v-avatar> -->
     <!-- <v-btn class="menu" elevation="0" rounded @click="toggleMenu"><v-icon>mdi-menu</v-icon></v-btn> -->
     <site-icon />
-    <v-btn class="ml-1" depressed to="gear">
+    <!-- <v-btn class="ml-1" depressed to="gear">
       Gear
-      <!-- <v-icon right>mdi-chevron-down</v-icon> -->
-    </v-btn>
-    <v-btn class="ml-1" depressed to="import">
-      Import
+      <v-icon right>mdi-chevron-down</v-icon>
+    </v-btn> -->
+    <v-menu bottom offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn v-bind="attrs" class="ml-1" depressed v-on="on">
+          Gear
+          <v-icon right>mdi-chevron-down</v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item link :to="{ name: 'gear' }">
+          <v-list-item-title>Gear</v-list-item-title>
+        </v-list-item>
+        <v-list-item link :to="{ name: 'import' }">
+          <v-list-item-title>Import</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+    <v-btn class="ml-1" depressed :to="{ name: 'hero' }">
+      Hero
     </v-btn>
     <!-- <v-btn class="ml-1" depressed to="dev">
       Dev

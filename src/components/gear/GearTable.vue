@@ -3,9 +3,9 @@
     dense
     :footer-props="{ showFirstLastPage: true }"
     :headers="headers"
-    :items="gears"
+    :items="filteredGears"
     :items-per-page="20"
-    multi-sort
+    :multi-sort="false"
   >
     <template v-slot:item.type="{ item }">
       <div class="d-flex align-center" style="white-space:nowrap; max-width: 80px">
@@ -22,15 +22,19 @@
     <template v-slot:item.grade="{ item }">
       <v-chip :color="item.grade.color" label small text-color="white">{{ item.grade.name.substring(0, 1) }}</v-chip>
     </template>
-    <!-- <template v-slot:item.score="{ item }">
-      {{ item.atkp + item.hpp }}
-    </template> -->
     <template v-slot:item.main="{ item }">
       {{ item.main.label }}
     </template>
     <!-- <template v-slot:item.enhance="{ item }">
       <v-chip color="red" small text-color="white">+{{ item.enhance }}</v-chip>
     </template> -->
+    <template v-slot:body.prepend="{ headers }">
+      <tr class="hidden-xs-only">
+        <td v-for="(item, index) in headers" :key="index" class="text-center v-data-table__divider">
+          <v-text-field v-if="index > 1" v-model="filter[item.value]" dense flat hide-details />
+        </td>
+      </tr>
+    </template>
   </v-data-table>
 </template>
 <script lang="ts">
@@ -47,6 +51,27 @@ import GearTypeIcon from './GearTypeIcon.vue';
 export default class GearTable extends Vue {
   @Prop() readonly item!: any;
   @Prop() readonly gears!: Gear.Gear[];
+  get filteredGears() {
+    return this.gears.filter(x => {
+      return (
+        (x.hpp || 0) >= (this.filter.hpp || 0) &&
+        (x.hp || 0) >= (this.filter.hp || 0) &&
+        (x.defp || 0) >= (this.filter.defp || 0) &&
+        (x.def || 0) >= (this.filter.def || 0) &&
+        (x.atkp || 0) >= (this.filter.atkp || 0) &&
+        (x.atk || 0) >= (this.filter.atk || 0) &&
+        (x.cri || 0) >= (this.filter.cri || 0) &&
+        (x.cdmg || 0) >= (this.filter.cdmg || 0) &&
+        (x.spd || 0) >= (this.filter.spd || 0) &&
+        (x.eff || 0) >= (this.filter.eff || 0) &&
+        (x.res || 0) >= (this.filter.res || 0) &&
+        (x.score || 0) >= (this.filter.score || 0) &&
+        (x.offScore || 0) >= (this.filter.offScore || 0) &&
+        (x.defScore || 0) >= (this.filter.defScore || 0)
+      );
+    });
+  }
+  filter = new Gear.Gear();
   headers = [
     this.getHeader({ text: 'GEAR', value: 'type', sortable: false }),
     // this.getHeader({ text: 'SET', value: 'set', width: '40px' }),
@@ -67,8 +92,8 @@ export default class GearTable extends Vue {
     this.getHeader({ text: 'EFF', value: 'eff' }),
     this.getHeader({ text: 'RES', value: 'res' }),
     this.getHeader({ text: 'STD_S', value: 'score' }),
-    this.getHeader({ text: 'DEF_S', value: 'defScore' }),
-    this.getHeader({ text: 'OFF_S', value: 'offScore' })
+    this.getHeader({ text: 'OFF_S', value: 'offScore' }),
+    this.getHeader({ text: 'DEF_S', value: 'defScore' })
   ];
 
   getHeader(obj: any): any {
