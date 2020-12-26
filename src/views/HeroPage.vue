@@ -1,9 +1,31 @@
 <template>
   <v-container>
     <v-row>
-      <v-btn icon @click="refresh">
-        <v-icon>mdi-cached</v-icon>
-      </v-btn>
+      <v-dialog v-model="confirmCache" width="300">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn v-bind="attrs" dark v-on="on">
+            Cache Data
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            Confirmation
+          </v-card-title>
+          <v-card-text>
+            Call EpicSevenDB API to retrieve hero data?
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" text @click="refresh">
+              OK
+            </v-btn>
+            <v-btn color="secondary" text @click="confirmCache = false">
+              CANCEL
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-row>
     <v-row>
       <v-col>
@@ -57,6 +79,7 @@ import { Hero } from '@/models';
 export default class HeroPage extends Vue {
   items: Array<Hero> = new Array();
   hero?: Hero = {} as Hero;
+  confirmCache: boolean = false;
 
   created() {
     (JSON.parse(localStorage.getItem('api-hero')!!) as Array<any>).forEach(x => {
@@ -82,6 +105,7 @@ export default class HeroPage extends Vue {
   }
 
   async refresh() {
+    localStorage.clear();
     await axios.get('https://api.epicsevendb.com/hero').then(response => {
       let results = response.data.results.filter((x: any) => !['raqueas', 'straze', 'rande'].includes(x._id));
       localStorage.setItem('api-hero', JSON.stringify(results));
@@ -89,6 +113,7 @@ export default class HeroPage extends Vue {
         this.retrieveStat(element);
       });
     });
+    this.confirmCache = false;
   }
 
   async retrieveStat(hero: any) {
