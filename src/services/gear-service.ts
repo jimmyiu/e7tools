@@ -45,7 +45,7 @@ class GearService {
     stats.delete(gear.main!!);
     let score = 0;
     stats.forEach((v: number | undefined, k: Stat) => {
-      if ([Stat.HPP, Stat.DEFP, Stat.RES].includes(k)) {
+      if ([Stat.HPP, Stat.DEFP].includes(k)) {
         score += v || 0;
         // } else if (Stat.SPD == k) {
         //   score += (v || 0) * 2;
@@ -66,8 +66,6 @@ class GearService {
         score += v || 0;
       } else if (Stat.CRI == k) {
         score += (v || 0) * 1.5;
-        // } else if (Stat.SPD == k) {
-        //   score += (v || 0) * 2;
       } else if (Stat.ATK == k) {
         score += Math.trunc(((v || 0) / STAT_AVERAGE.atk) * 100);
       }

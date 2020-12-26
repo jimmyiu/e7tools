@@ -14,7 +14,6 @@ export default new Vuex.Store({
       state.loading = value;
     },
     updateGears(state: any, value: Array<Gear.Gear>) {
-      // console.log(value);
       Vue.set(state, 'gears', value);
     }
   },
@@ -27,6 +26,9 @@ export default new Vuex.Store({
     },
     updateGears: ({ commit }, gears: Array<Gear.Gear>) => {
       commit('updateGears', gears);
+    },
+    getHeros: ({ commit }) => {
+      return undefined;
     }
     // toggleMenu: ({ commit, state }) => {
     //   commit('menu', !state.menu);

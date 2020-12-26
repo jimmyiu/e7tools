@@ -23,8 +23,8 @@ export namespace Gear {
   }
   export const SETS = [
     [Set.Speed, Set.Critical, Set.Hit],
-    [Set.Destruction, Set.Counter, Set.LifeSteal, Set.Resist],
     [Set.Attack, Set.Health, Set.Defense],
+    [Set.Destruction, Set.Counter, Set.LifeSteal, Set.Resist],
     [Set.Immunity, Set.Unity, Set.Rage],
     [Set.Revenge, Set.Injury, Set.Penetration]
   ];

@@ -5,7 +5,7 @@
     :headers="headers"
     :items="filteredGears"
     :items-per-page="20"
-    multi-sort
+    :multi-sort="false"
   >
     <template v-slot:item.type="{ item }">
       <div class="d-flex align-center" style="white-space:nowrap; max-width: 80px">
@@ -29,7 +29,7 @@
       <v-chip color="red" small text-color="white">+{{ item.enhance }}</v-chip>
     </template> -->
     <template v-slot:body.prepend="{ headers }">
-      <tr>
+      <tr class="hidden-xs-only">
         <td v-for="(item, index) in headers" :key="index" class="text-center v-data-table__divider">
           <v-text-field v-if="index > 1" v-model="filter[item.value]" dense flat hide-details />
         </td>
@@ -92,8 +92,8 @@ export default class GearTable extends Vue {
     this.getHeader({ text: 'EFF', value: 'eff' }),
     this.getHeader({ text: 'RES', value: 'res' }),
     this.getHeader({ text: 'STD_S', value: 'score' }),
-    this.getHeader({ text: 'DEF_S', value: 'defScore' }),
-    this.getHeader({ text: 'OFF_S', value: 'offScore' })
+    this.getHeader({ text: 'OFF_S', value: 'offScore' }),
+    this.getHeader({ text: 'DEF_S', value: 'defScore' })
   ];
 
   getHeader(obj: any): any {

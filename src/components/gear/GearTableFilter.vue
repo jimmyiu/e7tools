@@ -1,18 +1,18 @@
 <template>
   <div>
     <v-row class="mb-1" dense no-gutters>
-      <v-col>
+      <v-col class="d-flex align-center">
         <v-btn-toggle v-model="form.type" class="gear-filter" dense>
           <v-btn v-for="(item, index) in types" :key="index" :value="item">
             <gear-type-icon small :type="item" />
           </v-btn>
         </v-btn-toggle>
+        <v-btn-toggle v-model="form.level" class="ml-1" dense rounded>
+          <v-btn depressed min-width="42" :value="85">85</v-btn>
+          <v-btn depressed min-width="42" :value="90">90</v-btn>
+        </v-btn-toggle>
       </v-col>
       <v-col align="right">
-        <v-btn-toggle v-model="form.level" dense rounded>
-          <v-btn depressed small :value="85">85</v-btn>
-          <v-btn depressed small :value="90">90</v-btn>
-        </v-btn-toggle>
         <!-- <v-btn-toggle v-model="form.mode" dense rounded>
           <v-btn outlined small text> Full </v-btn>
           <v-btn outlined small text> Compact </v-btn>
