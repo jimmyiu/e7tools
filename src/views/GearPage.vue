@@ -41,12 +41,12 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { mapState } from 'vuex';
-import { GearDetail, GearForm, GearTable, GearTableFilter, GearStatistics } from '@/components';
+import { GearDetail, GearForm, GearTable, GearTableFilter } from '@/components';
 import { Gear } from '@/models';
 
 @Component({
   name: 'gear-page',
-  components: { GearDetail, GearForm, GearTable, GearTableFilter, GearStatistics },
+  components: { GearDetail, GearForm, GearTable, GearTableFilter },
   computed: { ...mapState(['gears']) }
 })
 export default class GearPage extends Vue {
