@@ -23,7 +23,6 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapState } from 'vuex';
-import { Hero } from '@/models';
 import { TopNav } from '@/components';
 
 @Component({

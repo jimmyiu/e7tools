@@ -7,6 +7,11 @@
         <gear-table :gears="filteredGears" />
       </v-col>
     </v-row>
+    <!-- <v-row>
+      <v-col>
+        <gear-statistics :gears="filteredGears" />
+      </v-col>
+    </v-row> -->
     <v-btn fab right @click="overlay = true"><v-icon>mdi-plus</v-icon></v-btn>
     <v-overlay color="secondary" opacity="0.5" :value="overlay">
       <gear-form @close="overlay = false" @input="inputGear" />
@@ -52,16 +57,25 @@ export default class GearPage extends Vue {
     type: undefined,
     sets: [],
     level: 0,
-    mode: 0
+    mode: 0,
+    main: true
   };
 
   get filteredGears() {
-    return this.gears.filter(it => {
+    let result = this.gears.filter(it => {
       let type = this.filter.type == undefined || this.filter.type == it.type!!;
       let set = this.filter.sets.length == 0 || this.filter.sets.indexOf(it.set!!) >= 0;
       let level = !this.filter.level || this.filter.level == it.level!!;
       return type && set && level;
     });
+    if (!this.filter.main) {
+      result = result.map(x => {
+        let foo = Gear.Gear.clone(x);
+        Vue.set(foo, foo.main!!.value, 0);
+        return foo;
+      });
+    }
+    return result;
   }
 
   created() {
