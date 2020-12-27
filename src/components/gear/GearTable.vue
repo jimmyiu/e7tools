@@ -37,7 +37,9 @@
             filter<br />
             max/25%
           </span>
-          <span v-if="index > 1"> {{ statistics[item.value].max }}/{{ statistics[item.value].third }} </span>
+          <span v-if="index > 1" class="caption">
+            {{ statistics[item.value].max }}/{{ statistics[item.value].third }}
+          </span>
         </td>
       </tr>
     </template>
@@ -96,7 +98,7 @@ export default class GearTable extends Vue {
     // this.getHeader({ text: 'LV', value: 'level' }),
     // this.getHeader({ text: 'ENH', value: 'enhance' }),
     // this.getHeader({ text: 'TITLE', value: 'title', width: '200px' }),
-    this.getHeader({ text: 'Main', value: 'main', width: '70px' }),
+    this.getHeader({ text: 'Main', value: 'main', width: '70px', sortable: false }),
     this.getHeader({ text: 'HP %', value: 'hpp', width: '60px' }),
     this.getHeader({ text: 'HP', value: 'hp' }),
     this.getHeader({ text: 'DEF %', value: 'defp', width: '60px' }),

@@ -120,6 +120,12 @@ export namespace Gear {
     getMain(): number {
       return this.getStatMap().get(this.main!!) || 0;
     }
+
+    static clone(gear: Gear): Gear {
+      let result = new Gear();
+      Object.assign(result, gear);
+      return result;
+    }
   }
 
   export interface TableFilter {

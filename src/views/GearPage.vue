@@ -69,8 +69,10 @@ export default class GearPage extends Vue {
       return type && set && level;
     });
     if (!this.filter.main) {
-      return result.map(x => {
-        Vue.set(x, x.main!!.value, 0);
+      result = result.map(x => {
+        let foo = Gear.Gear.clone(x);
+        Vue.set(foo, foo.main!!.value, 0);
+        return foo;
       });
     }
     return result;

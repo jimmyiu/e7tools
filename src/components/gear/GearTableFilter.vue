@@ -7,11 +7,11 @@
             <gear-type-icon small :type="item" />
           </v-btn>
         </v-btn-toggle>
-        <v-btn-toggle v-model="form.level" class="ml-1" dense rounded>
+        <v-btn-toggle v-model="form.level" class="ml-2" dense rounded>
           <v-btn depressed min-width="42" :value="85">85</v-btn>
           <v-btn depressed min-width="42" :value="90">90</v-btn>
         </v-btn-toggle>
-        <!-- <v-checkbox v-model="form.main" label="Main"></v-checkbox> -->
+        <v-checkbox v-model="form.main" class="mt-0 ml-2" dense hide-details label="Main"></v-checkbox>
       </v-col>
       <v-col align="right">
         <!-- <v-btn-toggle v-model="form.mode" dense rounded>
@@ -24,7 +24,7 @@
     </v-row>
     <v-row dense no-gutters>
       <v-col>
-        <span v-for="(set, i) in sets" :key="i" class="mr-1">
+        <span v-for="(set, i) in sets" :key="i" class="mr-0">
           <v-btn-toggle v-model="form.sets" class="gear-filter" dense multiple>
             <v-btn v-for="(item, index) in set" :key="index" :value="item">
               <gear-set-icon :set="item" small />
