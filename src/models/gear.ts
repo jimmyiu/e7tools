@@ -87,9 +87,6 @@ export namespace Gear {
     offScore: number = 0;
     defScore: number = 0;
 
-    // public constructor() {
-    //   this.id = ;
-    // }
     public constructor(
       public readonly id: string = Math.random()
         .toString(20)
@@ -112,6 +109,14 @@ export namespace Gear {
       ]);
     }
 
+    getScoreMap(): Map<string, number> {
+      return new Map([
+        ['score', this.score],
+        ['offScore', this.offScore],
+        ['defScore', this.defScore]
+      ]);
+    }
+
     getMain(): number {
       return this.getStatMap().get(this.main!!) || 0;
     }
@@ -122,5 +127,6 @@ export namespace Gear {
     sets: Set[];
     level: number;
     mode: number;
+    main: boolean;
   }
 }

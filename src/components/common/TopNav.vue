@@ -7,7 +7,7 @@
       Gear
       <v-icon right>mdi-chevron-down</v-icon>
     </v-btn> -->
-    <v-menu bottom offset-y>
+    <v-menu bottom offset-y open-on-hover>
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" class="ml-1" depressed v-on="on">
           Gear

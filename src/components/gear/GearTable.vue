@@ -4,15 +4,16 @@
     :footer-props="{ showFirstLastPage: true }"
     :headers="headers"
     :items="filteredGears"
-    :items-per-page="20"
+    :items-per-page="15"
     :multi-sort="false"
   >
     <template v-slot:item.type="{ item }">
-      <div class="d-flex align-center" style="white-space:nowrap; max-width: 80px">
+      <div class="d-flex align-center" style="white-space:nowrap; max-width: 82px">
         <gear-type-icon small :type="item.type" />
         <gear-set-icon :set="item.set" small />
         <div>
-          <span :style="'color: ' + item.grade.color">{{ item.level }}</span> +{{ item.enhance }}
+          <span :style="'color: ' + item.grade.color">{{ item.level }}</span
+          >+{{ item.enhance }}
         </div>
       </div>
     </template>
@@ -32,11 +33,21 @@
       <tr class="hidden-xs-only">
         <td v-for="(item, index) in headers" :key="index" class="text-center v-data-table__divider">
           <v-text-field v-if="index > 1" v-model="filter[item.value]" dense flat hide-details />
+          <span v-if="index == 0">
+            filter<br />
+            max/25%
+          </span>
+          <span v-if="index > 1"> {{ statistics[item.value].max }}/{{ statistics[item.value].third }} </span>
         </td>
       </tr>
     </template>
   </v-data-table>
 </template>
+<style lang="sass" scoped>
+::v-deep td
+  padding: 0 8px!important
+  // .v-data-table--dense > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table--dense > .v-data-table__wrapper > table > thead > tr > td, .v-data-table--dense > .v-data-table__wrapper > table > tfoot > tr > td
+</style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { Gear } from '@/models';
@@ -51,6 +62,8 @@ import GearTypeIcon from './GearTypeIcon.vue';
 export default class GearTable extends Vue {
   @Prop() readonly item!: any;
   @Prop() readonly gears!: Gear.Gear[];
+  filter = new Gear.Gear();
+
   get filteredGears() {
     return this.gears.filter(x => {
       return (
@@ -71,7 +84,11 @@ export default class GearTable extends Vue {
       );
     });
   }
-  filter = new Gear.Gear();
+
+  get statistics() {
+    return GearService.calculateStatistics(this.filteredGears);
+  }
+
   headers = [
     this.getHeader({ text: 'GEAR', value: 'type', sortable: false }),
     // this.getHeader({ text: 'SET', value: 'set', width: '40px' }),
@@ -79,7 +96,7 @@ export default class GearTable extends Vue {
     // this.getHeader({ text: 'LV', value: 'level' }),
     // this.getHeader({ text: 'ENH', value: 'enhance' }),
     // this.getHeader({ text: 'TITLE', value: 'title', width: '200px' }),
-    this.getHeader({ text: 'Main', value: 'main', width: '60px' }),
+    this.getHeader({ text: 'Main', value: 'main', width: '70px' }),
     this.getHeader({ text: 'HP %', value: 'hpp', width: '60px' }),
     this.getHeader({ text: 'HP', value: 'hp' }),
     this.getHeader({ text: 'DEF %', value: 'defp', width: '60px' }),

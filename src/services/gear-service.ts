@@ -72,5 +72,62 @@ class GearService {
     });
     return score;
   }
+
+  calculateStatistics(gears: Gear.Gear[]) {
+    let max = new Map<String, Array<number>>();
+    max.set('score', []);
+    max.set('offScore', []);
+    max.set('defScore', []);
+    Object.values(Gear.Stat).forEach((stat: Gear.Stat) => {
+      max.set(stat.value, []);
+    });
+
+    if (gears && gears.length > 0) {
+      gears.forEach((gear: Gear.Gear) => {
+        for (const [key, value] of gear.getStatMap().entries()) {
+          if (gear.main != key && value && value > 0) {
+            max.get(key.value)!!.push(value);
+          }
+        }
+        for (const [key, value] of gear.getScoreMap().entries()) {
+          max.get(key)!!.push(value);
+        }
+      });
+    }
+
+    for (const key of max.keys()) {
+      max.get(key)!!.sort((a, b) => b - a);
+    }
+
+    return {
+      hpp: this.analysis(max.get('hpp')!!),
+      hp: this.analysis(max.get('hp')!!),
+      defp: this.analysis(max.get('defp')!!),
+      def: this.analysis(max.get('def')!!),
+      atkp: this.analysis(max.get('atkp')!!),
+      atk: this.analysis(max.get('atk')!!),
+      cri: this.analysis(max.get('cri')!!),
+      cdmg: this.analysis(max.get('cdmg')!!),
+      spd: this.analysis(max.get('spd')!!),
+      eff: this.analysis(max.get('eff')!!),
+      res: this.analysis(max.get('res')!!),
+      score: this.analysis(max.get('score')!!),
+      offScore: this.analysis(max.get('offScore')!!),
+      defScore: this.analysis(max.get('defScore')!!)
+    };
+  }
+
+  analysis(values: number[]) {
+    if (values && values.length > 0) {
+      return {
+        max: values[0],
+        third: values[Math.trunc(values.length * 0.25)]
+      };
+    }
+    return {
+      max: 0,
+      third: 0
+    };
+  }
 }
 export default new GearService();

@@ -11,6 +11,7 @@
           <v-btn depressed min-width="42" :value="85">85</v-btn>
           <v-btn depressed min-width="42" :value="90">90</v-btn>
         </v-btn-toggle>
+        <!-- <v-checkbox v-model="form.main" label="Main"></v-checkbox> -->
       </v-col>
       <v-col align="right">
         <!-- <v-btn-toggle v-model="form.mode" dense rounded>
@@ -63,6 +64,7 @@ export default class GearTableFilter extends Vue {
     this.form.sets.splice(0);
     this.form.mode = 0;
     this.form.level = 0;
+    this.form.main = true;
   }
 }
 </script>

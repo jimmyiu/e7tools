@@ -7,6 +7,11 @@
         <gear-table :gears="filteredGears" />
       </v-col>
     </v-row>
+    <!-- <v-row>
+      <v-col>
+        <gear-statistics :gears="filteredGears" />
+      </v-col>
+    </v-row> -->
     <v-btn fab right @click="overlay = true"><v-icon>mdi-plus</v-icon></v-btn>
     <v-overlay color="secondary" opacity="0.5" :value="overlay">
       <gear-form @close="overlay = false" @input="inputGear" />
@@ -36,12 +41,12 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { mapState } from 'vuex';
-import { GearDetail, GearForm, GearTable, GearTableFilter } from '@/components';
+import { GearDetail, GearForm, GearTable, GearTableFilter, GearStatistics } from '@/components';
 import { Gear } from '@/models';
 
 @Component({
   name: 'gear-page',
-  components: { GearDetail, GearForm, GearTable, GearTableFilter },
+  components: { GearDetail, GearForm, GearTable, GearTableFilter, GearStatistics },
   computed: { ...mapState(['gears']) }
 })
 export default class GearPage extends Vue {
@@ -52,16 +57,23 @@ export default class GearPage extends Vue {
     type: undefined,
     sets: [],
     level: 0,
-    mode: 0
+    mode: 0,
+    main: true
   };
 
   get filteredGears() {
-    return this.gears.filter(it => {
+    let result = this.gears.filter(it => {
       let type = this.filter.type == undefined || this.filter.type == it.type!!;
       let set = this.filter.sets.length == 0 || this.filter.sets.indexOf(it.set!!) >= 0;
       let level = !this.filter.level || this.filter.level == it.level!!;
       return type && set && level;
     });
+    if (!this.filter.main) {
+      return result.map(x => {
+        Vue.set(x, x.main!!.value, 0);
+      });
+    }
+    return result;
   }
 
   created() {
