@@ -134,5 +134,6 @@ export namespace Gear {
     level: number;
     mode: number;
     main: boolean;
+    enhanceMode: number;
   }
 }

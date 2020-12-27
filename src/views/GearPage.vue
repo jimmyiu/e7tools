@@ -58,7 +58,8 @@ export default class GearPage extends Vue {
     sets: [],
     level: 0,
     mode: 0,
-    main: true
+    main: true,
+    enhanceMode: 0
   };
 
   get filteredGears() {
@@ -66,7 +67,11 @@ export default class GearPage extends Vue {
       let type = this.filter.type == undefined || this.filter.type == it.type!!;
       let set = this.filter.sets.length == 0 || this.filter.sets.indexOf(it.set!!) >= 0;
       let level = !this.filter.level || this.filter.level == it.level!!;
-      return type && set && level;
+      let enhance =
+        !this.filter.enhanceMode ||
+        (this.filter.enhanceMode == 1 && it.enhance!! < 15) ||
+        (this.filter.enhanceMode == 2 && it.enhance!! == 15);
+      return type && set && level && enhance;
     });
     if (!this.filter.main) {
       result = result.map(x => {

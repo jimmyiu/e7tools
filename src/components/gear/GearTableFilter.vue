@@ -11,7 +11,25 @@
           <v-btn depressed min-width="42" :value="85">85</v-btn>
           <v-btn depressed min-width="42" :value="90">90</v-btn>
         </v-btn-toggle>
-        <v-checkbox v-model="form.main" class="mt-0 ml-2" dense hide-details label="Main"></v-checkbox>
+        <v-btn-toggle v-model="form.enhanceMode" class="ml-2" dense rounded>
+          <v-btn depressed min-width="42" :value="1">15-</v-btn>
+          <v-btn depressed min-width="42" :value="2">15</v-btn>
+        </v-btn-toggle>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <span v-on="on">
+              <v-checkbox
+                v-model="form.main"
+                v-bind="attrs"
+                class="mt-0 ml-2"
+                dense
+                hide-details
+                label="Main"
+              ></v-checkbox>
+            </span>
+          </template>
+          <span>Display main stat value in the table</span>
+        </v-tooltip>
       </v-col>
       <v-col align="right">
         <!-- <v-btn-toggle v-model="form.mode" dense rounded>
@@ -65,6 +83,7 @@ export default class GearTableFilter extends Vue {
     this.form.mode = 0;
     this.form.level = 0;
     this.form.main = true;
+    this.form.enhanceMode = 0;
   }
 }
 </script>
