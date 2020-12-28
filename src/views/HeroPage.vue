@@ -85,7 +85,7 @@ export default class HeroPage extends Vue {
     (JSON.parse(localStorage.getItem('api-hero')!!) as Array<any>).forEach(x => {
       // console.log(x.assets.icon);
       let detail = JSON.parse(localStorage.getItem(`api-hero-${x._id}`)!!);
-      console.log(detail);
+      // console.log(detail);
       const a = new Hero(
         x._id,
         x.name,
