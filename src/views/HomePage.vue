@@ -10,8 +10,8 @@
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
-      tools platform. My initiative in doing this is to due with the complicated gear system of this game. It is hard to
-      determine a gear is good or bad, and also hard to optimize how to equip the gears to achieve the desired
+      tools platform. My initiative in doing this is to deal with the complicated gear system of this game. It is hard
+      to determine a gear is good or bad, and also hard to optimize how to equip the gears to achieve the desired
       ability.<br /><br />
       2020-12-06
     </message-box>
