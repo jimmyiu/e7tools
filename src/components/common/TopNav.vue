@@ -23,8 +23,8 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <v-btn class="ml-1" depressed :to="{ name: 'hero' }">
-      Hero
+    <v-btn class="ml-1" depressed :to="{ name: 'optimizer' }">
+      Optimizer
     </v-btn>
     <!-- <v-btn class="ml-1" depressed to="dev">
       Dev

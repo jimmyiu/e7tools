@@ -27,10 +27,17 @@ import { TopNav } from '@/components';
 
 @Component({
   name: 'app',
-  components: { TopNav }
+  components: { TopNav },
+  methods: { ...mapActions(['initApp']) }
 })
 export default class App extends Vue {
   menu = false;
+  initApp!: () => void;
+
+  created() {
+    // console.log('App created');
+    this.initApp();
+  }
   // items: Array<Hero> = new Array();
   // hero: Hero = new Hero();
   // async created() {
