@@ -2,8 +2,9 @@
   <div class="about">
     <message-box title="Current Status">
       <ul>
+        <li>Please bear in mind gears are only presisted in localstorage now</li>
+        <li>As data structure is not finalized, I am not going to write the exporter at this moment</li>
         <li>Working on gear input component</li>
-        <li>As data structure is not finalized, need to import gear everytime now</li>
       </ul>
       <br />2020-12-30
     </message-box>

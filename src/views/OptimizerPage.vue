@@ -74,52 +74,61 @@ import axios from 'axios';
 import { Hero } from '@/models';
 
 @Component({
-  name: 'hero-page'
+  name: 'optimizer-page'
 })
-export default class HeroPage extends Vue {
+export default class OptimizerPage extends Vue {
   items: Array<Hero> = new Array();
   hero?: Hero = {} as Hero;
   confirmCache: boolean = false;
 
   created() {
-    (JSON.parse(localStorage.getItem('api-hero')!!) as Array<any>).forEach(x => {
-      // console.log(x.assets.icon);
-      let detail = JSON.parse(localStorage.getItem(`api-hero-${x._id}`)!!);
-      // console.log(detail);
-      const a = new Hero(
-        x._id,
-        x.name,
-        x.assets.icon,
-        detail.calculatedStatus.lv60SixStarFullyAwakened.hp,
-        detail.calculatedStatus.lv60SixStarFullyAwakened.def,
-        detail.calculatedStatus.lv60SixStarFullyAwakened.atk,
-        Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.chc * 100),
-        Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.chd * 100),
-        detail.calculatedStatus.lv60SixStarFullyAwakened.spd,
-        Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.eff * 100),
-        Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.efr * 100)
-      );
-      // console.log(a);
-      this.items.push(a);
+    ((JSON.parse(localStorage.getItem('api.hero.details')!!) as Array<any>) || []).forEach(x => {
+      this.items.push(x as Hero);
     });
   }
 
   async refresh() {
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem('api.hero');
+    localStorage.removeItem('api.hero.details');
+    this.items.splice(0);
     await axios.get('https://api.epicsevendb.com/hero').then(response => {
       let results = response.data.results.filter((x: any) => !['raqueas', 'straze', 'rande'].includes(x._id));
-      localStorage.setItem('api-hero', JSON.stringify(results));
-      results.forEach((element: any) => {
-        this.retrieveStat(element);
+      localStorage.setItem('api.hero', JSON.stringify(results));
+      // results.forEach((element: any) => {
+      //   this.retrieveStat(element);
+      // });
+      // localStorage.setItem(`api.hero.details`, JSON.stringify(results.map((x: any) => await this.retrieveHero(x))));
+      Promise.all(results.map((x: any) => this.retrieveHero(x))).then(data => {
+        console.log(data);
+        this.items.push(...(data as Array<any>));
+        localStorage.setItem(`api.hero.details`, JSON.stringify(data));
       });
     });
     this.confirmCache = false;
   }
 
-  async retrieveStat(hero: any) {
-    await axios.get(`https://api.epicsevendb.com/hero/${hero._id}`).then(response => {
-      localStorage.setItem(`api-hero-${hero._id}`, JSON.stringify(response.data.results[0]));
+  async retrieveHero(hero: any) {
+    return axios.get(`https://api.epicsevendb.com/hero/${hero._id}`).then(response => {
+      // localStorage.setItem(`api.hero.${hero._id}`, JSON.stringify());
+      return Promise.resolve(this.createHero(hero, response.data.results[0]));
     });
+  }
+
+  createHero(hero: any, detail: any): Hero {
+    return new Hero(
+      hero._id,
+      hero.name,
+      hero.assets.icon,
+      detail.calculatedStatus.lv60SixStarFullyAwakened.hp,
+      detail.calculatedStatus.lv60SixStarFullyAwakened.def,
+      detail.calculatedStatus.lv60SixStarFullyAwakened.atk,
+      Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.chc * 100),
+      Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.chd * 100),
+      detail.calculatedStatus.lv60SixStarFullyAwakened.spd,
+      Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.eff * 100),
+      Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.efr * 100)
+    );
   }
 }
 </script>

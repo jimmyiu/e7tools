@@ -26,9 +26,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "gear" */ '../views/ImportPage.vue')
   },
   {
-    path: '/hero',
-    name: 'hero',
-    component: () => import(/* webpackChunkName: "gear" */ '../views/HeroPage.vue')
+    path: '/optimizer',
+    name: 'optimizer',
+    component: () => import(/* webpackChunkName: "gear" */ '../views/OptimizerPage.vue')
   }
   // {
   //   path: '/dev',
