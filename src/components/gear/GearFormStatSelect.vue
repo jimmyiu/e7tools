@@ -1,9 +1,9 @@
 <template>
-  <v-card flat>
+  <v-card class="text-center" flat>
     <v-btn
       v-for="(item, i) in config.btns"
       :key="i"
-      :class="{ 'mx-1 mb-2': true, 'disable-events': disabled(item) }"
+      :class="{ 'mx-1 mt-2': true, 'disable-events': disabled(item) }"
       :color="color(item)"
       outlined
       rounded

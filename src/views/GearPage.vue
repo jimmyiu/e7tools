@@ -12,47 +12,39 @@
         <gear-statistics :gears="filteredGears" />
       </v-col>
     </v-row> -->
-    <v-btn fab right @click="overlay = true"><v-icon>mdi-plus</v-icon></v-btn>
-    <v-overlay color="secondary" opacity="0.5" :value="overlay">
+    <v-bottom-sheet v-model="overlay" persistent scrollable>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn v-bind="attrs" bottom fab fixed right v-on="on"><v-icon>mdi-plus</v-icon></v-btn>
+      </template>
       <gear-form @close="overlay = false" @input="inputGear" />
-    </v-overlay>
-    <!-- <v-navigation-drawer absolute mini-variant permanent right>
-      <v-list dense nav>
-        <v-list-item link @click="overlay = true">
-          <v-tooltip left>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon v-bind="attrs" v-on="on">mdi-plus-box</v-icon>
-            </template>
-            <span>Add Gear</span>
-          </v-tooltip>
-        </v-list-item>
-        <v-list-item link>
-          <v-tooltip left>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon v-bind="attrs" v-on="on">mdi-import</v-icon>
-            </template>
-            <span>Import Gears</span>
-          </v-tooltip>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer> -->
+    </v-bottom-sheet>
+    <v-snackbar v-model="complete" color="success" rounded="pill" timeout="1500" top>
+      <div class="text-center">A gear is updated</div>
+      <!-- <template v-slot:action="{ attrs }">
+        <v-btn v-bind="attrs" color="red" text @click="complete = false">
+          Close
+        </v-btn>
+      </template> -->
+    </v-snackbar>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import { GearDetail, GearForm, GearTable, GearTableFilter } from '@/components';
 import { Gear } from '@/models';
 
 @Component({
   name: 'gear-page',
   components: { GearDetail, GearForm, GearTable, GearTableFilter },
-  computed: { ...mapState(['gears']) }
+  computed: { ...mapState(['gears']) },
+  methods: { ...mapActions(['updateGear']) }
 })
 export default class GearPage extends Vue {
-  gears2 = Array<Gear.Gear>();
+  updateGear!: (a: Gear.Gear) => void;
   gears!: Gear.Gear[];
   overlay = false;
+  complete = false;
   filter: Gear.TableFilter = {
     type: undefined,
     sets: [],
@@ -83,66 +75,12 @@ export default class GearPage extends Vue {
     return result;
   }
 
-  created() {
-    this.gears2 = [
-      this.dummy('1'),
-      this.dummy('2'),
-      this.dummy('3')
-      // this.dummy('4'),
-      // this.dummy('5'),
-      // this.dummy('6'),
-      // this.dummy('7'),
-      // this.dummy('8'),
-      // this.dummy('9'),
-      // this.dummy('10'),
-      // this.dummy('11'),
-      // this.dummy('12'),
-      // this.dummy('13'),
-      // this.dummy('14'),
-      // this.dummy('15'),
-      // this.dummy('16'),
-      // this.dummy('17'),
-      // this.dummy('18'),
-      // this.dummy('19')
-    ];
-  }
-
-  dummy(id: string): Gear.Gear {
-    let gear = new Gear.Gear(id);
-    gear.type = Gear.Type.Weapon;
-    gear.set = Gear.Set.Speed;
-    gear.grade = Gear.Grade.EPIC;
-    gear.level = 85;
-    gear.enhance = 15;
-    gear.main = Gear.Stat.ATK;
-    gear.hpp = 1;
-    gear.hp = 20000;
-    gear.defp = 3;
-    gear.def = 2000;
-    gear.atkp = 5;
-    gear.atk = 4000;
-    gear.cri = 100;
-    gear.cdmg = 350;
-    gear.spd = 9;
-    gear.eff = 10;
-    gear.res = 11;
-    gear.score = 12;
-    return gear;
-  }
+  created() {}
 
   inputGear(gear: Gear.Gear) {
-    // this.gears.push(gear);
+    this.updateGear(gear);
+    this.complete = true;
+    this.overlay = false;
   }
-
-  // items: Array<Hero> = new Array();
-  // hero: Hero = new Hero();
-  // async created() {
-  //   await axios.get('https://api.epicsevendb.com/api/hero').then(response => (this.items = response.data.results));
-  // }
-  // async load() {
-  //   return await axios
-  //     .get('https://api.epicsevendb.com/api/hero')
-  //     .then(response => (this.items = response.data.results));
-  // }
 }
 </script>

@@ -15,6 +15,11 @@ export default new Vuex.Store({
     },
     updateGears(state: any, value: Array<Gear.Gear>) {
       Vue.set(state, 'gears', value);
+    },
+    updateGear(state: any, value: Gear.Gear) {
+      // TODO: add or update
+      state.gears.push(value);
+      // Vue.set(state, 'gears', value);
     }
   },
   actions: {
@@ -26,6 +31,9 @@ export default new Vuex.Store({
     },
     updateGears: ({ commit }, gears: Array<Gear.Gear>) => {
       commit('updateGears', gears);
+    },
+    updateGear: ({ commit }, gear: Gear.Gear) => {
+      commit('updateGear', gear);
     },
     getHeros: ({ commit }) => {
       return undefined;
