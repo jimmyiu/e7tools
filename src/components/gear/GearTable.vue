@@ -54,8 +54,7 @@
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { Gear } from '@/models';
 import GearService from '@/services/gear-service';
-import GearSetIcon from './GearSetIcon.vue';
-import GearTypeIcon from './GearTypeIcon.vue';
+import { GearSetIcon, GearTypeIcon } from './common';
 
 @Component({
   name: 'gear-table',

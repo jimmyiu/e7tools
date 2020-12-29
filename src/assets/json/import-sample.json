@@ -8,10 +8,10 @@
           "ID": "zs"
         },
         {
-          "ID": "zzzzc"
+          "ID": "zzzzb"
         },
         {
-          "ID": "zzzzzK"
+          "ID": "zzzzzJ"
         },
         {
           "ID": "e"
@@ -85,14 +85,7 @@
     {
       "ID": "3",
       "Name": "Watcher Schuri",
-      "Gear": [
-        {
-          "ID": "zM"
-        },
-        {
-          "ID": "9"
-        }
-      ],
+      "Gear": [],
       "Artifact": {
         "ATK": 0.0,
         "HP": 0.0
@@ -129,9 +122,6 @@
         },
         {
           "ID": "6"
-        },
-        {
-          "ID": "zzzf"
         }
       ],
       "Artifact": {
@@ -204,7 +194,7 @@
           "ID": "zzq"
         },
         {
-          "ID": "zzzzs"
+          "ID": "zzzzr"
         },
         {
           "ID": "zzzo"
@@ -213,7 +203,7 @@
           "ID": "M"
         },
         {
-          "ID": "zzzzl"
+          "ID": "zzzzk"
         }
       ],
       "Artifact": {
@@ -280,7 +270,7 @@
       "Name": "Fallen Cecilia",
       "Gear": [
         {
-          "ID": "zzzze"
+          "ID": "zzzzd"
         },
         {
           "ID": "zzF"
@@ -292,7 +282,7 @@
           "ID": "zzz]"
         },
         {
-          "ID": "zzzzn"
+          "ID": "zzzzm"
         },
         {
           "ID": "zzP"
@@ -456,7 +446,7 @@
           "ID": "zB"
         },
         {
-          "ID": "zzzzzB"
+          "ID": "zzzzzA"
         },
         {
           "ID": "ze"
@@ -541,7 +531,7 @@
           "ID": "zzzC"
         },
         {
-          "ID": "zzzzzC"
+          "ID": "zzzzzB"
         }
       ],
       "Artifact": {
@@ -576,13 +566,7 @@
           "ID": "zzj"
         },
         {
-          "ID": "zA"
-        },
-        {
           "ID": "zzzzK"
-        },
-        {
-          "ID": "zzzY"
         }
       ],
       "Artifact": {
@@ -655,7 +639,7 @@
           "ID": "zzzW"
         },
         {
-          "ID": "zzzzzF"
+          "ID": "zzzzzE"
         },
         {
           "ID": "j"
@@ -731,7 +715,7 @@
       "Name": "Angelic Montmorancy",
       "Gear": [
         {
-          "ID": "zzzzzN"
+          "ID": "zzzzzM"
         },
         {
           "ID": "zy"
@@ -772,7 +756,7 @@
       "Name": "Champion Zerato",
       "Gear": [
         {
-          "ID": "zzzzr"
+          "ID": "zzzzq"
         },
         {
           "ID": "zI"
@@ -811,14 +795,7 @@
     {
       "ID": "E",
       "Name": "Vildred",
-      "Gear": [
-        {
-          "ID": "zzzq"
-        },
-        {
-          "ID": "zzg"
-        }
-      ],
+      "Gear": [],
       "Artifact": {
         "ATK": 0.0,
         "HP": 0.0
@@ -840,17 +817,7 @@
     {
       "ID": "F",
       "Name": "Sol",
-      "Gear": [
-        {
-          "ID": "W"
-        },
-        {
-          "ID": "zzB"
-        },
-        {
-          "ID": "zzzzO"
-        }
-      ],
+      "Gear": [],
       "Artifact": {
         "ATK": 0.0,
         "HP": 0.0
@@ -889,7 +856,7 @@
           "ID": "zzz["
         },
         {
-          "ID": "zzzzy"
+          "ID": "zzzzx"
         }
       ],
       "Artifact": {
@@ -915,19 +882,22 @@
       "Name": "Dizzy",
       "Gear": [
         {
-          "ID": "zzzzE"
+          "ID": "zzz^"
         },
         {
-          "ID": "zzv"
+          "ID": "zA"
         },
         {
-          "ID": "zzO"
+          "ID": "c"
         },
         {
-          "ID": "zzzD"
+          "ID": "zzzH"
         },
         {
-          "ID": "zzzg"
+          "ID": "zzzzzO"
+        },
+        {
+          "ID": "zzzY"
         }
       ],
       "Artifact": {
@@ -956,7 +926,7 @@
           "ID": "zzzy"
         },
         {
-          "ID": "zzzzw"
+          "ID": "zzzzv"
         },
         {
           "ID": "zzzP"
@@ -965,7 +935,7 @@
           "ID": "zx"
         },
         {
-          "ID": "zzzzzH"
+          "ID": "zzzzzG"
         },
         {
           "ID": "@"
@@ -1070,7 +1040,7 @@
           "ID": "zN"
         },
         {
-          "ID": "zzzzk"
+          "ID": "zzzzj"
         },
         {
           "ID": "zz_"
@@ -1149,7 +1119,7 @@
           "ID": "zj"
         },
         {
-          "ID": "zzzzzG"
+          "ID": "zzzzzF"
         },
         {
           "ID": "p"
@@ -1161,7 +1131,7 @@
           "ID": "zzzzB"
         },
         {
-          "ID": "zzzzzM"
+          "ID": "zzzzzL"
         }
       ],
       "Artifact": {
@@ -1313,7 +1283,7 @@
       "Name": "Roana",
       "Gear": [
         {
-          "ID": "zzzzf"
+          "ID": "zzzze"
         },
         {
           "ID": "zzJ"
@@ -1322,7 +1292,7 @@
           "ID": "zz\\"
         },
         {
-          "ID": "zzzzzL"
+          "ID": "zzzzzK"
         },
         {
           "ID": "zzze"
@@ -1464,7 +1434,7 @@
           "ID": "zzzc"
         },
         {
-          "ID": "zzzzp"
+          "ID": "zzzzo"
         },
         {
           "ID": "zzzA"
@@ -1522,7 +1492,7 @@
           "Value": 0.09
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "2",
@@ -1553,7 +1523,7 @@
           "Value": 0.25
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "3",
@@ -1584,7 +1554,7 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "4",
@@ -1708,7 +1678,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "8",
@@ -1739,7 +1709,7 @@
           "Value": 0.05
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "9",
@@ -1863,7 +1833,7 @@
           "Value": 0.05
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "=",
@@ -1925,7 +1895,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "?",
@@ -1956,7 +1926,7 @@
           "Value": 12.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "@",
@@ -1987,7 +1957,7 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "A",
@@ -2018,7 +1988,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "B",
@@ -2173,7 +2143,7 @@
           "Value": 0.15
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "G",
@@ -2204,7 +2174,7 @@
           "Value": 0.12
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "H",
@@ -2235,7 +2205,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "I",
@@ -2266,7 +2236,7 @@
           "Value": 0.17
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "J",
@@ -2359,7 +2329,7 @@
           "Value": 72.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "M",
@@ -2390,7 +2360,7 @@
           "Value": 76.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "N",
@@ -2421,7 +2391,7 @@
           "Value": 0.16
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "O",
@@ -2514,7 +2484,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "R",
@@ -2669,7 +2639,7 @@
           "Value": 0.15
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "W",
@@ -2762,7 +2732,7 @@
           "Value": 0.09
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "Z",
@@ -2793,7 +2763,7 @@
           "Value": 0.32
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "[",
@@ -2824,7 +2794,7 @@
           "Value": 4.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "\\",
@@ -2886,7 +2856,7 @@
           "Value": 0.15
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "^",
@@ -2917,7 +2887,7 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "_",
@@ -2948,7 +2918,7 @@
           "Value": 0.19
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "`",
@@ -2979,7 +2949,7 @@
           "Value": 0.12
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "a",
@@ -3010,7 +2980,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "b",
@@ -3041,7 +3011,7 @@
           "Value": 11.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "c",
@@ -3134,7 +3104,7 @@
           "Value": 0.16
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "f",
@@ -3165,7 +3135,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "g",
@@ -3196,7 +3166,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "h",
@@ -3289,7 +3259,7 @@
           "Value": 0.16
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "k",
@@ -3320,7 +3290,7 @@
           "Value": 0.27
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "l",
@@ -3382,7 +3352,7 @@
           "Value": 0.04
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "n",
@@ -3475,7 +3445,7 @@
           "Value": 0.15
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "q",
@@ -3506,7 +3476,7 @@
           "Value": 0.12
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "r",
@@ -3537,7 +3507,7 @@
           "Value": 0.04
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "s",
@@ -3568,7 +3538,7 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "t",
@@ -3599,7 +3569,7 @@
           "Value": 0.04
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "u",
@@ -3661,7 +3631,7 @@
           "Value": 0.08
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "w",
@@ -3723,7 +3693,7 @@
           "Value": 0.17
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "y",
@@ -3754,7 +3724,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "z",
@@ -3785,7 +3755,7 @@
           "Value": 30.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zA",
@@ -3847,7 +3817,7 @@
           "Value": 0.04
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zC",
@@ -3878,7 +3848,7 @@
           "Value": 37.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zD",
@@ -4033,7 +4003,7 @@
           "Value": 0.24
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zI",
@@ -4064,7 +4034,7 @@
           "Value": 0.11
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zJ",
@@ -4095,7 +4065,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zK",
@@ -4126,7 +4096,7 @@
           "Value": 0.14
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zL",
@@ -4157,7 +4127,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zM",
@@ -4219,7 +4189,7 @@
           "Value": 0.08
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zO",
@@ -4250,7 +4220,7 @@
           "Value": 72.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zP",
@@ -4312,7 +4282,7 @@
           "Value": 217.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zR",
@@ -4374,7 +4344,7 @@
           "Value": 0.1
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zT",
@@ -4405,7 +4375,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zU",
@@ -4467,7 +4437,7 @@
           "Value": 150.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zW",
@@ -4498,7 +4468,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zX",
@@ -4560,7 +4530,7 @@
           "Value": 0.05
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zZ",
@@ -4591,7 +4561,7 @@
           "Value": 77.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "z[",
@@ -4653,7 +4623,7 @@
           "Value": 27.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "z]",
@@ -4715,7 +4685,7 @@
           "Value": 0.09
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "z_",
@@ -4839,7 +4809,7 @@
           "Value": 0.12
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zc",
@@ -4870,7 +4840,7 @@
           "Value": 0.08
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zd",
@@ -4901,7 +4871,7 @@
           "Value": 450.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "ze",
@@ -4932,7 +4902,7 @@
           "Value": 0.28
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zf",
@@ -5025,7 +4995,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zi",
@@ -5056,7 +5026,7 @@
           "Value": 0.08
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zj",
@@ -5087,7 +5057,7 @@
           "Value": 0.25
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zk",
@@ -5118,7 +5088,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zl",
@@ -5180,7 +5150,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zn",
@@ -5211,7 +5181,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zo",
@@ -5304,7 +5274,7 @@
           "Value": 0.04
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zr",
@@ -5366,7 +5336,7 @@
           "Value": 0.09
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zt",
@@ -5397,7 +5367,7 @@
           "Value": 33.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zu",
@@ -5490,7 +5460,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zx",
@@ -5521,7 +5491,7 @@
           "Value": 0.22
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zy",
@@ -5552,7 +5522,7 @@
           "Value": 0.18
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zz",
@@ -5583,7 +5553,7 @@
           "Value": 0.11
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzA",
@@ -5614,7 +5584,7 @@
           "Value": 0.12
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzB",
@@ -5676,7 +5646,7 @@
           "Value": 4.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzD",
@@ -5707,7 +5677,7 @@
           "Value": 0.24
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzE",
@@ -5738,7 +5708,7 @@
           "Value": 391.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzF",
@@ -5769,7 +5739,7 @@
           "Value": 0.08
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzG",
@@ -5831,7 +5801,7 @@
           "Value": 0.17
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzI",
@@ -5862,7 +5832,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzJ",
@@ -5893,7 +5863,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzK",
@@ -5924,7 +5894,7 @@
           "Value": 0.18
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzL",
@@ -5955,7 +5925,7 @@
           "Value": 0.14
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzM",
@@ -5986,7 +5956,7 @@
           "Value": 169.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzN",
@@ -6017,7 +5987,7 @@
           "Value": 0.19
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzO",
@@ -6079,7 +6049,7 @@
           "Value": 0.3
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzQ",
@@ -6110,7 +6080,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzR",
@@ -6195,7 +6165,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzU",
@@ -6226,7 +6196,7 @@
           "Value": 0.11
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzV",
@@ -6319,7 +6289,7 @@
           "Value": 0.15
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzY",
@@ -6381,7 +6351,7 @@
           "Value": 0.17
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zz[",
@@ -6443,7 +6413,7 @@
           "Value": 0.19
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zz]",
@@ -6474,7 +6444,7 @@
           "Value": 0.18
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zz^",
@@ -6536,7 +6506,7 @@
           "Value": 0.1
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zz`",
@@ -6598,7 +6568,7 @@
           "Value": 0.05
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzb",
@@ -6691,7 +6661,7 @@
           "Value": 0.05
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zze",
@@ -6846,7 +6816,7 @@
           "Value": 77.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzj",
@@ -6908,7 +6878,7 @@
           "Value": 3.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzl",
@@ -6939,7 +6909,7 @@
           "Value": 0.33
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzm",
@@ -7001,7 +6971,7 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzo",
@@ -7063,7 +7033,7 @@
           "Value": 0.24
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzq",
@@ -7094,7 +7064,7 @@
           "Value": 0.08
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzr",
@@ -7125,7 +7095,7 @@
           "Value": 0.24
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzs",
@@ -7156,7 +7126,7 @@
           "Value": 0.08
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzt",
@@ -7187,7 +7157,7 @@
           "Value": 0.05
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzu",
@@ -7218,7 +7188,7 @@
           "Value": 0.09
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzv",
@@ -7280,7 +7250,7 @@
           "Value": 0.05
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzx",
@@ -7435,7 +7405,7 @@
           "Value": 0.18
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzC",
@@ -7458,7 +7428,7 @@
           "Value": 0.05
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzD",
@@ -7543,7 +7513,7 @@
           "Value": 0.14
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzG",
@@ -7574,7 +7544,7 @@
           "Value": 0.17
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzH",
@@ -7667,7 +7637,7 @@
           "Value": 0.23
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzK",
@@ -7787,7 +7757,7 @@
           "Value": 99.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzO",
@@ -7845,7 +7815,7 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzQ",
@@ -7876,7 +7846,7 @@
           "Value": 0.14
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzR",
@@ -8054,7 +8024,7 @@
           "Value": 84.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzX",
@@ -8147,7 +8117,7 @@
           "Value": 0.16
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzz[",
@@ -8178,7 +8148,7 @@
           "Value": 0.19
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzz\\",
@@ -8209,7 +8179,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzz]",
@@ -8240,7 +8210,7 @@
           "Value": 0.19
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzz^",
@@ -8302,7 +8272,7 @@
           "Value": 178.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzz`",
@@ -8364,7 +8334,7 @@
           "Value": 0.21
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzb",
@@ -8484,7 +8454,7 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzf",
@@ -8608,7 +8578,7 @@
           "Value": 0.15
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzj",
@@ -8639,7 +8609,7 @@
           "Value": 0.08
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzk",
@@ -8670,7 +8640,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzl",
@@ -8701,7 +8671,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzm",
@@ -8732,7 +8702,7 @@
           "Value": 0.14
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzn",
@@ -8763,7 +8733,7 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzo",
@@ -8794,7 +8764,7 @@
           "Value": 0.16
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzp",
@@ -8887,7 +8857,7 @@
           "Value": 0.14
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzs",
@@ -8980,7 +8950,7 @@
           "Value": 207.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzv",
@@ -9073,7 +9043,7 @@
           "Value": 187.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzy",
@@ -9104,7 +9074,7 @@
           "Value": 0.25
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzz",
@@ -9135,7 +9105,7 @@
           "Value": 0.14
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzzA",
@@ -9197,7 +9167,7 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzzC",
@@ -9228,7 +9198,7 @@
           "Value": 0.19
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzzD",
@@ -9267,27 +9237,27 @@
       "Set": 0,
       "Grade": 0,
       "Ilvl": 85,
-      "Enhance": 6,
+      "Enhance": 9,
       "Main": {
         "Name": 4,
-        "Value": 0.29
+        "Value": 0.36
       },
       "SubStats": [
-        {
-          "Name": 7,
-          "Value": 0.12
-        },
         {
           "Name": 0,
           "Value": 0.07
         },
         {
-          "Name": 9,
+          "Name": 2,
+          "Value": 4.0
+        },
+        {
+          "Name": 7,
           "Value": 0.12
         },
         {
-          "Name": 2,
-          "Value": 4.0
+          "Name": 9,
+          "Value": 0.18
         }
       ],
       "Locked": false
@@ -9321,7 +9291,7 @@
           "Value": 0.2
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzzG",
@@ -9383,7 +9353,7 @@
           "Value": 454.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzzI",
@@ -9561,7 +9531,7 @@
           "Value": 0.04
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzzO",
@@ -9627,10 +9597,10 @@
       "Set": 7,
       "Grade": 0,
       "Ilvl": 85,
-      "Enhance": 11,
+      "Enhance": 12,
       "Main": {
         "Name": 1,
-        "Value": 330.0
+        "Value": 360.0
       },
       "SubStats": [
         {
@@ -9639,7 +9609,7 @@
         },
         {
           "Name": 2,
-          "Value": 5.0
+          "Value": 9.0
         },
         {
           "Name": 5,
@@ -9774,7 +9744,7 @@
           "Value": 712.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzzV",
@@ -9805,7 +9775,7 @@
           "Value": 0.08
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzzW",
@@ -9867,7 +9837,7 @@
           "Value": 0.06
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzzY",
@@ -9925,7 +9895,7 @@
           "Value": 0.15
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
       "ID": "zzzz[",
@@ -10139,33 +10109,6 @@
     {
       "ID": "zzzzb",
       "Type": 4,
-      "Set": 0,
-      "Grade": 1,
-      "Ilvl": 85,
-      "Enhance": 9,
-      "Main": {
-        "Name": 1,
-        "Value": 280.0
-      },
-      "SubStats": [
-        {
-          "Name": 2,
-          "Value": 11.0
-        },
-        {
-          "Name": 10,
-          "Value": 0.13
-        },
-        {
-          "Name": 6,
-          "Value": 163.0
-        }
-      ],
-      "Locked": false
-    },
-    {
-      "ID": "zzzzc",
-      "Type": 4,
       "Set": 2,
       "Grade": 0,
       "Ilvl": 78,
@@ -10192,10 +10135,10 @@
           "Value": 4.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzd",
+      "ID": "zzzzc",
       "Type": 4,
       "Set": 1,
       "Grade": 1,
@@ -10222,7 +10165,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzze",
+      "ID": "zzzzd",
       "Type": 5,
       "Set": 0,
       "Grade": 0,
@@ -10250,10 +10193,10 @@
           "Value": 161.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzf",
+      "ID": "zzzze",
       "Type": 5,
       "Set": 0,
       "Grade": 0,
@@ -10281,10 +10224,10 @@
           "Value": 78.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzg",
+      "ID": "zzzzf",
       "Type": 5,
       "Set": 2,
       "Grade": 1,
@@ -10311,7 +10254,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzh",
+      "ID": "zzzzg",
       "Type": 5,
       "Set": 2,
       "Grade": 1,
@@ -10338,7 +10281,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzi",
+      "ID": "zzzzh",
       "Type": 5,
       "Set": 1,
       "Grade": 0,
@@ -10369,7 +10312,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzj",
+      "ID": "zzzzi",
       "Type": 5,
       "Set": 11,
       "Grade": 0,
@@ -10400,7 +10343,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzk",
+      "ID": "zzzzj",
       "Type": 3,
       "Set": 2,
       "Grade": 0,
@@ -10428,10 +10371,10 @@
           "Value": 116.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzl",
+      "ID": "zzzzk",
       "Type": 0,
       "Set": 0,
       "Grade": 0,
@@ -10459,10 +10402,10 @@
           "Value": 0.09
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzm",
+      "ID": "zzzzl",
       "Type": 4,
       "Set": 0,
       "Grade": 1,
@@ -10493,7 +10436,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzn",
+      "ID": "zzzzm",
       "Type": 1,
       "Set": 4,
       "Grade": 0,
@@ -10521,10 +10464,10 @@
           "Value": 8.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzo",
+      "ID": "zzzzn",
       "Type": 1,
       "Set": 1,
       "Grade": 0,
@@ -10555,7 +10498,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzp",
+      "ID": "zzzzo",
       "Type": 3,
       "Set": 1,
       "Grade": 0,
@@ -10586,7 +10529,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzq",
+      "ID": "zzzzp",
       "Type": 5,
       "Set": 0,
       "Grade": 0,
@@ -10617,7 +10560,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzr",
+      "ID": "zzzzq",
       "Type": 3,
       "Set": 7,
       "Grade": 0,
@@ -10645,10 +10588,10 @@
           "Value": 3.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzs",
+      "ID": "zzzzr",
       "Type": 3,
       "Set": 0,
       "Grade": 1,
@@ -10676,10 +10619,10 @@
           "Value": 80.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzt",
+      "ID": "zzzzs",
       "Type": 1,
       "Set": 2,
       "Grade": 1,
@@ -10710,7 +10653,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzu",
+      "ID": "zzzzt",
       "Type": 2,
       "Set": 2,
       "Grade": 1,
@@ -10741,7 +10684,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzv",
+      "ID": "zzzzu",
       "Type": 1,
       "Set": 11,
       "Grade": 0,
@@ -10772,7 +10715,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzw",
+      "ID": "zzzzv",
       "Type": 4,
       "Set": 0,
       "Grade": 0,
@@ -10800,10 +10743,10 @@
           "Value": 0.1
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzx",
+      "ID": "zzzzw",
       "Type": 5,
       "Set": 6,
       "Grade": 0,
@@ -10834,7 +10777,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzy",
+      "ID": "zzzzx",
       "Type": 5,
       "Set": 12,
       "Grade": 0,
@@ -10862,24 +10805,20 @@
           "Value": 0.18
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzz",
+      "ID": "zzzzy",
       "Type": 3,
       "Set": 0,
       "Grade": 0,
       "Ilvl": 85,
-      "Enhance": 12,
+      "Enhance": 15,
       "Main": {
         "Name": 0,
-        "Value": 0.43
+        "Value": 0.6
       },
       "SubStats": [
-        {
-          "Name": 7,
-          "Value": 0.25
-        },
         {
           "Name": 2,
           "Value": 6.0
@@ -10889,6 +10828,10 @@
           "Value": 0.05
         },
         {
+          "Name": 7,
+          "Value": 0.32
+        },
+        {
           "Name": 9,
           "Value": 0.06
         }
@@ -10896,15 +10839,15 @@
       "Locked": false
     },
     {
-      "ID": "zzzzzA",
+      "ID": "zzzzz",
       "Type": 3,
       "Set": 2,
       "Grade": 0,
       "Ilvl": 85,
-      "Enhance": 12,
+      "Enhance": 15,
       "Main": {
         "Name": 1,
-        "Value": 360.0
+        "Value": 500.0
       },
       "SubStats": [
         {
@@ -10912,22 +10855,22 @@
           "Value": 11.0
         },
         {
-          "Name": 7,
-          "Value": 0.07
-        },
-        {
           "Name": 3,
           "Value": 0.14
         },
         {
+          "Name": 7,
+          "Value": 0.07
+        },
+        {
           "Name": 9,
-          "Value": 0.08
+          "Value": 0.14
         }
       ],
       "Locked": false
     },
     {
-      "ID": "zzzzzB",
+      "ID": "zzzzzA",
       "Type": 0,
       "Set": 0,
       "Grade": 0,
@@ -10955,10 +10898,10 @@
           "Value": 0.12
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzzC",
+      "ID": "zzzzzB",
       "Type": 1,
       "Set": 12,
       "Grade": 0,
@@ -10986,10 +10929,10 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzzD",
+      "ID": "zzzzzC",
       "Type": 4,
       "Set": 2,
       "Grade": 0,
@@ -11020,7 +10963,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzzE",
+      "ID": "zzzzzD",
       "Type": 4,
       "Set": 2,
       "Grade": 0,
@@ -11051,15 +10994,15 @@
       "Locked": false
     },
     {
-      "ID": "zzzzzF",
+      "ID": "zzzzzE",
       "Type": 3,
       "Set": 0,
       "Grade": 0,
       "Ilvl": 85,
-      "Enhance": 9,
+      "Enhance": 12,
       "Main": {
         "Name": 5,
-        "Value": 0.34
+        "Value": 0.43
       },
       "SubStats": [
         {
@@ -11067,22 +11010,22 @@
           "Value": 10.0
         },
         {
-          "Name": 6,
-          "Value": 164.0
+          "Name": 4,
+          "Value": 0.1
         },
         {
-          "Name": 4,
-          "Value": 0.05
+          "Name": 6,
+          "Value": 164.0
         },
         {
           "Name": 10,
           "Value": 0.15
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzzG",
+      "ID": "zzzzzF",
       "Type": 4,
       "Set": 0,
       "Grade": 0,
@@ -11110,10 +11053,10 @@
           "Value": 56.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzzH",
+      "ID": "zzzzzG",
       "Type": 1,
       "Set": 0,
       "Grade": 1,
@@ -11137,10 +11080,10 @@
           "Value": 0.13
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzzI",
+      "ID": "zzzzzH",
       "Type": 4,
       "Set": 2,
       "Grade": 1,
@@ -11167,7 +11110,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzzJ",
+      "ID": "zzzzzI",
       "Type": 1,
       "Set": 8,
       "Grade": 0,
@@ -11198,7 +11141,7 @@
       "Locked": false
     },
     {
-      "ID": "zzzzzK",
+      "ID": "zzzzzJ",
       "Type": 3,
       "Set": 6,
       "Grade": 0,
@@ -11226,10 +11169,10 @@
           "Value": 0.21
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzzL",
+      "ID": "zzzzzK",
       "Type": 2,
       "Set": 0,
       "Grade": 0,
@@ -11257,10 +11200,10 @@
           "Value": 0.17
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzzM",
+      "ID": "zzzzzL",
       "Type": 0,
       "Set": 0,
       "Grade": 0,
@@ -11288,10 +11231,10 @@
           "Value": 0.07
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzzN",
+      "ID": "zzzzzM",
       "Type": 5,
       "Set": 0,
       "Grade": 0,
@@ -11319,10 +11262,10 @@
           "Value": 78.0
         }
       ],
-      "Locked": true
+      "Locked": false
     },
     {
-      "ID": "zzzzzO",
+      "ID": "zzzzzN",
       "Type": 5,
       "Set": 0,
       "Grade": 0,
@@ -11348,6 +11291,447 @@
         {
           "Name": 9,
           "Value": 0.05
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzO",
+      "Type": 0,
+      "Set": 0,
+      "Grade": 1,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 1,
+        "Value": 280.0
+      },
+      "SubStats": [
+        {
+          "Name": 0,
+          "Value": 0.09
+        },
+        {
+          "Name": 2,
+          "Value": 7.0
+        },
+        {
+          "Name": 9,
+          "Value": 0.12
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzP",
+      "Type": 2,
+      "Set": 0,
+      "Grade": 0,
+      "Ilvl": 78,
+      "Enhance": 15,
+      "Main": {
+        "Name": 8,
+        "Value": 285.0
+      },
+      "SubStats": [
+        {
+          "Name": 2,
+          "Value": 10.0
+        },
+        {
+          "Name": 5,
+          "Value": 0.23
+        },
+        {
+          "Name": 3,
+          "Value": 0.04
+        },
+        {
+          "Name": 10,
+          "Value": 0.14
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzQ",
+      "Type": 3,
+      "Set": 9,
+      "Grade": 0,
+      "Ilvl": 90,
+      "Enhance": 15,
+      "Main": {
+        "Name": 6,
+        "Value": 2835.0
+      },
+      "SubStats": [
+        {
+          "Name": 5,
+          "Value": 0.19
+        },
+        {
+          "Name": 2,
+          "Value": 8.0
+        },
+        {
+          "Name": 7,
+          "Value": 0.23
+        },
+        {
+          "Name": 8,
+          "Value": 36.0
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzR",
+      "Type": 3,
+      "Set": 0,
+      "Grade": 1,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 3,
+        "Value": 0.31
+      },
+      "SubStats": [
+        {
+          "Name": 6,
+          "Value": 169.0
+        },
+        {
+          "Name": 2,
+          "Value": 4.0
+        },
+        {
+          "Name": 0,
+          "Value": 0.25
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzS",
+      "Type": 0,
+      "Set": 11,
+      "Grade": 0,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 1,
+        "Value": 280.0
+      },
+      "SubStats": [
+        {
+          "Name": 0,
+          "Value": 0.14
+        },
+        {
+          "Name": 6,
+          "Value": 182.0
+        },
+        {
+          "Name": 4,
+          "Value": 0.1
+        },
+        {
+          "Name": 2,
+          "Value": 8.0
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzT",
+      "Type": 0,
+      "Set": 2,
+      "Grade": 0,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 1,
+        "Value": 280.0
+      },
+      "SubStats": [
+        {
+          "Name": 2,
+          "Value": 6.0
+        },
+        {
+          "Name": 3,
+          "Value": 0.05
+        },
+        {
+          "Name": 9,
+          "Value": 0.21
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzU",
+      "Type": 2,
+      "Set": 0,
+      "Grade": 1,
+      "Ilvl": 85,
+      "Enhance": 15,
+      "Main": {
+        "Name": 8,
+        "Value": 300.0
+      },
+      "SubStats": [
+        {
+          "Name": 7,
+          "Value": 0.11
+        },
+        {
+          "Name": 2,
+          "Value": 5.0
+        },
+        {
+          "Name": 5,
+          "Value": 0.18
+        },
+        {
+          "Name": 10,
+          "Value": 0.07
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzV",
+      "Type": 3,
+      "Set": 0,
+      "Grade": 1,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 8,
+        "Value": 168.0
+      },
+      "SubStats": [
+        {
+          "Name": 0,
+          "Value": 0.05
+        },
+        {
+          "Name": 10,
+          "Value": 0.15
+        },
+        {
+          "Name": 7,
+          "Value": 0.2
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzW",
+      "Type": 4,
+      "Set": 0,
+      "Grade": 1,
+      "Ilvl": 85,
+      "Enhance": 15,
+      "Main": {
+        "Name": 1,
+        "Value": 500.0
+      },
+      "SubStats": [
+        {
+          "Name": 2,
+          "Value": 11.0
+        },
+        {
+          "Name": 6,
+          "Value": 163.0
+        },
+        {
+          "Name": 10,
+          "Value": 0.13
+        },
+        {
+          "Name": 7,
+          "Value": 0.13
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzX",
+      "Type": 4,
+      "Set": 2,
+      "Grade": 0,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 5,
+        "Value": 0.34
+      },
+      "SubStats": [
+        {
+          "Name": 7,
+          "Value": 0.06
+        },
+        {
+          "Name": 4,
+          "Value": 0.14
+        },
+        {
+          "Name": 1,
+          "Value": 35.0
+        },
+        {
+          "Name": 0,
+          "Value": 0.16
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzY",
+      "Type": 4,
+      "Set": 2,
+      "Grade": 0,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 0,
+        "Value": 0.34
+      },
+      "SubStats": [
+        {
+          "Name": 8,
+          "Value": 34.0
+        },
+        {
+          "Name": 4,
+          "Value": 0.17
+        },
+        {
+          "Name": 9,
+          "Value": 0.13
+        },
+        {
+          "Name": 3,
+          "Value": 0.03
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzzZ",
+      "Type": 4,
+      "Set": 2,
+      "Grade": 1,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 0,
+        "Value": 0.34
+      },
+      "SubStats": [
+        {
+          "Name": 1,
+          "Value": 36.0
+        },
+        {
+          "Name": 7,
+          "Value": 0.12
+        },
+        {
+          "Name": 2,
+          "Value": 10.0
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzz[",
+      "Type": 4,
+      "Set": 0,
+      "Grade": 0,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 5,
+        "Value": 0.34
+      },
+      "SubStats": [
+        {
+          "Name": 0,
+          "Value": 0.11
+        },
+        {
+          "Name": 3,
+          "Value": 0.04
+        },
+        {
+          "Name": 4,
+          "Value": 0.18
+        },
+        {
+          "Name": 10,
+          "Value": 0.04
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzz\\",
+      "Type": 4,
+      "Set": 7,
+      "Grade": 1,
+      "Ilvl": 85,
+      "Enhance": 9,
+      "Main": {
+        "Name": 8,
+        "Value": 168.0
+      },
+      "SubStats": [
+        {
+          "Name": 2,
+          "Value": 4.0
+        },
+        {
+          "Name": 4,
+          "Value": 0.28
+        },
+        {
+          "Name": 1,
+          "Value": 34.0
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzz]",
+      "Type": 4,
+      "Set": 3,
+      "Grade": 0,
+      "Ilvl": 88,
+      "Enhance": 15,
+      "Main": {
+        "Name": 6,
+        "Value": 2765.0
+      },
+      "SubStats": [
+        {
+          "Name": 10,
+          "Value": 0.13
+        },
+        {
+          "Name": 5,
+          "Value": 0.3
+        },
+        {
+          "Name": 0,
+          "Value": 0.09
+        },
+        {
+          "Name": 3,
+          "Value": 0.07
         }
       ],
       "Locked": false

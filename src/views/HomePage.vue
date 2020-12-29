@@ -2,11 +2,10 @@
   <div class="about">
     <message-box title="Current Status">
       <ul>
-        <li>Will work on the stat calculation of an hero after equip the gears</li>
-        <li>Add Gear by UI is not working now</li>
+        <li>Working on gear input component</li>
         <li>As data structure is not finalized, need to import gear everytime now</li>
       </ul>
-      <br />2020-12-27
+      <br />2020-12-30
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -26,6 +25,7 @@
       </ol>
     </message-box>
     <message-box hide-default title="Version History">
+      [2020-12-29] add create gear form and update ui<br />
       [2020-12-27] add hero page<br />
       [2020-12-23] add import tool, simple score<br />
       [2020-12-20] fix mobile ui<br />
