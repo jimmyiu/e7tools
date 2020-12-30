@@ -26,6 +26,7 @@
       </ol>
     </message-box>
     <message-box hide-default title="Version History">
+      [2020-12-30] enhance persistent data structure, add settings<br />
       [2020-12-29] add create gear form and update ui<br />
       [2020-12-27] add hero page<br />
       [2020-12-23] add import tool, simple score<br />

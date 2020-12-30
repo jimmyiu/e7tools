@@ -1,5 +1,7 @@
 <template>
-  <v-container>
+  <div>
+    <!-- <gear-detail />
+    {{ getGearMap.get('fedaj7jj44') }} -->
     <v-row>
       <v-dialog v-model="confirmCache" width="300">
         <template v-slot:activator="{ on, attrs }">
@@ -65,18 +67,23 @@
     <!-- <v-row v-for="(item, i) in items" :key="i">
       <img :src="item.icon" />
     </v-row> -->
-  </v-container>
+  </div>
 </template>
 
 <script lang="ts">
+import { GearDetail } from '@/components';
+import { Hero, Gear } from '@/models';
 import { Vue, Component } from 'vue-property-decorator';
+import { mapGetters } from 'vuex';
 import axios from 'axios';
-import { Hero } from '@/models';
 
 @Component({
-  name: 'optimizer-page'
+  name: 'optimizer-page',
+  components: { GearDetail },
+  computed: { ...mapGetters(['getGearMap']) }
 })
 export default class OptimizerPage extends Vue {
+  readonly getGearMap!: Map<string, Gear.Gear>;
   items: Array<Hero> = new Array();
   hero?: Hero = {} as Hero;
   confirmCache: boolean = false;
