@@ -11735,6 +11735,68 @@
         }
       ],
       "Locked": false
+    },
+    {
+      "ID": "zzzzz^",
+      "Type": 4,
+      "Set": 6,
+      "Grade": 1,
+      "Ilvl": 88,
+      "Enhance": 15,
+      "Main": {
+        "Name": 5,
+        "Value": 0.65
+      },
+      "SubStats": [
+        {
+          "Name": 2,
+          "Value": 8.0
+        },
+        {
+          "Name": 3,
+          "Value": 0.05
+        },
+        {
+          "Name": 9,
+          "Value": 0.11
+        },
+        {
+          "Name": 10,
+          "Value": 0.24
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "zzzzz_",
+      "Type": 2,
+      "Set": 6,
+      "Grade": 0,
+      "Ilvl": 88,
+      "Enhance": 15,
+      "Main": {
+        "Name": 8,
+        "Value": 310.0
+      },
+      "SubStats": [
+        {
+          "Name": 5,
+          "Value": 0.06
+        },
+        {
+          "Name": 7,
+          "Value": 0.1
+        },
+        {
+          "Name": 2,
+          "Value": 13.0
+        },
+        {
+          "Name": 4,
+          "Value": 0.13
+        }
+      ],
+      "Locked": false
     }
   ]
 }
