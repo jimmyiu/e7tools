@@ -30,8 +30,8 @@
       Dev
     </v-btn> -->
     <v-spacer />
-    <v-switch hide-details @change="toggleDarkMode"></v-switch>
-    <!-- <v-avatar class="hidden-sm-and-down" color="grey darken-1 shrink" size="32"> </v-avatar> -->
+    <v-btn icon @click="toggleSetting"><v-icon>mdi-cog</v-icon></v-btn>
+    <!-- <v-switch hide-details @change="toggleDarkMode"></v-switch> -->
   </v-app-bar>
 </template>
 <style lang="sass" scoped>
@@ -49,20 +49,18 @@ import { mapActions } from 'vuex';
 import SiteIcon from './SiteIcon.vue';
 
 @Component({
+  name: 'top-nav',
   components: { SiteIcon }
 })
 export default class TopNav extends Vue {
-  name: string = 'top-nav';
-  links = [
-    // { name: 'Home', link: '/' },
-    { name: 'Gear', link: '/gear' }
-  ];
-
   toggleDarkMode() {
     this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
   }
 
   @Emit()
   toggleMenu() {}
+
+  @Emit()
+  toggleSetting() {}
 }
 </script>
