@@ -20,15 +20,15 @@ import { TopNav, SiteSetting } from '@/components';
 @Component({
   name: 'app',
   components: { TopNav, SiteSetting },
-  methods: { ...mapActions(['initApp']) }
+  methods: { ...mapActions(['initVuex']) }
 })
 export default class App extends Vue {
   setting = false;
 
-  initApp!: () => void;
+  initVuex!: () => void;
 
   created() {
-    this.initApp();
+    this.initVuex();
   }
 }
 </script>
