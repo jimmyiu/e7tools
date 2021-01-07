@@ -1,8 +1,14 @@
 <template>
   <div>
-    <!-- <gear-detail />
-    {{ getGearMap.get('fedaj7jj44') }} -->
-    <v-row>
+    <v-virtual-scroll height="400" :item-height="152" :items="gears">
+      <template v-slot:default="{ item }">
+        <v-row dense no-gutters>
+          <v-col cols="auto"><gear-detail :gear-id="item.id"/></v-col>
+        </v-row>
+      </template>
+    </v-virtual-scroll>
+    <!-- {{ getGearMap.get('fedaj7jj44') }} -->
+    <v-row class="mt-9">
       <v-dialog v-model="confirmCache" width="300">
         <template v-slot:activator="{ on, attrs }">
           <v-btn v-bind="attrs" dark v-on="on">
@@ -74,16 +80,15 @@
 import { GearDetail } from '@/components';
 import { Hero, Gear } from '@/models';
 import { Vue, Component } from 'vue-property-decorator';
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import axios from 'axios';
 
 @Component({
   name: 'optimizer-page',
   components: { GearDetail },
-  computed: { ...mapGetters(['getGearMap']) }
+  computed: { ...mapState(['gears']) }
 })
 export default class OptimizerPage extends Vue {
-  readonly getGearMap!: Map<string, Gear.Gear>;
   items: Array<Hero> = new Array();
   hero?: Hero = {} as Hero;
   confirmCache: boolean = false;

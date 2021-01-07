@@ -1,13 +1,7 @@
 <template>
-  <v-row dense no-gutters>
-    <v-col align="center">
-      <v-img
-        :max-height="getWidth()"
-        :max-width="getWidth()"
-        :src="require(`@/assets/img/gear/set/${set.toLowerCase()}.png`)"
-      />
-    </v-col>
-  </v-row>
+  <div>
+    <v-img :max-height="width" :max-width="width" :src="require(`@/assets/img/gear/set/${set.toLowerCase()}.png`)" />
+  </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
@@ -19,7 +13,7 @@ export default class GearSetIcon extends Vue {
   @Prop() readonly set!: Gear.Set;
   @Prop({ type: Boolean, default: false }) readonly small!: Boolean;
 
-  getWidth(): number {
+  get width(): number {
     return this.small ? 26 : 44;
   }
 }
