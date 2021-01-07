@@ -1,9 +1,7 @@
 <template>
-  <v-row dense no-gutters>
-    <v-col align="center">
-      <v-img :max-height="getWidth()" :max-width="getWidth()" :src="`assets/img/gear/${type.toLowerCase()}.png`" />
-    </v-col>
-  </v-row>
+  <div>
+    <v-img :max-height="width" :max-width="width" :src="require(`@/assets/img/gear/${type.toLowerCase()}.png`)" />
+  </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
@@ -15,7 +13,7 @@ export default class GearTypeIcon extends Vue {
   @Prop() readonly type!: Gear.Type;
   @Prop({ type: Boolean, default: false }) readonly small!: Boolean;
 
-  getWidth(): number {
+  get width(): number {
     return this.small ? 22 : 44;
   }
 }
