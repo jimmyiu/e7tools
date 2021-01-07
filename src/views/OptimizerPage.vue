@@ -4,7 +4,6 @@
       <template v-slot:default="{ item }">
         <v-row dense no-gutters>
           <v-col cols="auto"><gear-detail :gear-id="item.id"/></v-col>
-          <v-col cols="auto"><gear-detail :gear-id="item.id"/></v-col>
         </v-row>
       </template>
     </v-virtual-scroll>
