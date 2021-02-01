@@ -4,8 +4,8 @@
       <p>This tool will be updated slowly</p>
       <ul>
         <li>Gears are only presisted in localstorage now</li>
-        <li>As data structure is not finalized, I am not going to work on the exporter at this moment</li>
-        <li>Next: export gears</li>
+        <li>As data structure is not finalized, the import / export function is a temporary solution</li>
+        <li>Next: fine tune gear filter</li>
       </ul>
       <br />2021-02-01
     </message-box>

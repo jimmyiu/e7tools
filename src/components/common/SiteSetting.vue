@@ -11,31 +11,7 @@
         Data &amp; Settings
         <div class="d-flex mt-1">
           <v-spacer />
-          <v-dialog v-model="dialog.import">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn v-bind="attrs" class="mr-2" color="success" dark small v-on="on">
-                Import
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-title>
-                Import
-              </v-card-title>
-              <v-card-text>
-                TODO
-                <v-textarea outlined />
-              </v-card-text>
-              <v-divider></v-divider>
-              <v-card-actions>
-                <v-btn color="primary" disabled text @click="importData">
-                  Import
-                </v-btn>
-                <v-btn color="secondary" text @click="dialog.import = false">
-                  CLOSE
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
+          <setting-import />
           <v-dialog v-model="dialog.export">
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" class="mr-2" color="primary" dark small v-on="on">
@@ -43,18 +19,19 @@
               </v-btn>
             </template>
             <v-card>
-              <v-card-title>
+              <v-card-title class="primary">
                 Export
               </v-card-title>
               <v-card-text>
+                <br />
                 <v-textarea ref="export-data" outlined readonly :value="exportData" />
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
-                <v-btn color="primary" text @click="copy">
+                <v-btn color="primary" @click="copy">
                   COPY
                 </v-btn>
-                <v-btn color="secondary" text @click="dialog.export = false">
+                <v-btn text @click="dialog.export = false">
                   CLOSE
                 </v-btn>
               </v-card-actions>
@@ -67,20 +44,20 @@
               </v-btn>
             </template>
             <v-card>
-              <v-card-title>
+              <v-card-title class="error">
                 Confirmation
               </v-card-title>
               <v-card-text>
+                <br />
                 Clear all data &amp; settings?<br />
                 The page will be reloaded.
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" text @click="performClear">
+                <v-btn color="primary" @click="performClear">
                   OK
                 </v-btn>
-                <v-btn color="secondary" text @click="clearDialog = false">
+                <v-btn text @click="clearDialog = false">
                   CANCEL
                 </v-btn>
               </v-card-actions>
@@ -102,22 +79,23 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
-import { mapActions } from 'vuex';
+import SettingImport from './SettingImport.vue';
+import { Constants } from '@/models';
 
 @Component({
-  name: 'site-setting'
+  name: 'site-setting',
+  components: { SettingImport }
 })
 export default class SiteSetting extends Vue {
   clearDialog = false;
   dialog = {
     clear: false,
-    export: false,
-    imoprt: false
+    export: false
   };
   @Model('input') readonly visible!: boolean;
 
   get exportData() {
-    return localStorage.getItem('vuex.data');
+    return localStorage.getItem(Constants.KEY_VUEXDATA);
   }
 
   toggleDarkMode() {
@@ -136,10 +114,6 @@ export default class SiteSetting extends Vue {
     // this.
     // document.getElementById('').select()
     document.execCommand('copy');
-  }
-
-  importData() {
-    console.log('TODO');
   }
 
   @Emit()
