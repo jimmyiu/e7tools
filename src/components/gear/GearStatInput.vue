@@ -71,7 +71,7 @@ export default class GearStatInput extends Vue {
   @Emit()
   input(value: number) {
     const result = Object.assign({}, this.value);
-    result.value = value;
+    result.value = +value;
     return result;
   }
 }
