@@ -1,7 +1,7 @@
 <template>
   <v-card class="text-center" flat>
     <v-btn
-      v-for="(item, i) in config.btns"
+      v-for="(item, i) in btns"
       :key="i"
       :class="{ 'mx-1 mt-2': true, 'disable-events': disabled(item) }"
       :color="color(item)"
@@ -20,23 +20,13 @@ import Stat = Gear.Stat;
 import { Vue, Component, Prop, Emit, Model, Watch } from 'vue-property-decorator';
 
 class StatBtnConfig {
-  constructor(public readonly stat: Stat, public readonly main: boolean, public readonly sub: boolean) {}
+  constructor(public readonly stat: Stat, public main: boolean, public sub: boolean) {}
 }
 
-@Component
+@Component({
+  name: 'gear-form-stat-select'
+})
 export default class GearFormStatSelect extends Vue {
-  name: string = 'gear-form-stat-select';
-  @Prop() readonly enhance!: number;
-  @Prop() readonly grade!: Gear.Grade;
-  @Prop() readonly type!: Gear.Type;
-  result = new Array<Stat | undefined>(5);
-  size = 0;
-  config = {
-    maxSize: 0,
-    singleMain: false,
-    btns: Array<StatBtnConfig>()
-  };
-
   readonly ALL_STATS = Object.values(Gear.Stat);
   readonly SELECTION_CONFIG = {
     // in the sequence of Object.values(Gear.Stat)
@@ -49,62 +39,99 @@ export default class GearFormStatSelect extends Vue {
     Ring: [3, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3],
     Boot: [3, 3, 3, 3, 3, 3, 1, 1, 3, 1, 1]
   };
+  @Prop() readonly type!: Gear.Type;
+  @Prop() readonly value!: Gear.StatInput[];
+  btns = Array<StatBtnConfig>();
 
-  @Watch('type', { immediate: true, deep: true })
-  onTypeChanged(val: Gear.Type) {
-    let foo = this.SELECTION_CONFIG[val];
-    this.config.btns = [];
-    let mains: StatBtnConfig[] = [];
+  get selectedSize(): number {
+    return this.value.filter(x => x.stat != undefined).length;
+  }
+
+  get isSingleMain(): boolean {
+    return this.btns.filter(x => x.main).length == 1;
+  }
+
+  get emptySubStatIndex(): number {
+    const index = this.value.slice(1, this.value.length).findIndex(x => x.stat == undefined);
+    return index < 0 ? index : index + 1;
+  }
+
+  isMain(config: StatBtnConfig): boolean {
+    return config.main && this.value[0].stat == config.stat;
+  }
+
+  isSub(config: StatBtnConfig): boolean {
+    return config.sub && this.value.findIndex(x => x.stat == config.stat) > 0;
+  }
+
+  created() {
+    console.log('created::value=', this.value);
     for (let i = 0; i < this.ALL_STATS.length; i++) {
-      let config = {
-        stat: this.ALL_STATS[i],
-        main: (foo[i] & 2) > 0,
-        sub: (foo[i] & 1) > 0
-      };
-      this.config.btns.push(config);
-      if (config.main) {
-        mains.push(config);
+      this.btns.push(new StatBtnConfig(this.ALL_STATS[i], true, true));
+    }
+    this.onTypeChanged(this.type);
+  }
+
+  @Watch('type', { immediate: false, deep: true })
+  onTypeChanged(type: Gear.Type) {
+    console.log('onTypeChanged::start');
+    let typeConfig = this.SELECTION_CONFIG[type];
+    for (let i = 0; i < this.ALL_STATS.length; i++) {
+      this.btns[i].main = (typeConfig[i] & 2) > 0;
+      this.btns[i].sub = (typeConfig[i] & 1) > 0;
+    }
+    console.log('onTypeChanged::isSingleMain=', this.isSingleMain);
+
+    let result = Array<Gear.StatInput>();
+    // handle main stat change
+    if (this.isSingleMain) {
+      const mainStat = this.btns.find(x => x.main)!.stat;
+      if (mainStat != this.value[0].stat) {
+        result.push({ stat: mainStat, value: 0 });
+      } else {
+        result.push(this.value[0]);
+      }
+    } else if (this.value[0].stat != undefined && this.btns.find(x => x.stat == this.value[0].stat)?.main) {
+      result.push(this.value[0]);
+    } else {
+      result.push({ stat: undefined, value: 0 });
+    }
+    // handle sub stat change
+    for (let i = 1; i < this.value.length; i++) {
+      if (this.value[i].stat != undefined && this.btns.find(x => x.stat == this.value[i].stat)?.sub) {
+        result.push(this.value[i]);
       }
     }
-    this.config.singleMain = mains.length == 1;
-    this.updateResult(0, this.config.singleMain ? mains[0].stat : null);
-  }
-  @Watch('grade', { immediate: true, deep: true })
-  OnGradeChanged(val: Gear.Grade) {
-    switch (val) {
-      case Gear.Grade.EPIC:
-        this.config.maxSize = 5;
-        break;
-      case Gear.Grade.HERO:
-        this.config.maxSize = 4;
-        break;
-      case Gear.Grade.RARE:
-        this.config.maxSize = 3;
-        break;
-      default:
-        this.config.maxSize = 0;
+    while (result.length < this.value.length) {
+      result.push({ stat: undefined, value: 0 });
     }
-    for (let i = this.config.maxSize; i < 5; i++) {
-      this.updateResult(i, null);
-    }
+    // emit result
+    this.$nextTick(function() {
+      console.log('onTypeChanged::emit input event');
+      this.$emit('input', result);
+    });
   }
 
   disabled(config: StatBtnConfig) {
-    // not a main / sub stat
     if (!config.main && !config.sub) {
       return true;
-    } else if (this.config.singleMain && this.result[0] == config.stat) {
+    } else if (this.isSingleMain && this.isMain(config)) {
       return true;
-    } else if (this.size == this.config.maxSize && this.result.indexOf(config.stat) < 0) {
+    } else if (this.selectedSize == this.value.length && !this.isMain(config) && !this.isSub(config)) {
+      return true;
+    } else if (this.isMain(config) || this.isSub(config)) {
+      return false;
+    } else if (config.sub && !config.main && this.emptySubStatIndex == -1) {
+      // sub-only stat but all sub selected
       return true;
     }
     return false;
   }
 
   color(config: StatBtnConfig): string {
-    if (this.result[0] == config.stat) {
+    if (this.isMain(config)) {
       return 'primary';
-    } else if (this.result.indexOf(config.stat) > 0) {
+    } else if (this.isSub(config)) {
       return 'success';
     } else if (this.disabled(config)) {
       return 'secondary';
@@ -113,27 +140,32 @@ export default class GearFormStatSelect extends Vue {
   }
 
   click($event: any, selected: StatBtnConfig) {
-    var index = this.result.indexOf(selected.stat);
+    console.log('click::selected=', selected);
+    // skip 1st item if not a main stat
+    const index = this.value.findIndex(x => x.stat == selected.stat);
+    console.log('click::index =', index);
     if (index < 0) {
-      for (let i = selected.main ? 0 : 1; i < this.config.maxSize; i++) {
-        if (this.result[i] == null) {
-          this.updateResult(i, selected.stat);
-          break;
-        }
+      let target = this.value.findIndex(x => x.stat == undefined);
+      // handle main is not selected, but selected one is sub-only
+      if (target == 0 && !selected.main) {
+        target = this.emptySubStatIndex;
+      }
+      console.log('click::target =', target);
+      if (target >= 0 && target < this.value.length) {
+        this.updateResult(target, selected.stat);
       }
     } else {
-      this.updateResult(index, null);
+      this.updateResult(index, undefined);
     }
   }
 
-  updateResult(index: number, stat: Stat | null) {
-    if (stat == null && this.result[index] != null) {
-      this.size--;
-    } else if (stat != null && this.result[index] == null) {
-      this.size++;
-    }
-    Vue.set(this.result, index, stat);
-    this.$emit('input', this.result);
+  @Emit('input')
+  updateResult(index: number, stat: Stat | undefined) {
+    console.log('updateResult::index =', index, ', stat =', stat);
+    let result = [...this.value];
+    result[index].stat = stat;
+    console.log('updateResult::result=', result);
+    return result;
   }
 }
 </script>

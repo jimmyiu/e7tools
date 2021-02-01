@@ -16,7 +16,7 @@
             <gear-set-select v-model="form.set" class="justify-center" />
           </v-card>
           <v-card class="pa-2 pt-0" outlined width="300px">
-            <gear-form-stat-select v-model="form.stats" :enhance="form.enhance" :grade="form.grade" :type="form.type" />
+            <gear-form-stat-select v-model="form.statInputs" :type="form.type" />
           </v-card>
         </v-col>
         <v-col cols="auto">
@@ -59,14 +59,14 @@
                     <v-slider v-model="form.level" hide-details max="7" min="0" :tick-labels="levelTicks" />
                   </v-card-text>
                 </v-card>
-                <gear-stat-input v-model="form.statValues[0]" class="mt-2" dense mode="main" :stat="form.stats[0]" />
-                <gear-stat-input v-model="form.statValues[1]" class="mt-2" dense mode="sub" :stat="form.stats[1]" />
+                <gear-stat-input v-model="form.statInputs[0]" class="mt-2" dense mode="main" />
+                <gear-stat-input v-model="form.statInputs[1]" class="mt-2" dense mode="sub" />
               </div>
             </v-col>
             <v-col cols="auto">
-              <gear-stat-input v-model="form.statValues[2]" mode="sub" :stat="form.stats[2]" />
-              <gear-stat-input v-model="form.statValues[3]" class="mt-2" dense mode="sub" :stat="form.stats[3]" />
-              <gear-stat-input v-model="form.statValues[4]" class="mt-2" dense mode="sub" :stat="form.stats[4]" />
+              <gear-stat-input v-model="form.statInputs[2]" mode="sub" />
+              <gear-stat-input v-model="form.statInputs[3]" class="mt-2" dense mode="sub" />
+              <gear-stat-input v-model="form.statInputs[4]" class="mt-2" dense mode="sub" />
             </v-col>
           </v-row>
         </v-col>
@@ -74,7 +74,7 @@
     </v-card-text>
     <v-divider />
     <v-card-actions>
-      <v-btn class="font-weight-bold" color="primary" outlined @click="submit">Create</v-btn>
+      <v-btn class="font-weight-bold" color="primary" outlined @click="submit">{{ gear ? 'Edit' : 'Create' }}</v-btn>
       <v-btn text @click="reset">Reset</v-btn>
       <v-spacer />
       <v-btn text @click="$emit('close')">Close</v-btn>
@@ -86,13 +86,17 @@
   min-width: 32px
 </style>
 <script lang="ts">
-import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { Gear } from '@/models';
-import GearFormStatSelect from './GearFormStatSelect.vue';
 import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from './common';
+import { Vue, Component, Prop, Emit, Watch } from 'vue-property-decorator';
+import GearFormStatSelect from './GearFormStatSelect.vue';
 import GearStatInput from './GearStatInput.vue';
 
+/**
+ * This is a gear form, it takes a gear for edit (undefined for create) and returns a gear object
+ */
 @Component({
+  name: 'gear-form',
   components: {
     GearFormStatSelect,
     GearSetIcon,
@@ -104,60 +108,105 @@ import GearStatInput from './GearStatInput.vue';
   computed: {}
 })
 export default class GearForm extends Vue {
-  name: string = 'gear-form';
-  form = {
-    type: Gear.Type.Weapon,
-    set: Gear.Set.Speed,
-    grade: Gear.Grade.EPIC,
-    level: 5,
-    enhance: 15,
-    stats: Array<Gear.Stat>(),
-    statValues: Array<number>()
-  };
+  @Prop({ type: Gear.Gear, required: false, default: undefined }) readonly gear!: Gear.Gear;
+
+  form = this.defaultForm();
   readonly sets = Gear.SETS;
   readonly types = Object.values(Gear.Type);
   readonly grades = Object.values(Gear.Grade);
   levelTicks = [67, 70, 71, 75, 78, 85, 88, 90];
 
-  get levelColor(): string {
-    if (this.levelTicks[this.form.level] < 75) {
-      return 'success';
-    } else if (this.levelTicks[this.form.level] <= 85) {
-      return 'primary';
+  // @Watch('form.grade', { immediate: false, deep: true })
+  // onGradleChanged(grade: Gear.Grade) {
+  //   console.log(
+  //     'onGradeChanged::grade.numOfStats =',
+  //     grade.numOfStats,
+  //     ', stats.length =',
+  //     this.form.statInputs.length
+  //   );
+  //   if (this.form.statInputs.length < grade.numOfStats) {
+  //     while (this.form.statInputs.length < grade.numOfStats) {
+  //       this.form.statInputs.push({ stat: undefined, value: 0 });
+  //     }
+  //   } else {
+  //     while (grade.numOfStats < this.form.statInputs.length) {
+  //       this.form.statInputs.pop();
+  //     }
+  //   }
+  // }
+
+  defaultForm() {
+    const defaultInputStats = Array<Gear.StatInput>();
+    while (defaultInputStats.length < 5) {
+      defaultInputStats.push({ stat: undefined, value: 0 });
     }
-    return 'red';
-  }
-
-  mounted() {
-    this.reset();
-  }
-
-  reset() {
-    this.form = {
+    return {
       type: Gear.Type.Weapon,
       set: Gear.Set.Speed,
       grade: Gear.Grade.EPIC,
       level: 5,
       enhance: 15,
-      stats: [Gear.Stat.ATK, Gear.Stat.ATKP, Gear.Stat.CRI, Gear.Stat.CDMG, Gear.Stat.SPD],
-      statValues: [100, 10, 10, 10, 10]
+      statInputs: defaultInputStats
     };
+  }
+
+  // createInputStats(gear: Gear.Gear): Gear.StatInput[] {
+  //   const result = Array<Gear.StatInput>();
+  //   result.push({ stat: gear.main, value: gear.getMain() });
+  //   console.log('createInputStats::main =', gear.getMain());
+  //   gear.getSubs().forEach((value, key) => {
+  //     console.log('createInputStats::value =', value);
+  //     result.push({ stat: key, value: value });
+  //   });
+  //   while (result.length < 5) {
+  //     result.push({ stat: undefined, value: 0 });
+  //   }
+  //   console.log('createInputStats::result =', result);
+  //   return result;
+  // }
+
+  created() {
+    console.log('created::start');
+    this.reset();
+  }
+
+  reset() {
+    console.log('reset', this.gear);
+    if (this.gear) {
+      const statInputs = this.gear.getStatInputs();
+      while (statInputs.length < 5) {
+        statInputs.push({ stat: undefined, value: 0 });
+      }
+      this.form = {
+        type: this.gear.type!!,
+        set: this.gear.set!!,
+        grade: this.gear.grade!!,
+        level: this.levelTicks.indexOf(this.gear.level!!),
+        enhance: this.gear.enhance!!,
+        // statInputs: this.createInputStats(this.gear)
+        statInputs: statInputs
+      };
+    } else {
+      this.form = this.defaultForm();
+    }
   }
 
   @Emit('input')
   submit() {
-    let gear = new Gear.Gear();
+    let gear = this.gear ? new Gear.Gear(this.gear.id) : new Gear.Gear();
     gear.set = this.form.set;
     gear.type = this.form.type;
     gear.grade = this.form.grade;
     gear.level = this.levelTicks[this.form.level];
     gear.enhance = this.form.enhance;
     gear.score = 0;
-    gear.main = this.form.stats[0];
-    for (let i = 0; i < this.form.stats.length; i++) {
-      Vue.set(gear, this.form.stats[i].value, this.form.statValues[i]);
+    gear.main = this.form.statInputs[0].stat;
+    for (let i = 0; i < this.form.statInputs.length; i++) {
+      if (this.form.statInputs[i].stat) {
+        Vue.set(gear, this.form.statInputs[i].stat!.value, this.form.statInputs[i].value);
+      }
     }
-    console.log('gear', gear);
+    console.log('submit::gear =', gear);
     return gear;
   }
 }

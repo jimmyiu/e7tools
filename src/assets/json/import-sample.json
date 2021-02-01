@@ -7746,15 +7746,15 @@
       "Set": 1,
       "Grade": 1,
       "Ilvl": 85,
-      "Enhance": 13,
+      "Enhance": 15,
       "Main": {
         "Name": 1,
-        "Value": 390.0
+        "Value": 500.0
       },
       "SubStats": [
         {
           "Name": 0,
-          "Value": 0.14
+          "Value": 0.22
         },
         {
           "Name": 3,
@@ -12053,6 +12053,68 @@
         }
       ],
       "Locked": true
+    },
+    {
+      "ID": "01af8ib608",
+      "Type": 0,
+      "Set": 5,
+      "Grade": 0,
+      "Ilvl": 90,
+      "Enhance": 15,
+      "Main": {
+        "Name": 1,
+        "Value": 525.0
+      },
+      "SubStats": [
+        {
+          "Name": 4,
+          "Value": 0.06
+        },
+        {
+          "Name": 0,
+          "Value": 0.39
+        },
+        {
+          "Name": 2,
+          "Value": 7.0
+        },
+        {
+          "Name": 3,
+          "Value": 0.04
+        }
+      ],
+      "Locked": false
+    },
+    {
+      "ID": "h5ci86h5c9",
+      "Type": 4,
+      "Set": 7,
+      "Grade": 0,
+      "Ilvl": 88,
+      "Enhance": 15,
+      "Main": {
+        "Name": 0,
+        "Value": 0.65
+      },
+      "SubStats": [
+        {
+          "Name": 5,
+          "Value": 0.14
+        },
+        {
+          "Name": 2,
+          "Value": 12.0
+        },
+        {
+          "Name": 3,
+          "Value": 0.1
+        },
+        {
+          "Name": 9,
+          "Value": 0.17
+        }
+      ],
+      "Locked": false
     }
   ]
 }

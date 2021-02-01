@@ -71,6 +71,7 @@ export namespace Gear {
     level?: number;
     enhance?: number;
     main?: Stat;
+    // stats
     hpp?: number;
     hp?: number;
     defp?: number;
@@ -121,6 +122,28 @@ export namespace Gear {
       return this.getStatMap().get(this.main!!) || 0;
     }
 
+    getSubs(): Map<Stat, number> {
+      let result = new Map<Stat, number>();
+      this.getStatMap().forEach((value, key) => {
+        if (key.value != this.main?.label && value != undefined) {
+          result.set(key, value);
+        }
+      });
+      return result;
+    }
+
+    getStatInputs(): StatInput[] {
+      const result = Array<StatInput>();
+      this.getStatMap().forEach((value, key) => {
+        if (key.value == this.main?.value) {
+          result.unshift({ stat: key, value: value ?? 0 });
+        } else if (value) {
+          result.push({ stat: key, value: value });
+        }
+      });
+      return result;
+    }
+
     static clone(gear: Gear): Gear {
       let result = new Gear();
       Object.assign(result, gear);
@@ -136,4 +159,9 @@ export namespace Gear {
     main: boolean;
     enhanceMode: number;
   }
+
+  export type StatInput = {
+    stat?: Stat;
+    value: number;
+  };
 }

@@ -1,7 +1,6 @@
 <template>
   <v-app-bar app dark dense flat>
-    <!-- <v-avatar color="secondary" size="36"><v-icon>mdi-menu</v-icon></v-avatar> -->
-    <!-- <v-btn class="menu" elevation="0" rounded @click="toggleMenu"><v-icon>mdi-menu</v-icon></v-btn> -->
+    <!-- <v-btn icon><v-icon>mdi-menu</v-icon></v-btn> -->
     <site-icon />
     <!-- <v-btn class="ml-1" depressed to="gear">
       Gear
