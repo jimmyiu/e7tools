@@ -18,6 +18,12 @@ class GearService {
     return Array.from(map.values());
   }
 
+  assignScore(gear: Gear.Gear) {
+    gear.score = this.calculateOffScore(gear);
+    gear.offScore = this.calculateOffScore(gear);
+    gear.defScore = this.calculateDefScore(gear);
+  }
+
   calculateScore(gear: Gear.Gear) {
     let stats = gear.getStatMap();
     stats.delete(gear.main!!);
