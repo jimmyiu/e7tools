@@ -35,9 +35,14 @@ export default new Vuex.Store({
       state.data.gears = value;
     },
     updateGear(state: any, value: Gear.Gear) {
-      // TODO: add or update
       console.log('updateGear::value = ', value);
-      state.gears.push(value);
+      const index = state.gears.findIndex((x: Gear.Gear) => x.id == value.id);
+      if (index < 0) {
+        state.gears.push(value);
+      } else {
+        // Object.assign(state.gears[index], value);
+        state.gears.splice(index, 1, value);
+      }
       state.data.gears = state.gears;
     },
     setData(state: any, value: VuexData) {

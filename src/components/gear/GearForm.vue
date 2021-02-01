@@ -71,7 +71,6 @@
           </v-row>
         </v-col>
       </v-row>
-      {{ form.statInputs }}
     </v-card-text>
     <v-divider />
     <v-card-actions>
@@ -137,38 +136,34 @@ export default class GearForm extends Vue {
   // }
 
   defaultForm() {
+    const defaultInputStats = Array<Gear.StatInput>();
+    while (defaultInputStats.length < 5) {
+      defaultInputStats.push({ stat: undefined, value: 0 });
+    }
     return {
       type: Gear.Type.Weapon,
       set: Gear.Set.Speed,
       grade: Gear.Grade.EPIC,
       level: 5,
       enhance: 15,
-      statInputs: this.defaultInputStats()
+      statInputs: defaultInputStats
     };
   }
 
-  defaultInputStats(): Gear.StatInput[] {
-    const result = Array<Gear.StatInput>();
-    while (result.length < 5) {
-      result.push({ stat: undefined, value: 0 });
-    }
-    return result;
-  }
-
-  createInputStats(gear: Gear.Gear): Gear.StatInput[] {
-    const result = Array<Gear.StatInput>();
-    result.push({ stat: gear.main, value: gear.getMain() });
-    console.log('createInputStats::main =', gear.getMain());
-    gear.getSubs().forEach((value, key) => {
-      console.log('createInputStats::value =', value);
-      result.push({ stat: key, value: value });
-    });
-    while (result.length < 5) {
-      result.push({ stat: undefined, value: 0 });
-    }
-    console.log('createInputStats::result =', result);
-    return result;
-  }
+  // createInputStats(gear: Gear.Gear): Gear.StatInput[] {
+  //   const result = Array<Gear.StatInput>();
+  //   result.push({ stat: gear.main, value: gear.getMain() });
+  //   console.log('createInputStats::main =', gear.getMain());
+  //   gear.getSubs().forEach((value, key) => {
+  //     console.log('createInputStats::value =', value);
+  //     result.push({ stat: key, value: value });
+  //   });
+  //   while (result.length < 5) {
+  //     result.push({ stat: undefined, value: 0 });
+  //   }
+  //   console.log('createInputStats::result =', result);
+  //   return result;
+  // }
 
   created() {
     console.log('created::start');
@@ -178,6 +173,10 @@ export default class GearForm extends Vue {
   reset() {
     console.log('reset', this.gear);
     if (this.gear) {
+      const statInputs = this.gear.getStatInputs();
+      while (statInputs.length < 5) {
+        statInputs.push({ stat: undefined, value: 0 });
+      }
       this.form = {
         type: this.gear.type!!,
         set: this.gear.set!!,
@@ -185,7 +184,7 @@ export default class GearForm extends Vue {
         level: this.levelTicks.indexOf(this.gear.level!!),
         enhance: this.gear.enhance!!,
         // statInputs: this.createInputStats(this.gear)
-        statInputs: this.gear.getStatInputs()
+        statInputs: statInputs
       };
     } else {
       this.form = this.defaultForm();
@@ -194,7 +193,7 @@ export default class GearForm extends Vue {
 
   @Emit('input')
   submit() {
-    let gear = new Gear.Gear();
+    let gear = this.gear ? new Gear.Gear(this.gear.id) : new Gear.Gear();
     gear.set = this.form.set;
     gear.type = this.form.type;
     gear.grade = this.form.grade;
@@ -203,9 +202,11 @@ export default class GearForm extends Vue {
     gear.score = 0;
     gear.main = this.form.statInputs[0].stat;
     for (let i = 0; i < this.form.statInputs.length; i++) {
-      Vue.set(gear, this.form.statInputs[i].stat!.value, this.form.statInputs[i].value);
+      if (this.form.statInputs[i].stat) {
+        Vue.set(gear, this.form.statInputs[i].stat!.value, this.form.statInputs[i].value);
+      }
     }
-    // console.log('gear', gear);
+    console.log('submit::gear =', gear);
     return gear;
   }
 }
