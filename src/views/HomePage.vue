@@ -1,14 +1,13 @@
 <template>
   <div class="about">
     <message-box title="Current Status">
-      <p>This week is busy on work, development will be continued in next week.</p>
+      <p>This tool will be updated slowly</p>
       <ul>
         <li>Gears are only presisted in localstorage now</li>
         <li>As data structure is not finalized, I am not going to work on the exporter at this moment</li>
-        <li>Working on gear input component</li>
-        <li>TODO: move filter values to filter component</li>
+        <li>Next: export gears</li>
       </ul>
-      <br />2021-01-07
+      <br />2021-02-01
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -28,6 +27,7 @@
       </ol>
     </message-box>
     <message-box hide-default title="Version History">
+      [2021-02-01] complete edit gear<br />
       [2020-12-30] enhance persistent data structure, add settings<br />
       [2020-12-29] add create gear form and update ui<br />
       [2020-12-27] add hero page<br />
