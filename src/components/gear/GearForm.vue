@@ -202,7 +202,7 @@ export default class GearForm extends Vue {
     gear.score = 0;
     gear.main = this.form.statInputs[0].stat;
     for (let i = 0; i < this.form.statInputs.length; i++) {
-      if (this.form.statInputs[i].stat) {
+      if (this.form.statInputs[i].stat && this.form.statInputs[i].value > 0) {
         Vue.set(gear, this.form.statInputs[i].stat!.value, this.form.statInputs[i].value);
       }
     }

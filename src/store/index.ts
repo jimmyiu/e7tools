@@ -1,11 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { Gear } from '@/models/gear';
+import { Gear, Constants } from '@/models';
 import { VuexData } from '@/models/persistence';
-import { Hero } from '@/models';
 
 const DATA_VERSION = '0.1.0';
-const KEY_VUEXDATA = 'vuex.data';
+// const KEY_VUEXDATA = 'vuex.data';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -49,7 +48,7 @@ export default new Vuex.Store({
       Vue.set(state, 'data', value);
     },
     persistData(state: any, value: VuexData) {
-      localStorage.setItem(KEY_VUEXDATA, JSON.stringify(state.data));
+      localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(state.data));
     }
     // persistGears(state: any, value: Array<Gear.Gear>) {
     //   this.updateGears(state, value);
@@ -64,8 +63,8 @@ export default new Vuex.Store({
     },
     initVuex: ({ commit }) => {
       console.log('initVuex::called');
-      if (localStorage.getItem(KEY_VUEXDATA) != null) {
-        let data = JSON.parse(localStorage.getItem(KEY_VUEXDATA)!!);
+      if (localStorage.getItem(Constants.KEY_VUEXDATA) != null) {
+        let data = JSON.parse(localStorage.getItem(Constants.KEY_VUEXDATA)!!);
         if (data && (data as VuexData).version && (data as VuexData).version == DATA_VERSION) {
           console.log('initVuex::data version matches');
           commit('setData', data);
