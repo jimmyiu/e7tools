@@ -1,28 +1,34 @@
 <template>
-  <v-card elevation="6" :max-width="width" outlined>
+  <v-card elevation="6" outlined width="100%">
     <div class="d-flex justify-left align-center" style="height: 36px">
       <!-- <div class="d-flex" style="padding-top: 1px"> -->
       <gear-type-icon class="mx-auto" small style="padding: 0 1px" :type="gear.type" />
       <v-divider vertical />
       <gear-set-icon class="mx-auto" :set="gear.set" small />
       <v-divider vertical />
-      <div class="mx-auto align-center">
+      <div class="mx-auto align-center align-self-center">
         <span :style="'color: ' + gear.grade.color">{{ gear.level }}</span>
         <span class="caption">+{{ gear.enhance }}</span>
       </div>
     </div>
     <v-divider />
-    <div class="pa-2 text-center">{{ gear.main.label }}: {{ gear[gear.main.value] }}</div>
+    <div class="pa-1 text-center">{{ gear.main.label }}: {{ gear[gear.main.value] }}</div>
     <v-divider />
-    <v-row class="d-flex flex-wrap py-2 pl-3 pr-1" dense no-gutters>
+    <v-row class="d-flex flex-wrap py-1" dense no-gutters>
       <template v-for="(item, i) in stats">
-        <v-col v-if="gear[item.value] && item.value != gear.main.value" :key="`${i}1`" cols="4">
+        <v-col
+          v-if="gear[item.value] && item.value != gear.main.value"
+          :key="`${i}1`"
+          bottom
+          class="pl-1 caption align-self-center"
+          cols="4"
+        >
           {{ item.label }}:
         </v-col>
         <v-col
           v-if="gear[item.value] && item.value != gear.main.value"
           :key="`${i}2`"
-          class="pr-2 text-right"
+          class="pr-1 text-right"
           cols="2"
           >{{ gear[item.value] }}</v-col
         >

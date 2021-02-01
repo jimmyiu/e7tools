@@ -4,7 +4,7 @@
       <v-col>
         <gear-table-filter v-model="filter" />
         <v-divider class="mt-1" />
-        <gear-table :gears="filteredGears" />
+        <gear-table :gears="filteredGears" @edit-gear="editGear" />
       </v-col>
     </v-row>
     <!-- <v-row>
@@ -12,45 +12,43 @@
         <gear-statistics :gears="filteredGears" />
       </v-col>
     </v-row> -->
-    <v-bottom-sheet v-model="overlay" persistent scrollable>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" bottom fab fixed right v-on="on"><v-icon>mdi-plus</v-icon></v-btn>
-      </template>
-      <gear-form @close="overlay = false" @input="inputGear" />
+    <v-btn bottom fab fixed right @click="createGear"><v-icon>mdi-plus</v-icon></v-btn>
+    <v-bottom-sheet v-model="visible.overlay" scrollable>
+      <gear-form v-if="visible.overlay" :gear="gearToBeEdited" @close="visible.overlay = false" @input="inputGear" />
     </v-bottom-sheet>
-    <v-snackbar v-model="complete" color="success" rounded="pill" timeout="1500" top>
+    <v-snackbar v-model="visible.completeMsg" color="success" rounded="pill" timeout="1500" top>
       <div class="text-center">A gear is updated</div>
-      <!-- <template v-slot:action="{ attrs }">
-        <v-btn v-bind="attrs" color="red" text @click="complete = false">
-          Close
-        </v-btn>
-      </template> -->
     </v-snackbar>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import { GearDetail, GearForm, GearTable, GearTableFilter } from '@/components';
 import { Gear } from '@/models';
 
 @Component({
   name: 'gear-page',
   components: { GearDetail, GearForm, GearTable, GearTableFilter },
-  computed: { ...mapState(['gears']) },
+  computed: { ...mapState(['gears']), ...mapGetters(['getGearMap']) },
   methods: { ...mapActions(['updateGear']) }
 })
 export default class GearPage extends Vue {
+  readonly getGearMap!: Map<string, Gear.Gear>;
   updateGear!: (a: Gear.Gear) => void;
+
   gears!: Gear.Gear[];
-  overlay = false;
-  complete = false;
+  gearToBeEdited?: Gear.Gear = undefined;
+  visible = {
+    overlay: false,
+    completeMsg: false
+  };
   filter: Gear.TableFilter = {
     type: undefined,
     sets: [],
     level: 0,
     mode: 0,
-    main: true,
+    main: false,
     enhanceMode: 0
   };
 
@@ -75,12 +73,20 @@ export default class GearPage extends Vue {
     return result;
   }
 
-  created() {}
-
   inputGear(gear: Gear.Gear) {
     this.updateGear(gear);
-    this.complete = true;
-    this.overlay = false;
+    this.visible.completeMsg = true;
+    this.visible.overlay = false;
+  }
+
+  editGear(gearId: string) {
+    this.gearToBeEdited = this.getGearMap.get(gearId);
+    this.visible.overlay = true;
+  }
+
+  createGear() {
+    this.gearToBeEdited = undefined;
+    this.visible.overlay = true;
   }
 }
 </script>

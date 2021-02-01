@@ -26,20 +26,20 @@
     <template v-slot:item.main="{ item }">
       {{ item.main.label }}
     </template>
-    <!-- <template v-slot:item.enhance="{ item }">
-      <v-chip color="red" small text-color="white">+{{ item.enhance }}</v-chip>
-    </template> -->
+    <template v-slot:item.action="{ item }">
+      <v-btn icon small @click="editGear(item)"><v-icon small>mdi-pencil</v-icon></v-btn>
+      <v-btn icon small @click="deleteGear(item)"><v-icon small>mdi-delete</v-icon></v-btn>
+    </template>
     <template v-slot:body.prepend="{ headers }">
       <tr class="hidden-xs-only">
         <td v-for="(item, index) in headers" :key="index" class="text-center v-data-table__divider">
-          <v-text-field v-if="index > 1" v-model="filter[item.value]" dense flat hide-details />
+          <v-text-field v-if="index > 1 && index < 16" v-model="filter[item.value]" dense flat hide-details />
           <span v-if="index == 0">
             filter<br />
             max/25%
           </span>
-          <span v-if="index > 1" class="caption">
-            {{ statistics[item.value].max }}/{{ statistics[item.value].third }}
-          </span>
+          <span v-else-if="index == 1 || index == 16"></span>
+          <span v-else class="caption">{{ statistics[item.value].max }}/{{ statistics[item.value].third }}</span>
         </td>
       </tr>
     </template>
@@ -48,7 +48,6 @@
 <style lang="sass" scoped>
 ::v-deep td
   padding: 0 8px!important
-  // .v-data-table--dense > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table--dense > .v-data-table__wrapper > table > thead > tr > td, .v-data-table--dense > .v-data-table__wrapper > table > tfoot > tr > td
 </style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
@@ -111,7 +110,8 @@ export default class GearTable extends Vue {
     this.getHeader({ text: 'RES', value: 'res' }),
     this.getHeader({ text: 'STD_S', value: 'score' }),
     this.getHeader({ text: 'OFF_S', value: 'offScore' }),
-    this.getHeader({ text: 'DEF_S', value: 'defScore' })
+    this.getHeader({ text: 'DEF_S', value: 'defScore' }),
+    this.getHeader({ text: '', value: 'action', width: '80px' })
   ];
 
   getHeader(obj: any): any {
@@ -119,6 +119,16 @@ export default class GearTable extends Vue {
       ...{ width: '50px', class: 'px-1 py-1', divider: true, align: 'center', style: 'border: 3px' },
       ...obj
     };
+  }
+
+  @Emit()
+  deleteGear(gear: Gear.Gear) {
+    return gear.id;
+  }
+
+  @Emit()
+  editGear(gear: Gear.Gear) {
+    return gear.id;
   }
 }
 </script>

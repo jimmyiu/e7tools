@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <gear-filter v-model="filter" /> -->
     <v-virtual-scroll height="400" :item-height="152" :items="gears">
       <template v-slot:default="{ item }">
         <v-row dense no-gutters>
@@ -8,7 +9,7 @@
       </template>
     </v-virtual-scroll>
     <!-- {{ getGearMap.get('fedaj7jj44') }} -->
-    <v-row class="mt-9">
+    <!-- <v-row class="mt-9">
       <v-dialog v-model="confirmCache" width="300">
         <template v-slot:activator="{ on, attrs }">
           <v-btn v-bind="attrs" dark v-on="on">
@@ -68,7 +69,7 @@
           </v-list-item>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
     <!-- <v-row> here: {{ hero }} </v-row> -->
     <!-- <v-row v-for="(item, i) in items" :key="i">
       <img :src="item.icon" />
@@ -77,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { GearDetail } from '@/components';
+import { GearDetail, GearFilter } from '@/components';
 import { Hero, Gear } from '@/models';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapState } from 'vuex';
@@ -85,13 +86,21 @@ import axios from 'axios';
 
 @Component({
   name: 'optimizer-page',
-  components: { GearDetail },
+  components: { GearDetail, GearFilter },
   computed: { ...mapState(['gears']) }
 })
 export default class OptimizerPage extends Vue {
   items: Array<Hero> = new Array();
   hero?: Hero = {} as Hero;
   confirmCache: boolean = false;
+  filter: Gear.TableFilter = {
+    type: undefined,
+    sets: [],
+    level: 0,
+    mode: 0,
+    main: true,
+    enhanceMode: 0
+  };
 
   created() {
     ((JSON.parse(localStorage.getItem('api.hero.details')!!) as Array<any>) || []).forEach(x => {

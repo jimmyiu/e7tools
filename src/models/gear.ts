@@ -54,14 +54,18 @@ export namespace Gear {
   }
 
   export class Grade {
-    static readonly EPIC = new Grade('Epic', 'red');
-    static readonly HERO = new Grade('Hero', 'purple');
-    static readonly RARE = new Grade('Rare', 'blue');
-    static readonly GOOD = new Grade('Hero', 'green');
-    static readonly NORMAL = new Grade('Rare', 'grey');
+    static readonly EPIC = new Grade('Epic', 'red', 5);
+    static readonly HERO = new Grade('Hero', 'purple', 4);
+    static readonly RARE = new Grade('Rare', 'blue', 3);
+    static readonly GOOD = new Grade('Hero', 'green', 2);
+    static readonly NORMAL = new Grade('Rare', 'grey', 1);
 
     // private to disallow creating other instances of this type
-    private constructor(public readonly name: string, public readonly color: string) { }
+    private constructor(
+      public readonly name: string,
+      public readonly color: string,
+      public readonly numOfStats: number
+    ) { }
   }
 
   export class Gear {
@@ -71,6 +75,7 @@ export namespace Gear {
     level?: number;
     enhance?: number;
     main?: Stat;
+    // stats
     hpp?: number;
     hp?: number;
     defp?: number;
@@ -121,6 +126,16 @@ export namespace Gear {
       return this.getStatMap().get(this.main!!) || 0;
     }
 
+    getSubs(): Map<Stat, number> {
+      let result = new Map<Stat, number>();
+      this.getStatMap().forEach((value, key) => {
+        if (key != this.main && value != undefined) {
+          result.set(key, value);
+        }
+      });
+      return result;
+    }
+
     static clone(gear: Gear): Gear {
       let result = new Gear();
       Object.assign(result, gear);
@@ -136,4 +151,9 @@ export namespace Gear {
     main: boolean;
     enhanceMode: number;
   }
+
+  export type StatInput = {
+    stat?: Stat;
+    value: number;
+  };
 }

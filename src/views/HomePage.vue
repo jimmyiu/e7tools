@@ -6,6 +6,7 @@
         <li>Gears are only presisted in localstorage now</li>
         <li>As data structure is not finalized, I am not going to work on the exporter at this moment</li>
         <li>Working on gear input component</li>
+        <li>TODO: move filter values to filter component</li>
       </ul>
       <br />2021-01-07
     </message-box>
