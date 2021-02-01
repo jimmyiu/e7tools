@@ -54,18 +54,14 @@ export namespace Gear {
   }
 
   export class Grade {
-    static readonly EPIC = new Grade('Epic', 'red', 5);
-    static readonly HERO = new Grade('Hero', 'purple', 4);
-    static readonly RARE = new Grade('Rare', 'blue', 3);
-    static readonly GOOD = new Grade('Hero', 'green', 2);
-    static readonly NORMAL = new Grade('Rare', 'grey', 1);
+    static readonly EPIC = new Grade('Epic', 'red');
+    static readonly HERO = new Grade('Hero', 'purple');
+    static readonly RARE = new Grade('Rare', 'blue');
+    static readonly GOOD = new Grade('Hero', 'green');
+    static readonly NORMAL = new Grade('Rare', 'grey');
 
     // private to disallow creating other instances of this type
-    private constructor(
-      public readonly name: string,
-      public readonly color: string,
-      public readonly numOfStats: number
-    ) { }
+    private constructor(public readonly name: string, public readonly color: string) { }
   }
 
   export class Gear {
@@ -129,8 +125,20 @@ export namespace Gear {
     getSubs(): Map<Stat, number> {
       let result = new Map<Stat, number>();
       this.getStatMap().forEach((value, key) => {
-        if (key != this.main && value != undefined) {
+        if (key.value != this.main?.label && value != undefined) {
           result.set(key, value);
+        }
+      });
+      return result;
+    }
+
+    getStatInputs(): StatInput[] {
+      const result = Array<StatInput>();
+      this.getStatMap().forEach((value, key) => {
+        if (key.value == this.main?.value) {
+          result.unshift({ stat: key, value: value ?? 0 });
+        } else if (value) {
+          result.push({ stat: key, value: value });
         }
       });
       return result;

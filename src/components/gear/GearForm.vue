@@ -17,7 +17,6 @@
           </v-card>
           <v-card class="pa-2 pt-0" outlined width="300px">
             <gear-form-stat-select v-model="form.statInputs" :type="form.type" />
-            <!-- :enhance="form.enhance" :grade="form.grade" -->
           </v-card>
         </v-col>
         <v-col cols="auto">
@@ -60,14 +59,14 @@
                     <v-slider v-model="form.level" hide-details max="7" min="0" :tick-labels="levelTicks" />
                   </v-card-text>
                 </v-card>
-                <gear-stat-input v-model="form.statValues[0]" class="mt-2" dense mode="main" :stat="form.stats[0]" />
-                <gear-stat-input v-model="form.statValues[1]" class="mt-2" dense mode="sub" :stat="form.stats[1]" />
+                <gear-stat-input v-model="form.statInputs[0]" class="mt-2" dense mode="main" />
+                <gear-stat-input v-model="form.statInputs[1]" class="mt-2" dense mode="sub" />
               </div>
             </v-col>
             <v-col cols="auto">
-              <gear-stat-input v-model="form.statValues[2]" mode="sub" :stat="form.stats[2]" />
-              <gear-stat-input v-model="form.statValues[3]" class="mt-2" dense mode="sub" :stat="form.stats[3]" />
-              <gear-stat-input v-model="form.statValues[4]" class="mt-2" dense mode="sub" :stat="form.stats[4]" />
+              <gear-stat-input v-model="form.statInputs[2]" mode="sub" />
+              <gear-stat-input v-model="form.statInputs[3]" class="mt-2" dense mode="sub" />
+              <gear-stat-input v-model="form.statInputs[4]" class="mt-2" dense mode="sub" />
             </v-col>
           </v-row>
         </v-col>
@@ -90,7 +89,6 @@
 <script lang="ts">
 import { Gear } from '@/models';
 import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from './common';
-import { mapGetters } from 'vuex';
 import { Vue, Component, Prop, Emit, Watch } from 'vue-property-decorator';
 import GearFormStatSelect from './GearFormStatSelect.vue';
 import GearStatInput from './GearStatInput.vue';
@@ -119,23 +117,24 @@ export default class GearForm extends Vue {
   readonly grades = Object.values(Gear.Grade);
   levelTicks = [67, 70, 71, 75, 78, 85, 88, 90];
 
-  @Watch('form.grade', { immediate: false, deep: true })
-  onGradleChanged(grade: Gear.Grade) {
-    console.log('onGradeChanged::grade.numOfStats =', grade.numOfStats, ',stats.length =', this.form.statInputs.length);
-    if (this.form.statInputs.length < grade.numOfStats) {
-      while (this.form.statInputs.length < grade.numOfStats) {
-        this.form.statInputs.push({ stat: undefined, value: 0 });
-      }
-    } else {
-      while (grade.numOfStats < this.form.statInputs.length) {
-        this.form.statInputs.pop();
-      }
-    }
-  }
-
-  mounted() {
-    this.reset();
-  }
+  // @Watch('form.grade', { immediate: false, deep: true })
+  // onGradleChanged(grade: Gear.Grade) {
+  //   console.log(
+  //     'onGradeChanged::grade.numOfStats =',
+  //     grade.numOfStats,
+  //     ', stats.length =',
+  //     this.form.statInputs.length
+  //   );
+  //   if (this.form.statInputs.length < grade.numOfStats) {
+  //     while (this.form.statInputs.length < grade.numOfStats) {
+  //       this.form.statInputs.push({ stat: undefined, value: 0 });
+  //     }
+  //   } else {
+  //     while (grade.numOfStats < this.form.statInputs.length) {
+  //       this.form.statInputs.pop();
+  //     }
+  //   }
+  // }
 
   defaultForm() {
     return {
@@ -144,38 +143,49 @@ export default class GearForm extends Vue {
       grade: Gear.Grade.EPIC,
       level: 5,
       enhance: 15,
-      stats: [Gear.Stat.ATK, Gear.Stat.ATKP, Gear.Stat.CRI, Gear.Stat.CDMG, Gear.Stat.SPD],
-      statValues: [100, 10, 10, 10, 10],
-      statInputs: this.defaultInputStats(Gear.Grade.EPIC.numOfStats)
+      statInputs: this.defaultInputStats()
     };
   }
 
-  defaultInputStats(length: number): Gear.StatInput[] {
+  defaultInputStats(): Gear.StatInput[] {
     const result = Array<Gear.StatInput>();
-    while (result.length < length) {
+    while (result.length < 5) {
       result.push({ stat: undefined, value: 0 });
     }
     return result;
   }
 
+  createInputStats(gear: Gear.Gear): Gear.StatInput[] {
+    const result = Array<Gear.StatInput>();
+    result.push({ stat: gear.main, value: gear.getMain() });
+    console.log('createInputStats::main =', gear.getMain());
+    gear.getSubs().forEach((value, key) => {
+      console.log('createInputStats::value =', value);
+      result.push({ stat: key, value: value });
+    });
+    while (result.length < 5) {
+      result.push({ stat: undefined, value: 0 });
+    }
+    console.log('createInputStats::result =', result);
+    return result;
+  }
+
+  created() {
+    console.log('created::start');
+    this.reset();
+  }
+
   reset() {
     console.log('reset', this.gear);
     if (this.gear) {
-      let stats: Gear.Stat[] = [this.gear.main!!];
-      let statValues: number[] = [this.gear.getMain()];
-      this.gear.getSubs().forEach((value, key) => {
-        stats.push(key);
-        statValues.push(value);
-      });
       this.form = {
         type: this.gear.type!!,
         set: this.gear.set!!,
         grade: this.gear.grade!!,
         level: this.levelTicks.indexOf(this.gear.level!!),
         enhance: this.gear.enhance!!,
-        stats: stats,
-        statValues: statValues,
-        statInputs: []
+        // statInputs: this.createInputStats(this.gear)
+        statInputs: this.gear.getStatInputs()
       };
     } else {
       this.form = this.defaultForm();
@@ -191,9 +201,9 @@ export default class GearForm extends Vue {
     gear.level = this.levelTicks[this.form.level];
     gear.enhance = this.form.enhance;
     gear.score = 0;
-    gear.main = this.form.stats[0];
-    for (let i = 0; i < this.form.stats.length; i++) {
-      Vue.set(gear, this.form.stats[i].value, this.form.statValues[i]);
+    gear.main = this.form.statInputs[0].stat;
+    for (let i = 0; i < this.form.statInputs.length; i++) {
+      Vue.set(gear, this.form.statInputs[i].stat!.value, this.form.statInputs[i].value);
     }
     // console.log('gear', gear);
     return gear;

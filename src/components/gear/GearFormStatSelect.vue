@@ -74,18 +74,23 @@ export default class GearFormStatSelect extends Vue {
 
   @Watch('type', { immediate: false, deep: true })
   onTypeChanged(type: Gear.Type) {
-    console.log('type::start');
+    console.log('onTypeChanged::start');
     let typeConfig = this.SELECTION_CONFIG[type];
     for (let i = 0; i < this.ALL_STATS.length; i++) {
       this.btns[i].main = (typeConfig[i] & 2) > 0;
       this.btns[i].sub = (typeConfig[i] & 1) > 0;
     }
-    console.log('type::isSingleMain=', this.isSingleMain);
+    console.log('onTypeChanged::isSingleMain=', this.isSingleMain);
 
     let result = Array<Gear.StatInput>();
     // handle main stat change
     if (this.isSingleMain) {
-      result.push({ stat: this.btns.find(x => x.main)?.stat, value: 0 });
+      const mainStat = this.btns.find(x => x.main)!.stat;
+      if (mainStat != this.value[0].stat) {
+        result.push({ stat: mainStat, value: 0 });
+      } else {
+        result.push(this.value[0]);
+      }
     } else if (this.value[0].stat != undefined && this.btns.find(x => x.stat == this.value[0].stat)?.main) {
       result.push(this.value[0]);
     } else {
@@ -102,6 +107,7 @@ export default class GearFormStatSelect extends Vue {
     }
     // emit result
     this.$nextTick(function() {
+      console.log('onTypeChanged::emit input event');
       this.$emit('input', result);
     });
   }
