@@ -6,7 +6,7 @@
       Gear
       <v-icon right>mdi-chevron-down</v-icon>
     </v-btn> -->
-    <v-menu bottom offset-y open-on-hover>
+    <!-- <v-menu bottom offset-y open-on-hover>
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" class="ml-1" depressed v-on="on">
           Gear
@@ -21,10 +21,26 @@
           <v-list-item-title>Import</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
-    <v-btn class="ml-1" depressed :to="{ name: 'optimizer' }">
-      Optimizer
+    </v-menu> -->
+    <v-btn class="ml-1" depressed :to="{ name: 'gear' }">
+      Gear
     </v-btn>
+    <v-menu bottom offset-y open-on-hover>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn v-bind="attrs" class="ml-1" depressed v-on="on">
+          Others
+          <v-icon right>mdi-chevron-down</v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item link :to="{ name: 'optimizer' }">
+          <v-list-item-title>Optimizer</v-list-item-title>
+        </v-list-item>
+        <v-list-item link :to="{ name: 'import' }">
+          <v-list-item-title>Import</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
     <!-- <v-btn class="ml-1" depressed to="dev">
       Dev
     </v-btn> -->
