@@ -49,7 +49,7 @@ export default class GearPage extends Vue {
     level: 0,
     mode: 0,
     main: false,
-    enhanceMode: 0
+    enhanceMode: Gear.EnhanceModeFilter.ALL
   };
 
   get filteredGears() {
@@ -59,14 +59,14 @@ export default class GearPage extends Vue {
       let level = !this.filter.level || this.filter.level == it.level!!;
       let enhance =
         !this.filter.enhanceMode ||
-        (this.filter.enhanceMode == 1 && it.enhance!! < 15) ||
-        (this.filter.enhanceMode == 2 && it.enhance!! == 15);
+        (this.filter.enhanceMode == Gear.EnhanceModeFilter.LESS_THAN_15 && it.enhance!! < 15) ||
+        (this.filter.enhanceMode == Gear.EnhanceModeFilter.ONLY_15 && it.enhance!! == 15);
       return type && set && level && enhance;
     });
     if (!this.filter.main) {
       result = result.map(x => {
         let foo = Gear.Gear.clone(x);
-        Vue.set(foo, foo.main!!.value, 0);
+        Vue.set(foo, foo.main!!.value, undefined);
         return foo;
       });
     }

@@ -7,6 +7,23 @@ const STAT_AVERAGE = {
   def: 611
 };
 class GearService {
+  applyFilter(gears: Gear.Gear[], filter: Gear.GearFilter) {
+    // prepare set filter
+    let set: (it: Gear.Gear) => boolean = (it: Gear.Gear) => true;
+    if (filter.sets.length > 0) {
+      set = (it: Gear.Gear) => filter.sets.indexOf(it.set!) >= 0;
+    }
+    // prepare enhance filter
+    let enhance: (it: Gear.Gear) => boolean = (it: Gear.Gear) => true;
+    if (filter.enhanceMode == Gear.EnhanceModeFilter.LESS_THAN_15) {
+      enhance = (it: Gear.Gear) => it.enhance! < 15;
+    } else if (filter.enhanceMode == Gear.EnhanceModeFilter.ONLY_15) {
+      enhance = (it: Gear.Gear) => it.enhance! == 15;
+    }
+    return gears.filter(it => {
+      return set(it) && enhance(it);
+    });
+  }
   mergeGears(original: Gear.Gear[], extra: Gear.Gear[]) {
     let map = new Map<String, Gear.Gear>();
     if (original) {
@@ -19,7 +36,7 @@ class GearService {
   }
 
   assignScore(gear: Gear.Gear) {
-    gear.score = this.calculateOffScore(gear);
+    gear.score = this.calculateScore(gear);
     gear.offScore = this.calculateOffScore(gear);
     gear.defScore = this.calculateDefScore(gear);
   }

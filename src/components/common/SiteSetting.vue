@@ -109,10 +109,7 @@ export default class SiteSetting extends Vue {
   }
 
   copy() {
-    console.log(this.$refs['export-data']);
     (this.$refs['export-data'] as any).$el.querySelector('textarea').select();
-    // this.
-    // document.getElementById('').select()
     document.execCommand('copy');
   }
 

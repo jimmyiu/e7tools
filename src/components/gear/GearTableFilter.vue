@@ -65,7 +65,7 @@ export default class GearTableFilter extends Vue {
     this.form.mode = 0;
     this.form.level = 0;
     this.form.main = true;
-    this.form.enhanceMode = 0;
+    this.form.enhanceMode = Gear.EnhanceModeFilter.ALL;
   }
 }
 </script>

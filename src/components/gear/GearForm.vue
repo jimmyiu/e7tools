@@ -200,7 +200,6 @@ export default class GearForm extends Vue {
     gear.grade = this.form.grade;
     gear.level = this.levelTicks[this.form.level];
     gear.enhance = this.form.enhance;
-    gear.score = 0;
     gear.main = this.form.statInputs[0].stat;
     for (let i = 0; i < this.form.statInputs.length; i++) {
       if (this.form.statInputs[i].stat && this.form.statInputs[i].value > 0) {
