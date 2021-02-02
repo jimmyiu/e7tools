@@ -19,7 +19,7 @@
             Filter: {{ filter }}, Criteria: {{ criteria }}<br />
             Distribution: {{ gearStore.distribution }}<br />
             Combinations: {{ gearStore.numOfCombinations | formatNumber }}
-            <i>(Performance issue: only first {{ hardLimit | formatNumber }} combination will be evaluated now)</i
+            <i>(Performance issue: only first {{ hardLimit | formatNumber }} combinations will be evaluated now)</i
             ><br />
             Estimated Time:
             {{ Math.round(((gearStore.numOfCombinations / 10000000) * 17.5) / 60) | formatNumber }} minutes
