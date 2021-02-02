@@ -10,14 +10,17 @@
             <gear-optimizer-filter v-model="filter" />
           </v-card-text>
           <v-divider />
-          <v-card-text>
+          <v-card-text class="pb-2">
             <gear-optimizer-criteria v-model="criteria" />
           </v-card-text>
           <v-divider />
           <v-card-text>
+            <strong>Debug Panel</strong><br />
             Filter: {{ filter }}, Criteria: {{ criteria }}<br />
             Distribution: {{ gearStore.distribution }}<br />
-            Combinations: {{ gearStore.numOfCombinations | formatNumber }}<br />
+            Combinations: {{ gearStore.numOfCombinations | formatNumber }}
+            <i>(Performance issue: only first {{ hardLimit | formatNumber }} combination will be evaluated now)</i
+            ><br />
             Estimated Time:
             {{ Math.round(((gearStore.numOfCombinations / 10000000) * 17.5) / 60) | formatNumber }} minutes
             <i>(10,000,000 combinations take around 17.5 seconds in the testing machine)</i>
@@ -100,6 +103,10 @@ export default class OptimizerPage extends Vue {
 
   get gearStore() {
     return new Gear.GearStore(GearService.applyFilter(this.gears, this.filter));
+  }
+
+  get hardLimit() {
+    return GearOptimizer.COMBINATION_HARD_LIMIT;
   }
 
   optimize() {

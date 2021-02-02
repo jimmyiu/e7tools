@@ -1,11 +1,59 @@
 <template>
-  <div class="d-flex">
-    <v-text-field v-model="value.spd.min" class="pb-2" dense hide-details label="SPD (min)" outlined type="number" />
-    <v-text-field v-model="value.spd.max" class="pb-2" dense hide-details label="SPD (max)" outlined type="number" />
-    <v-text-field v-model="value.cri.min" dense hide-details label="CRI (min)" outlined type="number" />
-    <v-text-field v-model="value.cri.max" dense hide-details label="CRI (max)" outlined type="number" />
-    <v-text-field v-model="value.cdmg.min" dense hide-details label="C.DMG (min)" outlined type="number" />
-    <v-text-field v-model="value.cdmg.max" dense hide-details label="C.DMG (max)" outlined type="number" />
+  <div class="d-flex flex-wrap">
+    <v-text-field
+      v-model="value.spd.min"
+      class="pb-2 mr-2"
+      dense
+      hide-details
+      label="SPD (min)"
+      outlined
+      type="number"
+    />
+    <v-text-field
+      v-model="value.spd.max"
+      class="pb-2 mr-2"
+      dense
+      hide-details
+      label="SPD (max)"
+      outlined
+      type="number"
+    />
+    <v-text-field
+      v-model="value.cri.min"
+      class="pb-2 mr-2"
+      dense
+      hide-details
+      label="CRI (min)"
+      outlined
+      type="number"
+    />
+    <v-text-field
+      v-model="value.cri.max"
+      class="pb-2 mr-2"
+      dense
+      hide-details
+      label="CRI (max)"
+      outlined
+      type="number"
+    />
+    <v-text-field
+      v-model="value.cdmg.min"
+      class="pb-2 mr-2"
+      dense
+      hide-details
+      label="C.DMG (min)"
+      outlined
+      type="number"
+    />
+    <v-text-field
+      v-model="value.cdmg.max"
+      class="pb-2 mr-2"
+      dense
+      hide-details
+      label="C.DMG (max)"
+      outlined
+      type="number"
+    />
   </div>
 </template>
 <script lang="ts">
