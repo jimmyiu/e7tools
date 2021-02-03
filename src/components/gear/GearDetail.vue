@@ -44,21 +44,22 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { GearSetIcon, GearTypeIcon } from './common';
 import { Gear } from '@/models';
-import { mapGetters } from 'vuex';
+// import { mapGetters } from 'vuex';
 
 @Component({
   name: 'gear-detail',
-  components: { GearSetIcon, GearTypeIcon },
-  computed: { ...mapGetters(['getGearMap']) }
+  components: { GearSetIcon, GearTypeIcon }
+  // computed: { ...mapGetters(['getGearMap']) }
 })
 export default class GearDetail extends Vue {
-  @Prop() readonly gearId!: string;
+  // @Prop() readonly gearId!: string;
+  @Prop() readonly gear!: Gear.Gear;
   readonly stats = Object.values(Gear.Stat);
-  readonly getGearMap!: Map<string, Gear.Gear>;
+  // readonly getGearMap!: Map<string, Gear.Gear>;
 
-  get gear() {
-    return this.getGearMap.get(this.gearId);
-  }
+  // get gear() {
+  //   return this.getGearMap.get(this.gearId);
+  // }
 
   get width() {
     // console.log(this.$vuetify.breakpoint);

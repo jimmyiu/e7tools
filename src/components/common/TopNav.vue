@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app dark dense flat>
-    <!-- <v-btn icon><v-icon>mdi-menu</v-icon></v-btn> -->
-    <site-icon />
+    <v-btn icon :to="{ name: 'home' }"><v-icon>mdi-home</v-icon></v-btn>
+    <!-- <site-icon /> -->
     <!-- <v-btn class="ml-1" depressed to="gear">
       Gear
       <v-icon right>mdi-chevron-down</v-icon>
@@ -25,6 +25,9 @@
     <v-btn class="ml-1" depressed :to="{ name: 'gear' }">
       Gear
     </v-btn>
+    <v-btn class="ml-1" depressed :to="{ name: 'optimizer' }">
+      Optimizer
+    </v-btn>
     <v-menu bottom offset-y open-on-hover>
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" class="ml-1" depressed v-on="on">
@@ -33,9 +36,6 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item link :to="{ name: 'optimizer' }">
-          <v-list-item-title>Optimizer</v-list-item-title>
-        </v-list-item>
         <v-list-item link :to="{ name: 'import' }">
           <v-list-item-title>Import</v-list-item-title>
         </v-list-item>

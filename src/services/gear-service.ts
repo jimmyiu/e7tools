@@ -7,6 +7,40 @@ const STAT_AVERAGE = {
   def: 611
 };
 class GearService {
+  applyFilter(gears: Gear.Gear[], filter: Gear.GearFilter) {
+    type Filter = (it: Gear.Gear) => boolean;
+    const defaultFilter: Filter = (it: Gear.Gear) => true;
+    // prepare set filter
+    let set = defaultFilter;
+    if (filter.sets.length > 0) {
+      set = (it: Gear.Gear) => filter.sets.indexOf(it.set!) >= 0;
+    }
+    // prepare enhance filter
+    let enhance = defaultFilter;
+    if (filter.enhanceMode == Gear.EnhanceModeFilter.LESS_THAN_15) {
+      enhance = (it: Gear.Gear) => it.enhance! < 15;
+    } else if (filter.enhanceMode == Gear.EnhanceModeFilter.ONLY_15) {
+      enhance = (it: Gear.Gear) => it.enhance! == 15;
+    }
+    let necklace = defaultFilter;
+    if (filter.necklaces.length > 0) {
+      const necklaceValues = filter.necklaces.map(x => x.value);
+      necklace = (it: Gear.Gear) => it.type! != Gear.Type.Necklace || necklaceValues.indexOf(it.main!.value) >= 0;
+    }
+    let ring = defaultFilter;
+    if (filter.rings.length > 0) {
+      const ringValues = filter.rings.map(x => x.value);
+      ring = (it: Gear.Gear) => it.type! != Gear.Type.Ring || ringValues.indexOf(it.main!.value) >= 0;
+    }
+    let boot = defaultFilter;
+    if (filter.boots.length > 0) {
+      const bootValues = filter.boots.map(x => x.value);
+      boot = (it: Gear.Gear) => it.type! != Gear.Type.Boot || bootValues.indexOf(it.main!.value) >= 0;
+    }
+    return gears.filter(it => {
+      return set(it) && enhance(it) && necklace(it) && ring(it) && boot(it);
+    });
+  }
   mergeGears(original: Gear.Gear[], extra: Gear.Gear[]) {
     let map = new Map<String, Gear.Gear>();
     if (original) {
@@ -19,7 +53,7 @@ class GearService {
   }
 
   assignScore(gear: Gear.Gear) {
-    gear.score = this.calculateOffScore(gear);
+    gear.score = this.calculateScore(gear);
     gear.offScore = this.calculateOffScore(gear);
     gear.defScore = this.calculateDefScore(gear);
   }

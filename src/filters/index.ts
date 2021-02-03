@@ -12,3 +12,7 @@ Vue.filter('demoFilter', (input: string) => {
       return `${input}th`;
   }
 });
+
+Vue.filter('formatNumber', (input: number) => {
+  return Number(input).toLocaleString();
+});

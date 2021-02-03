@@ -3,11 +3,12 @@
     <message-box title="Current Status">
       <p>This tool will be updated slowly</p>
       <ul>
-        <li>Gears are only presisted in localstorage now</li>
-        <li>As data structure is not finalized, the import / export function is a temporary solution</li>
-        <li>Next: fine tune gear filter</li>
+        <li>
+          Gears are only presisted in localstorage, a simple import / export function is provided (may revise later)
+        </li>
+        <li>Next: gear optimizer</li>
       </ul>
-      <br />2021-02-01
+      <br />2021-02-03
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -27,6 +28,7 @@
       </ol>
     </message-box>
     <message-box hide-default title="Version History">
+      [2021-02-02] experimental gear optimizer<br />
       [2021-02-01] complete edit gear<br />
       [2020-12-30] enhance persistent data structure, add settings<br />
       [2020-12-29] add create gear form and update ui<br />

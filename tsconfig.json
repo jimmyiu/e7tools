@@ -11,6 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    // "typeRoots": ["./types"],
     "types": [
       "webpack-env",
       "vuetify"
@@ -22,6 +23,7 @@
     },
     "lib": [
       "esnext",
+      // "webworker",
       "dom",
       "dom.iterable",
       "scripthost"

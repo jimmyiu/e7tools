@@ -108,9 +108,9 @@ export default class GearTable extends Vue {
     this.getHeader({ text: 'SPD', value: 'spd' }),
     this.getHeader({ text: 'EFF', value: 'eff' }),
     this.getHeader({ text: 'RES', value: 'res' }),
-    this.getHeader({ text: 'STD_S', value: 'score' }),
-    this.getHeader({ text: 'OFF_S', value: 'offScore' }),
-    this.getHeader({ text: 'DEF_S', value: 'defScore' }),
+    this.getHeader({ text: 'SCORE', value: 'score' }),
+    this.getHeader({ text: 'OFF', value: 'offScore' }),
+    this.getHeader({ text: 'DEF', value: 'defScore' }),
     this.getHeader({ text: '', value: 'action', width: '80px' })
   ];
 
