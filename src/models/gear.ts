@@ -24,6 +24,50 @@ function sumAbility(a1?: Gear.GearAbility, a2?: Gear.GearAbility): Gear.GearAbil
   };
 }
 
+function applyDeltaAbility(input: Gear.GearAbility, minus?: Gear.GearAbility, plus?: Gear.GearAbility) {
+  if (!minus && !plus) {
+    return;
+  }
+  const subtract = (n1?: number, n2?: number) => {
+    if (n1 == undefined || n2 == undefined) {
+      return n1 ?? (n2 ? -1 * n2 : undefined);
+    }
+    return n1 - n2;
+  };
+  const sum = (n1?: number, n2?: number) => {
+    if (n1 == undefined || n2 == undefined) {
+      return n1 ?? n2 ?? undefined;
+    }
+    return n1 + n2;
+  };
+  if (minus) {
+    input.hpp = subtract(input.hpp, minus.hpp);
+    input.hp = subtract(input.hp, minus.hp);
+    input.defp = subtract(input.defp, minus.defp);
+    input.def = subtract(input.def, minus.def);
+    input.atkp = subtract(input.hpp, minus.hpp);
+    input.atk = subtract(input.hp, minus.hp);
+    input.cri = subtract(input.cri, minus.cri);
+    input.cdmg = subtract(input.cdmg, minus.cdmg);
+    input.spd = subtract(input.spd, minus.spd);
+    input.eff = subtract(input.eff, minus.eff);
+    input.res = subtract(input.res, minus.res);
+  }
+  if (plus) {
+    input.hpp = sum(input.hpp, plus.hpp);
+    input.hp = sum(input.hp, plus.hp);
+    input.defp = sum(input.defp, plus.defp);
+    input.def = sum(input.def, plus.def);
+    input.atkp = sum(input.hpp, plus.hpp);
+    input.atk = sum(input.hp, plus.hp);
+    input.cri = sum(input.cri, plus.cri);
+    input.cdmg = sum(input.cdmg, plus.cdmg);
+    input.spd = sum(input.spd, plus.spd);
+    input.eff = sum(input.eff, plus.eff);
+    input.res = sum(input.res, plus.res);
+  }
+}
+
 export namespace Gear {
   export enum Set {
     Speed = 'Speed',
@@ -197,12 +241,18 @@ export namespace Gear {
     ONLY_15 = 2
   }
 
-  export interface GearFilter {
+  export interface BaseGearFilter {
     sets: Set[];
     enhanceMode: EnhanceModeFilter;
   }
 
-  export interface TableFilter extends GearFilter {
+  export interface GearFilter extends BaseGearFilter {
+    necklaces: Stat[];
+    rings: Stat[];
+    boots: Stat[];
+  }
+
+  export interface TableFilter extends BaseGearFilter {
     type?: Type;
     level: number;
     mode: number;
@@ -282,51 +332,111 @@ export namespace Gear {
   }
 
   export class GearCombination {
-    weapon?: Gear.Gear;
-    helmet?: Gear.Gear;
-    armor?: Gear.Gear;
-    necklace?: Gear.Gear;
-    ring?: Gear.Gear;
-    boot?: Gear.Gear;
+    // weapon?: Gear.Gear;
+    // helmet?: Gear.Gear;
+    // armor?: Gear.Gear;
+    // necklace?: Gear.Gear;
+    // ring?: Gear.Gear;
+    // boot?: Gear.Gear;
     // weaponId?: string;
     // helmetId?: string;
     // armorId?: string;
     // necklaceId?: string;
     // ringId?: string;
     // bootId?: string;
-    ability: Gear.GearAbility = {};
-    constructor(gears: Array<Gear.Gear | undefined>) {
-      gears.forEach(x => {
-        if (x) {
-          switch (x.type) {
-            case Type.Weapon:
-              this.weapon = x;
-              // this.weaponId = x.id;
-              break;
-            case Type.Helmet:
-              this.helmet = x;
-              // this.helmetId = x.id;
-              break;
-            case Type.Armor:
-              this.armor = x;
-              // this.armorId = x.id;
-              break;
-            case Type.Necklace:
-              this.necklace = x;
-              // this.necklaceId = x.id;
-              break;
-            case Type.Ring:
-              this.ring = x;
-              // this.ringId = x.id;
-              break;
-            case Type.Boot:
-              this.boot = x;
-              // this.bootId = x.id;
-              break;
-          }
-          this.ability = sumAbility(this.ability, x);
-        }
-      });
+    // ability: Gear.GearAbility = {};
+    constructor(
+      readonly weapon?: Gear.Gear,
+      readonly helmet?: Gear.Gear,
+      readonly armor?: Gear.Gear,
+      readonly necklace?: Gear.Gear,
+      readonly ring?: Gear.Gear,
+      readonly boot?: Gear.Gear,
+      readonly ability: Gear.GearAbility = {},
+      readonly id: string = Math.random()
+        .toString(20)
+        .substr(2, 10)
+    ) {
+      // TODO: cal score
+    }
+    // constructor(gears: Array<Gear.Gear | undefined>) {
+    //   gears.forEach(x => {
+    //     if (x) {
+    //       switch (x.type) {
+    //         case Type.Weapon:
+    //           this.weapon = x;
+    //           // this.weaponId = x.id;
+    //           break;
+    //         case Type.Helmet:
+    //           this.helmet = x;
+    //           // this.helmetId = x.id;
+    //           break;
+    //         case Type.Armor:
+    //           this.armor = x;
+    //           // this.armorId = x.id;
+    //           break;
+    //         case Type.Necklace:
+    //           this.necklace = x;
+    //           // this.necklaceId = x.id;
+    //           break;
+    //         case Type.Ring:
+    //           this.ring = x;
+    //           // this.ringId = x.id;
+    //           break;
+    //         case Type.Boot:
+    //           this.boot = x;
+    //           // this.bootId = x.id;
+    //           break;
+    //       }
+    //       this.ability = sumAbility(this.ability, x);
+    //     }
+    //   });
+    // }
+  }
+
+  export class GearCombinationBuilder {
+    private _weapon?: Gear.Gear;
+    private _helmet?: Gear.Gear;
+    private _armor?: Gear.Gear;
+    private _necklace?: Gear.Gear;
+    private _ring?: Gear.Gear;
+    private _boot?: Gear.Gear;
+    private _ability: Gear.GearAbility = {};
+    constructor() { }
+    weapon(weapon: Gear.Gear) {
+      applyDeltaAbility(this._ability, this._weapon, weapon);
+      this._weapon = weapon;
+    }
+    helmet(helmet: Gear.Gear) {
+      applyDeltaAbility(this._ability, this._helmet, helmet);
+      this._helmet = helmet;
+    }
+    armor(armor: Gear.Gear) {
+      applyDeltaAbility(this._ability, this._armor, armor);
+      this._armor = armor;
+    }
+    necklace(necklace: Gear.Gear) {
+      applyDeltaAbility(this._ability, this._necklace, necklace);
+      this._necklace = necklace;
+    }
+    ring(ring: Gear.Gear) {
+      applyDeltaAbility(this._ability, this._ring, ring);
+      this._ring = ring;
+    }
+    boot(boot: Gear.Gear) {
+      applyDeltaAbility(this._ability, this._boot, boot);
+      this._boot = boot;
+    }
+    build() {
+      return new GearCombination(
+        this._weapon,
+        this._helmet,
+        this._armor,
+        this._necklace,
+        this._ring,
+        this._boot,
+        Object.assign({}, this._ability)
+      );
     }
   }
 }

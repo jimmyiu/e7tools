@@ -6,24 +6,38 @@
     <v-row dense>
       <v-col cols="12">
         <v-card>
-          <v-card-text class="pb-0">
-            <gear-optimizer-filter v-model="filter" />
-          </v-card-text>
-          <v-divider />
-          <v-card-text class="pb-2">
-            <gear-optimizer-criteria v-model="criteria" />
-          </v-card-text>
-          <v-divider />
           <v-card-text>
-            <strong>Debug Panel</strong><br />
-            Filter: {{ filter }}, Criteria: {{ criteria }}<br />
-            Distribution: {{ gearStore.distribution }}<br />
-            Combinations: {{ gearStore.numOfCombinations | formatNumber }}
-            <i>(Performance issue: only first {{ hardLimit | formatNumber }} combinations will be evaluated now)</i
-            ><br />
-            Estimated Time:
-            {{ Math.round(((gearStore.numOfCombinations / 10000000) * 17.5) / 60) | formatNumber }} minutes
-            <i>(10,000,000 combinations take around 17.5 seconds in the testing machine)</i>
+            <v-row>
+              <v-col cols="12" md="9">
+                <gear-optimizer-filter v-model="filter" />
+                <v-divider class="mb-4" />
+                <gear-optimizer-criteria v-model="criteria" />
+              </v-col>
+              <v-col class="hidden-sm-and-down" cols="12" md="3">
+                <v-card class="section">
+                  <v-card-text>
+                    <strong>Debug Panel</strong><br />
+                    <span v-for="(item, key) in gearStore.distribution" :key="key">- {{ key }} ({{ item }})<br /></span>
+                    <!-- Filter: {{ filter }}, Criteria: {{ criteria }}<br /> -->
+                    <!-- Distribution: {{ gearStore.distribution }}<br /> -->
+                    <p>
+                      Number of combinations: {{ gearStore.numOfCombinations | formatNumber }} (Hard limit:
+                      {{ hardLimit | formatNumber }})<br />
+                      Estimated processing time:
+                      {{ Math.round(((gearStore.numOfCombinations / 10000000) * 7.1) / 60) | formatNumber }}
+                      minutes<br />
+                      <!-- <v-icon>help_outlined</v-icon> -->
+                      <!-- <i>
+                    Remark:<br />
+                    - only first {{ hardLimit | formatNumber }} combinations will be evaluated now (Performance
+                    issue)<br />
+                    - 10,000,000 combinations take around 7.1 seconds in the testing machine
+                  </i> -->
+                    </p>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
           </v-card-text>
           <v-divider />
           <v-card-actions>
@@ -33,18 +47,30 @@
         </v-card>
       </v-col>
     </v-row>
-    <!-- <v-row>
-      <v-col cols="6" lg="2" md="4">aaa</v-col>
-      <v-col cols="6" lg="2" md="4">aaa</v-col>
-      <v-col cols="6" lg="2" md="4">aaa</v-col>
-      <v-col cols="6" lg="2" md="4">aaa</v-col>
-      <v-col cols="6" lg="2" md="4">aaa</v-col>
-      <v-col cols="6" lg="2" md="4">aaa</v-col>
-    </v-row> -->
+    <v-row v-if="selectedCombination.id">
+      <v-col cols="2" sm="4" xs="6">
+        <gear-detail :gear="selectedCombination.weapon" />
+      </v-col>
+      <v-col cols="2" sm="4" xs="6">
+        <gear-detail :gear="selectedCombination.helmet" />
+      </v-col>
+      <v-col cols="2" sm="4" xs="6">
+        <gear-detail :gear="selectedCombination.armor" />
+      </v-col>
+      <v-col cols="2" sm="4" xs="6">
+        <gear-detail :gear="selectedCombination.necklace" />
+      </v-col>
+      <v-col cols="2" sm="4" xs="6">
+        <gear-detail :gear="selectedCombination.ring" />
+      </v-col>
+      <v-col cols="2" sm="4" xs="6">
+        <gear-detail :gear="selectedCombination.boot" />
+      </v-col>
+    </v-row>
     <v-row>
       <v-col cols="12">
-        <v-progress-linear v-if="progress > 0" v-model="progress" height="25">
-          <strong>{{ progress }}%</strong>
+        <v-progress-linear v-if="progressPercent > 0" height="25" :value="progressPercent">
+          <strong>{{ progressPercent }}%</strong>
         </v-progress-linear>
         <v-data-table
           dense
@@ -53,6 +79,7 @@
           :items="combinations"
           :items-per-page="15"
           :multi-sort="false"
+          single-select
           @click:row="clickRow"
         ></v-data-table>
       </v-col>
@@ -76,15 +103,12 @@ import { mapState } from 'vuex';
 export default class OptimizerPage extends Vue {
   // vuex
   readonly gears!: Gear.Gear[];
+  worker = new Worker('../workers/gear-optimizer-worker.ts', { type: 'module' });
   // models
   filter: Gear.GearFilter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
-  // filter: Gear.GearFilter = {
-  //   sets: [],
-  //   enhanceMode: Gear.EnhanceModeFilter.ALL
-  // };
   criteria: Gear.GearOptimizerCriteria = { spd: { min: 110 }, cri: { min: 40, max: 110 }, cdmg: { min: 0, max: 210 } };
   combinations: Gear.GearCombination[] = [];
-  // optimizer: GearOptimizer = new GearOptimizer([], this.filter);
+  selectedCombination = { id: '' } as Gear.GearCombination;
   progress = 0;
   //
   headers = [
@@ -109,13 +133,23 @@ export default class OptimizerPage extends Vue {
     return GearOptimizer.COMBINATION_HARD_LIMIT;
   }
 
-  optimize() {
+  get progressPercent() {
+    return Math.ceil(
+      (this.progress / Math.min(GearOptimizer.COMBINATION_HARD_LIMIT, this.gearStore.numOfCombinations ?? 1)) * 100
+    );
+  }
+
+  async optimize() {
     // this.combinations.splice(0, this.combinations.length);
     console.log('optimize::start');
     this.combinations.splice(0, this.combinations.length);
-    const time = Date.now();
-    this.combinations = GearOptimizer.optimize(this.gearStore, this.criteria, this.updateProgress);
-    console.log(Date.now() - time);
+    this.worker.postMessage({
+      action: 'optimize',
+      store: this.gearStore,
+      criteria: this.criteria
+    });
+    // GearOptimizer.optimize(this.gearStore, this.criteria);
+
     // this.optimizer.optimize(this.updateProgress);
     // const weapons =
     //   this.gearsByType.get(Gear.Type.Weapon)!.length > 0 ? this.gearsByType.get(Gear.Type.Weapon)! : [undefined];
@@ -136,16 +170,26 @@ export default class OptimizerPage extends Vue {
     this.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
   }
 
-  updateProgress(progress: number) {
-    // this.progress = progress;
-    // console.log('a');
-    // this.$forceUpdate();
+  clickRow(item: Gear.GearCombination, e: any) {
+    console.log('clickRow::item =', item);
+    console.log('clickRow::e =', e);
+    e.select();
+    this.selectedCombination = item;
   }
-  // created() {
-  //   console.log('created');
-  // }
-  clickRow(a: any) {
-    console.log('clickRow::a =', a);
+
+  created() {
+    this.worker.onmessage = e => {
+      console.log('worker::onmessage::action =', e.data.action);
+      if (e.data.action == 'optimize-result') {
+        this.combinations = e.data.result;
+      } else if (e.data.action == 'progress') {
+        this.progress = e.data.result;
+      }
+    };
+  }
+
+  destroyed() {
+    this.worker.terminate();
   }
 }
 </script>

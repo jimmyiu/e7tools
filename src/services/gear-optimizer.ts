@@ -1,85 +1,50 @@
-// import { Vue } from 'vue-property-decorator';
 import { Gear } from '@/models/gear';
-// import GearService from './gear-service';
 
+// TODO: refactor
 export class GearOptimizer {
-  // static COMBINATION_HARD_LIMIT = 10000000;
-  static COMBINATION_HARD_LIMIT = 5000000;
+  static COMBINATION_HARD_LIMIT = 1000000;
+  // static COMBINATION_HARD_LIMIT = 5000000;
   // static COMBINATION_HARD_LIMIT = 2;
-  static OPTIMIZE_RESULT_HARD_LIMIT = 500000;
-
-  // static HARD_LIMIT = 1000000;
-  // weapons: Gear.Gear[] = [];
-  // helmets: Gear.Gear[] = [];
-  // armors: Gear.Gear[] = [];
-  // necklaces: Gear.Gear[] = [];
-  // rings: Gear.Gear[] = [];
-  // boots: Gear.Gear[] = [];
-
-  // constructor(store: Gear.GearStore) {
-  //   gears
-  //     .filter(it => {
-  //       let set = filter.sets.length == 0 || filter.sets.indexOf(it.set!) >= 0;
-  //       return set;
-  //     })
-  //     .forEach(x => {
-  //       switch (x.type) {
-  //         case Gear.Type.Weapon:
-  //           this.weapons.push(x);
-  //           break;
-  //         case Gear.Type.Helmet:
-  //           this.helmets.push(x);
-  //           break;
-  //         case Gear.Type.Armor:
-  //           this.armors.push(x);
-  //           break;
-  //         case Gear.Type.Necklace:
-  //           this.necklaces.push(x);
-  //           break;
-  //         case Gear.Type.Ring:
-  //           this.rings.push(x);
-  //           break;
-  //         case Gear.Type.Boot:
-  //           this.boots.push(x);
-  //           break;
-  //       }
-  //     });
-  // }
+  static OPTIMIZE_RESULT_HARD_LIMIT = 100000;
+  static REPORT_PROGRESS_COUNT = GearOptimizer.COMBINATION_HARD_LIMIT / 10;
 
   static optimize(
     store: Gear.GearStore,
     criteria: Gear.GearOptimizerCriteria,
-    progressCallback: (x: number) => void
+    progressCallback: (x: number) => void = (x: number) => { }
   ): Gear.GearCombination[] {
     let count = 0;
+    let time = Date.now();
     const result: Gear.GearCombination[] = [];
-    // const tmp = Array<Gear.Gear>(6);
+    const builder = new Gear.GearCombinationBuilder();
     for (let i1 = 0; i1 < store.weapons.length; i1++) {
-      // tmp[0] = store.weapons[i1];
+      builder.weapon(store.weapons[i1]);
       for (let i2 = 0; i2 < store.helmets.length; i2++) {
-        // tmp[1] = store.helmets[i2];
+        builder.helmet(store.helmets[i2]);
         for (let i3 = 0; i3 < store.armors.length; i3++) {
-          // tmp[2] = store.armors[i3];
+          builder.armor(store.armors[i3]);
           for (let i4 = 0; i4 < store.necklaces.length; i4++) {
-            // tmp[3] = store.necklaces[i4];
+            builder.necklace(store.necklaces[i4]);
             for (let i5 = 0; i5 < store.rings.length; i5++) {
-              // tmp[4] = store.rings[i5];
+              builder.ring(store.rings[i5]);
               for (let i6 = 0; i6 < store.boots.length; i6++) {
-                // tmp[5] = store.boots[i6];
+                builder.boot(store.boots[i6]);
                 // let combination = new Gear.GearCombination(tmp);
-                let combination = new Gear.GearCombination([
-                  store.weapons[i1],
-                  store.helmets[i2],
-                  store.armors[i3],
-                  store.necklaces[i4],
-                  store.rings[i5],
-                  store.boots[i6]
-                ]);
-                if (++count % 1000000 == 0) {
+                // let combination = new Gear.GearCombination([
+                //   store.weapons[i1],
+                //   store.helmets[i2],
+                //   store.armors[i3],
+                //   store.necklaces[i4],
+                //   store.rings[i5],
+                //   store.boots[i6]
+                // ]);
+                let combination = builder.build();
+                if (++count % GearOptimizer.REPORT_PROGRESS_COUNT == 0) {
                   console.log('optimize::count =', count, ', result.length =', result.length);
-                  // progressCallback(count);
+                  progressCallback(count);
                   if (count >= GearOptimizer.COMBINATION_HARD_LIMIT) {
                     console.log('optimize::hit combination hard limit');
+                    console.log('processing time =', (Date.now() - time) / 1000, 'seconds');
                     return result;
                   }
                 }
@@ -92,6 +57,7 @@ export class GearOptimizer {
                 }
                 if (result.length >= GearOptimizer.OPTIMIZE_RESULT_HARD_LIMIT) {
                   console.log('optimize::hit combination hard limit, result.length =', result.length);
+                  console.log('processing time =', (Date.now() - time) / 1000, 'seconds');
                   return result;
                 }
               }
@@ -100,6 +66,7 @@ export class GearOptimizer {
         }
       }
     }
+    console.log('processing time =', (Date.now() - time) / 1000, 'seconds');
     return result;
   }
 
