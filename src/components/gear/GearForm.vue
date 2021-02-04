@@ -92,6 +92,7 @@ import { Vue, Component, Prop, Emit, Watch } from 'vue-property-decorator';
 import GearFormStatSelect from './GearFormStatSelect.vue';
 import GearStatInput from './GearStatInput.vue';
 import GearService from '@/services/gear-service';
+import GearStatRangeService from '@/services/gear-stat-range-service';
 
 /**
  * This is a gear form, it takes a gear for edit (undefined for create) and returns a gear object
@@ -115,7 +116,25 @@ export default class GearForm extends Vue {
   readonly sets = Gear.SETS;
   readonly types = Object.values(Gear.Type);
   readonly grades = Object.values(Gear.Grade);
-  levelTicks = [67, 70, 71, 75, 78, 85, 88, 90];
+  levelTicks = [67, 70, 71, 75, 78, 80, 85, 88, 90];
+
+  get mainChanger() {
+    return {
+      type: this.form.type,
+      main: this.form.statInputs[0].stat,
+      level: this.levelTicks[this.form.level],
+      enhance: this.form.enhance
+    };
+  }
+
+  @Watch('mainChanger', { immediate: false, deep: false })
+  onMainChangerChanged(val: any) {
+    console.log('onMainChangerChanged::val =', val);
+    const main = GearStatRangeService.getMain(val.type, val.main, val.level, val.enhance);
+    if (main) {
+      this.form.statInputs[0].value = main;
+    }
+  }
 
   // @Watch('form.grade', { immediate: false, deep: true })
   // onGradleChanged(grade: Gear.Grade) {

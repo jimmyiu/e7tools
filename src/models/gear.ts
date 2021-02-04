@@ -1,3 +1,5 @@
+import { Range } from './common';
+
 // TODO: refactor
 function sumAbility(a1?: Gear.GearAbility, a2?: Gear.GearAbility): Gear.GearAbility {
   const sum = (n1?: number, n2?: number) => {
@@ -45,8 +47,8 @@ function applyDeltaAbility(input: Gear.GearAbility, minus?: Gear.GearAbility, pl
     input.hp = subtract(input.hp, minus.hp);
     input.defp = subtract(input.defp, minus.defp);
     input.def = subtract(input.def, minus.def);
-    input.atkp = subtract(input.hpp, minus.hpp);
-    input.atk = subtract(input.hp, minus.hp);
+    input.atkp = subtract(input.atkp, minus.atkp);
+    input.atk = subtract(input.atk, minus.atk);
     input.cri = subtract(input.cri, minus.cri);
     input.cdmg = subtract(input.cdmg, minus.cdmg);
     input.spd = subtract(input.spd, minus.spd);
@@ -58,8 +60,8 @@ function applyDeltaAbility(input: Gear.GearAbility, minus?: Gear.GearAbility, pl
     input.hp = sum(input.hp, plus.hp);
     input.defp = sum(input.defp, plus.defp);
     input.def = sum(input.def, plus.def);
-    input.atkp = sum(input.hpp, plus.hpp);
-    input.atk = sum(input.hp, plus.hp);
+    input.atkp = sum(input.atkp, plus.atkp);
+    input.atk = sum(input.atk, plus.atk);
     input.cri = sum(input.cri, plus.cri);
     input.cdmg = sum(input.cdmg, plus.cdmg);
     input.spd = sum(input.spd, plus.spd);
@@ -263,11 +265,6 @@ export namespace Gear {
     stat?: Stat;
     value: number;
   };
-
-  export interface Range {
-    min?: number;
-    max?: number;
-  }
 
   export interface GearOptimizerCriteria {
     cri: Range;

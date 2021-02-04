@@ -7,37 +7,9 @@
       <v-col cols="12">
         <v-card>
           <v-card-text>
-            <v-row>
-              <v-col cols="12" md="9">
-                <gear-optimizer-filter v-model="filter" />
-                <v-divider class="mb-4" />
-                <gear-optimizer-criteria v-model="criteria" />
-              </v-col>
-              <v-col class="hidden-sm-and-down" cols="12" md="3">
-                <v-card class="section">
-                  <v-card-text>
-                    <strong>Debug Panel</strong><br />
-                    <span v-for="(item, key) in gearStore.distribution" :key="key">- {{ key }} ({{ item }})<br /></span>
-                    <!-- Filter: {{ filter }}, Criteria: {{ criteria }}<br /> -->
-                    <!-- Distribution: {{ gearStore.distribution }}<br /> -->
-                    <p>
-                      Number of combinations: {{ gearStore.numOfCombinations | formatNumber }} (Hard limit:
-                      {{ hardLimit | formatNumber }})<br />
-                      Estimated processing time:
-                      {{ Math.round(((gearStore.numOfCombinations / 10000000) * 7.1) / 60) | formatNumber }}
-                      minutes<br />
-                      <!-- <v-icon>help_outlined</v-icon> -->
-                      <!-- <i>
-                    Remark:<br />
-                    - only first {{ hardLimit | formatNumber }} combinations will be evaluated now (Performance
-                    issue)<br />
-                    - 10,000,000 combinations take around 7.1 seconds in the testing machine
-                  </i> -->
-                    </p>
-                  </v-card-text>
-                </v-card>
-              </v-col>
-            </v-row>
+            <gear-optimizer-filter v-model="filter" />
+            <v-divider class="mb-4" />
+            <gear-optimizer-criteria v-model="criteria" />
           </v-card-text>
           <v-divider />
           <v-card-actions>
@@ -48,22 +20,22 @@
       </v-col>
     </v-row>
     <v-row v-if="selectedCombination.id">
-      <v-col cols="2" sm="4" xs="6">
+      <v-col cols="6" lg="2" sm="4">
         <gear-detail :gear="selectedCombination.weapon" />
       </v-col>
-      <v-col cols="2" sm="4" xs="6">
+      <v-col cols="6" lg="2" sm="4">
         <gear-detail :gear="selectedCombination.helmet" />
       </v-col>
-      <v-col cols="2" sm="4" xs="6">
+      <v-col cols="6" lg="2" sm="4">
         <gear-detail :gear="selectedCombination.armor" />
       </v-col>
-      <v-col cols="2" sm="4" xs="6">
+      <v-col cols="6" lg="2" sm="4">
         <gear-detail :gear="selectedCombination.necklace" />
       </v-col>
-      <v-col cols="2" sm="4" xs="6">
+      <v-col cols="6" lg="2" sm="4">
         <gear-detail :gear="selectedCombination.ring" />
       </v-col>
-      <v-col cols="2" sm="4" xs="6">
+      <v-col cols="6" lg="2" sm="4">
         <gear-detail :gear="selectedCombination.boot" />
       </v-col>
     </v-row>
@@ -82,6 +54,31 @@
           single-select
           @click:row="clickRow"
         ></v-data-table>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <v-card class="section">
+          <v-card-text>
+            <strong>Debug Panel</strong><br />
+            <span v-for="(item, key) in gearStore.distribution" :key="key">{{ key }} ({{ item }}), </span>
+            <!-- Filter: {{ filter }}, Criteria: {{ criteria }}<br /> -->
+            <!-- Distribution: {{ gearStore.distribution }}<br /> -->
+            <br />
+            Number of combinations: {{ gearStore.numOfCombinations | formatNumber }} (Hard limit:
+            {{ hardLimit | formatNumber }})<br />
+            Estimated processing time:
+            {{ Math.round(((gearStore.numOfCombinations / 10000000) * 7.1) / 60) | formatNumber }}
+            minutes
+            <!-- <v-icon>help_outlined</v-icon> -->
+            <!-- <i>
+                    Remark:<br />
+                    - only first {{ hardLimit | formatNumber }} combinations will be evaluated now (Performance
+                    issue)<br />
+                    - 10,000,000 combinations take around 7.1 seconds in the testing machine
+                  </i> -->
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -106,7 +103,7 @@ export default class OptimizerPage extends Vue {
   worker = new Worker('../workers/gear-optimizer-worker.ts', { type: 'module' });
   // models
   filter: Gear.GearFilter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
-  criteria: Gear.GearOptimizerCriteria = { spd: { min: 110 }, cri: { min: 40, max: 110 }, cdmg: { min: 0, max: 210 } };
+  criteria: Gear.GearOptimizerCriteria = { spd: { min: 0 }, cri: { min: 0, max: 110 }, cdmg: { min: 0, max: 210 } };
   combinations: Gear.GearCombination[] = [];
   selectedCombination = { id: '' } as Gear.GearCombination;
   progress = 0;

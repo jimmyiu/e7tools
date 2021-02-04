@@ -1,5 +1,7 @@
 # Epic7 Online Tools
 
+This tools is currently hosted using the project [GitHub page](https://jimmyiu.github.io/e7tools/).
+
 ## Development Notes
 
 This project is optimized for Ubuntu + Docker. You can start the developement environment by:
