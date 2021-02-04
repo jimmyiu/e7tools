@@ -2,7 +2,7 @@ import { Gear, Range } from '@/models';
 
 // TODO: refactor
 export class GearOptimizer {
-  static COMBINATION_HARD_LIMIT = 1000000;
+  static COMBINATION_HARD_LIMIT = 10000000;
   // static COMBINATION_HARD_LIMIT = 5000000;
   // static COMBINATION_HARD_LIMIT = 2;
   static OPTIMIZE_RESULT_HARD_LIMIT = 100000;
