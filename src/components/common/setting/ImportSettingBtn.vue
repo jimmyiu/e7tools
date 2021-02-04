@@ -26,12 +26,11 @@
 <script lang="ts">
 import { Constants } from '@/models';
 import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
-import { mapActions } from 'vuex';
 
 @Component({
-  name: 'setting-import'
+  name: 'import-setting-btn'
 })
-export default class SettingImport extends Vue {
+export default class ImportSettingBtn extends Vue {
   dialog = false;
   data: string = '';
 

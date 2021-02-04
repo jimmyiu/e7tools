@@ -10,26 +10,27 @@ const routes = [
     name: 'home',
     component: HomePage
   },
-  // {
-  //   path: '/hero',
-  //   name: 'hero',
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/HeroPage.vue')
-  // },
   {
     path: '/gear',
     name: 'gear',
     component: () => import(/* webpackChunkName: "gear" */ '../views/GearPage.vue')
   },
   {
-    path: '/import',
-    name: 'import',
-    component: () => import(/* webpackChunkName: "gear" */ '../views/ImportPage.vue')
-  },
-  {
     path: '/optimizer',
     name: 'optimizer',
     component: () => import(/* webpackChunkName: "gear" */ '../views/OptimizerPage.vue')
+  },
+  {
+    path: '/import',
+    name: 'import',
+    component: () => import(/* webpackChunkName: "other" */ '../views/ImportPage.vue')
+  },
+  {
+    path: '/hero',
+    name: 'hero',
+    component: () => import(/* webpackChunkName: "other" */ '../views/HeroPage.vue')
   }
+
   // {
   //   path: '/dev',
   //   name: 'dev',

@@ -40,6 +40,9 @@
         <v-list-item link :to="{ name: 'import' }">
           <v-list-item-title>Import</v-list-item-title>
         </v-list-item>
+        <v-list-item link :to="{ name: 'hero' }">
+          <v-list-item-title>Hero</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
     <!-- <v-btn class="ml-1" depressed to="dev">

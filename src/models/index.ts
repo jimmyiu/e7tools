@@ -5,6 +5,7 @@ import { Hero } from './hero';
 export { Gear, Hero, Range };
 export const Constants = {
   KEY_VUEXDATA: 'vuex.data',
+  KEY_E7DBDAYA: 'vuex.e7db',
   GEAR_FILTER_DEFAULT: {
     sets: [],
     enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
