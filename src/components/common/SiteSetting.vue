@@ -40,22 +40,22 @@
           <v-dialog v-model="clearDialog" width="300">
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" color="error" dark small v-on="on">
-                Clear
+                Delete
               </v-btn>
             </template>
             <v-card>
               <v-card-title class="error">
-                Confirmation
+                Caution
               </v-card-title>
               <v-card-text>
                 <br />
-                Clear all data &amp; settings?<br />
+                Delete all data &amp; settings?<br />
                 The page will be reloaded.
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
-                <v-btn color="primary" @click="performClear">
-                  OK
+                <v-btn class="font-weight-bold" color="primary" text @click="performClear">
+                  DELETE
                 </v-btn>
                 <v-btn text @click="clearDialog = false">
                   CANCEL
