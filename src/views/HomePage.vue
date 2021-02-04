@@ -42,9 +42,8 @@ import { Vue, Component } from 'vue-property-decorator';
 import { MessageBox } from '@/components';
 
 @Component({
+  name: 'home-page',
   components: { MessageBox }
 })
-export default class HomePage extends Vue {
-  name: string = 'home-page';
-}
+export default class HomePage extends Vue {}
 </script>

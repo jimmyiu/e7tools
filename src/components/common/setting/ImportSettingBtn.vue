@@ -13,7 +13,7 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
-        <v-btn color="primary" :disabled="data == ''" outlined @click="importData">
+        <v-btn class="font-weight-bold" color="primary" :disabled="data == ''" text @click="importData">
           Import
         </v-btn>
         <v-btn color="" text @click="dialog = false">
@@ -26,12 +26,11 @@
 <script lang="ts">
 import { Constants } from '@/models';
 import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
-import { mapActions } from 'vuex';
 
 @Component({
-  name: 'setting-import'
+  name: 'import-setting-btn'
 })
-export default class SettingImport extends Vue {
+export default class ImportSettingBtn extends Vue {
   dialog = false;
   data: string = '';
 

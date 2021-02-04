@@ -1,6 +1,7 @@
 <template>
   <v-app-bar app dark dense flat>
-    <v-btn icon :to="{ name: 'home' }"><v-icon>mdi-home</v-icon></v-btn>
+    <v-btn icon @click="goHomepage"><v-icon>mdi-home</v-icon></v-btn>
+    <!-- <v-icon>mdi-home</v-icon> -->
     <!-- <site-icon /> -->
     <!-- <v-btn class="ml-1" depressed to="gear">
       Gear
@@ -38,6 +39,9 @@
       <v-list>
         <v-list-item link :to="{ name: 'import' }">
           <v-list-item-title>Import</v-list-item-title>
+        </v-list-item>
+        <v-list-item link :to="{ name: 'hero' }">
+          <v-list-item-title>Hero</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -77,5 +81,11 @@ export default class TopNav extends Vue {
 
   @Emit()
   toggleSetting() {}
+
+  goHomepage() {
+    this.$router.push({ name: 'home' }).catch(err => {
+      // ignore duplicate
+    });
+  }
 }
 </script>

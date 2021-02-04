@@ -10,6 +10,9 @@
       </v-container>
     </v-main>
     <site-setting v-model="setting" />
+    <v-overlay v-if="loading" :value="loading">
+      <v-progress-circular indeterminate />
+    </v-overlay>
   </v-app>
 </template>
 <script lang="ts">
@@ -20,11 +23,13 @@ import { TopNav, SiteSetting } from '@/components';
 @Component({
   name: 'app',
   components: { TopNav, SiteSetting },
+  computed: { ...mapState(['loading']) },
   methods: { ...mapActions(['initVuex']) }
 })
 export default class App extends Vue {
-  setting = false;
+  loading!: boolean;
 
+  setting = false;
   initVuex!: () => void;
 
   created() {
