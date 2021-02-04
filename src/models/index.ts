@@ -1,15 +1,16 @@
+import { Range } from './common';
 import { Gear } from './gear';
 import { Hero } from './hero';
 
-export { Gear, Hero };
+export { Gear, Hero, Range };
 export const Constants = {
   KEY_VUEXDATA: 'vuex.data',
   GEAR_FILTER_DEFAULT: {
     sets: [],
     enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
-    necklaces: [Gear.Stat.CDMG, Gear.Stat.ATKP, Gear.Stat.ATK],
-    rings: [Gear.Stat.ATKP, Gear.Stat.ATK],
-    boots: [Gear.Stat.SPD]
+    necklaces: [], // [Gear.Stat.CDMG, Gear.Stat.ATKP, Gear.Stat.ATK],
+    rings: [], // [Gear.Stat.ATKP, Gear.Stat.ATK],
+    boots: [] // [Gear.Stat.SPD]
   } as Gear.GearFilter,
   //
   NECKLACE_STATS: [

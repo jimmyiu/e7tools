@@ -24,11 +24,11 @@
               </v-card-title>
               <v-card-text>
                 <br />
-                <v-textarea ref="export-data" outlined readonly :value="exportData" />
+                <v-textarea ref="export-data" outlined readonly :value="exportData()" />
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
-                <v-btn color="primary" @click="copy">
+                <v-btn class="font-weight-bold" color="primary" text @click="copy">
                   COPY
                 </v-btn>
                 <v-btn text @click="dialog.export = false">
@@ -75,6 +75,9 @@
         <v-switch hide-details @change="toggleDarkMode"></v-switch>
       </v-list-item-action>
     </v-list-item>
+    <v-snackbar v-model="dialog.exportComplete" app color="success" rounded="pill" timeout="1500">
+      <div class="text-center">Copied to clipboard</div>
+    </v-snackbar>
   </v-navigation-drawer>
 </template>
 <script lang="ts">
@@ -90,11 +93,12 @@ export default class SiteSetting extends Vue {
   clearDialog = false;
   dialog = {
     clear: false,
-    export: false
+    export: false,
+    exportComplete: false
   };
   @Model('input') readonly visible!: boolean;
 
-  get exportData() {
+  exportData() {
     return localStorage.getItem(Constants.KEY_VUEXDATA);
   }
 
@@ -111,6 +115,8 @@ export default class SiteSetting extends Vue {
   copy() {
     (this.$refs['export-data'] as any).$el.querySelector('textarea').select();
     document.execCommand('copy');
+    this.dialog.export = false;
+    this.dialog.exportComplete = true;
   }
 
   @Emit()

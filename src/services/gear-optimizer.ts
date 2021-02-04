@@ -1,4 +1,4 @@
-import { Gear } from '@/models/gear';
+import { Gear, Range } from '@/models';
 
 // TODO: refactor
 export class GearOptimizer {
@@ -70,7 +70,7 @@ export class GearOptimizer {
     return result;
   }
 
-  static assert(ability: number | undefined, range: Gear.Range) {
+  static assert(ability: number | undefined, range: Range) {
     if (!range.min && !range.max) {
       // no assertion required
       return true;
