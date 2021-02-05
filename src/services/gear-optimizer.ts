@@ -5,7 +5,7 @@ export class GearOptimizer {
   static COMBINATION_HARD_LIMIT = 1000000;
   // static COMBINATION_HARD_LIMIT = 5000000;
   // static COMBINATION_HARD_LIMIT = 2;
-  static OPTIMIZE_RESULT_HARD_LIMIT = 100000;
+  static OPTIMIZE_RESULT_HARD_LIMIT = 50000;
   static REPORT_PROGRESS_COUNT = GearOptimizer.COMBINATION_HARD_LIMIT / 10;
 
   static optimize(

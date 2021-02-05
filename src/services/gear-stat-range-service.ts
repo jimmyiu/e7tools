@@ -22,6 +22,8 @@ class GearStatRangeService {
         return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55][enhance - 1];
       } else if (stat.value == Gear.Stat.SPD.value) {
         return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40][enhance - 1];
+      } else if (stat.value == Gear.Stat.HP.value) {
+        return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2700][enhance - 1];
       }
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60][enhance - 1];
     } else if (level > 85) {
@@ -43,8 +45,14 @@ class GearStatRangeService {
   }
 
   private getWeaponMain(level: number, enhance: number) {
-    if (level == 75 && enhance == 15) {
-      return 465;
+    if (level == 90) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 525][enhance - 1];
+    } else if (level == 85) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 500][enhance - 1];
+    } else if (level == 75) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 465][enhance - 1];
+    } else if (level == 70) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][enhance - 1];
     }
     return 0;
   }

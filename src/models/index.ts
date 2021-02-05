@@ -1,8 +1,9 @@
 import { Range } from './common';
 import { Gear } from './gear';
 import { Hero } from './hero';
+import { E7db } from './e7db';
 
-export { Gear, Hero, Range };
+export { Gear, Hero, Range, E7db };
 export const Constants = {
   KEY_VUEXDATA: 'vuex.data',
   KEY_E7DBDAYA: 'vuex.e7db',

@@ -1,4 +1,4 @@
-import { E7db } from '@/models/e7db';
+import { E7db } from '@/models';
 import axios from 'axios';
 
 class E7dbDataHandler {

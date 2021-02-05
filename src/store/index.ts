@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { Gear, Constants } from '@/models';
-import { E7db } from '@/models/e7db';
+import { Gear, Constants, E7db } from '@/models';
 import { E7dbData, VuexData } from '@/models/persistence';
 import E7dbDataHandler from '@/services/e7db-data-handler';
 

@@ -267,9 +267,14 @@ export namespace Gear {
   };
 
   export interface GearOptimizerCriteria {
+    hp: Range;
+    def: Range;
+    atk: Range;
     cri: Range;
     cdmg: Range;
     spd: Range;
+    eff: Range;
+    res: Range;
   }
 
   export class GearStore {

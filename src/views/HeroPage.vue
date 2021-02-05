@@ -11,9 +11,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-// import HeroService from '@/services/hero-service';
 import E7dbDataHandler from '@/services/e7db-data-handler';
-import { E7db } from '@/models/e7db';
+import { E7db } from '@/models';
 import { mapActions, mapState } from 'vuex';
 
 @Component({

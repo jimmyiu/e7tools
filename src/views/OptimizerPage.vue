@@ -1,23 +1,52 @@
 <template>
   <div>
-    <v-alert dense outlined type="warning">
+    <v-alert dense dismissible outlined type="warning">
       This is still an experimental feature
     </v-alert>
-    <v-row dense>
-      <v-col cols="12">
-        <v-card>
-          <v-card-text>
+    <v-card>
+      <v-card-text>
+        <v-row>
+          <v-col cols="12" md="3">
+            <v-autocomplete
+              v-model="hero"
+              class="mb-4"
+              dense
+              hide-details
+              item-text="name"
+              item-value="id"
+              :items="e7db.heros"
+              label="Hero"
+              outlined
+              return-object
+            >
+              <template v-slot:item="data">
+                <v-avatar class="mr-2" left size="32">
+                  <v-img :src="data.item.icon"></v-img>
+                </v-avatar>
+                {{ data.item.name }}
+              </template>
+            </v-autocomplete>
+            <v-avatar class="mr-2" left size="48">
+              <v-img :src="hero.icon"></v-img>
+            </v-avatar>
+            {{ hero }}
+          </v-col>
+          <v-col cols="12" md="auto">
             <gear-optimizer-filter v-model="filter" />
-            <v-divider class="mb-4" />
+          </v-col>
+          <v-col>
             <gear-optimizer-criteria v-model="criteria" />
-          </v-card-text>
-          <v-divider />
-          <v-card-actions>
-            <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
-            <v-btn text @click="reset">Reset</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <v-divider />
+      <v-card-actions>
+        <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
+        <v-btn text @click="reset">Reset</v-btn>
+      </v-card-actions>
+    </v-card>
+    <v-row dense>
+      <v-col cols="8"> </v-col>
     </v-row>
     <v-row v-if="selectedCombination.id">
       <v-col cols="6" lg="2" sm="4">
@@ -77,6 +106,7 @@
                     issue)<br />
                     - 10,000,000 combinations take around 7.1 seconds in the testing machine
                   </i> -->
+            {{ criteria }}
           </v-card-text>
         </v-card>
       </v-col>
@@ -86,7 +116,8 @@
 
 <script lang="ts">
 import { GearDetail, GearOptimizerFilter, GearOptimizerCriteria } from '@/components';
-import { Constants, Gear } from '@/models';
+import { Constants, Gear, E7db } from '@/models';
+import { E7dbData } from '@/models/persistence';
 import { GearOptimizer } from '@/services/gear-optimizer';
 import GearService from '@/services/gear-service';
 import { Vue, Component } from 'vue-property-decorator';
@@ -95,15 +126,26 @@ import { mapState } from 'vuex';
 @Component({
   name: 'optimizer-page',
   components: { GearDetail, GearOptimizerFilter, GearOptimizerCriteria },
-  computed: { ...mapState(['gears']) }
+  computed: { ...mapState(['gears', 'e7db']) }
 })
 export default class OptimizerPage extends Vue {
   // vuex
   readonly gears!: Gear.Gear[];
+  readonly e7db!: E7dbData;
   worker = new Worker('../workers/gear-optimizer-worker.ts', { type: 'module' });
   // models
+  hero: E7db.Hero = {} as E7db.Hero;
   filter: Gear.GearFilter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
-  criteria: Gear.GearOptimizerCriteria = { spd: { min: 0 }, cri: { min: 0, max: 110 }, cdmg: { min: 0, max: 210 } };
+  criteria: Gear.GearOptimizerCriteria = {
+    hp: {},
+    def: {},
+    atk: {},
+    cri: { max: 110 },
+    cdmg: { max: 360 },
+    spd: {},
+    eff: {},
+    res: {}
+  };
   combinations: Gear.GearCombination[] = [];
   selectedCombination = { id: '' } as Gear.GearCombination;
   progress = 0;
@@ -175,6 +217,7 @@ export default class OptimizerPage extends Vue {
   }
 
   created() {
+    this.hero = this.e7db.heros[4];
     this.worker.onmessage = e => {
       console.log('worker::onmessage::action =', e.data.action);
       if (e.data.action == 'optimize-result') {
