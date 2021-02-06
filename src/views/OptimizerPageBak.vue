@@ -136,20 +136,20 @@ export default class OptimizerPage extends Vue {
     });
   }
 
-  createHero(hero: any, detail: any): Hero {
-    return new Hero(
-      hero._id,
-      hero.name,
-      hero.assets.icon,
-      detail.calculatedStatus.lv60SixStarFullyAwakened.hp,
-      detail.calculatedStatus.lv60SixStarFullyAwakened.def,
-      detail.calculatedStatus.lv60SixStarFullyAwakened.atk,
-      Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.chc * 100),
-      Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.chd * 100),
-      detail.calculatedStatus.lv60SixStarFullyAwakened.spd,
-      Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.eff * 100),
-      Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.efr * 100)
-    );
+  createHero(hero: any, detail: any) {
+    // return new Hero(
+    //   hero._id,
+    //   hero.name,
+    //   hero.assets.icon,
+    //   detail.calculatedStatus.lv60SixStarFullyAwakened.hp,
+    //   detail.calculatedStatus.lv60SixStarFullyAwakened.def,
+    //   detail.calculatedStatus.lv60SixStarFullyAwakened.atk,
+    //   Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.chc * 100),
+    //   Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.chd * 100),
+    //   detail.calculatedStatus.lv60SixStarFullyAwakened.spd,
+    //   Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.eff * 100),
+    //   Math.round(detail.calculatedStatus.lv60SixStarFullyAwakened.efr * 100)
+    // );
   }
 }
 </script>

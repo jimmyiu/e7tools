@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { Gear, Constants, E7db } from '@/models';
+import { Gear, Constants, Hero } from '@/models';
 import { E7dbData, VuexData } from '@/models/persistence';
 import E7dbDataHandler from '@/services/e7db-data-handler';
 
@@ -48,7 +48,7 @@ export default new Vuex.Store({
       }
       state.data.gears = state.gears;
     },
-    setE7dbHeros(state: any, value: E7db.Hero[]) {
+    setE7dbHeros(state: any, value: Hero[]) {
       state.e7db.date = Date.now();
       state.e7db.heros = value;
     },

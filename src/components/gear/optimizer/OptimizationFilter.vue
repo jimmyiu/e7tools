@@ -69,7 +69,7 @@ import { Constants, Gear } from '@/models';
 import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from '../common';
 
 @Component({
-  name: 'gear-optimizer-filter',
+  name: 'optimization-filter',
   components: {
     GearSetIcon,
     GearSetSelect,
@@ -77,7 +77,7 @@ import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from '../com
     GearTypeSelect
   }
 })
-export default class GearOptimizerFilter extends Vue {
+export default class OptimizationFilter extends Vue {
   @Model() readonly value!: Gear.GearFilter;
   get stats() {
     return {

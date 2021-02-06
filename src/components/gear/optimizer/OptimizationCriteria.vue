@@ -23,7 +23,7 @@
         <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/${item[1].value}.png`)" />
       </v-col>
       <v-col>
-        <v-text-field v-model="value[item[1].value].min" dense hide-details label="min" solo-inverted type="number" />
+        <v-text-field v-model="value[item[1].value].min" dense hide-details label="min" solo-inverted />
       </v-col>
       <v-col>
         <v-text-field v-model="value[item[1].value].max" dense flat hide-details label="max" solo-inverted />
@@ -60,9 +60,9 @@ import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
 import { Gear } from '@/models';
 
 @Component({
-  name: 'gear-optimizer-criteria'
+  name: 'optimization-criteria'
 })
-export default class GearOptimizerCriteria extends Vue {
+export default class OptimizationCriteria extends Vue {
   readonly stats = [
     [Gear.Stat.HP, Gear.Stat.DEF],
     [Gear.Stat.ATK, Gear.Stat.CRI],
