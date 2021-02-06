@@ -1,48 +1,49 @@
 <template>
-  <div>
+  <div style="max-width: 252px">
     <!-- <v-icon right>help_outlined</v-icon> -->
     <gear-set-select v-model="value.sets" multiple />
-    <v-row dense>
-      <v-col cols="12" sm="4">
-        <v-select
-          v-model="value.necklaces"
-          dense
-          hide-details
-          item-text="label"
-          :items="stats.necklaces"
-          label="Necklace"
-          multiple
-          outlined
-          return-object
-        />
-      </v-col>
-      <v-col cols="12" sm="4">
-        <v-select
-          v-model="value.rings"
-          dense
-          hide-details
-          item-text="label"
-          :items="stats.rings"
-          label="Ring"
-          multiple
-          outlined
-          return-object
-        />
-      </v-col>
-      <v-col cols="12" sm="4">
-        <v-select
-          v-model="value.boots"
-          dense
-          hide-details
-          item-text="label"
-          :items="stats.boots"
-          label="Boot"
-          multiple
-          outlined
-          return-object
-        />
-      </v-col>
-    </v-row>
+    <v-select
+      v-model="value.necklaces"
+      class="mb-2"
+      clear-icon="mdi-close-circle-outline"
+      clearable
+      dense
+      hide-details
+      item-text="label"
+      :items="stats.necklaces"
+      label="Necklace Main Stat"
+      multiple
+      outlined
+      return-object
+    />
+    <v-select
+      v-model="value.rings"
+      class="mb-2"
+      clear-icon="mdi-close-circle-outline"
+      clearable
+      dense
+      hide-details
+      item-text="label"
+      :items="stats.rings"
+      label="Ring Main Stat"
+      multiple
+      outlined
+      return-object
+    />
+    <v-select
+      v-model="value.boots"
+      clear-icon="mdi-close-circle-outline"
+      clearable
+      dense
+      hide-details
+      item-text="label"
+      :items="stats.boots"
+      label="Boot Main Stat"
+      multiple
+      outlined
+      return-object
+    />
+
     <v-checkbox
       v-model="value.enhanceMode"
       class="mr-3 mb-3 mt-0"
@@ -68,7 +69,7 @@ import { Constants, Gear } from '@/models';
 import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from '../common';
 
 @Component({
-  name: 'gear-optimizer-filter',
+  name: 'optimization-filter',
   components: {
     GearSetIcon,
     GearSetSelect,
@@ -76,7 +77,7 @@ import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from '../com
     GearTypeSelect
   }
 })
-export default class GearOptimizerFilter extends Vue {
+export default class OptimizationFilter extends Vue {
   @Model() readonly value!: Gear.GearFilter;
   get stats() {
     return {

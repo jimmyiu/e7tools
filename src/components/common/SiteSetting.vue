@@ -18,6 +18,15 @@
         <v-switch hide-details @change="toggleDarkMode"></v-switch>
       </v-list-item-action>
     </v-list-item>
+    <v-divider />
+    <v-list-item>
+      <v-list-item-content>
+        Version
+      </v-list-item-content>
+      <v-list-item-action>
+        0.2.0
+      </v-list-item-action>
+    </v-list-item>
   </v-navigation-drawer>
 </template>
 <script lang="ts">

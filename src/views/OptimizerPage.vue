@@ -1,25 +1,40 @@
 <template>
   <div>
-    <v-alert dense outlined type="warning">
+    <v-alert dense dismissible outlined type="warning">
       This is still an experimental feature
     </v-alert>
-    <v-row dense>
-      <v-col cols="12">
-        <v-card>
-          <v-card-text>
-            <gear-optimizer-filter v-model="filter" />
-            <v-divider class="mb-4" />
-            <gear-optimizer-criteria v-model="criteria" />
-          </v-card-text>
-          <v-divider />
-          <v-card-actions>
-            <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
-            <v-btn text @click="reset">Reset</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row v-if="selectedCombination.id">
+    <v-card>
+      <v-card-text>
+        <optimization-profiler v-model="profile" />
+      </v-card-text>
+      <v-divider />
+      <!-- <v-card-text> Profile: {{ profile }} </v-card-text>
+      <v-divider /> -->
+      <v-card-actions>
+        <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
+        <v-btn text @click="reset">Reset</v-btn>
+      </v-card-actions>
+    </v-card>
+    <v-card>
+      <v-row>
+        <v-col cols="12">
+          <v-progress-linear v-if="progress > 0" height="25" :value="progress">
+            <strong>{{ progress }}%</strong>
+          </v-progress-linear>
+          <v-data-table
+            dense
+            :footer-props="{ showFirstLastPage: true }"
+            :headers="headers"
+            :items="combinations"
+            :items-per-page="15"
+            :multi-sort="false"
+            single-select
+            @click:row="clickRow"
+          ></v-data-table>
+        </v-col>
+      </v-row>
+    </v-card>
+    <v-row v-if="selectedCombination.weapon">
       <v-col cols="6" lg="2" sm="4">
         <gear-detail :gear="selectedCombination.weapon" />
       </v-col>
@@ -41,23 +56,6 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-progress-linear v-if="progressPercent > 0" height="25" :value="progressPercent">
-          <strong>{{ progressPercent }}%</strong>
-        </v-progress-linear>
-        <v-data-table
-          dense
-          :footer-props="{ showFirstLastPage: true }"
-          :headers="headers"
-          :items="combinations"
-          :items-per-page="15"
-          :multi-sort="false"
-          single-select
-          @click:row="clickRow"
-        ></v-data-table>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
         <v-card class="section">
           <v-card-text>
             <strong>Debug Panel</strong><br />
@@ -68,7 +66,7 @@
             Number of combinations: {{ gearStore.numOfCombinations | formatNumber }} (Hard limit:
             {{ hardLimit | formatNumber }})<br />
             Estimated processing time:
-            {{ Math.round(((gearStore.numOfCombinations / 10000000) * 7.1) / 60) | formatNumber }}
+            {{ Math.round(((gearStore.numOfCombinations / 10000000) * 8.7) / 60) | formatNumber }}
             minutes
             <!-- <v-icon>help_outlined</v-icon> -->
             <!-- <i>
@@ -85,35 +83,42 @@
 </template>
 
 <script lang="ts">
-import { GearDetail, GearOptimizerFilter, GearOptimizerCriteria } from '@/components';
-import { Constants, Gear } from '@/models';
-import { GearOptimizer } from '@/services/gear-optimizer';
-import GearService from '@/services/gear-service';
+import { GearDetail, OptimizationProfiler } from '@/components';
+import { Constants, Gear, Gear2, OptimizationProfile, OptimizationResult } from '@/models';
+import { E7dbData } from '@/models/persistence';
+import { DefaultGearOptimizer } from '@/services/gear-optimizer';
+import GearFilterService from '@/services/gear-filter-service';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapState } from 'vuex';
 
 @Component({
   name: 'optimizer-page',
-  components: { GearDetail, GearOptimizerFilter, GearOptimizerCriteria },
-  computed: { ...mapState(['gears']) }
+  components: { GearDetail, OptimizationProfiler },
+  computed: { ...mapState(['gears', 'e7db']) }
 })
 export default class OptimizerPage extends Vue {
   // vuex
   readonly gears!: Gear.Gear[];
+  readonly e7db!: E7dbData;
   worker = new Worker('../workers/gear-optimizer-worker.ts', { type: 'module' });
   // models
-  filter: Gear.GearFilter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
-  criteria: Gear.GearOptimizerCriteria = { spd: { min: 0 }, cri: { min: 0, max: 110 }, cdmg: { min: 0, max: 210 } };
-  combinations: Gear.GearCombination[] = [];
-  selectedCombination = { id: '' } as Gear.GearCombination;
+  profile: OptimizationProfile = {
+    id: '',
+    hero: {},
+    filter: {},
+    criteria: {}
+  } as OptimizationProfile;
+
+  combinations: OptimizationResult[] = [];
+  selectedCombination = {} as Gear2.GearCombination;
   progress = 0;
   //
   headers = [
-    { text: 'HP %', value: 'ability.hpp' },
+    { text: 'Set', value: 'combination.sets' },
     { text: 'HP', value: 'ability.hp' },
-    { text: 'DEF %', value: 'ability.defp' },
+    // { text: 'DEF %', value: 'ability.defp' },
     { text: 'DEF', value: 'ability.def' },
-    { text: 'ATK %', value: 'ability.atkp' },
+    // { text: 'ATK %', value: 'ability.atkp' },
     { text: 'ATK', value: 'ability.atk' },
     { text: 'CRI', value: 'ability.cri' },
     { text: 'C.DMG', value: 'ability.cdmg' },
@@ -123,58 +128,49 @@ export default class OptimizerPage extends Vue {
   ];
 
   get gearStore() {
-    return new Gear.GearStore(GearService.applyFilter(this.gears, this.filter));
+    return new Gear.GearStore(GearFilterService.filter(this.gears, this.profile.filter));
   }
 
   get hardLimit() {
-    return GearOptimizer.COMBINATION_HARD_LIMIT;
-  }
-
-  get progressPercent() {
-    return Math.ceil(
-      (this.progress / Math.min(GearOptimizer.COMBINATION_HARD_LIMIT, this.gearStore.numOfCombinations ?? 1)) * 100
-    );
+    return DefaultGearOptimizer.COMBINATION_HARD_LIMIT;
   }
 
   async optimize() {
-    // this.combinations.splice(0, this.combinations.length);
     console.log('optimize::start');
     this.combinations.splice(0, this.combinations.length);
     this.worker.postMessage({
       action: 'optimize',
       store: this.gearStore,
-      criteria: this.criteria
+      profile: this.profile
     });
-    // GearOptimizer.optimize(this.gearStore, this.criteria);
-
-    // this.optimizer.optimize(this.updateProgress);
-    // const weapons =
-    //   this.gearsByType.get(Gear.Type.Weapon)!.length > 0 ? this.gearsByType.get(Gear.Type.Weapon)! : [undefined];
-    // const helmets =
-    //   this.gearsByType.get(Gear.Type.Helmet)!.length > 0 ? this.gearsByType.get(Gear.Type.Helmet)! : [undefined];
-    // const armors =
-    //   this.gearsByType.get(Gear.Type.Armor)!.length > 0 ? this.gearsByType.get(Gear.Type.Armor)! : [undefined];
-    // weapons.forEach((weapon: Gear.Gear | undefined) => {
-    //   helmets.forEach((helmet?: Gear.Gear) => {
-    //     armors.forEach((armor?: Gear.Gear) => {
-    //       this.combinations.push(new Gear.GearCombination([weapon, helmet, armor]));
-    //     });
-    //   });
-    // });
   }
 
   reset() {
-    this.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
+    // this.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
+    this.profile.hero = this.e7db.heros[4];
+    this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
+    this.profile.criteria = {
+      hp: {},
+      def: {},
+      atk: {},
+      cri: { max: 110 },
+      cdmg: { max: 360 },
+      spd: { min: 250 },
+      eff: {},
+      res: {}
+    };
   }
 
-  clickRow(item: Gear.GearCombination, e: any) {
+  clickRow(item: OptimizationResult, e: any) {
     console.log('clickRow::item =', item);
     console.log('clickRow::e =', e);
-    e.select();
-    this.selectedCombination = item;
+    // e.select();
+    this.selectedCombination = item.combination;
   }
 
   created() {
+    // this.hero = this.e7db.heros[4];
+    this.reset();
     this.worker.onmessage = e => {
       console.log('worker::onmessage::action =', e.data.action);
       if (e.data.action == 'optimize-result') {

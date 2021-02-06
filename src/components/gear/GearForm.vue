@@ -56,7 +56,7 @@
                         outlined
                       />
                     </div>
-                    <v-slider v-model="form.level" hide-details max="7" min="0" :tick-labels="levelTicks" />
+                    <v-slider v-model="form.level" hide-details max="8" min="0" :tick-labels="levelTicks" />
                   </v-card-text>
                 </v-card>
                 <gear-stat-input v-model="form.statInputs[0]" class="mt-2" dense mode="main" />
@@ -164,7 +164,7 @@ export default class GearForm extends Vue {
       type: Gear.Type.Weapon,
       set: Gear.Set.Speed,
       grade: Gear.Grade.EPIC,
-      level: 5,
+      level: 6,
       enhance: 15,
       statInputs: defaultInputStats
     };

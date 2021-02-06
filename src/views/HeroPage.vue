@@ -11,9 +11,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-// import HeroService from '@/services/hero-service';
 import E7dbDataHandler from '@/services/e7db-data-handler';
-import { E7db } from '@/models/e7db';
+import { Hero } from '@/models';
 import { mapActions, mapState } from 'vuex';
 
 @Component({
@@ -23,10 +22,10 @@ import { mapActions, mapState } from 'vuex';
 })
 export default class HeroPage extends Vue {
   withLoading!: (fn: () => Promise<any>) => void;
-  updateE7dbHeros!: (heros: E7db.Hero[]) => void;
-  heros!: E7db.Hero[];
+  updateE7dbHeros!: (heros: Hero[]) => void;
+  heros!: Hero[];
   //
-  result: E7db.Hero[] = [];
+  result: Hero[] = [];
 
   async refresh() {
     this.withLoading(async () => {

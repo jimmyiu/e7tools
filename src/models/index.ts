@@ -1,8 +1,13 @@
 import { Range } from './common';
 import { Gear } from './gear';
-import { Hero } from './hero';
+import { Gear2 } from './gear2';
+import { Hero, HeroAbility } from './hero';
+import { E7db } from './e7db';
+import { OptimizationProfile, OptimizationResult } from './optimizer';
 
-export { Gear, Hero, Range };
+export { Gear, Gear2, Range, E7db };
+export { Hero, HeroAbility };
+export { OptimizationProfile, OptimizationResult };
 export const Constants = {
   KEY_VUEXDATA: 'vuex.data',
   KEY_E7DBDAYA: 'vuex.e7db',

@@ -1,30 +1,30 @@
 import { Range } from './common';
 
 // TODO: refactor
-function sumAbility(a1?: Gear.GearAbility, a2?: Gear.GearAbility): Gear.GearAbility {
-  const sum = (n1?: number, n2?: number) => {
-    if (n1 == undefined || n2 == undefined) {
-      return n1 ?? n2 ?? undefined;
-    }
-    return n1 + n2;
-  };
-  if (a1 == undefined || a2 == undefined) {
-    return a1 ?? a2 ?? {};
-  }
-  return {
-    hpp: sum(a1.hpp, a2.hpp),
-    hp: sum(a1.hp, a2.hp),
-    defp: sum(a1.defp, a2.defp),
-    def: sum(a1.def, a2.def),
-    atkp: sum(a1.atkp, a2.atkp),
-    atk: sum(a1.atk, a2.atk),
-    cri: sum(a1.cri, a2.cri),
-    cdmg: sum(a1.cdmg, a2.cdmg),
-    spd: sum(a1.spd, a2.spd),
-    eff: sum(a1.eff, a2.eff),
-    res: sum(a1.res, a2.res)
-  };
-}
+// function sumAbility(a1?: Gear.GearAbility, a2?: Gear.GearAbility): Gear.GearAbility {
+//   const sum = (n1?: number, n2?: number) => {
+//     if (n1 == undefined || n2 == undefined) {
+//       return n1 ?? n2 ?? undefined;
+//     }
+//     return n1 + n2;
+//   };
+//   if (a1 == undefined || a2 == undefined) {
+//     return a1 ?? a2 ?? {};
+//   }
+//   return {
+//     hpp: sum(a1.hpp, a2.hpp),
+//     hp: sum(a1.hp, a2.hp),
+//     defp: sum(a1.defp, a2.defp),
+//     def: sum(a1.def, a2.def),
+//     atkp: sum(a1.atkp, a2.atkp),
+//     atk: sum(a1.atk, a2.atk),
+//     cri: sum(a1.cri, a2.cri),
+//     cdmg: sum(a1.cdmg, a2.cdmg),
+//     spd: sum(a1.spd, a2.spd),
+//     eff: sum(a1.eff, a2.eff),
+//     res: sum(a1.res, a2.res)
+//   };
+// }
 
 function applyDeltaAbility(input: Gear.GearAbility, minus?: Gear.GearAbility, plus?: Gear.GearAbility) {
   if (!minus && !plus) {
@@ -151,6 +151,8 @@ export namespace Gear {
   }
 
   export class Gear implements GearAbility {
+    static NONE: Gear = new Gear('');
+
     type?: Type;
     set?: Set;
     grade?: Grade;
@@ -267,9 +269,14 @@ export namespace Gear {
   };
 
   export interface GearOptimizerCriteria {
+    hp: Range;
+    def: Range;
+    atk: Range;
     cri: Range;
     cdmg: Range;
     spd: Range;
+    eff: Range;
+    res: Range;
   }
 
   export class GearStore {
@@ -325,6 +332,25 @@ export namespace Gear {
         this.rings.length *
         this.boots.length
       );
+    }
+
+    getGearsByType(type: Gear.Type) {
+      switch (type) {
+        case Type.Weapon:
+          return this.weapons;
+        case Type.Helmet:
+          return this.helmets;
+        case Type.Armor:
+          return this.armors;
+        case Type.Necklace:
+          return this.necklaces;
+        case Type.Ring:
+          return this.rings;
+        case Type.Boot:
+          return this.boots;
+      }
+      // TODO: throw exception ?
+      return [];
     }
   }
 
@@ -423,6 +449,28 @@ export namespace Gear {
     boot(boot: Gear.Gear) {
       applyDeltaAbility(this._ability, this._boot, boot);
       this._boot = boot;
+    }
+    set(type: Gear.Type, gear: Gear.Gear) {
+      switch (type) {
+        case Type.Weapon:
+          this.weapon(gear);
+          break;
+        case Type.Helmet:
+          this.helmet(gear);
+          break;
+        case Type.Armor:
+          this.armor(gear);
+          break;
+        case Type.Necklace:
+          this.necklace(gear);
+          break;
+        case Type.Ring:
+          this.ring(gear);
+          break;
+        case Type.Boot:
+          this.boot(gear);
+          break;
+      }
     }
     build() {
       return new GearCombination(

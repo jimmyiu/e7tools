@@ -1,10 +1,10 @@
-import { E7db } from '@/models/e7db';
+import { Hero } from '@/models';
 import axios from 'axios';
 
 class E7dbDataHandler {
-  async retrieveHeros(): Promise<Array<E7db.Hero>> {
+  async retrieveHeros(): Promise<Array<Hero>> {
     console.log('retrieveHeros::start');
-    let result: E7db.Hero[] = [];
+    let result: Hero[] = [];
     let response = await axios.get('https://api.epicsevendb.com/hero');
 
     let heros: any[] = response.data.results.filter((x: any) => !['raqueas', 'straze', 'rande'].includes(x._id));
@@ -16,13 +16,13 @@ class E7dbDataHandler {
     );
   }
 
-  async retrieveHero(id: string): Promise<E7db.Hero> {
+  async retrieveHero(id: string): Promise<Hero> {
     const response = await axios.get(`https://api.epicsevendb.com/hero/${id}`);
     // console.log('retrieveHero::detail =', response.data.results[0]);
     return response.data.results[0];
   }
 
-  createE7dbHero(overview: any, detail: any): E7db.Hero {
+  createE7dbHero(overview: any, detail: any): Hero {
     return {
       id: overview._id,
       name: overview.name,

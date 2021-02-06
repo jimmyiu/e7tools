@@ -1,5 +1,5 @@
 import { Gear } from './gear';
-import { E7db } from './e7db';
+import { Hero } from './hero';
 
 export type VuexData = {
   version: string;
@@ -8,5 +8,5 @@ export type VuexData = {
 
 export type E7dbData = {
   date: number;
-  heros: Array<E7db.Hero>;
+  heros: Array<Hero>;
 };
