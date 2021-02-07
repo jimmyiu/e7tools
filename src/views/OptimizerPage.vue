@@ -13,15 +13,17 @@
       <v-card-actions>
         <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
         <v-btn text @click="reset">Reset</v-btn>
+        <!-- <v-btn class="font-weight-bold" color="warning" text @click="test">Test</v-btn> -->
       </v-card-actions>
     </v-card>
+
     <v-card class="mt-2">
+      <v-progress-linear v-if="progress > 0" height="20" striped>
+        <strong>{{ progress }}%</strong>
+      </v-progress-linear>
       <v-card-text>
         <v-row>
           <v-col cols="12">
-            <v-progress-linear v-if="progress > 0" height="25" :value="progress">
-              <strong>{{ progress }}%</strong>
-            </v-progress-linear>
             <v-data-table
               dense
               :footer-props="{ showFirstLastPage: true }"
@@ -88,7 +90,7 @@
 
 <script lang="ts">
 import { GearDetail, GearSetIcon, OptimizationProfiler } from '@/components';
-import { Constants, Gear, Gear2, EquipedHero, OptimizationProfile, OptimizationResult } from '@/models';
+import { Constants, Gear, Gear2, EquipedHero, OptimizationProfile } from '@/models';
 import { E7dbData } from '@/models/persistence';
 import { DefaultGearOptimizer } from '@/services/gear-optimizer';
 import GearFilterService from '@/services/gear-filter-service';
@@ -110,7 +112,8 @@ export default class OptimizerPage extends Vue {
     id: '',
     hero: {},
     filter: {},
-    criteria: {}
+    stat: {},
+    combination: {}
   } as OptimizationProfile;
 
   combinations: EquipedHero[] = [];
@@ -155,7 +158,7 @@ export default class OptimizerPage extends Vue {
     // this.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
     this.profile.hero = this.e7db.heros[4];
     this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
-    this.profile.criteria = {
+    this.profile.stat = {
       hp: {},
       def: {},
       atk: { min: 3500 },
@@ -167,9 +170,12 @@ export default class OptimizerPage extends Vue {
       ehp: {},
       damage: {}
     };
+    this.profile.combination = {
+      forcedSets: [Gear.Set.Speed, Gear.Set.Critical]
+    };
   }
 
-  clickRow(item: OptimizationResult, e: any) {
+  clickRow(item: EquipedHero, e: any) {
     console.log('clickRow::item =', item);
     console.log('clickRow::e =', e);
     // e.select();

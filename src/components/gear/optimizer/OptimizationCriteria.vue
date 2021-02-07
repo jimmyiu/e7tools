@@ -69,7 +69,7 @@
 </style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
-import { Gear } from '@/models';
+import { Gear, OptimizationStatCriteria } from '@/models';
 
 @Component({
   name: 'optimization-criteria'
@@ -81,6 +81,6 @@ export default class OptimizationCriteria extends Vue {
     [Gear.Stat.CDMG, Gear.Stat.SPD],
     [Gear.Stat.EFF, Gear.Stat.RES]
   ];
-  @Model() readonly value!: Gear.GearOptimizerCriteria;
+  @Model() readonly value!: OptimizationStatCriteria;
 }
 </script>

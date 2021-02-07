@@ -100,6 +100,16 @@ export namespace Gear {
     [Set.Revenge, Set.Injury, Set.Penetration],
     [Set.Destruction, Set.Counter, Set.LifeSteal, Set.Resist]
   ];
+  export type SetAbility = {
+    hpp: number;
+    defp: number;
+    atkp: number;
+    cri: number;
+    cdmg: number;
+    spdp: number;
+    eff: number;
+    res: number;
+  };
   export class Stat {
     static readonly HPP = new Stat('hpp', 'HP %');
     static readonly HP = new Stat('hp', 'HP');
@@ -267,19 +277,6 @@ export namespace Gear {
     stat?: Stat;
     value: number;
   };
-
-  export interface GearOptimizerCriteria {
-    hp: Range;
-    def: Range;
-    atk: Range;
-    cri: Range;
-    cdmg: Range;
-    spd: Range;
-    eff: Range;
-    res: Range;
-    ehp: Range;
-    damage: Range;
-  }
 
   export class GearStore {
     readonly weapons: Gear[] = [];

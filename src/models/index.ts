@@ -3,11 +3,11 @@ import { Gear } from './gear';
 import { Gear2 } from './gear2';
 import { Hero, HeroAbility, EquipedHero } from './hero';
 import { E7db } from './e7db';
-import { OptimizationProfile, OptimizationResult } from './optimizer';
+import { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria } from './optimizer';
 
 export { Gear, Gear2, Range, E7db };
 export { Hero, HeroAbility, EquipedHero };
-export { OptimizationProfile, OptimizationResult };
+export { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria };
 export const Constants = {
   KEY_VUEXDATA: 'vuex.data',
   KEY_E7DBDAYA: 'vuex.e7db',

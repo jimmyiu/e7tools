@@ -1,5 +1,5 @@
 import { Gear, Gear2, Hero } from '@/models';
-import { HeroAbility, EquipedHero } from '@/models/hero';
+import { EquipedHero } from '@/models/hero';
 
 class GearCombinationService {
   public apply(combination: Gear2.GearCombination, hero: Hero): EquipedHero {
@@ -23,7 +23,7 @@ class GearCombinationService {
   }
 
   private determineSetsExtraAbility(sets: Gear.Set[]) {
-    const result = {
+    const result: Gear.SetAbility = {
       hpp: 0,
       defp: 0,
       atkp: 0,
