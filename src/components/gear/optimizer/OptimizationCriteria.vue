@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 340px">
+  <div>
     <!-- <v-row dense>
       <v-col> </v-col>
       <v-col class="text-center" cols="5">
@@ -29,6 +29,18 @@
         <v-text-field v-model="value[item[1].value].max" dense flat hide-details label="max" solo-inverted />
       </v-col>
     </v-row>
+    <v-row dense>
+      <v-col cols="auto" style="margin: auto;"><div style="width: 18px"></div></v-col>
+      <v-col>
+        <v-text-field v-model="value.ehp.min" dense hide-details label="EHP (min)" outlined />
+      </v-col>
+      <v-col>
+        <v-text-field v-model="value.damage.min" dense hide-details label="Damage (min)" outlined />
+      </v-col>
+      <v-col cols="auto" style="margin: auto"><div style="width: 18px"></div></v-col>
+      <v-col> </v-col>
+      <v-col> </v-col>
+    </v-row>
     <!-- <v-row dense>
       <v-col cols="3">
         <v-text-field v-model="value.cdmg.min" dense hide-details label="C.DMG (min)" outlined type="number" />
@@ -57,7 +69,7 @@
 </style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
-import { Gear } from '@/models';
+import { Gear, OptimizationStatCriteria } from '@/models';
 
 @Component({
   name: 'optimization-criteria'
@@ -69,6 +81,6 @@ export default class OptimizationCriteria extends Vue {
     [Gear.Stat.CDMG, Gear.Stat.SPD],
     [Gear.Stat.EFF, Gear.Stat.RES]
   ];
-  @Model() readonly value!: Gear.GearOptimizerCriteria;
+  @Model() readonly value!: OptimizationStatCriteria;
 }
 </script>

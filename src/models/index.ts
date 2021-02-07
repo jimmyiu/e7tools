@@ -1,22 +1,22 @@
 import { Range } from './common';
 import { Gear } from './gear';
 import { Gear2 } from './gear2';
-import { Hero, HeroAbility } from './hero';
+import { Hero, HeroAbility, EquipedHero } from './hero';
 import { E7db } from './e7db';
-import { OptimizationProfile, OptimizationResult } from './optimizer';
+import { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria } from './optimizer';
 
 export { Gear, Gear2, Range, E7db };
-export { Hero, HeroAbility };
-export { OptimizationProfile, OptimizationResult };
+export { Hero, HeroAbility, EquipedHero };
+export { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria };
 export const Constants = {
   KEY_VUEXDATA: 'vuex.data',
   KEY_E7DBDAYA: 'vuex.e7db',
   GEAR_FILTER_DEFAULT: {
     sets: [],
     enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
-    necklaces: [], // [Gear.Stat.CDMG, Gear.Stat.ATKP, Gear.Stat.ATK],
-    rings: [], // [Gear.Stat.ATKP, Gear.Stat.ATK],
-    boots: [] // [Gear.Stat.SPD]
+    necklaces: [Gear.Stat.CDMG], // [Gear.Stat.CDMG, Gear.Stat.ATKP, Gear.Stat.ATK],
+    rings: [Gear.Stat.ATKP, Gear.Stat.ATK],
+    boots: [Gear.Stat.SPD]
   } as Gear.GearFilter,
   //
   NECKLACE_STATS: [

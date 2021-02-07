@@ -1,10 +1,10 @@
 import { Gear, Gear2, Hero } from '@/models';
-import { HeroAbility } from '@/models/hero';
+import { EquipedHero } from '@/models/hero';
 
 class GearCombinationService {
-  public apply(combination: Gear2.GearCombination, hero: Hero): HeroAbility {
+  public apply(combination: Gear2.GearCombination, hero: Hero): EquipedHero {
     const extra = this.determineSetsExtraAbility(combination.sets);
-    const result: HeroAbility = {
+    const result: EquipedHero = {
       hp: Math.trunc(hero.hp * (1 + (combination.ability.hpp + extra.hpp) / 100)) + combination.ability.hp,
       def: Math.trunc(hero.def * (1 + (combination.ability.defp + extra.defp) / 100)) + combination.ability.def,
       atk: Math.trunc(hero.atk * (1 + (combination.ability.atkp + extra.atkp) / 100)) + combination.ability.atk,
@@ -12,13 +12,18 @@ class GearCombinationService {
       cdmg: hero.cdmg + combination.ability.cdmg + extra.cdmg,
       spd: Math.trunc(hero.spd * (1 + extra.spdp / 100)) + combination.ability.spd,
       eff: hero.eff + combination.ability.eff + extra.eff,
-      res: hero.res + combination.ability.res + extra.res
+      res: hero.res + combination.ability.res + extra.res,
+      combination: combination,
+      damage: 0,
+      ehp: 0
     };
+    result.damage = Math.trunc((result.atk * Math.min(result.cdmg, 350)) / 1000);
+    result.ehp = Math.trunc(result.hp * (1 + result.def / 300));
     return result;
   }
 
   private determineSetsExtraAbility(sets: Gear.Set[]) {
-    const result = {
+    const result: Gear.SetAbility = {
       hpp: 0,
       defp: 0,
       atkp: 0,

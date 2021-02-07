@@ -1,4 +1,4 @@
-import { Gear, Gear2, Range, HeroAbility, OptimizationProfile, OptimizationResult } from '@/models';
+import { Gear, Gear2, HeroAbility, EquipedHero, OptimizationProfile } from '@/models';
 import GearCombinationService from './gear-combination-service';
 
 export interface IGearOptimizer {
@@ -6,13 +6,13 @@ export interface IGearOptimizer {
   profile: OptimizationProfile;
   progressCallback: (x: number) => void;
 
-  optimize: () => OptimizationResult[];
+  optimize: () => EquipedHero[];
 }
 
 export class DefaultGearOptimizer implements IGearOptimizer {
-  static COMBINATION_HARD_LIMIT = 10000000;
+  static COMBINATION_HARD_LIMIT = 1000000;
   // static COMBINATION_HARD_LIMIT = 10;
-  static OPTIMIZE_RESULT_HARD_LIMIT = 30000;
+  static OPTIMIZE_RESULT_LIMIT = 30000;
   static REPORT_PROGRESS_COUNT = DefaultGearOptimizer.COMBINATION_HARD_LIMIT / 10;
 
   constructor(
@@ -21,72 +21,152 @@ export class DefaultGearOptimizer implements IGearOptimizer {
     public readonly progressCallback: (x: number) => void
   ) { }
 
-  optimize(): OptimizationResult[] {
+  optimize(): EquipedHero[] {
     console.log('optimize::start');
-    console.log('optimize::hero =', this.profile.hero);
-    const builder = new Gear2.GearCombinationBuilder();
+    console.log('optimize::profile =', this.profile);
     let start = Date.now();
-    // this.evaluate(result, builder, Object.values(Gear.Type));
+    this.progressCallback(1);
+    const result: EquipedHero[] = this.performOptimize();
     this.progressCallback(0);
-    const result: OptimizationResult[] = this.performOptimize();
-    this.progressCallback(100);
     console.log('optimize::processing time =', (Date.now() - start) / 1000, 'seconds');
     return result;
   }
 
-  heroAbilityFilter() {
-    type Filter = (ability: HeroAbility) => boolean;
-    const noopFilter: Filter = (ability: HeroAbility) => true;
-    // constfilters: Filter[] = [];
-
-    let spdMin = noopFilter;
-    if (this.profile.criteria.spd.min) {
-      spdMin = (ability: HeroAbility) => ability.spd >= this.profile.criteria.spd.min!;
+  minFilter(stat: string) {
+    if ((this.profile.stat as any)[stat]!.min) {
+      return (ability: HeroAbility) => (ability as any)[stat] >= (this.profile.stat as any)[stat].min!;
     }
-    return (ability: HeroAbility) => {
-      return spdMin(ability);
+    return (ability: HeroAbility) => true;
+  }
+
+  maxFilter(stat: string) {
+    if ((this.profile.stat as any)[stat]!.max) {
+      return (ability: HeroAbility) => (ability as any)[stat] <= (this.profile.stat as any)[stat].max!;
+    }
+    return (ability: HeroAbility) => true;
+  }
+
+  combinationFilter() {
+    if (this.profile.combination.forcedSets.length == 0) {
+      return (sets: Gear2.GearCombinationBuilder, emptySlot: number) => true;
+    }
+    const target: any = {};
+    // TODO: currently assumed input sets is make sense
+    for (let i = 0; i < this.profile.combination.forcedSets.length; i++) {
+      const set = this.profile.combination.forcedSets[i];
+      switch (set) {
+        case Gear.Set.Speed:
+        case Gear.Set.Attack:
+        case Gear.Set.Destruction:
+          target[set] = target[set] ?? 4;
+          break;
+        default:
+          target[set] = (target[set] ?? 0) + 2;
+          break;
+      }
+    }
+    return (builder: Gear2.GearCombinationBuilder, emptySlot: number) => {
+      return builder._sets.isPossible(target, emptySlot);
     };
   }
 
-  performOptimize(): OptimizationResult[] {
+  equipedHeroFilter() {
+    // type Filter = (ability: HeroAbility) => boolean;
+
+    let atkMin = this.minFilter(Gear.Stat.ATK.value);
+    let atkMax = this.maxFilter(Gear.Stat.ATK.value);
+    let spdMin = this.minFilter(Gear.Stat.SPD.value);
+    let criMin = this.minFilter(Gear.Stat.CRI.value);
+    let criMax = this.maxFilter(Gear.Stat.CRI.value);
+
+    let cdmgMin = this.minFilter(Gear.Stat.CDMG.value);
+    let cdmgMax = this.maxFilter(Gear.Stat.CDMG.value);
+
+    let ehpMin = this.minFilter('ehp');
+    let damageMin = this.minFilter('damage');
+
+    return (hero: EquipedHero) => {
+      return (
+        spdMin(hero) &&
+        criMin(hero) &&
+        criMax(hero) &&
+        atkMin(hero) &&
+        atkMax(hero) &&
+        cdmgMin(hero) &&
+        cdmgMax(hero) &&
+        ehpMin(hero) &&
+        damageMin(hero)
+      );
+    };
+  }
+
+  performOptimize(): EquipedHero[] {
+    let actualCount = 0;
     let count = 0;
-    const result: OptimizationResult[] = [];
+    const result: EquipedHero[] = [];
     const builder = new Gear2.GearCombinationBuilder();
-    const filter = this.heroAbilityFilter();
-    for (let i1 = 0; i1 < this.store.weapons.length; i1++) {
+    const equipedHeroFilter = this.equipedHeroFilter();
+    const combinationFilter = this.combinationFilter();
+    for (let i1 = 0, n1 = this.store.weapons.length; i1 < n1; i1++) {
       builder.weapon(this.store.weapons[i1]);
-      for (let i2 = 0; i2 < this.store.helmets.length; i2++) {
+      for (let i2 = 0, n2 = this.store.helmets.length; i2 < n2; i2++) {
         builder.helmet(this.store.helmets[i2]);
-        for (let i3 = 0; i3 < this.store.armors.length; i3++) {
+        for (let i3 = 0, n3 = this.store.armors.length; i3 < n3; i3++) {
           builder.armor(this.store.armors[i3]);
-          for (let i4 = 0; i4 < this.store.necklaces.length; i4++) {
+          if (!combinationFilter(builder, 3)) {
+            actualCount += this.store.necklaces.length * this.store.rings.length * this.store.boots.length;
+            continue;
+          }
+          for (let i4 = 0, n4 = this.store.necklaces.length; i4 < n4; i4++) {
             builder.necklace(this.store.necklaces[i4]);
-            for (let i5 = 0; i5 < this.store.rings.length; i5++) {
+            if (!combinationFilter(builder, 2)) {
+              actualCount += this.store.rings.length * this.store.boots.length;
+              continue;
+            }
+            for (let i5 = 0, n5 = this.store.rings.length; i5 < n5; i5++) {
               builder.ring(this.store.rings[i5]);
-              for (let i6 = 0; i6 < this.store.boots.length; i6++) {
+              if (!combinationFilter(builder, 1)) {
+                actualCount += this.store.boots.length;
+                continue;
+              }
+              for (let i6 = 0, n6 = this.store.boots.length; i6 < n6; i6++) {
                 builder.boot(this.store.boots[i6]);
+                if (++actualCount && !combinationFilter(builder, 0)) {
+                  continue;
+                }
+
+                // let combination = builder.build();
+                const equipedHero = GearCombinationService.apply(builder.build(), this.profile.hero);
+                if (equipedHeroFilter(equipedHero)) {
+                  result.push(equipedHero);
+                  if (result.length >= DefaultGearOptimizer.OPTIMIZE_RESULT_LIMIT) {
+                    console.log(
+                      'optimize::hit result limit, actualCount =',
+                      actualCount,
+                      ', result.length =',
+                      result.length
+                    );
+                    return result;
+                  }
+                }
 
                 if (++count % DefaultGearOptimizer.REPORT_PROGRESS_COUNT == 0) {
-                  console.log('optimize::count =', count, ', result.length =', result.length);
+                  console.log(
+                    'optimize::actualCount =',
+                    actualCount,
+                    ',count =',
+                    count,
+                    ',result.length =',
+                    result.length
+                  );
                   // this.progressCallback(Math.trunc((100 * count) / DefaultGearOptimizer.COMBINATION_HARD_LIMIT));
                   this.progressCallback(count);
-                  if (count++ >= DefaultGearOptimizer.COMBINATION_HARD_LIMIT) {
+
+                  // hard limit check
+                  if (count >= DefaultGearOptimizer.COMBINATION_HARD_LIMIT) {
                     console.log('optimize::hit combination hard limit');
                     return result;
                   }
-                }
-
-                let combination = builder.build();
-                const ability = GearCombinationService.apply(combination, this.profile.hero);
-                if (filter(ability)) {
-                  result.push({
-                    ability: ability,
-                    combination: combination
-                  });
-                }
-                if (result.length >= DefaultGearOptimizer.OPTIMIZE_RESULT_HARD_LIMIT) {
-                  console.log('optimize::hit combination hard limit, result.length =', result.length);
-                  return result;
                 }
               }
             }
@@ -96,135 +176,4 @@ export class DefaultGearOptimizer implements IGearOptimizer {
     }
     return result;
   }
-
-  // evaluate(result: Gear.GearCombination[], builder: Gear.GearCombinationBuilder, types: Gear.Type[]) {
-  //   if (types.length == 0) {
-  //     let combination = builder.build();
-
-  //     if (result.length >= GearOptimizer.OPTIMIZE_RESULT_HARD_LIMIT) {
-  //       console.log('optimize::hit combination hard limit, result.length =', result.length);
-  //       console.log('processing time =', (Date.now() - time) / 1000, 'seconds');
-  //       return result;
-  //     }
-  //   } else {
-  //     const gears: Gear.Gear[] = this.store.getGearsByType(types[0]);
-  //     for (let i = 0; i < gears.length; i++) {
-  //       builder.set(types[0], gears[i]);
-  //       this.evaluate(result, builder, types.slice(1));
-  //     }
-  //   }
-  // }
 }
-
-// TODO: refactor
-export class GearOptimizer {
-  static COMBINATION_HARD_LIMIT = 10000000;
-  // static COMBINATION_HARD_LIMIT = 5000000;
-  // static COMBINATION_HARD_LIMIT = 2;
-  static OPTIMIZE_RESULT_HARD_LIMIT = 50000;
-  static REPORT_PROGRESS_COUNT = GearOptimizer.COMBINATION_HARD_LIMIT / 10;
-
-  static optimize(
-    store: Gear.GearStore,
-    criteria: Gear.GearOptimizerCriteria,
-    progressCallback: (x: number) => void = (x: number) => { }
-  ): Gear.GearCombination[] {
-    let count = 0;
-    let time = Date.now();
-    const result: Gear.GearCombination[] = [];
-    const builder = new Gear.GearCombinationBuilder();
-    for (let i1 = 0; i1 < store.weapons.length; i1++) {
-      builder.weapon(store.weapons[i1]);
-      for (let i2 = 0; i2 < store.helmets.length; i2++) {
-        builder.helmet(store.helmets[i2]);
-        for (let i3 = 0; i3 < store.armors.length; i3++) {
-          builder.armor(store.armors[i3]);
-          for (let i4 = 0; i4 < store.necklaces.length; i4++) {
-            builder.necklace(store.necklaces[i4]);
-            for (let i5 = 0; i5 < store.rings.length; i5++) {
-              builder.ring(store.rings[i5]);
-              for (let i6 = 0; i6 < store.boots.length; i6++) {
-                builder.boot(store.boots[i6]);
-                let combination = builder.build();
-                if (++count % GearOptimizer.REPORT_PROGRESS_COUNT == 0) {
-                  console.log('optimize::count =', count, ', result.length =', result.length);
-                  progressCallback(count);
-                  if (count >= GearOptimizer.COMBINATION_HARD_LIMIT) {
-                    console.log('optimize::hit combination hard limit');
-                    console.log('processing time =', (Date.now() - time) / 1000, 'seconds');
-                    return result;
-                  }
-                }
-                if (
-                  GearOptimizer.assert(combination.ability.spd, criteria.spd) &&
-                  GearOptimizer.assert(combination.ability.cri, criteria.cri) &&
-                  GearOptimizer.assert(combination.ability.cdmg, criteria.cdmg)
-                ) {
-                  result.push(combination);
-                }
-                if (result.length >= GearOptimizer.OPTIMIZE_RESULT_HARD_LIMIT) {
-                  console.log('optimize::hit combination hard limit, result.length =', result.length);
-                  console.log('processing time =', (Date.now() - time) / 1000, 'seconds');
-                  return result;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    console.log('processing time =', (Date.now() - time) / 1000, 'seconds');
-    return result;
-  }
-
-  static assert(ability: number | undefined, range: Range) {
-    if (!range.min && !range.max) {
-      // no assertion required
-      return true;
-    } else if (ability == undefined) {
-      // assertion required, but ability value absent
-      return false;
-    }
-    // const min = range.min ? ability >= range.min : true;
-    // const max = range.max ? ability <= range.max : true;
-    return (range.min ? ability >= range.min : true) && (range.max ? ability <= range.max : true);
-  }
-}
-
-// class OptimizeService {
-// convert(item: any): Gear.Gear {
-//   let gear: ImportGear = item;
-//   let result = new Gear.Gear(`i-${gear.ID}`);
-//   result.type = TYPE_MAPPING.get(gear.Type);
-//   result.set = SET_MAPPING.get(gear.Set);
-//   result.grade = GRADE_MAPPING.get(gear.Grade);
-//   result.level = gear.Ilvl;
-//   result.enhance = gear.Enhance;
-//   result.main = STAT_MAPPING.get(gear.Main.Name);
-//   [gear.Main, ...gear.SubStats].forEach(it => {
-//     let stat = STAT_MAPPING.get(it.Name);
-//     if (stat != undefined) {
-//       Vue.set(result, stat.value, this.covertStatValue(stat, it.Value));
-//     }
-//   });
-//   result.score = GearService.calculateScore(result);
-//   result.defScore = GearService.calculateDefScore(result);
-//   result.offScore = GearService.calculateOffScore(result);
-//   return result;
-// }
-// covertStatValue(stat: Gear.Stat, value: number): number {
-//   if (
-//     stat == Gear.Stat.ATKP ||
-//     stat == Gear.Stat.HPP ||
-//     stat == Gear.Stat.DEFP ||
-//     stat == Gear.Stat.CRI ||
-//     stat == Gear.Stat.CDMG ||
-//     stat == Gear.Stat.EFF ||
-//     stat == Gear.Stat.RES
-//   ) {
-//     return Math.round(value * 100);
-//   }
-//   return value;
-// }
-// }
-// export default new OptimizeService();
