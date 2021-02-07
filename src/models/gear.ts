@@ -277,6 +277,8 @@ export namespace Gear {
     spd: Range;
     eff: Range;
     res: Range;
+    ehp: Range;
+    damage: Range;
   }
 
   export class GearStore {
