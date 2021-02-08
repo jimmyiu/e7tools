@@ -10,9 +10,9 @@ export interface IGearOptimizer {
 }
 
 export class DefaultGearOptimizer implements IGearOptimizer {
-  static COMBINATION_HARD_LIMIT = 1000000;
+  static COMBINATION_HARD_LIMIT = 10000000;
   // static COMBINATION_HARD_LIMIT = 10;
-  static OPTIMIZE_RESULT_LIMIT = 30000;
+  static OPTIMIZE_RESULT_LIMIT = 50000;
   static REPORT_PROGRESS_COUNT = DefaultGearOptimizer.COMBINATION_HARD_LIMIT / 10;
 
   constructor(
@@ -71,29 +71,43 @@ export class DefaultGearOptimizer implements IGearOptimizer {
   }
 
   equipedHeroFilter() {
-    // type Filter = (ability: HeroAbility) => boolean;
-
+    let hpMin = this.minFilter(Gear.Stat.HP.value);
+    let hpMax = this.maxFilter(Gear.Stat.HP.value);
+    let defMin = this.minFilter(Gear.Stat.DEF.value);
+    let defMax = this.maxFilter(Gear.Stat.DEF.value);
     let atkMin = this.minFilter(Gear.Stat.ATK.value);
     let atkMax = this.maxFilter(Gear.Stat.ATK.value);
-    let spdMin = this.minFilter(Gear.Stat.SPD.value);
     let criMin = this.minFilter(Gear.Stat.CRI.value);
     let criMax = this.maxFilter(Gear.Stat.CRI.value);
-
     let cdmgMin = this.minFilter(Gear.Stat.CDMG.value);
     let cdmgMax = this.maxFilter(Gear.Stat.CDMG.value);
-
+    let spdMin = this.minFilter(Gear.Stat.SPD.value);
+    let spdMax = this.maxFilter(Gear.Stat.SPD.value);
+    let effMin = this.minFilter(Gear.Stat.EFF.value);
+    let effMax = this.maxFilter(Gear.Stat.EFF.value);
+    let resMin = this.minFilter(Gear.Stat.RES.value);
+    let resMax = this.maxFilter(Gear.Stat.RES.value);
     let ehpMin = this.minFilter('ehp');
     let damageMin = this.minFilter('damage');
 
     return (hero: EquipedHero) => {
       return (
         spdMin(hero) &&
+        spdMax(hero) &&
         criMin(hero) &&
         criMax(hero) &&
+        hpMin(hero) &&
+        hpMax(hero) &&
+        defMin(hero) &&
+        defMax(hero) &&
         atkMin(hero) &&
         atkMax(hero) &&
         cdmgMin(hero) &&
         cdmgMax(hero) &&
+        effMin(hero) &&
+        effMax(hero) &&
+        resMin(hero) &&
+        resMax(hero) &&
         ehpMin(hero) &&
         damageMin(hero)
       );
@@ -136,7 +150,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
                 }
 
                 // let combination = builder.build();
-                const equipedHero = GearCombinationService.apply(builder.build(), this.profile.hero);
+                const equipedHero = GearCombinationService.apply(builder.build(count), this.profile.hero);
                 if (equipedHeroFilter(equipedHero)) {
                   result.push(equipedHero);
                   if (result.length >= DefaultGearOptimizer.OPTIMIZE_RESULT_LIMIT) {

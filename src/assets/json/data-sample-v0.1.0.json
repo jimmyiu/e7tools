@@ -433,15 +433,15 @@
       "defScore": 8,
       "set": "Speed",
       "type": "Helmet",
-      "grade": { "name": "Epic", "color": "red" },
+      "grade": { "name": "Hero", "color": "purple" },
       "level": 85,
       "enhance": 15,
       "main": { "value": "hp", "label": "HP" },
       "hp": 2700,
       "defp": 8,
       "atkp": 13,
-      "eff": 25,
-      "cri": 4
+      "cri": 4,
+      "eff": 25
     },
     {
       "id": "jbbc071b7d",
@@ -513,20 +513,20 @@
     },
     {
       "id": "36212gbic7",
-      "score": 43,
+      "score": 57,
       "offScore": 6,
-      "defScore": 13,
+      "defScore": 19,
       "set": "Speed",
       "type": "Helmet",
       "grade": { "name": "Epic", "color": "red" },
       "level": 85,
-      "enhance": 9,
+      "enhance": 15,
       "main": { "value": "hp", "label": "HP" },
-      "hp": 1512,
-      "hpp": 13,
-      "spd": 3,
+      "hp": 2700,
+      "hpp": 19,
       "cri": 4,
-      "res": 18
+      "spd": 3,
+      "res": 26
     },
     {
       "id": "bb330f2ea4",
@@ -842,13 +842,13 @@
       "set": "Destruction",
       "type": "Boot",
       "grade": { "name": "Epic", "color": "red" },
-      "level": 85,
+      "level": 78,
       "enhance": 15,
       "main": { "value": "atkp", "label": "ATK %" },
       "atkp": 60,
+      "hpp": 15,
       "defp": 7,
       "cri": 19,
-      "hpp": 15,
       "eff": 7
     },
     {
@@ -870,20 +870,20 @@
     },
     {
       "id": "10id467414",
-      "score": 53,
-      "offScore": 41,
+      "score": 64.5,
+      "offScore": 49.5,
       "defScore": 0,
       "set": "Speed",
       "type": "Boot",
       "grade": { "name": "Epic", "color": "red" },
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": { "value": "spd", "label": "SPD" },
-      "spd": 40,
-      "cri": 4,
-      "cdmg": 13,
-      "atkp": 22,
-      "eff": 12
+      "spd": 45,
+      "atkp": 26,
+      "cri": 5,
+      "cdmg": 16,
+      "eff": 15
     },
     {
       "id": "fg34c98db1",
@@ -910,14 +910,14 @@
       "set": "Speed",
       "type": "Armor",
       "grade": { "name": "Hero", "color": "purple" },
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": { "value": "def", "label": "DEF" },
-      "def": 300,
-      "spd": 12,
-      "cdmg": 15,
+      "def": 310,
       "defp": 7,
-      "cri": 10
+      "cri": 10,
+      "cdmg": 15,
+      "spd": 12
     },
     {
       "id": "i8hg1ihfa9",
@@ -1091,20 +1091,20 @@
     },
     {
       "id": "ae2i1864f5",
-      "score": 51,
-      "offScore": 13,
+      "score": 61,
+      "offScore": 16,
       "defScore": 0,
       "set": "Critical",
       "type": "Necklace",
-      "grade": { "name": "Epic", "color": "red" },
-      "level": 85,
+      "grade": { "name": "Hero", "color": "purple" },
+      "level": 90,
       "enhance": 15,
       "main": { "value": "cdmg", "label": "C.DMG" },
-      "cdmg": 65,
-      "spd": 7,
-      "atkp": 13,
-      "eff": 18,
-      "res": 6
+      "cdmg": 70,
+      "atkp": 16,
+      "spd": 8,
+      "eff": 22,
+      "res": 7
     },
     {
       "id": "82i3j51g0e",
@@ -1278,7 +1278,7 @@
     },
     {
       "id": "6gdfc1bh6d",
-      "score": 46.5,
+      "score": 47.5,
       "offScore": 10.5,
       "defScore": 9,
       "set": "Speed",
@@ -1288,10 +1288,10 @@
       "enhance": 15,
       "main": { "value": "hpp", "label": "HP %" },
       "hpp": 60,
-      "res": 5,
       "def": 55,
+      "cri": 7,
       "spd": 11,
-      "cri": 7
+      "res": 6
     },
     {
       "id": "h3568g4ic9",
@@ -1326,6 +1326,40 @@
       "defp": 5,
       "atk": 84,
       "hpp": 21
+    },
+    {
+      "id": "dadhc6f845",
+      "score": 65,
+      "offScore": 9,
+      "defScore": 20,
+      "set": "Speed",
+      "type": "Necklace",
+      "grade": { "name": "Epic", "color": "red" },
+      "level": 90,
+      "enhance": 15,
+      "main": { "value": "atk", "label": "ATK" },
+      "atk": 525,
+      "eff": 32,
+      "defp": 20,
+      "spd": 2,
+      "atkp": 9
+    },
+    {
+      "id": "a4hh53h93e",
+      "score": 58.5,
+      "offScore": 19.5,
+      "defScore": 12,
+      "set": "Speed",
+      "type": "Ring",
+      "grade": { "name": "Epic", "color": "red" },
+      "level": 78,
+      "enhance": 15,
+      "main": { "value": "atkp", "label": "ATK %" },
+      "atkp": 60,
+      "defp": 12,
+      "cri": 13,
+      "spd": 6,
+      "eff": 15
     }
   ]
 }

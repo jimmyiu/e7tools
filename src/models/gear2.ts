@@ -38,7 +38,7 @@ export namespace Gear2 {
     sets: Gear.Set[];
 
     constructor(
-      // readonly id: number,
+      readonly id: number,
       readonly weapon: Gear.Gear,
       readonly helmet: Gear.Gear,
       readonly armor: Gear.Gear,
@@ -240,8 +240,9 @@ export namespace Gear2 {
       this.change(this._boot, boot);
       this._boot = boot;
     }
-    build() {
+    build(id: number) {
       return new GearCombination(
+        id,
         this._weapon,
         this._helmet,
         this._armor,

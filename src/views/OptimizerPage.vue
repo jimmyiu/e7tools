@@ -12,6 +12,7 @@
       <v-divider /> -->
       <v-card-actions>
         <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
+        <!-- <v-btn class="font-weight-bold" color="success" text>Save</v-btn> -->
         <v-btn text @click="reset">Reset</v-btn>
         <!-- <v-btn class="font-weight-bold" color="warning" text @click="test">Test</v-btn> -->
       </v-card-actions>
@@ -28,7 +29,8 @@
               dense
               :footer-props="{ showFirstLastPage: true }"
               :headers="headers"
-              :items="combinations"
+              item-key="combination.id"
+              :items="result"
               :items-per-page="15"
               :multi-sort="false"
               single-select
@@ -74,15 +76,15 @@
         Number of combinations: {{ gearStore.numOfCombinations | formatNumber }} (Hard limit:
         {{ hardLimit | formatNumber }})<br />
         Estimated processing time:
-        {{ Math.round(((gearStore.numOfCombinations / 10000000) * 9) / 60) | formatNumber }}
+        {{ Math.round(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber }}
         minutes
         <!-- <v-icon>help_outlined</v-icon> -->
         <!-- <i>
-                    Remark:<br />
-                    - only first {{ hardLimit | formatNumber }} combinations will be evaluated now (Performance
-                    issue)<br />
-                    - 10,000,000 combinations take around 7.1 seconds in the testing machine
-                  </i> -->
+          Remark:<br />
+          - only first {{ hardLimit | formatNumber }} combinations will be evaluated now (Performance
+          issue)<br />
+          - 10,000,000 combinations take around 7.1 seconds in the testing machine
+        </i> -->
       </v-card-text>
     </v-card>
   </div>
@@ -116,7 +118,7 @@ export default class OptimizerPage extends Vue {
     combination: {}
   } as OptimizationProfile;
 
-  combinations: EquipedHero[] = [];
+  result: EquipedHero[] = [];
   selectedCombination = {} as Gear2.GearCombination;
   progress = 0;
   //
@@ -146,7 +148,7 @@ export default class OptimizerPage extends Vue {
 
   async optimize() {
     console.log('optimize::start');
-    this.combinations.splice(0, this.combinations.length);
+    this.result.splice(0, this.result.length);
     this.worker.postMessage({
       action: 'optimize',
       store: this.gearStore,
@@ -161,24 +163,24 @@ export default class OptimizerPage extends Vue {
     this.profile.stat = {
       hp: {},
       def: {},
-      atk: { min: 3500 },
-      cri: { min: 96, max: 110 },
-      cdmg: { min: 270, max: 360 },
-      spd: { min: 218 },
+      atk: {}, // { min: 3500 },
+      cri: { max: 110 }, // min: 96,
+      cdmg: { max: 360 }, // min: 270,
+      spd: {}, // min: 218
       eff: {},
       res: {},
       ehp: {},
       damage: {}
     };
     this.profile.combination = {
-      forcedSets: [Gear.Set.Speed, Gear.Set.Critical]
+      forcedSets: [] // [Gear.Set.Speed, Gear.Set.Critical]
     };
   }
 
   clickRow(item: EquipedHero, e: any) {
     console.log('clickRow::item =', item);
     console.log('clickRow::e =', e);
-    // e.select();
+    e.select();
     this.selectedCombination = item.combination;
   }
 
@@ -188,7 +190,7 @@ export default class OptimizerPage extends Vue {
     this.worker.onmessage = e => {
       console.log('worker::onmessage::action =', e.data.action);
       if (e.data.action == 'optimize-result') {
-        this.combinations = e.data.result;
+        this.result = e.data.result;
       } else if (e.data.action == 'progress') {
         this.progress = e.data.result;
       }
