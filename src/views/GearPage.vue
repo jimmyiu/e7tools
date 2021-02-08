@@ -4,7 +4,7 @@
       <v-col>
         <gear-table-filter v-model="filter" />
         <v-divider class="mt-1" />
-        <gear-table :gears="filteredGears" @delete-gear="deleteGear" @edit-gear="editGear" />
+        <gear-table :gears="filteredGears" @edit-gear="editGear" />
       </v-col>
     </v-row>
     <!-- <v-row>
@@ -36,12 +36,11 @@ import { Gear } from '@/models';
   name: 'gear-page',
   components: { GearDetail, GearFormCard, GearTable, GearTableFilter },
   computed: { ...mapState(['gears']), ...mapGetters(['getGearMap']) },
-  methods: mapActions(['updateGear', 'deleteGear'])
+  methods: mapActions(['updateGear'])
 })
 export default class GearPage extends Vue {
   readonly getGearMap!: Map<string, Gear.Gear>;
   updateGear!: (gear: Gear.Gear) => void;
-  deleteGear!: (gear: Gear.Gear) => void;
 
   gears!: Gear.Gear[];
   gearToBeEdited?: Gear.Gear = undefined;
