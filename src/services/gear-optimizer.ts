@@ -1,4 +1,4 @@
-import { Gear, Gear2, HeroAbility, EquipedHero, OptimizationProfile } from '@/models';
+import { Gear, HeroAbility, EquipedHero, OptimizationProfile } from '@/models';
 import GearCombinationService from './gear-combination-service';
 
 export interface IGearOptimizer {
@@ -10,9 +10,9 @@ export interface IGearOptimizer {
 }
 
 export class DefaultGearOptimizer implements IGearOptimizer {
-  static COMBINATION_HARD_LIMIT = 1000000;
+  static COMBINATION_HARD_LIMIT = 10000000;
   // static COMBINATION_HARD_LIMIT = 10;
-  static OPTIMIZE_RESULT_LIMIT = 30000;
+  static OPTIMIZE_RESULT_LIMIT = 50000;
   static REPORT_PROGRESS_COUNT = DefaultGearOptimizer.COMBINATION_HARD_LIMIT / 10;
 
   constructor(
@@ -48,7 +48,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
 
   combinationFilter() {
     if (this.profile.combination.forcedSets.length == 0) {
-      return (sets: Gear2.GearCombinationBuilder, emptySlot: number) => true;
+      return (sets: Gear.GearCombinationBuilder, emptySlot: number) => true;
     }
     const target: any = {};
     // TODO: currently assumed input sets is make sense
@@ -65,35 +65,49 @@ export class DefaultGearOptimizer implements IGearOptimizer {
           break;
       }
     }
-    return (builder: Gear2.GearCombinationBuilder, emptySlot: number) => {
+    return (builder: Gear.GearCombinationBuilder, emptySlot: number) => {
       return builder._sets.isPossible(target, emptySlot);
     };
   }
 
   equipedHeroFilter() {
-    // type Filter = (ability: HeroAbility) => boolean;
-
+    let hpMin = this.minFilter(Gear.Stat.HP.value);
+    let hpMax = this.maxFilter(Gear.Stat.HP.value);
+    let defMin = this.minFilter(Gear.Stat.DEF.value);
+    let defMax = this.maxFilter(Gear.Stat.DEF.value);
     let atkMin = this.minFilter(Gear.Stat.ATK.value);
     let atkMax = this.maxFilter(Gear.Stat.ATK.value);
-    let spdMin = this.minFilter(Gear.Stat.SPD.value);
     let criMin = this.minFilter(Gear.Stat.CRI.value);
     let criMax = this.maxFilter(Gear.Stat.CRI.value);
-
     let cdmgMin = this.minFilter(Gear.Stat.CDMG.value);
     let cdmgMax = this.maxFilter(Gear.Stat.CDMG.value);
-
+    let spdMin = this.minFilter(Gear.Stat.SPD.value);
+    let spdMax = this.maxFilter(Gear.Stat.SPD.value);
+    let effMin = this.minFilter(Gear.Stat.EFF.value);
+    let effMax = this.maxFilter(Gear.Stat.EFF.value);
+    let resMin = this.minFilter(Gear.Stat.RES.value);
+    let resMax = this.maxFilter(Gear.Stat.RES.value);
     let ehpMin = this.minFilter('ehp');
     let damageMin = this.minFilter('damage');
 
     return (hero: EquipedHero) => {
       return (
         spdMin(hero) &&
+        spdMax(hero) &&
         criMin(hero) &&
         criMax(hero) &&
+        hpMin(hero) &&
+        hpMax(hero) &&
+        defMin(hero) &&
+        defMax(hero) &&
         atkMin(hero) &&
         atkMax(hero) &&
         cdmgMin(hero) &&
         cdmgMax(hero) &&
+        effMin(hero) &&
+        effMax(hero) &&
+        resMin(hero) &&
+        resMax(hero) &&
         ehpMin(hero) &&
         damageMin(hero)
       );
@@ -104,7 +118,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
     let actualCount = 0;
     let count = 0;
     const result: EquipedHero[] = [];
-    const builder = new Gear2.GearCombinationBuilder();
+    const builder = new Gear.GearCombinationBuilder();
     const equipedHeroFilter = this.equipedHeroFilter();
     const combinationFilter = this.combinationFilter();
     for (let i1 = 0, n1 = this.store.weapons.length; i1 < n1; i1++) {
@@ -136,7 +150,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
                 }
 
                 // let combination = builder.build();
-                const equipedHero = GearCombinationService.apply(builder.build(), this.profile.hero);
+                const equipedHero = GearCombinationService.apply(builder.build(count), this.profile.hero);
                 if (equipedHeroFilter(equipedHero)) {
                   result.push(equipedHero);
                   if (result.length >= DefaultGearOptimizer.OPTIMIZE_RESULT_LIMIT) {

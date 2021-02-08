@@ -98,7 +98,7 @@ import GearStatRangeService from '@/services/gear-stat-range-service';
  * This is a gear form, it takes a gear for edit (undefined for create) and returns a gear object
  */
 @Component({
-  name: 'gear-form',
+  name: 'gear-form-card',
   components: {
     GearFormStatSelect,
     GearSetIcon,
@@ -109,7 +109,7 @@ import GearStatRangeService from '@/services/gear-stat-range-service';
   },
   computed: {}
 })
-export default class GearForm extends Vue {
+export default class GearFormCard extends Vue {
   @Prop({ type: Gear.Gear, required: false, default: undefined }) readonly gear!: Gear.Gear;
 
   form = this.defaultForm();
@@ -155,14 +155,14 @@ export default class GearForm extends Vue {
   //   }
   // }
 
-  defaultForm() {
+  defaultForm(): Gear.GearInputForm {
     const defaultInputStats = Array<Gear.StatInput>();
     while (defaultInputStats.length < 5) {
       defaultInputStats.push({ stat: undefined, value: 0 });
     }
     return {
-      type: Gear.Type.Weapon,
-      set: Gear.Set.Speed,
+      // type: Gear.Type.Weapon,
+      // set: Gear.Set.Speed,
       grade: Gear.Grade.EPIC,
       level: 6,
       enhance: 15,
@@ -211,15 +211,23 @@ export default class GearForm extends Vue {
     }
   }
 
-  @Emit('input')
   submit() {
-    let gear = this.gear ? new Gear.Gear(this.gear.id) : new Gear.Gear();
+    if (!this.form.set || !this.form.type || !this.form.statInputs[0].stat) {
+      console.log('submit::TODO: show validation message');
+      return;
+    }
+    // let gear = this.gear ? new Gear.Gear(this.gear.id) : new Gear.Gear();
+    let gear = new Gear.Gear(
+      this.gear ? this.gear.id : undefined,
+      this.form.type,
+      this.form.set,
+      this.form.grade,
+      this.levelTicks[this.form.level],
+      this.form.enhance,
+      this.form.statInputs[0].stat
+    );
     gear.set = this.form.set;
     gear.type = this.form.type;
-    gear.grade = this.form.grade;
-    gear.level = this.levelTicks[this.form.level];
-    gear.enhance = this.form.enhance;
-    gear.main = this.form.statInputs[0].stat;
     for (let i = 0; i < this.form.statInputs.length; i++) {
       if (this.form.statInputs[i].stat && this.form.statInputs[i].value > 0) {
         Vue.set(gear, this.form.statInputs[i].stat!.value, this.form.statInputs[i].value);
@@ -227,7 +235,7 @@ export default class GearForm extends Vue {
     }
     GearService.assignScore(gear);
     console.log('submit::gear =', gear);
-    return gear;
+    this.$emit('input', gear);
   }
 }
 </script>

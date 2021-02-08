@@ -27,8 +27,11 @@
       {{ item.main.label }}
     </template>
     <template v-slot:item.action="{ item }">
+      <v-btn icon small @click="lockGear(item)">
+        <v-icon small>{{ item.locked ? 'lock' : 'lock_open' }}</v-icon>
+      </v-btn>
       <v-btn icon small @click="editGear(item)"><v-icon small>mdi-pencil</v-icon></v-btn>
-      <v-btn icon small @click="deleteGear(item)"><v-icon small>mdi-delete</v-icon></v-btn>
+      <v-btn icon small @click="confirmDelete(item)"><v-icon small>mdi-delete</v-icon></v-btn>
     </template>
     <template v-slot:body.prepend="{ headers }">
       <tr class="hidden-xs-only">
@@ -54,15 +57,24 @@ import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { Gear } from '@/models';
 import GearService from '@/services/gear-service';
 import { GearSetIcon, GearTypeIcon } from './common';
+import { mapActions } from 'vuex';
 
 @Component({
   name: 'gear-table',
-  components: { GearSetIcon, GearTypeIcon }
+  components: { GearSetIcon, GearTypeIcon },
+  methods: mapActions(['updateGear', 'deleteGear'])
 })
 export default class GearTable extends Vue {
+  updateGear!: (gear: Gear.Gear) => void;
+  deleteGear!: (gear: Gear.Gear) => void;
+
   @Prop() readonly item!: any;
   @Prop() readonly gears!: Gear.Gear[];
-  filter = new Gear.Gear();
+  filter: Gear.GearAbility & Gear.GearScore = {
+    score: 0,
+    offScore: 0,
+    defScore: 0
+  };
 
   get filteredGears() {
     return this.gears.filter(x => {
@@ -78,9 +90,9 @@ export default class GearTable extends Vue {
         (x.spd || 0) >= (this.filter.spd || 0) &&
         (x.eff || 0) >= (this.filter.eff || 0) &&
         (x.res || 0) >= (this.filter.res || 0) &&
-        (x.score || 0) >= (this.filter.score || 0) &&
-        (x.offScore || 0) >= (this.filter.offScore || 0) &&
-        (x.defScore || 0) >= (this.filter.defScore || 0)
+        x.score >= this.filter.score &&
+        x.offScore >= this.filter.offScore &&
+        x.defScore >= this.filter.defScore
       );
     });
   }
@@ -111,7 +123,7 @@ export default class GearTable extends Vue {
     this.getHeader({ text: 'SCORE', value: 'score' }),
     this.getHeader({ text: 'OFF', value: 'offScore' }),
     this.getHeader({ text: 'DEF', value: 'defScore' }),
-    this.getHeader({ text: '', value: 'action', width: '80px' })
+    this.getHeader({ text: '', value: 'action', width: '100px' })
   ];
 
   getHeader(obj: any): any {
@@ -121,14 +133,20 @@ export default class GearTable extends Vue {
     };
   }
 
-  @Emit()
-  deleteGear(gear: Gear.Gear) {
-    return gear.id;
+  lockGear(gear: Gear.Gear) {
+    gear.locked = !gear.locked;
+    this.updateGear(gear);
   }
 
   @Emit()
   editGear(gear: Gear.Gear) {
     return gear.id;
+  }
+
+  confirmDelete(gear: Gear.Gear) {
+    if (window.confirm(`Are you sure to delete the gear with type = ${gear.type} and set = ${gear.set}?`)) {
+      this.deleteGear(gear);
+    }
   }
 }
 </script>

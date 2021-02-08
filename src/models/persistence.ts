@@ -1,8 +1,11 @@
 import { Gear } from './gear';
 import { Hero } from './hero';
 
-export type VuexData = {
+export type PersistentData = {
   version: string;
+};
+
+export type VuexData = PersistentData & {
   gears: Array<Gear.Gear>;
 };
 

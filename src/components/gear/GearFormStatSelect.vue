@@ -39,7 +39,7 @@ export default class GearFormStatSelect extends Vue {
     Ring: [3, 3, 3, 3, 3, 3, 1, 1, 1, 3, 3],
     Boot: [3, 3, 3, 3, 3, 3, 1, 1, 3, 1, 1]
   };
-  @Prop() readonly type!: Gear.Type;
+  @Prop() readonly type!: Gear.Type | undefined;
   @Prop() readonly value!: Gear.StatInput[];
   btns = Array<StatBtnConfig>();
 
@@ -73,8 +73,14 @@ export default class GearFormStatSelect extends Vue {
   }
 
   @Watch('type', { immediate: false, deep: true })
-  onTypeChanged(type: Gear.Type) {
-    console.log('onTypeChanged::start');
+  onTypeChanged(type?: Gear.Type) {
+    console.log('onTypeChanged::start, type =', type);
+    if (type == undefined) {
+      for (let i = 0; i < this.ALL_STATS.length; i++) {
+        this.btns[i].main = this.btns[i].sub = false;
+      }
+      return;
+    }
     let typeConfig = this.SELECTION_CONFIG[type];
     for (let i = 0; i < this.ALL_STATS.length; i++) {
       this.btns[i].main = (typeConfig[i] & 2) > 0;

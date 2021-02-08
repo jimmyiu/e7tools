@@ -31,6 +31,8 @@ class GearStatRangeService {
         return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70][enhance - 1];
       } else if (stat.value == Gear.Stat.SPD.value) {
         return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45][enhance - 1];
+      } else if (stat.value == Gear.Stat.ATK.value) {
+        return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 525][enhance - 1];
       }
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65][enhance - 1];
     } else if (level < 75) {
@@ -72,7 +74,9 @@ class GearStatRangeService {
   }
 
   private getArmorMain(level: number, enhance: number) {
-    if (level == 85) {
+    if (level == 90) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 310][enhance - 1];
+    } else if (level == 85) {
       return [0, 0, 0, 0, 0, 132, 144, 0, 168, 0, 0, 0, 0, 0, 300][enhance - 1];
     } else if (level == 75) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 275][enhance - 1];

@@ -63,13 +63,15 @@ const STAT_MAPPING: ReadonlyMap<number, Gear.Stat> = new Map([
 class ImportService {
   convert(item: any): Gear.Gear {
     let gear: ImportGear = item;
-    let result = new Gear.Gear(`i-${gear.ID}`);
-    result.type = TYPE_MAPPING.get(gear.Type);
-    result.set = SET_MAPPING.get(gear.Set);
-    result.grade = GRADE_MAPPING.get(gear.Grade);
-    result.level = gear.Ilvl;
-    result.enhance = gear.Enhance;
-    result.main = STAT_MAPPING.get(gear.Main.Name);
+    let result = new Gear.Gear(
+      `i-${gear.ID}`,
+      TYPE_MAPPING.get(gear.Type)!,
+      SET_MAPPING.get(gear.Set)!,
+      GRADE_MAPPING.get(gear.Grade)!,
+      gear.Ilvl,
+      gear.Enhance,
+      STAT_MAPPING.get(gear.Main.Name)!
+    );
     [gear.Main, ...gear.SubStats].forEach(it => {
       let stat = STAT_MAPPING.get(it.Name);
       if (stat != undefined) {

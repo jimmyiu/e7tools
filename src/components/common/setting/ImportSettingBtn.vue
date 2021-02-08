@@ -25,6 +25,8 @@
 </template>
 <script lang="ts">
 import { Constants } from '@/models';
+import { PersistentData } from '@/models/persistence';
+import { DataConverterFactory } from '@/services/data-converter';
 import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
 
 @Component({
@@ -35,9 +37,16 @@ export default class ImportSettingBtn extends Vue {
   data: string = '';
 
   importData() {
-    localStorage.clear();
-    localStorage.setItem(Constants.KEY_VUEXDATA, this.data);
-    this.$router.go(0);
+    // localStorage.clear();
+    const importData = JSON.parse(this.data) as PersistentData;
+    console.log('importData::data.version =', importData.version);
+    if (importData.version == Constants.CURRENT_PERSISTENT_DATA_VERSION) {
+      localStorage.setItem(Constants.KEY_VUEXDATA, this.data);
+      this.$router.go(0);
+    } else {
+      console.log('importData::data conversion starts');
+      const result = DataConverterFactory.getDataConverter(importData.version).convert(importData);
+    }
   }
 }
 </script>
