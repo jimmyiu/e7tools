@@ -97,15 +97,8 @@ export namespace Gear {
   };
 
   export class Gear implements GearAbility, GearScore {
-    static NONE: Gear = new Gear(undefined, Grade.EPIC, 85, 15, Stat.HP);
+    static NONE: Gear = new Gear(undefined, Type.Armor, Set.Speed, Grade.EPIC, 85, 15, Stat.HP);
 
-    type?: Type;
-    set?: Set;
-    // grade: Grade;
-    // level: number;
-    // enhance: number;
-    // main: Stat;
-    // stats
     hpp?: number;
     hp?: number;
     defp?: number;
@@ -121,11 +114,16 @@ export namespace Gear {
     score: number = 0;
     offScore: number = 0;
     defScore: number = 0;
+    // v0.2.0
+    locked: boolean = false;
+    equiped: boolean = false;
 
     public constructor(
       public readonly id: string = Math.random()
         .toString(20)
         .substr(2, 10),
+      public type: Type,
+      public set: Set,
       public grade: Grade,
       public level: number,
       public enhance: number,
@@ -183,7 +181,7 @@ export namespace Gear {
     }
 
     static clone(gear: Gear): Gear {
-      let result = new Gear(undefined, gear.grade, gear.level, gear.enhance, gear.main);
+      let result = new Gear(undefined, gear.type, gear.set, gear.grade, gear.level, gear.enhance, gear.main);
       Object.assign(result, gear);
       return result;
     }
@@ -349,16 +347,18 @@ export namespace Gear {
     Injury = 0;
     Penetration = 0;
 
-    change(to: Set, from?: Set) {
+    constructor(defaultGears: Gear.Gear[]) {
+      for (let i = 0; i < defaultGears.length; i++) {
+        (this as any)[defaultGears[i].set] += 1;
+      }
+    }
+
+    change(to: Set, from: Set) {
       if (from == to) {
         return;
       }
-      if (from != undefined) {
-        (this as any)[from] -= 1;
-        // this.updateValue(from, -1);
-      }
+      (this as any)[from] -= 1;
       (this as any)[to] += 1;
-      // this.updateValue(to, 1);
     }
 
     isPossible(target: any, emptySlot: number) {
@@ -373,7 +373,6 @@ export namespace Gear {
         //   (this as any)[set]
         // );
         // console.log('isPossible::result = ', target[set] <= (this as any)[set]);
-        //
         if (target[set] > (this as any)[set] + emptySlot) {
           return false;
         }
@@ -439,39 +438,6 @@ export namespace Gear {
       }
       return result;
     }
-
-    private determineSetsExtraAbility(sets: Set[]) {
-      const result: Gear.SetAbility = {
-        hpp: 0,
-        defp: 0,
-        atkp: 0,
-        cri: 0,
-        cdmg: 0,
-        spdp: 0,
-        eff: 0,
-        res: 0
-      };
-      for (let i = 0; i < sets.length; i++) {
-        if (sets[i] == Set.Health) {
-          result.hpp += 12;
-        } else if (sets[i] == Set.Defense) {
-          result.defp += 12;
-        } else if (sets[i] == Set.Attack) {
-          result.atkp += 35;
-        } else if (sets[i] == Set.Critical) {
-          result.cri += 12;
-        } else if (sets[i] == Set.Destruction) {
-          result.cdmg += 40;
-        } else if (sets[i] == Set.Speed) {
-          result.spdp += 25;
-        } else if (sets[i] == Set.Hit) {
-          result.eff += 12;
-        } else if (sets[i] == Set.Resist) {
-          result.res += 12;
-        }
-      }
-      return result;
-    }
   }
 
   export class GearCombinationBuilder {
@@ -494,7 +460,7 @@ export namespace Gear {
       eff: 0,
       res: 0
     };
-    _sets = new SetCalculator();
+    _sets = new SetCalculator([this._weapon, this._helmet, this._armor, this._necklace, this._ring, this._boot]);
 
     constructor() { }
     weapon(weapon: Gear) {

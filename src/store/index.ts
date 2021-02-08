@@ -36,7 +36,6 @@ export default new Vuex.Store({
     },
     updateGears(state: any, value: Array<Gear.Gear>) {
       Vue.set(state, 'gears', value);
-      state.data.gears = value;
     },
     updateGear(state: any, value: Gear.Gear) {
       console.log('updateGear::value = ', value);
@@ -47,14 +46,12 @@ export default new Vuex.Store({
         // Object.assign(state.gears[index], value);
         state.gears.splice(index, 1, value);
       }
-      state.data.gears = state.gears;
     },
     deleteGear(state: any, value: Gear.Gear) {
       console.log('deleteGear::value = ', value);
       const index = state.gears.findIndex((x: Gear.Gear) => x.id == value.id);
       if (index >= 0) {
         state.gears.splice(index, 1);
-        state.data.gears = state.gears;
       }
     },
     setE7dbHeros(state: any, value: Hero[]) {
@@ -68,7 +65,9 @@ export default new Vuex.Store({
     restoreE7db(state: any, value: E7dbData) {
       Vue.set(state, 'e7db', value);
     },
-    persistData(state: any, value: VuexData) { },
+    persistData(state: any, value: VuexData) {
+      localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(value));
+    },
     persistE7db(state: any, value: E7dbData) {
       localStorage.setItem(Constants.KEY_E7DBDAYA, JSON.stringify(state.e7db));
     }
@@ -82,40 +81,45 @@ export default new Vuex.Store({
     },
     updateGears: ({ commit, state }, gears: Array<Gear.Gear>) => {
       commit('updateGears', gears);
-      localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(state.data));
+      state.data.gears = gears;
+      commit('persistData', state.data);
     },
     updateGear: ({ commit, state }, gear: Gear.Gear) => {
       commit('updateGear', gear);
-      localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(state.data));
+      state.data.gears = state.gears;
+      commit('persistData', state.data);
     },
     deleteGear: ({ commit, state }, gear: Gear.Gear) => {
       commit('deleteGear', gear);
-      localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(state.data));
+      state.data.gears = state.gears;
+      commit('persistData', state.data);
     },
 
     initVuex: ({ commit, dispatch }) => {
       console.log('initVuex::called');
       if (localStorage.getItem(Constants.KEY_VUEXDATA) != null) {
         let data = JSON.parse(localStorage.getItem(Constants.KEY_VUEXDATA)!!);
-        if (
-          data &&
-          (data as PersistentData).version &&
-          (data as PersistentData).version == Constants.CURRENT_PERSISTENT_DATA_VERSION
-        ) {
-          console.log('initVuex::data version matches');
+        if (data && (data as PersistentData).version) {
+          if ((data as PersistentData).version == Constants.CURRENT_PERSISTENT_DATA_VERSION) {
+            console.log('initVuex::data version matches');
+          } else {
+            console.log('initVuex::CAUTION! Data version does not match');
+            const result = DataUpgrader.upgrade(data);
+            console.log(result);
+            data = result;
+            commit('persistData', data);
+          }
           commit('restoreData', data);
           commit(
             'updateGears',
             (data.gears as Array<any>).map(x => {
-              const result = new Gear.Gear(x.id, x.grade, x.level, x.enhance, x.main);
+              const result = new Gear.Gear(x.type, x.set, x.id, x.grade, x.level, x.enhance, x.main);
               return Object.assign(result, x);
             })
           );
         } else {
           // TODO: alert if not match
-          console.log('initVuex::CAUTION! Data version does not match');
-          const result = DataUpgrader.upgrade(data);
-          console.log(result);
+          console.log('initVuex::CAUTION! invalid persistent data');
         }
       }
       if (localStorage.getItem(Constants.KEY_E7DBDAYA) != null) {

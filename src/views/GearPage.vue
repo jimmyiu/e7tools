@@ -94,11 +94,5 @@ export default class GearPage extends Vue {
     this.gearToBeEdited = undefined;
     this.visible.overlay = true;
   }
-  // deleteGearById(gearId: string) {
-  //   const gear = this.getGearMap.get(gearId);
-  //   if (gear) {
-  //     this.deleteGear(gear);
-  //   }
-  // }
 }
 </script>
