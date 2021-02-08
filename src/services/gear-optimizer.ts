@@ -1,4 +1,4 @@
-import { Gear, Gear2, HeroAbility, EquipedHero, OptimizationProfile } from '@/models';
+import { Gear, HeroAbility, EquipedHero, OptimizationProfile } from '@/models';
 import GearCombinationService from './gear-combination-service';
 
 export interface IGearOptimizer {
@@ -48,7 +48,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
 
   combinationFilter() {
     if (this.profile.combination.forcedSets.length == 0) {
-      return (sets: Gear2.GearCombinationBuilder, emptySlot: number) => true;
+      return (sets: Gear.GearCombinationBuilder, emptySlot: number) => true;
     }
     const target: any = {};
     // TODO: currently assumed input sets is make sense
@@ -65,7 +65,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
           break;
       }
     }
-    return (builder: Gear2.GearCombinationBuilder, emptySlot: number) => {
+    return (builder: Gear.GearCombinationBuilder, emptySlot: number) => {
       return builder._sets.isPossible(target, emptySlot);
     };
   }
@@ -118,7 +118,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
     let actualCount = 0;
     let count = 0;
     const result: EquipedHero[] = [];
-    const builder = new Gear2.GearCombinationBuilder();
+    const builder = new Gear.GearCombinationBuilder();
     const equipedHeroFilter = this.equipedHeroFilter();
     const combinationFilter = this.combinationFilter();
     for (let i1 = 0, n1 = this.store.weapons.length; i1 < n1; i1++) {

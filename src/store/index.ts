@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { Gear, Constants, Hero } from '@/models';
-import { E7dbData, VuexData } from '@/models/persistence';
+import { E7dbData, PersistentData, VuexData } from '@/models/persistence';
 import E7dbDataHandler from '@/services/e7db-data-handler';
+import { DataUpgrader } from '@/services/data-converter';
 
 const DATA_VERSION = '0.1.0';
 Vue.use(Vuex);
@@ -48,6 +49,14 @@ export default new Vuex.Store({
       }
       state.data.gears = state.gears;
     },
+    deleteGear(state: any, value: Gear.Gear) {
+      console.log('deleteGear::value = ', value);
+      const index = state.gears.findIndex((x: Gear.Gear) => x.id == value.id);
+      if (index >= 0) {
+        state.gears.splice(index, 1);
+        state.data.gears = state.gears;
+      }
+    },
     setE7dbHeros(state: any, value: Hero[]) {
       state.e7db.date = Date.now();
       state.e7db.heros = value;
@@ -79,21 +88,34 @@ export default new Vuex.Store({
       commit('updateGear', gear);
       localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(state.data));
     },
+    deleteGear: ({ commit, state }, gear: Gear.Gear) => {
+      commit('deleteGear', gear);
+      localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(state.data));
+    },
 
     initVuex: ({ commit, dispatch }) => {
       console.log('initVuex::called');
       if (localStorage.getItem(Constants.KEY_VUEXDATA) != null) {
         let data = JSON.parse(localStorage.getItem(Constants.KEY_VUEXDATA)!!);
-        if (data && (data as VuexData).version && (data as VuexData).version == DATA_VERSION) {
+        if (
+          data &&
+          (data as PersistentData).version &&
+          (data as PersistentData).version == Constants.CURRENT_PERSISTENT_DATA_VERSION
+        ) {
           console.log('initVuex::data version matches');
           commit('restoreData', data);
           commit(
             'updateGears',
-            (data.gears as Array<any>).map(x => Object.assign(new Gear.Gear(''), x))
+            (data.gears as Array<any>).map(x => {
+              const result = new Gear.Gear(x.id, x.grade, x.level, x.enhance, x.main);
+              return Object.assign(result, x);
+            })
           );
         } else {
           // TODO: alert if not match
           console.log('initVuex::CAUTION! Data version does not match');
+          const result = DataUpgrader.upgrade(data);
+          console.log(result);
         }
       }
       if (localStorage.getItem(Constants.KEY_E7DBDAYA) != null) {

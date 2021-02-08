@@ -1,4 +1,4 @@
-// import { Gear, Gear2, HeroAbility, EquipedHero, OptimizationProfile } from '@/models';
+// import { Gear, HeroAbility, EquipedHero, OptimizationProfile } from '@/models';
 // import GearCombinationService from './gear-combination-service';
 
 // export interface IGearOptimizer {
@@ -125,7 +125,7 @@
 //   performOptimizeBak(): EquipedHero[] {
 //     let count = 0;
 //     const result: EquipedHero[] = [];
-//     const builder = new Gear2.GearCombinationBuilder2();
+//     const builder = new Gear.GearCombinationBuilder2();
 //     const filter = this.heroAbilityFilter();
 //     for (let i1 = 0; i1 < this.store.weapons.length; i1++) {
 //       builder.weapon(this.store.weapons[i1]);
@@ -197,7 +197,7 @@
 //     let actualCount = 0;
 //     let count = 0;
 //     const result: EquipedHero[] = [];
-//     const builder = new Gear2.GearCombinationBuilder();
+//     const builder = new Gear.GearCombinationBuilder();
 //     const filter = this.heroAbilityFilter();
 //     for (let i1 = 0, n1 = this.store.weapons.length; i1 < n1; i1++) {
 //       builder.weapon(this.store.weapons[i1]);

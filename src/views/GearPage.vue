@@ -4,7 +4,7 @@
       <v-col>
         <gear-table-filter v-model="filter" />
         <v-divider class="mt-1" />
-        <gear-table :gears="filteredGears" @edit-gear="editGear" />
+        <gear-table :gears="filteredGears" @delete-gear="deleteGear" @edit-gear="editGear" />
       </v-col>
     </v-row>
     <!-- <v-row>
@@ -14,7 +14,12 @@
     </v-row> -->
     <v-btn bottom fab fixed right @click="createGear"><v-icon>mdi-plus</v-icon></v-btn>
     <v-bottom-sheet v-model="visible.overlay" scrollable>
-      <gear-form v-if="visible.overlay" :gear="gearToBeEdited" @close="visible.overlay = false" @input="inputGear" />
+      <gear-form-card
+        v-if="visible.overlay"
+        :gear="gearToBeEdited"
+        @close="visible.overlay = false"
+        @input="inputGear"
+      />
     </v-bottom-sheet>
     <v-snackbar v-model="visible.completeMsg" color="success" rounded="pill" timeout="1500" top>
       <div class="text-center">A gear is updated</div>
@@ -24,18 +29,19 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { mapState, mapActions, mapGetters } from 'vuex';
-import { GearDetail, GearForm, GearTable, GearTableFilter } from '@/components';
+import { GearDetail, GearFormCard, GearTable, GearTableFilter } from '@/components';
 import { Gear } from '@/models';
 
 @Component({
   name: 'gear-page',
-  components: { GearDetail, GearForm, GearTable, GearTableFilter },
+  components: { GearDetail, GearFormCard, GearTable, GearTableFilter },
   computed: { ...mapState(['gears']), ...mapGetters(['getGearMap']) },
-  methods: { ...mapActions(['updateGear']) }
+  methods: mapActions(['updateGear', 'deleteGear'])
 })
 export default class GearPage extends Vue {
   readonly getGearMap!: Map<string, Gear.Gear>;
-  updateGear!: (a: Gear.Gear) => void;
+  updateGear!: (gear: Gear.Gear) => void;
+  deleteGear!: (gear: Gear.Gear) => void;
 
   gears!: Gear.Gear[];
   gearToBeEdited?: Gear.Gear = undefined;
@@ -88,5 +94,11 @@ export default class GearPage extends Vue {
     this.gearToBeEdited = undefined;
     this.visible.overlay = true;
   }
+  // deleteGearById(gearId: string) {
+  //   const gear = this.getGearMap.get(gearId);
+  //   if (gear) {
+  //     this.deleteGear(gear);
+  //   }
+  // }
 }
 </script>

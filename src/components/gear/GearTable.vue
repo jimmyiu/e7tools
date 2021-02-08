@@ -62,7 +62,11 @@ import { GearSetIcon, GearTypeIcon } from './common';
 export default class GearTable extends Vue {
   @Prop() readonly item!: any;
   @Prop() readonly gears!: Gear.Gear[];
-  filter = new Gear.Gear();
+  filter: Gear.GearAbility & Gear.GearScore = {
+    score: 0,
+    offScore: 0,
+    defScore: 0
+  };
 
   get filteredGears() {
     return this.gears.filter(x => {
@@ -78,9 +82,9 @@ export default class GearTable extends Vue {
         (x.spd || 0) >= (this.filter.spd || 0) &&
         (x.eff || 0) >= (this.filter.eff || 0) &&
         (x.res || 0) >= (this.filter.res || 0) &&
-        (x.score || 0) >= (this.filter.score || 0) &&
-        (x.offScore || 0) >= (this.filter.offScore || 0) &&
-        (x.defScore || 0) >= (this.filter.defScore || 0)
+        x.score >= this.filter.score &&
+        x.offScore >= this.filter.offScore &&
+        x.defScore >= this.filter.defScore
       );
     });
   }
@@ -123,7 +127,7 @@ export default class GearTable extends Vue {
 
   @Emit()
   deleteGear(gear: Gear.Gear) {
-    return gear.id;
+    return gear;
   }
 
   @Emit()

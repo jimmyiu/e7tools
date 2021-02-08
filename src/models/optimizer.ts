@@ -1,4 +1,4 @@
-import { Gear, Gear2, Hero, Range } from '.';
+import { Gear, Hero, Range } from '.';
 
 export type OptimizationCombinationCriteria = {
   forcedSets: Gear.Set[];

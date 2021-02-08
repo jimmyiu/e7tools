@@ -92,7 +92,7 @@
 
 <script lang="ts">
 import { GearDetail, GearSetIcon, OptimizationProfiler } from '@/components';
-import { Constants, Gear, Gear2, EquipedHero, OptimizationProfile } from '@/models';
+import { Constants, Gear, EquipedHero, OptimizationProfile } from '@/models';
 import { E7dbData } from '@/models/persistence';
 import { DefaultGearOptimizer } from '@/services/gear-optimizer';
 import GearFilterService from '@/services/gear-filter-service';
@@ -119,7 +119,7 @@ export default class OptimizerPage extends Vue {
   } as OptimizationProfile;
 
   result: EquipedHero[] = [];
-  selectedCombination = {} as Gear2.GearCombination;
+  selectedCombination = {} as Gear.GearCombination;
   progress = 0;
   //
   headers = [
