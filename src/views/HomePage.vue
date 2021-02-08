@@ -3,13 +3,13 @@
     <message-box title="Current Status">
       <p>This tool is under development</p>
       <ul>
-        <li>Gear Management feature is working, but definitely a lot of things have to improve</li>
+        <li>Gear Management & Gear Optimizer features are working, but definitely a lot of things have to improve</li>
         <li>
           Gears are presisted in localstorage, a simple import / export function is provided (may revise later)
         </li>
-        <li>Next target: Gear Optimizer</li>
+        <li>Next target: Add locked and equiped flag for Gear</li>
       </ul>
-      <br />2021-02-04
+      <br />2021-02-09
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -28,6 +28,7 @@
       </ol>
     </message-box>
     <message-box hide-default title="Progress">
+      [2021-02-08] complete basic optimizer<br />
       [2021-02-03] adopt web worker for optimizer calculation<br />
       [2021-02-02] start gear optimizer<br />
       [2021-02-01] complete edit gear<br />
