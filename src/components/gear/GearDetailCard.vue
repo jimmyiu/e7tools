@@ -24,6 +24,7 @@
             class="pl-1 caption align-self-center"
             cols="4"
           >
+            <!-- <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/${item.value}.png`)" /> -->
             {{ item.label }}:
           </v-col>
           <v-col

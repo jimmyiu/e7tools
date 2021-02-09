@@ -1,6 +1,27 @@
 <template>
   <div>
-    <v-card>
+    <v-card class="section">
+      <v-card-text>
+        <strong>Debug Panel</strong><br />
+        <span v-for="(item, key) in gearStore.distribution" :key="key">{{ key }} ({{ item }}), </span>
+        <!-- Filter: {{ filter }}, Criteria: {{ criteria }}<br /> -->
+        <!-- Distribution: {{ gearStore.distribution }}<br /> -->
+        <br />
+        Number of combinations: {{ gearStore.numOfCombinations | formatNumber }} (Hard limit:
+        {{ hardLimit | formatNumber }})<br />
+        Estimated processing time:
+        {{ Math.round(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber }}
+        minutes
+        <!-- <v-icon>help_outlined</v-icon> -->
+        <!-- <i>
+          Remark:<br />
+          - only first {{ hardLimit | formatNumber }} combinations will be evaluated now (Performance
+          issue)<br />
+          - 10,000,000 combinations take around 7.1 seconds in the testing machine
+        </i> -->
+      </v-card-text>
+    </v-card>
+    <v-card class="mt-2">
       <v-card-text>
         <optimization-profiler v-model="profile" />
       </v-card-text>
@@ -15,37 +36,35 @@
       </v-card-actions>
     </v-card>
 
-    <v-slide-x-transition>
-      <v-card class="mt-2">
-        <v-card-text>
-          <v-row>
-            <v-col cols="6" lg="2" sm="2">
-              <gear-detail-card :gear="selectedCombination.weapon" />
-            </v-col>
-            <v-col cols="6" lg="2" sm="2">
-              <gear-detail-card :gear="selectedCombination.helmet" />
-            </v-col>
-            <v-col cols="6" lg="2" sm="2">
-              <gear-detail-card :gear="selectedCombination.armor" />
-            </v-col>
-            <v-col cols="6" lg="2" sm="2">
-              <gear-detail-card :gear="selectedCombination.necklace" />
-            </v-col>
-            <v-col cols="6" lg="2" sm="2">
-              <gear-detail-card :gear="selectedCombination.ring" />
-            </v-col>
-            <v-col cols="6" lg="2" sm="2">
-              <gear-detail-card :gear="selectedCombination.boot" />
-            </v-col>
-          </v-row>
-        </v-card-text>
-        <v-divider />
-        <v-card-actions>
-          <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip All</v-btn>
-          <v-btn text @click="unequipAll">Unequip All</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-slide-x-transition>
+    <v-card class="mt-2">
+      <v-card-text>
+        <v-row>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.weapon" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.helmet" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.armor" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.necklace" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.ring" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.boot" />
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <v-divider />
+      <v-card-actions>
+        <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip All</v-btn>
+        <v-btn text @click="unequipAll">Unequip All</v-btn>
+      </v-card-actions>
+    </v-card>
 
     <v-card class="mt-2">
       <v-progress-linear v-if="progress > 0" height="20" striped>
@@ -76,27 +95,6 @@
             <!-- <gear-detail :gear="selectedCombination.weapon" /> -->
           </v-col>
         </v-row>
-      </v-card-text>
-    </v-card>
-    <v-card class="mt-2 section">
-      <v-card-text>
-        <strong>Debug Panel</strong><br />
-        <span v-for="(item, key) in gearStore.distribution" :key="key">{{ key }} ({{ item }}), </span>
-        <!-- Filter: {{ filter }}, Criteria: {{ criteria }}<br /> -->
-        <!-- Distribution: {{ gearStore.distribution }}<br /> -->
-        <br />
-        Number of combinations: {{ gearStore.numOfCombinations | formatNumber }} (Hard limit:
-        {{ hardLimit | formatNumber }})<br />
-        Estimated processing time:
-        {{ Math.round(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber }}
-        minutes
-        <!-- <v-icon>help_outlined</v-icon> -->
-        <!-- <i>
-          Remark:<br />
-          - only first {{ hardLimit | formatNumber }} combinations will be evaluated now (Performance
-          issue)<br />
-          - 10,000,000 combinations take around 7.1 seconds in the testing machine
-        </i> -->
       </v-card-text>
     </v-card>
   </div>
@@ -172,7 +170,9 @@ export default class OptimizerPage extends Vue {
   }
 
   reset() {
-    this.profile.hero = this.e7db.heros[4];
+    if (!this.profile.hero.id) {
+      this.profile.hero = this.e7db.heros[4];
+    }
     this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
     this.profile.stat = {
       hp: {},
