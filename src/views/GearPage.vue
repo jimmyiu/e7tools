@@ -29,12 +29,12 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { mapState, mapActions, mapGetters } from 'vuex';
-import { GearDetail, GearFormCard, GearTable, GearTableFilter } from '@/components';
+import { GearFormCard, GearTable, GearTableFilter } from '@/components';
 import { Gear } from '@/models';
 
 @Component({
   name: 'gear-page',
-  components: { GearDetail, GearFormCard, GearTable, GearTableFilter },
+  components: { GearFormCard, GearTable, GearTableFilter },
   computed: { ...mapState(['gears']), ...mapGetters(['getGearMap']) },
   methods: mapActions(['updateGear'])
 })

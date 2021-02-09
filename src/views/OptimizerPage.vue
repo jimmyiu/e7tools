@@ -1,72 +1,6 @@
 <template>
   <div>
-    <v-alert dense dismissible outlined type="warning">
-      This is still an experimental feature
-    </v-alert>
-    <v-card>
-      <v-card-text>
-        <optimization-profiler v-model="profile" />
-      </v-card-text>
-      <v-divider />
-      <!-- <v-card-text> Profile: {{ profile }} </v-card-text>
-      <v-divider /> -->
-      <v-card-actions>
-        <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
-        <!-- <v-btn class="font-weight-bold" color="success" text>Save</v-btn> -->
-        <v-btn text @click="reset">Reset</v-btn>
-        <!-- <v-btn class="font-weight-bold" color="warning" text @click="test">Test</v-btn> -->
-      </v-card-actions>
-    </v-card>
-
-    <v-card class="mt-2">
-      <v-progress-linear v-if="progress > 0" height="20" striped>
-        <strong>{{ progress }}%</strong>
-      </v-progress-linear>
-      <v-card-text>
-        <v-row>
-          <v-col cols="12">
-            <v-data-table
-              dense
-              :footer-props="{ showFirstLastPage: true }"
-              :headers="headers"
-              item-key="combination.id"
-              :items="result"
-              :items-per-page="15"
-              :multi-sort="false"
-              single-select
-              @click:row="clickRow"
-            >
-              <template v-slot:item.combination.sets="{ item }">
-                <div class="d-flex">
-                  <gear-set-icon v-for="(set, key) in item.combination.sets" :key="key" :set="set" small />
-                </div>
-              </template>
-            </v-data-table>
-          </v-col>
-        </v-row>
-        <v-row v-if="selectedCombination.weapon">
-          <v-col cols="6" lg="2" sm="4">
-            <gear-detail :gear="selectedCombination.weapon" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="4">
-            <gear-detail :gear="selectedCombination.helmet" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="4">
-            <gear-detail :gear="selectedCombination.armor" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="4">
-            <gear-detail :gear="selectedCombination.necklace" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="4">
-            <gear-detail :gear="selectedCombination.ring" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="4">
-            <gear-detail :gear="selectedCombination.boot" />
-          </v-col>
-        </v-row>
-      </v-card-text>
-    </v-card>
-    <v-card class="mt-2 section">
+    <v-card class="section">
       <v-card-text>
         <strong>Debug Panel</strong><br />
         <span v-for="(item, key) in gearStore.distribution" :key="key">{{ key }} ({{ item }}), </span>
@@ -87,27 +21,117 @@
         </i> -->
       </v-card-text>
     </v-card>
+    <v-card class="mt-2">
+      <v-card-text>
+        <optimization-profiler v-model="profile" />
+      </v-card-text>
+      <v-divider />
+      <!-- <v-card-text> Profile: {{ profile }} </v-card-text>
+      <v-divider /> -->
+      <v-card-actions>
+        <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
+        <v-btn text @click="reset">Reset</v-btn>
+        <v-divider class="mx-2" vertical />
+        <v-btn class="font-weight-bold" color="success" text @click="saveProfile">Save</v-btn>
+        <v-btn text @click="loadProfile">Load</v-btn>
+        <!-- <v-btn class="font-weight-bold" color="warning" text @click="test">Test</v-btn> -->
+        <v-divider class="mx-2" vertical />
+      </v-card-actions>
+    </v-card>
+
+    <v-card class="mt-2">
+      <v-card-text>
+        <v-row>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.weapon" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.helmet" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.armor" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.necklace" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.ring" />
+          </v-col>
+          <v-col cols="6" lg="2" sm="2">
+            <gear-detail-card :gear="selectedCombination.boot" />
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <v-divider />
+      <v-card-actions>
+        <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip All</v-btn>
+        <v-btn text @click="unequipAll">Unequip All</v-btn>
+      </v-card-actions>
+    </v-card>
+
+    <v-card class="mt-2">
+      <v-progress-linear v-if="progress > 0" height="20" striped>
+        <strong>{{ progress }}%</strong>
+      </v-progress-linear>
+      <v-card-text>
+        <v-row>
+          <v-col>
+            <v-data-table
+              dense
+              :footer-props="{ showFirstLastPage: true }"
+              :headers="headers"
+              item-key="combination.id"
+              :items="result"
+              :items-per-page="10"
+              :multi-sort="false"
+              single-select
+              @click:row="clickRow"
+            >
+              <template v-slot:item.combination.sets="{ item }">
+                <div class="d-flex">
+                  <gear-set-icon v-for="(set, key) in item.combination.sets" :key="key" :set="set" small />
+                </div>
+              </template>
+            </v-data-table>
+          </v-col>
+          <v-col cols="auto">
+            <!-- <gear-detail :gear="selectedCombination.weapon" /> -->
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+
+    <v-snackbar v-model="popupMsg" color="success" rounded="pill" timeout="1500" top>
+      <div class="text-center">{{ profile.hero.name }} profile saved</div>
+    </v-snackbar>
   </div>
 </template>
 
 <script lang="ts">
-import { GearDetail, GearSetIcon, OptimizationProfiler } from '@/components';
+import { GearDetailCard, GearSetIcon, OptimizationProfiler } from '@/components';
 import { Constants, Gear, EquipedHero, OptimizationProfile } from '@/models';
 import { E7dbData } from '@/models/persistence';
 import { DefaultGearOptimizer } from '@/services/gear-optimizer';
 import GearFilterService from '@/services/gear-filter-service';
 import { Vue, Component } from 'vue-property-decorator';
-import { mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 @Component({
   name: 'optimizer-page',
-  components: { GearDetail, GearSetIcon, OptimizationProfiler },
-  computed: { ...mapState(['gears', 'e7db']) }
+  components: { GearDetailCard, GearSetIcon, OptimizationProfiler },
+  computed: { ...mapState(['gears', 'e7db']), ...mapGetters(['getEquipped', 'getProfile']) },
+  methods: mapActions(['updateGear', 'updateProfiles'])
 })
 export default class OptimizerPage extends Vue {
   // vuex
   readonly gears!: Gear.Gear[];
   readonly e7db!: E7dbData;
+  updateGear!: (gear: Gear.Gear) => void;
+  updateProfiles!: (profiles: OptimizationProfile[]) => void;
+  getEquipped!: (heroId: string) => Gear.GearCombination;
+  getProfile!: (heroId: string) => OptimizationProfile | undefined;
+
+  // worker
   worker = new Worker('../workers/gear-optimizer-worker.ts', { type: 'module' });
   // models
   profile: OptimizationProfile = {
@@ -117,13 +141,13 @@ export default class OptimizerPage extends Vue {
     stat: {},
     combination: {}
   } as OptimizationProfile;
-
   result: EquipedHero[] = [];
   selectedCombination = {} as Gear.GearCombination;
   progress = 0;
+  popupMsg = 0;
   //
   headers = [
-    { text: 'Set', value: 'combination.sets' },
+    { text: 'Set', value: 'combination.sets', sortable: false },
     { text: 'HP', value: 'hp' },
     // { text: 'DEF %', value: 'ability.defp' },
     { text: 'DEF', value: 'def' },
@@ -157,8 +181,9 @@ export default class OptimizerPage extends Vue {
   }
 
   reset() {
-    // this.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
-    this.profile.hero = this.e7db.heros[4];
+    if (!this.profile.hero.id) {
+      this.profile.hero = this.e7db.heros[4];
+    }
     this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
     this.profile.stat = {
       hp: {},
@@ -175,6 +200,7 @@ export default class OptimizerPage extends Vue {
     this.profile.combination = {
       forcedSets: [] // [Gear.Set.Speed, Gear.Set.Critical]
     };
+    this.selectedCombination = this.getEquipped(this.profile.hero.id);
   }
 
   clickRow(item: EquipedHero, e: any) {
@@ -182,6 +208,52 @@ export default class OptimizerPage extends Vue {
     console.log('clickRow::e =', e);
     e.select();
     this.selectedCombination = item.combination;
+  }
+
+  equipAll() {
+    console.log('equipAll::hero =', this.profile.hero);
+    this.selectedCombination.weapon.equippedHero = this.profile.hero.id;
+    this.updateGear(this.selectedCombination.weapon);
+    this.selectedCombination.helmet.equippedHero = this.profile.hero.id;
+    this.updateGear(this.selectedCombination.helmet);
+    this.selectedCombination.armor.equippedHero = this.profile.hero.id;
+    this.updateGear(this.selectedCombination.armor);
+    this.selectedCombination.necklace.equippedHero = this.profile.hero.id;
+    this.updateGear(this.selectedCombination.necklace);
+    this.selectedCombination.ring.equippedHero = this.profile.hero.id;
+    this.updateGear(this.selectedCombination.ring);
+    this.selectedCombination.boot.equippedHero = this.profile.hero.id;
+    this.updateGear(this.selectedCombination.boot);
+  }
+
+  unequipAll() {
+    this.selectedCombination.weapon.equippedHero = '';
+    this.updateGear(this.selectedCombination.weapon);
+    this.selectedCombination.helmet.equippedHero = '';
+    this.updateGear(this.selectedCombination.helmet);
+    this.selectedCombination.armor.equippedHero = '';
+    this.updateGear(this.selectedCombination.armor);
+    this.selectedCombination.necklace.equippedHero = '';
+    this.updateGear(this.selectedCombination.necklace);
+    this.selectedCombination.ring.equippedHero = '';
+    this.updateGear(this.selectedCombination.ring);
+    this.selectedCombination.boot.equippedHero = '';
+    this.updateGear(this.selectedCombination.boot);
+  }
+
+  saveProfile() {
+    console.log('saveProfile::profile =', this.profile);
+    this.updateProfiles([this.profile]);
+    this.popupMsg = 1;
+  }
+
+  loadProfile() {
+    console.log('loadProfile::hero.id =', this.profile.hero.id);
+    const profile = this.getProfile(this.profile.hero.id);
+    console.log('loadProfile::profile =', this.getProfile(this.profile.hero.id));
+    if (profile) {
+      Object.assign(this.profile, profile);
+    }
   }
 
   created() {

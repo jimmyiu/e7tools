@@ -17,7 +17,9 @@ export const Constants = {
     enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
     necklaces: [], // [Gear.Stat.CDMG, Gear.Stat.ATKP, Gear.Stat.ATK],
     rings: [], // [Gear.Stat.ATKP, Gear.Stat.ATK],
-    boots: []
+    boots: [],
+    locked: false,
+    equipped: false
   } as Gear.GearFilter,
   //
   NECKLACE_STATS: [

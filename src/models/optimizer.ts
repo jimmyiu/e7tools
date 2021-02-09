@@ -4,20 +4,6 @@ export type OptimizationCombinationCriteria = {
   forcedSets: Gear.Set[];
 };
 
-// export interface OptimizerCriteria {
-//   hp: Range;
-//   def: Range;
-//   atk: Range;
-//   cri: Range;
-//   cdmg: Range;
-//   spd: Range;
-//   eff: Range;
-//   res: Range;
-//   ehp: Range;
-//   damage: Range;
-//   forcedSets: Gear.Set[];
-// }
-
 export type OptimizationStatCriteria = {
   hp: Range;
   def: Range;

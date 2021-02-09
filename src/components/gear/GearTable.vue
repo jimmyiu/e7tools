@@ -7,6 +7,11 @@
     :items-per-page="15"
     :multi-sort="false"
   >
+    <!-- header -->
+    <template v-slot:header.type="{ item }">
+      <div class="d-flex align-center" style="white-space:nowrap; max-width: 82px">hello {{ item }}</div>
+    </template>
+    <!-- item -->
     <template v-slot:item.type="{ item }">
       <div class="d-flex align-center" style="white-space:nowrap; max-width: 82px">
         <gear-type-icon small :type="item.type" />
@@ -27,11 +32,13 @@
       {{ item.main.label }}
     </template>
     <template v-slot:item.action="{ item }">
-      <v-btn icon small @click="lockGear(item)">
-        <v-icon small>{{ item.locked ? 'lock' : 'lock_open' }}</v-icon>
-      </v-btn>
-      <v-btn icon small @click="editGear(item)"><v-icon small>mdi-pencil</v-icon></v-btn>
-      <v-btn icon small @click="confirmDelete(item)"><v-icon small>mdi-delete</v-icon></v-btn>
+      <div style="white-space:nowrap;">
+        <v-btn icon small @click="lockGear(item)">
+          <v-icon small>{{ item.locked ? 'lock' : 'lock_open' }}</v-icon>
+        </v-btn>
+        <v-btn icon small @click="editGear(item)"><v-icon small>mdi-pencil</v-icon></v-btn>
+        <v-btn icon small @click="confirmDelete(item)"><v-icon small>mdi-delete</v-icon></v-btn>
+      </div>
     </template>
     <template v-slot:body.prepend="{ headers }">
       <tr class="hidden-xs-only">
@@ -57,14 +64,16 @@ import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { Gear } from '@/models';
 import GearService from '@/services/gear-service';
 import { GearSetIcon, GearTypeIcon } from './common';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 @Component({
   name: 'gear-table',
   components: { GearSetIcon, GearTypeIcon },
+  computed: { ...mapGetters(['getGearMap']) },
   methods: mapActions(['updateGear', 'deleteGear'])
 })
 export default class GearTable extends Vue {
+  readonly getGearMap!: Map<string, Gear.Gear>;
   updateGear!: (gear: Gear.Gear) => void;
   deleteGear!: (gear: Gear.Gear) => void;
 
@@ -134,8 +143,11 @@ export default class GearTable extends Vue {
   }
 
   lockGear(gear: Gear.Gear) {
-    gear.locked = !gear.locked;
-    this.updateGear(gear);
+    let lockGear = this.getGearMap.get(gear.id);
+    if (lockGear) {
+      lockGear.locked = !lockGear.locked;
+      this.updateGear(lockGear);
+    }
   }
 
   @Emit()

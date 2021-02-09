@@ -14,7 +14,8 @@ export class DataConverter_0_1_0 implements DataConverter {
     console.log('convert::past =', past);
     const result: VuexData = {
       version: this.TARGET_VERSION,
-      gears: []
+      gears: [],
+      profiles: []
     };
     for (let i = 0; i < past.gears.length; i++) {
       const pastGear = past.gears[i];
@@ -27,7 +28,10 @@ export class DataConverter_0_1_0 implements DataConverter {
         pastGear.enhance,
         pastGear.main
       );
-      result.gears.push(Object.assign(newGear, pastGear));
+      newGear = Object.assign(newGear, pastGear);
+      newGear.locked = false;
+      newGear.equippedHero = '';
+      result.gears.push(newGear);
     }
     console.log('convert::result =', result);
     return result;

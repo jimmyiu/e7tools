@@ -46,12 +46,14 @@
 
     <v-checkbox
       v-model="value.enhanceMode"
-      class="mr-3 mb-3 mt-0"
+      class="mr-3 my-0"
       dense
       hide-details
       label="+15 Only"
       :value="2"
     ></v-checkbox>
+    <v-checkbox v-model="value.locked" class="mr-3 my-0" dense hide-details label="Include Locked"></v-checkbox>
+    <v-checkbox v-model="value.equipped" class="mr-3 my-0" dense hide-details label="Include Equipped"></v-checkbox>
     <!-- class="justify-center" -->
     <!-- <v-checkbox
       v-model="value.allowBrokenSet"

@@ -54,21 +54,20 @@ class GearStatRangeService {
     } else if (level == 75) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 465][enhance - 1];
     } else if (level == 70) {
-      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][enhance - 1];
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 440][enhance - 1];
     }
     return 0;
   }
 
   private getHelmetMain(level: number, enhance: number) {
-    if (level == 85) {
-      switch (enhance) {
-        case 15:
-          return 2700;
-        case 12:
-          return 1944;
-        case 9:
-          return 1512;
-      }
+    if (level == 90) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][enhance - 1];
+    } else if (level == 85) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1944, 0, 0, 2700][enhance - 1];
+    } else if (level == 75) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2495][enhance - 1];
+    } else if (level == 70) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2360][enhance - 1];
     }
     return 0;
   }

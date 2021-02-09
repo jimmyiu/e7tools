@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
+import { Vue, Component, Model } from 'vue-property-decorator';
 import OptimizationCriteria from './OptimizationCriteria.vue';
 import OptimizationFilter from './OptimizationFilter.vue';
 import { Gear, OptimizationProfile } from '@/models';
@@ -59,7 +59,7 @@ import { mapState } from 'vuex';
 @Component({
   name: 'optimization-profiler',
   components: { OptimizationCriteria, OptimizationFilter },
-  computed: { ...mapState(['gears', 'e7db']) }
+  computed: { ...mapState(['e7db']) }
 })
 export default class OptimizationProfiler extends Vue {
   get sets() {
