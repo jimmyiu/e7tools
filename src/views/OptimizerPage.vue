@@ -30,9 +30,12 @@
       <v-divider /> -->
       <v-card-actions>
         <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
-        <!-- <v-btn class="font-weight-bold" color="success" text>Save</v-btn> -->
         <v-btn text @click="reset">Reset</v-btn>
+        <v-divider class="mx-2" vertical />
+        <v-btn class="font-weight-bold" color="success" text @click="saveProfile">Save</v-btn>
+        <v-btn text @click="loadProfile">Load</v-btn>
         <!-- <v-btn class="font-weight-bold" color="warning" text @click="test">Test</v-btn> -->
+        <v-divider class="mx-2" vertical />
       </v-card-actions>
     </v-card>
 
@@ -97,6 +100,10 @@
         </v-row>
       </v-card-text>
     </v-card>
+
+    <v-snackbar v-model="popupMsg" color="success" rounded="pill" timeout="1500" top>
+      <div class="text-center">{{ profile.hero.name }} profile saved</div>
+    </v-snackbar>
   </div>
 </template>
 
@@ -112,15 +119,18 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 @Component({
   name: 'optimizer-page',
   components: { GearDetailCard, GearSetIcon, OptimizationProfiler },
-  computed: { ...mapState(['gears', 'e7db']), ...mapGetters(['getEquipped']) },
-  methods: mapActions(['updateGear'])
+  computed: { ...mapState(['gears', 'e7db']), ...mapGetters(['getEquipped', 'getProfile']) },
+  methods: mapActions(['updateGear', 'updateProfiles'])
 })
 export default class OptimizerPage extends Vue {
   // vuex
   readonly gears!: Gear.Gear[];
   readonly e7db!: E7dbData;
   updateGear!: (gear: Gear.Gear) => void;
+  updateProfiles!: (profiles: OptimizationProfile[]) => void;
   getEquipped!: (heroId: string) => Gear.GearCombination;
+  getProfile!: (heroId: string) => OptimizationProfile | undefined;
+
   // worker
   worker = new Worker('../workers/gear-optimizer-worker.ts', { type: 'module' });
   // models
@@ -134,6 +144,7 @@ export default class OptimizerPage extends Vue {
   result: EquipedHero[] = [];
   selectedCombination = {} as Gear.GearCombination;
   progress = 0;
+  popupMsg = 0;
   //
   headers = [
     { text: 'Set', value: 'combination.sets', sortable: false },
@@ -228,6 +239,21 @@ export default class OptimizerPage extends Vue {
     this.updateGear(this.selectedCombination.ring);
     this.selectedCombination.boot.equippedHero = '';
     this.updateGear(this.selectedCombination.boot);
+  }
+
+  saveProfile() {
+    console.log('saveProfile::profile =', this.profile);
+    this.updateProfiles([this.profile]);
+    this.popupMsg = 1;
+  }
+
+  loadProfile() {
+    console.log('loadProfile::hero.id =', this.profile.hero.id);
+    const profile = this.getProfile(this.profile.hero.id);
+    console.log('loadProfile::profile =', this.getProfile(this.profile.hero.id));
+    if (profile) {
+      Object.assign(this.profile, profile);
+    }
   }
 
   created() {

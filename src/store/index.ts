@@ -1,11 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { Gear, Constants, Hero } from '@/models';
+import { Gear, Constants, Hero, OptimizationProfile } from '@/models';
 import { E7dbData, PersistentData, VuexData } from '@/models/persistence';
 import E7dbDataHandler from '@/services/e7db-data-handler';
 import { DataUpgrader } from '@/services/data-converter';
 
-const DATA_VERSION = '0.1.0';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -17,8 +16,9 @@ export default new Vuex.Store({
       heros: []
     } as E7dbData,
     data: {
-      version: DATA_VERSION,
-      gears: []
+      version: Constants.CURRENT_PERSISTENT_DATA_VERSION,
+      gears: [],
+      profiles: []
     } as VuexData
   },
   getters: {
@@ -33,6 +33,9 @@ export default new Vuex.Store({
       const builder = new Gear.GearCombinationBuilder();
       state.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
       return builder.build(-1);
+    },
+    getProfile: state => (heroId: string) => {
+      return state.data.profiles.find(x => x.hero.id == heroId);
     }
   },
   mutations: {
@@ -59,6 +62,16 @@ export default new Vuex.Store({
         state.gears.splice(index, 1);
       }
     },
+    saveProfile(state, profile: OptimizationProfile) {
+      if (profile.hero.id) {
+        const index = state.data.profiles.findIndex(x => x.hero.id == profile.hero.id);
+        if (index < 0) {
+          state.data.profiles.push(profile);
+        } else {
+          state.data.profiles.splice(index, 1, profile);
+        }
+      }
+    },
     setE7dbHeros(state: any, value: Hero[]) {
       state.e7db.date = Date.now();
       state.e7db.heros = value;
@@ -70,8 +83,8 @@ export default new Vuex.Store({
     restoreE7db(state: any, value: E7dbData) {
       Vue.set(state, 'e7db', value);
     },
-    persistData(state: any, value: VuexData) {
-      localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(value));
+    persistData(state: any) {
+      localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(state.data));
     },
     persistE7db(state: any, value: E7dbData) {
       localStorage.setItem(Constants.KEY_E7DBDAYA, JSON.stringify(state.e7db));
@@ -87,19 +100,24 @@ export default new Vuex.Store({
     updateGears: ({ commit, state }, gears: Array<Gear.Gear>) => {
       commit('updateGears', gears);
       state.data.gears = gears;
-      commit('persistData', state.data);
+      commit('persistData');
     },
     updateGear: ({ commit, state }, gear: Gear.Gear) => {
       commit('updateGear', gear);
       state.data.gears = state.gears;
-      commit('persistData', state.data);
+      commit('persistData');
     },
     deleteGear: ({ commit, state }, gear: Gear.Gear) => {
       commit('deleteGear', gear);
       state.data.gears = state.gears;
-      commit('persistData', state.data);
+      commit('persistData');
     },
-
+    // profiles
+    updateProfiles: ({ commit }, profiles: OptimizationProfile[]) => {
+      profiles.forEach(profile => commit('saveProfile', Object.assign({}, profile)));
+      commit('persistData');
+    },
+    // initialization
     initVuex: ({ commit, dispatch }) => {
       console.log('initVuex::called');
       if (localStorage.getItem(Constants.KEY_VUEXDATA) != null) {
@@ -107,14 +125,15 @@ export default new Vuex.Store({
         if (data && (data as PersistentData).version) {
           if ((data as PersistentData).version == Constants.CURRENT_PERSISTENT_DATA_VERSION) {
             console.log('initVuex::data version matches');
+            commit('restoreData', data);
           } else {
             console.log('initVuex::CAUTION! Data version does not match');
             const result = DataUpgrader.upgrade(data);
             console.log(result);
             data = result;
-            commit('persistData', data);
+            commit('restoreData', data);
+            commit('persistData');
           }
-          commit('restoreData', data);
           commit(
             'updateGears',
             (data.gears as Array<any>).map(x => {

@@ -14,7 +14,8 @@ export class DataConverter_0_1_0 implements DataConverter {
     console.log('convert::past =', past);
     const result: VuexData = {
       version: this.TARGET_VERSION,
-      gears: []
+      gears: [],
+      profiles: []
     };
     for (let i = 0; i < past.gears.length; i++) {
       const pastGear = past.gears[i];
