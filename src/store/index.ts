@@ -28,6 +28,11 @@ export default new Vuex.Store({
         map.set(x.id, x);
       });
       return map;
+    },
+    getEquipped: state => (heroId: string) => {
+      const builder = new Gear.GearCombinationBuilder();
+      state.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
+      return builder.build(-1);
     }
   },
   mutations: {

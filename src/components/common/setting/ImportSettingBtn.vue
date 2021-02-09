@@ -42,11 +42,11 @@ export default class ImportSettingBtn extends Vue {
     console.log('importData::data.version =', importData.version);
     if (importData.version == Constants.CURRENT_PERSISTENT_DATA_VERSION) {
       localStorage.setItem(Constants.KEY_VUEXDATA, this.data);
-      this.$router.go(0);
     } else {
       console.log('importData::data conversion starts');
       const result = DataConverterFactory.getDataConverter(importData.version).convert(importData);
     }
+    this.$router.go(0);
   }
 }
 </script>

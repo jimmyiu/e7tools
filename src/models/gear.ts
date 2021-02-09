@@ -116,7 +116,7 @@ export namespace Gear {
     defScore: number = 0;
     // v0.2.0
     locked: boolean = false;
-    equiped: boolean = false;
+    equippedHero: string = '';
 
     public constructor(
       public readonly id: string = Math.random()
@@ -193,23 +193,25 @@ export namespace Gear {
     ONLY_15 = 2
   }
 
-  export interface BaseGearFilter {
+  export type BaseGearFilter = {
     sets: Set[];
     enhanceMode: EnhanceModeFilter;
-  }
+  };
 
-  export interface GearFilter extends BaseGearFilter {
+  export type GearFilter = BaseGearFilter & {
     necklaces: Stat[];
     rings: Stat[];
     boots: Stat[];
-  }
+    locked: boolean;
+    equipped: boolean;
+  };
 
-  export interface TableFilter extends BaseGearFilter {
+  export type TableFilter = BaseGearFilter & {
     type?: Type;
     level: number;
     mode: number;
     main: boolean;
-  }
+  };
 
   export type StatInput = {
     stat?: Stat;
@@ -486,6 +488,21 @@ export namespace Gear {
     boot(boot: Gear) {
       this.change(this._boot, boot);
       this._boot = boot;
+    }
+    setGear(gear: Gear) {
+      if (gear.type == Type.Weapon) {
+        this.weapon(gear);
+      } else if (gear.type == Type.Helmet) {
+        this.helmet(gear);
+      } else if (gear.type == Type.Armor) {
+        this.armor(gear);
+      } else if (gear.type == Type.Necklace) {
+        this.necklace(gear);
+      } else if (gear.type == Type.Ring) {
+        this.ring(gear);
+      } else if (gear.type == Type.Boot) {
+        this.boot(gear);
+      }
     }
     build(id: number) {
       return new GearCombination(

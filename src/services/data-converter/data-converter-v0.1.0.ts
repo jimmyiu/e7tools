@@ -27,7 +27,10 @@ export class DataConverter_0_1_0 implements DataConverter {
         pastGear.enhance,
         pastGear.main
       );
-      result.gears.push(Object.assign(newGear, pastGear));
+      newGear = Object.assign(newGear, pastGear);
+      newGear.locked = false;
+      newGear.equippedHero = '';
+      result.gears.push(newGear);
     }
     console.log('convert::result =', result);
     return result;

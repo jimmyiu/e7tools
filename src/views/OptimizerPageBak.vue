@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { GearDetail, GearTableFilter } from '@/components';
+import { GearDetailCard, GearTableFilter } from '@/components';
 import { Hero, Gear } from '@/models';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapState } from 'vuex';
@@ -86,7 +86,7 @@ import axios from 'axios';
 
 @Component({
   name: 'optimizer-page',
-  components: { GearDetail, GearTableFilter },
+  components: { GearDetailCard, GearTableFilter },
   computed: { ...mapState(['gears']) }
 })
 export default class OptimizerPage extends Vue {
