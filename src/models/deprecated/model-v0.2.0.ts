@@ -1,14 +1,19 @@
 import { Gear as GearNs } from '../gear';
+import { OptimizationProfile } from '../optimizer';
 import { PersistentData } from '../persistence';
-import { V_0_2_0 } from './model-v0.2.0';
-export namespace V_0_1_0 {
-  export type VuexData = PersistentData & {
-    gears: Array<Gear>;
-  };
-
-  type StatInput = V_0_2_0.StatInput;
+export namespace V_0_2_0 {
   type GearScore = GearNs.GearScore;
   type GearAbility = GearNs.GearAbility;
+
+  export type VuexData = PersistentData & {
+    gears: Array<Gear>;
+    profiles: Array<OptimizationProfile>;
+  };
+
+  export type StatInput = {
+    stat?: Stat;
+    value: number;
+  };
 
   export enum Set {
     Speed = 'Speed',
@@ -33,6 +38,15 @@ export namespace V_0_1_0 {
     Penetration = 'Penetration'
   }
 
+  export enum Type {
+    Weapon = 'Weapon',
+    Helmet = 'Helmet',
+    Armor = 'Armor',
+    Necklace = 'Necklace',
+    Ring = 'Ring',
+    Boot = 'Boot'
+  }
+
   export class Stat {
     static readonly HPP = new Stat('hpp', 'HP %');
     static readonly HP = new Stat('hp', 'HP');
@@ -47,15 +61,6 @@ export namespace V_0_1_0 {
     static readonly RES = new Stat('res', 'RES');
 
     private constructor(public readonly value: string, public readonly label: string) { }
-  }
-
-  export enum Type {
-    Weapon = 'Weapon',
-    Helmet = 'Helmet',
-    Armor = 'Armor',
-    Necklace = 'Necklace',
-    Ring = 'Ring',
-    Boot = 'Boot'
   }
 
   export class Grade {
@@ -89,7 +94,7 @@ export namespace V_0_1_0 {
     defScore: number = 0;
     // v0.2.0
     locked: boolean = false;
-    equiped: boolean = false;
+    equippedHero: string = '';
 
     public constructor(
       public readonly id: string = Math.random()
@@ -134,7 +139,7 @@ export namespace V_0_1_0 {
     getSubs(): Map<Stat, number> {
       let result = new Map<Stat, number>();
       this.getStatMap().forEach((value, key) => {
-        if (key.value != this.main?.label && value != undefined) {
+        if (key.value != this.main?.value && value != undefined) {
           result.set(key, value);
         }
       });

@@ -18,6 +18,7 @@ export default new Vuex.Store({
     data: {
       version: Constants.CURRENT_PERSISTENT_DATA_VERSION,
       gears: [],
+      // TODO: should NOT use vuex to store profile
       profiles: []
     } as VuexData
   },
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     },
     getProfile: state => (heroId: string) => {
       return state.data.profiles.find(x => x.hero.id == heroId);
+    },
+    getHero: state => (heroId: string) => {
+      return state.e7db.heros.find(x => x.id == heroId);
     }
   },
   mutations: {
@@ -64,11 +68,13 @@ export default new Vuex.Store({
     },
     saveProfile(state, profile: OptimizationProfile) {
       if (profile.hero.id) {
-        const index = state.data.profiles.findIndex(x => x.hero.id == profile.hero.id);
+        // TODO: better deep clone solution
+        const shadow = JSON.parse(JSON.stringify(profile)) as OptimizationProfile;
+        const index = state.data.profiles.findIndex(x => x.hero.id == shadow.hero.id);
         if (index < 0) {
-          state.data.profiles.push(profile);
+          state.data.profiles.push(shadow);
         } else {
-          state.data.profiles.splice(index, 1, profile);
+          state.data.profiles.splice(index, 1, shadow);
         }
       }
     },
@@ -114,7 +120,7 @@ export default new Vuex.Store({
     },
     // profiles
     updateProfiles: ({ commit }, profiles: OptimizationProfile[]) => {
-      profiles.forEach(profile => commit('saveProfile', Object.assign({}, profile)));
+      profiles.forEach(profile => commit('saveProfile', profile));
       commit('persistData');
     },
     // initialization
@@ -136,8 +142,8 @@ export default new Vuex.Store({
           }
           commit(
             'updateGears',
-            (data.gears as Array<any>).map(x => {
-              const result = new Gear.Gear(x.type, x.set, x.id, x.grade, x.level, x.enhance, x.main);
+            (data.gears as Array<Gear.Gear>).map(x => {
+              const result = new Gear.Gear(x.id, x.type, x.set, x.grade.name, x.level, x.enhance, x.main.value);
               return Object.assign(result, x);
             })
           );

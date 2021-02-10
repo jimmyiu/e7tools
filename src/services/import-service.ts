@@ -67,10 +67,10 @@ class ImportService {
       `i-${gear.ID}`,
       TYPE_MAPPING.get(gear.Type)!,
       SET_MAPPING.get(gear.Set)!,
-      GRADE_MAPPING.get(gear.Grade)!,
+      GRADE_MAPPING.get(gear.Grade)!.name,
       gear.Ilvl,
       gear.Enhance,
-      STAT_MAPPING.get(gear.Main.Name)!
+      STAT_MAPPING.get(gear.Main.Name)?.value!
     );
     [gear.Main, ...gear.SubStats].forEach(it => {
       let stat = STAT_MAPPING.get(it.Name);

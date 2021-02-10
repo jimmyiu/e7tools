@@ -40,20 +40,53 @@ export namespace Gear {
     eff: number;
     res: number;
   };
-  export class Stat {
-    static readonly HPP = new Stat('hpp', 'HP %');
-    static readonly HP = new Stat('hp', 'HP');
-    static readonly DEFP = new Stat('defp', 'DEF %');
-    static readonly DEF = new Stat('def', 'DEF');
-    static readonly ATKP = new Stat('atkp', 'ATK %');
-    static readonly ATK = new Stat('atk', 'ATK');
-    static readonly CRI = new Stat('cri', 'CRI');
-    static readonly CDMG = new Stat('cdmg', 'C.DMG');
-    static readonly SPD = new Stat('spd', 'SPD');
-    static readonly EFF = new Stat('eff', 'EFF');
-    static readonly RES = new Stat('res', 'RES');
 
-    private constructor(public readonly value: string, public readonly label: string) { }
+  export class Stat {
+    static readonly HPP = Object.freeze(new Stat('hpp', 'HP %', true));
+    static readonly HP = Object.freeze(new Stat('hp', 'HP', false));
+    static readonly DEFP = Object.freeze(new Stat('defp', 'DEF %', true));
+    static readonly DEF = Object.freeze(new Stat('def', 'DEF', false));
+    static readonly ATKP = Object.freeze(new Stat('atkp', 'ATK %', true));
+    static readonly ATK = Object.freeze(new Stat('atk', 'ATK', false));
+    static readonly CRI = Object.freeze(new Stat('cri', 'CRI', false));
+    static readonly CDMG = Object.freeze(new Stat('cdmg', 'CDMG', false));
+    static readonly SPD = Object.freeze(new Stat('spd', 'SPD', false));
+    static readonly EFF = Object.freeze(new Stat('eff', 'EFF', false));
+    static readonly RES = Object.freeze(new Stat('res', 'RES', false));
+    static getInstance(value: string) {
+      switch (value) {
+        case Stat.HPP.value:
+          return Stat.HPP;
+        case Stat.HP.value:
+          return Stat.HP;
+        case Stat.DEFP.value:
+          return Stat.DEFP;
+        case Stat.DEF.value:
+          return Stat.DEF;
+        case Stat.ATKP.value:
+          return Stat.ATKP;
+        case Stat.ATK.value:
+          return Stat.ATK;
+        case Stat.CRI.value:
+          return Stat.CRI;
+        case Stat.CDMG.value:
+          return Stat.CDMG;
+        case Stat.SPD.value:
+          return Stat.SPD;
+        case Stat.EFF.value:
+          return Stat.EFF;
+        case Stat.RES.value:
+          return Stat.RES;
+      }
+      console.error('getInstance::fail to convert stat=', value);
+      throw new Error('fail to convert stat=' + value);
+    }
+
+    private constructor(
+      public readonly value: string,
+      public readonly label: string,
+      public readonly percent: boolean
+    ) { }
   }
 
   export enum Type {
@@ -66,11 +99,28 @@ export namespace Gear {
   }
 
   export class Grade {
-    static readonly EPIC = new Grade('Epic', 'red');
-    static readonly HERO = new Grade('Hero', 'purple');
-    static readonly RARE = new Grade('Rare', 'blue');
-    static readonly GOOD = new Grade('Hero', 'green');
-    static readonly NORMAL = new Grade('Rare', 'grey');
+    static readonly EPIC = Object.freeze(new Grade('Epic', 'red'));
+    static readonly HERO = Object.freeze(new Grade('Hero', 'purple'));
+    static readonly RARE = Object.freeze(new Grade('Rare', 'blue'));
+    static readonly GOOD = Object.freeze(new Grade('Hero', 'green'));
+    static readonly NORMAL = Object.freeze(new Grade('Rare', 'grey'));
+
+    static getInstance(name: string) {
+      switch (name) {
+        case Grade.EPIC.name:
+          return Grade.EPIC;
+        case Grade.HERO.name:
+          return Grade.HERO;
+        case Grade.RARE.name:
+          return Grade.RARE;
+        case Grade.GOOD.name:
+          return Grade.GOOD;
+        case Grade.NORMAL.name:
+          return Grade.NORMAL;
+      }
+      console.error('getInstance::fail to convert grade =', name);
+      throw new Error('fail to convert grade =' + name);
+    }
 
     // private to disallow creating other instances of this type
     private constructor(public readonly name: string, public readonly color: string) { }
@@ -97,7 +147,7 @@ export namespace Gear {
   };
 
   export class Gear implements GearAbility, GearScore {
-    static NONE: Gear = new Gear(undefined, Type.Armor, Set.Speed, Grade.EPIC, 85, 15, Stat.HP);
+    static NONE: Gear = new Gear(undefined, Type.Armor, Set.Speed, Grade.EPIC.name, 85, 15, Stat.HP.value);
 
     hpp?: number;
     hp?: number;
@@ -117,6 +167,9 @@ export namespace Gear {
     // v0.2.0
     locked: boolean = false;
     equippedHero: string = '';
+    // v0.2.1
+    grade: Grade;
+    main: Stat;
 
     public constructor(
       public readonly id: string = Math.random()
@@ -124,11 +177,14 @@ export namespace Gear {
         .substr(2, 10),
       public type: Type,
       public set: Set,
-      public grade: Grade,
+      grade: string,
       public level: number,
       public enhance: number,
-      public main: Stat
-    ) { }
+      main: string
+    ) {
+      this.main = Stat.getInstance(main);
+      this.grade = Grade.getInstance(grade);
+    }
 
     getStatMap(): Map<Stat, number | undefined> {
       return new Map([
@@ -161,7 +217,7 @@ export namespace Gear {
     getSubs(): Map<Stat, number> {
       let result = new Map<Stat, number>();
       this.getStatMap().forEach((value, key) => {
-        if (key.value != this.main?.label && value != undefined) {
+        if (key.value != this.main?.value && value != undefined) {
           result.set(key, value);
         }
       });
@@ -181,7 +237,7 @@ export namespace Gear {
     }
 
     static clone(gear: Gear): Gear {
-      let result = new Gear(undefined, gear.type, gear.set, gear.grade, gear.level, gear.enhance, gear.main);
+      let result = new Gear(undefined, gear.type, gear.set, gear.grade.name, gear.level, gear.enhance, gear.main.value);
       Object.assign(result, gear);
       return result;
     }

@@ -9,7 +9,7 @@ export { Hero, HeroAbility, EquipedHero };
 export { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria };
 
 export const Constants = {
-  CURRENT_PERSISTENT_DATA_VERSION: '0.2.0',
+  CURRENT_PERSISTENT_DATA_VERSION: '0.2.1',
   KEY_VUEXDATA: 'vuex.data',
   KEY_E7DBDAYA: 'vuex.e7db',
   GEAR_FILTER_DEFAULT: {

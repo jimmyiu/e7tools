@@ -221,10 +221,10 @@ export default class GearFormCard extends Vue {
       this.gear ? this.gear.id : undefined,
       this.form.type,
       this.form.set,
-      this.form.grade,
+      this.form.grade.name,
       this.levelTicks[this.form.level],
       this.form.enhance,
-      this.form.statInputs[0].stat
+      this.form.statInputs[0].stat.value
     );
     gear.set = this.form.set;
     gear.type = this.form.type;
