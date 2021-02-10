@@ -1,6 +1,6 @@
 .PHONY: docker node npm
 
-NODE_IMAGE=node:12-alpine
+NODE_IMAGE=node:14-alpine
 DK_IMAGE=vue-template
 DK_IMAGE_TAG=latest
 
