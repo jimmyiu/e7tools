@@ -1,6 +1,7 @@
 # Epic7 Online Tools
 
-This tools is currently hosted using the project [GitHub page](https://jimmyiu.github.io/e7tools/).
+This tools is currently under development, and is temporarily hosted using the project [GitHub page](https://jimmyiu.github.io/e7tools/).<br />
+I found a well developed Java based optimizer here: <https://github.com/fribbels/Fribbels-Epic-7-Optimizer>
 
 ## Development Notes
 
