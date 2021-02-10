@@ -5,7 +5,8 @@ type Filter = (it: Gear.Gear) => boolean;
 class GearFilterService {
   private noopFilter: Filter = (it: Gear.Gear) => true;
 
-  public filter(gears: Gear.Gear[], filter: Gear.GearFilter) {
+  // TODO: refactor hero id
+  public filter(gears: Gear.Gear[], filter: Gear.GearFilter, params: { heroId: string }) {
     type Filter = (it: Gear.Gear) => boolean;
     // console.log('filter::filter =', filter);
 
@@ -42,7 +43,11 @@ class GearFilterService {
     }
     let equiped = this.noopFilter;
     if (!filter.equipped) {
-      equiped = (it: Gear.Gear) => it.equippedHero == '';
+      if (params.heroId) {
+        equiped = (it: Gear.Gear) => it.equippedHero == '' || it.equippedHero == params.heroId;
+      } else {
+        equiped = (it: Gear.Gear) => it.equippedHero == '';
+      }
     }
     return gears.filter(it => {
       return locked(it) && equiped(it) && set(it) && enhance(it) && necklace(it) && ring(it) && boot(it);

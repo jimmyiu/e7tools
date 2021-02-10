@@ -12,6 +12,7 @@
           label="Hero"
           outlined
           return-object
+          @change="changeHero"
         >
           <template v-slot:item="data">
             <v-avatar class="mr-2" left size="32">
@@ -66,5 +67,11 @@ export default class OptimizationProfiler extends Vue {
     return Object.values(Gear.Set);
   }
   @Model() readonly value!: OptimizationProfile;
+
+  changeHero() {
+    if (this.value.hero && this.value.hero.id) {
+      this.$emit('change-hero', this.value.hero);
+    }
+  }
 }
 </script>

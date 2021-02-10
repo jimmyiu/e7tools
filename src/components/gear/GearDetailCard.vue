@@ -1,41 +1,54 @@
 <template>
-  <v-card elevation="6" outlined width="100%">
+  <v-card elevation="6" min-width="180px" outlined width="180px">
     <div v-if="gear && gear.id">
-      <div class="d-flex justify-left align-center" style="height: 36px">
-        <!-- <div class="d-flex" style="padding-top: 1px"> -->
-        <gear-type-icon class="mx-auto" small style="padding: 0 1px" :type="gear.type" />
-        <v-divider vertical />
-        <gear-set-icon class="mx-auto" :set="gear.set" small />
-        <v-divider vertical />
-        <div class="mx-auto align-center align-self-center">
-          <span :style="'color: ' + gear.grade.color">{{ gear.level }}</span>
-          <span class="caption">+{{ gear.enhance }}</span>
-        </div>
-      </div>
-      <v-divider />
-      <div class="pa-1 text-center">{{ gear.main.label }}: {{ gear[gear.main.value] }}</div>
-      <v-divider />
-      <v-row class="d-flex flex-wrap py-1" dense no-gutters>
-        <template v-for="(item, i) in stats">
-          <v-col
-            v-if="gear[item.value] && item.value != gear.main.value"
-            :key="`${i}1`"
-            bottom
-            class="pl-1 caption align-self-center"
-            cols="4"
-          >
-            <!-- <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/${item.value}.png`)" /> -->
-            {{ item.label }}:
+      <v-card-text class="pa-0">
+        <v-row dense>
+          <v-col class="d-flex pl-2 align-center">
+            <gear-type-icon small style="padding-bottom: 1px" :type="gear.type" />
+            <gear-set-icon :set="gear.set" small />
+            <div>
+              <span :style="'color: ' + gear.grade.color">{{ gear.level }}</span>
+              <span class="caption">+{{ gear.enhance }}</span>
+            </div>
           </v-col>
-          <v-col
-            v-if="gear[item.value] && item.value != gear.main.value"
-            :key="`${i}2`"
-            class="pr-1 text-right"
-            cols="2"
-            >{{ gear[item.value] }}</v-col
-          >
-        </template>
-      </v-row>
+          <v-col class="pa-2" cols="auto" style="height: 46px">
+            <v-img v-if="hero" :src="hero.icon" width="30" />
+            <!-- {{ gear.equippedHero }} -->
+          </v-col>
+        </v-row>
+        <v-divider />
+        <v-row>
+          <v-col>
+            <div class="pa-1 text-center">{{ gear.main.label }}: {{ gear[gear.main.value] }}</div>
+          </v-col>
+        </v-row>
+        <v-divider class="mb-1" />
+        <v-row v-for="(item, i) in subs" :key="i" class="d-flex flex-wrap" dense>
+          <v-col class="pl-2">
+            <gear-stat-icon :stat="item[0]" />
+          </v-col>
+          <v-col class="pr-2 text-right">
+            {{ item[1] }}
+          </v-col>
+          <!-- {{ item }} -->
+          <!-- <v-col
+          v-if="gear[item.value] && item.value != gear.main.value"
+          :key="`${i}1`"
+          bottom
+          class="pl-1 caption align-self-center"
+          cols="4"
+        >
+          <gear-stat-icon :stat="item" />
+        </v-col>
+        <v-col
+          v-if="gear[item.value] && item.value != gear.main.value"
+          :key="`${i}2`"
+          class="pr-3 text-right"
+          cols="2"
+          >{{ gear[item.value] }}</v-col
+        > -->
+        </v-row>
+      </v-card-text>
     </div>
     <div v-else>TODO: EMPTY</div>
   </v-card>
@@ -46,19 +59,29 @@
 </style>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { GearSetIcon, GearTypeIcon } from './common';
-import { Gear } from '@/models';
-// import { mapGetters } from 'vuex';
+import { GearSetIcon, GearStatIcon, GearTypeIcon } from './common';
+import { Gear, Hero } from '@/models';
+import { mapGetters } from 'vuex';
 
 @Component({
   name: 'gear-detail-card',
-  components: { GearSetIcon, GearTypeIcon }
-  // computed: { ...mapGetters(['getGearMap']) }
+  components: { GearSetIcon, GearTypeIcon, GearStatIcon },
+  computed: mapGetters(['getHero'])
 })
 export default class GearDetailCard extends Vue {
+  // vuex
+  getHero!: (heroId: string) => Hero | undefined;
+  //
   @Prop() readonly gear!: Gear.Gear;
+  get hero(): Hero | undefined {
+    return this.gear.equippedHero ? this.getHero(this.gear.equippedHero) : undefined;
+  }
   get stats() {
     return Object.values(Gear.Stat);
+  }
+
+  get subs() {
+    return this.gear.getSubs();
   }
 
   get width() {

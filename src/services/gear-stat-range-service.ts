@@ -63,7 +63,9 @@ class GearStatRangeService {
     if (level == 90) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0][enhance - 1];
     } else if (level == 85) {
-      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1944, 0, 0, 2700][enhance - 1];
+      return [0, 0, 0, 0, 0, 0, 0, 0, 1512, 0, 0, 1944, 0, 0, 2700][enhance - 1];
+    } else if (level == 78) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2565][enhance - 1];
     } else if (level == 75) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2495][enhance - 1];
     } else if (level == 70) {
@@ -77,6 +79,8 @@ class GearStatRangeService {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 310][enhance - 1];
     } else if (level == 85) {
       return [0, 0, 0, 0, 0, 132, 144, 0, 168, 0, 0, 0, 0, 0, 300][enhance - 1];
+    } else if (level == 78) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 285][enhance - 1];
     } else if (level == 75) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 275][enhance - 1];
     } else if (level == 70) {

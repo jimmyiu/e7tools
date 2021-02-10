@@ -3,13 +3,15 @@
     <message-box title="Current Status">
       <p>This tool is under development</p>
       <ul>
-        <li>Gear Management & Gear Optimizer features are working, but definitely a lot of things have to improve</li>
-        <li>
-          Gears are presisted in localstorage, a simple import / export function is provided (may revise later)
+        <li style="color: red">
+          CAUTION: I am working on a better persistent data model, please bare in mind you may have a risk that the
+          inputted data cannot be restored. However, I will offer help, leave an issue in the GitHub and I will follow
+          up.
         </li>
-        <li>Next target: Add locked and equiped flag for Gear</li>
+        <li>Gear Management & Gear Optimizer features are working, but definitely a lot of things have to improve</li>
+        <li>Next target: Revise persistent data</li>
       </ul>
-      <br />2021-02-09
+      <br />2021-02-10
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -28,6 +30,8 @@
       </ol>
     </message-box>
     <message-box hide-default title="Progress">
+      [2021-02-10] start to revise persistence data<br />
+      [2021-02-01] add equipped and locked flags<br />
       [2021-02-08] complete basic optimizer<br />
       [2021-02-03] adopt web worker for optimizer calculation<br />
       [2021-02-02] start gear optimizer<br />

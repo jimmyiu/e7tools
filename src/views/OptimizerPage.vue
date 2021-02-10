@@ -23,7 +23,7 @@
     </v-card>
     <v-card class="mt-2">
       <v-card-text>
-        <optimization-profiler v-model="profile" />
+        <optimization-profiler v-model="profile" @change-hero="reset" />
       </v-card-text>
       <v-divider />
       <!-- <v-card-text> Profile: {{ profile }} </v-card-text>
@@ -34,13 +34,34 @@
         <v-divider class="mx-2" vertical />
         <v-btn class="font-weight-bold" color="success" text @click="saveProfile">Save</v-btn>
         <v-btn text @click="loadProfile">Load</v-btn>
-        <!-- <v-btn class="font-weight-bold" color="warning" text @click="test">Test</v-btn> -->
         <v-divider class="mx-2" vertical />
       </v-card-actions>
     </v-card>
 
     <v-card class="mt-2">
       <v-card-text>
+        <v-row v-if="equippedHero">
+          <v-col class="d-flex" cols="12">
+            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/hp.png`)" />
+            {{ equippedHero.hp }}
+            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/def.png`)" />
+            {{ equippedHero.def }}
+            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/atk.png`)" />
+            {{ equippedHero.atk }}
+            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/cri.png`)" />
+            {{ equippedHero.cri }}
+            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/cdmg.png`)" />
+            {{ equippedHero.cdmg }}
+            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/spd.png`)" />
+            {{ equippedHero.spd }}
+            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/eff.png`)" />
+            {{ equippedHero.eff }}
+            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/res.png`)" />
+            {{ equippedHero.res }}
+            Damage: {{ equippedHero.damage }}, EHP:
+            {{ equippedHero.ehp }}
+          </v-col>
+        </v-row>
         <v-row>
           <v-col cols="6" lg="2" sm="2">
             <gear-detail-card :gear="selectedCombination.weapon" />
@@ -70,7 +91,7 @@
     </v-card>
 
     <v-card class="mt-2">
-      <v-progress-linear v-if="progress > 0" height="20" striped>
+      <v-progress-linear v-if="progress > 0" height="20" indeterminate striped>
         <strong>{{ progress }}%</strong>
       </v-progress-linear>
       <v-card-text>
@@ -101,7 +122,7 @@
       </v-card-text>
     </v-card>
 
-    <v-snackbar v-model="popupMsg" color="success" rounded="pill" timeout="1500" top>
+    <v-snackbar v-if="profile.hero" v-model="popupMsg" color="success" rounded="pill" timeout="1500" top>
       <div class="text-center">{{ profile.hero.name }} profile saved</div>
     </v-snackbar>
   </div>
@@ -113,6 +134,7 @@ import { Constants, Gear, EquipedHero, OptimizationProfile } from '@/models';
 import { E7dbData } from '@/models/persistence';
 import { DefaultGearOptimizer } from '@/services/gear-optimizer';
 import GearFilterService from '@/services/gear-filter-service';
+import GearCombinationService from '@/services/gear-combination-service';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
@@ -133,6 +155,7 @@ export default class OptimizerPage extends Vue {
 
   // worker
   worker = new Worker('../workers/gear-optimizer-worker.ts', { type: 'module' });
+
   // models
   profile: OptimizationProfile = {
     id: '',
@@ -149,9 +172,7 @@ export default class OptimizerPage extends Vue {
   headers = [
     { text: 'Set', value: 'combination.sets', sortable: false },
     { text: 'HP', value: 'hp' },
-    // { text: 'DEF %', value: 'ability.defp' },
     { text: 'DEF', value: 'def' },
-    // { text: 'ATK %', value: 'ability.atkp' },
     { text: 'ATK', value: 'atk' },
     { text: 'CRI', value: 'cri' },
     { text: 'C.DMG', value: 'cdmg' },
@@ -163,7 +184,18 @@ export default class OptimizerPage extends Vue {
   ];
 
   get gearStore() {
-    return new Gear.GearStore(GearFilterService.filter(this.gears, this.profile.filter));
+    return new Gear.GearStore(
+      GearFilterService.filter(this.gears, this.profile.filter, {
+        heroId: this.profile.hero ? this.profile.hero.id : ''
+      })
+    );
+  }
+
+  get equippedHero(): EquipedHero | undefined {
+    if (this.profile.hero) {
+      return GearCombinationService.apply(this.getEquipped(this.profile.hero.id), this.profile.hero);
+    }
+    return undefined;
   }
 
   get hardLimit() {
@@ -182,8 +214,9 @@ export default class OptimizerPage extends Vue {
 
   reset() {
     if (!this.profile.hero.id) {
-      this.profile.hero = this.e7db.heros[4];
+      this.profile.hero = this.e7db.heros[34];
     }
+    this.result.splice(0, this.result.length);
     this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
     this.profile.stat = {
       hp: {},
@@ -200,7 +233,12 @@ export default class OptimizerPage extends Vue {
     this.profile.combination = {
       forcedSets: [] // [Gear.Set.Speed, Gear.Set.Critical]
     };
-    this.selectedCombination = this.getEquipped(this.profile.hero.id);
+    // this.changeHero();
+    if (this.equippedHero) {
+      console.log('reset::profile.hero.id =', this.profile.hero.id);
+      // console.log(this.getEquipped(this.profile.hero.id));
+      this.selectedCombination = this.equippedHero.combination;
+    }
   }
 
   clickRow(item: EquipedHero, e: any) {
@@ -212,34 +250,40 @@ export default class OptimizerPage extends Vue {
 
   equipAll() {
     console.log('equipAll::hero =', this.profile.hero);
-    this.selectedCombination.weapon.equippedHero = this.profile.hero.id;
-    this.updateGear(this.selectedCombination.weapon);
-    this.selectedCombination.helmet.equippedHero = this.profile.hero.id;
-    this.updateGear(this.selectedCombination.helmet);
-    this.selectedCombination.armor.equippedHero = this.profile.hero.id;
-    this.updateGear(this.selectedCombination.armor);
-    this.selectedCombination.necklace.equippedHero = this.profile.hero.id;
-    this.updateGear(this.selectedCombination.necklace);
-    this.selectedCombination.ring.equippedHero = this.profile.hero.id;
-    this.updateGear(this.selectedCombination.ring);
-    this.selectedCombination.boot.equippedHero = this.profile.hero.id;
-    this.updateGear(this.selectedCombination.boot);
+    if (this.selectedCombination) {
+      this.unequipAll();
+      console.log('equipAll::selectedCombination =', this.selectedCombination);
+      const c = this.selectedCombination;
+      [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot]
+        .filter(x => x.id)
+        .forEach(x => {
+          x.equippedHero = this.profile.hero.id;
+          this.updateGear(x);
+        });
+    }
   }
 
   unequipAll() {
-    this.selectedCombination.weapon.equippedHero = '';
-    this.updateGear(this.selectedCombination.weapon);
-    this.selectedCombination.helmet.equippedHero = '';
-    this.updateGear(this.selectedCombination.helmet);
-    this.selectedCombination.armor.equippedHero = '';
-    this.updateGear(this.selectedCombination.armor);
-    this.selectedCombination.necklace.equippedHero = '';
-    this.updateGear(this.selectedCombination.necklace);
-    this.selectedCombination.ring.equippedHero = '';
-    this.updateGear(this.selectedCombination.ring);
-    this.selectedCombination.boot.equippedHero = '';
-    this.updateGear(this.selectedCombination.boot);
+    if (this.equippedHero && this.equippedHero.combination) {
+      console.log('unequipAll::', this.equippedHero.combination);
+      const c = this.equippedHero.combination;
+      [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot]
+        .filter(x => x.id)
+        .forEach(x => {
+          x.equippedHero = '';
+          this.updateGear(x);
+        });
+    }
   }
+
+  // changeHero() {
+  //   console.log('changeHero::start');
+  //   if (this.equippedHero) {
+  //     console.log('changeHero::profile.hero.id =', this.profile.hero.id);
+  //     // console.log(this.getEquipped(this.profile.hero.id));
+  //     this.selectedCombination = this.equippedHero.combination;
+  //   }
+  // }
 
   saveProfile() {
     console.log('saveProfile::profile =', this.profile);
