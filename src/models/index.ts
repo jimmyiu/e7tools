@@ -1,17 +1,17 @@
-import { Range } from './common';
+import { Range, HeroAbility } from './common';
 import { Gear } from './gear';
-import { Hero, HeroAbility, EquipedHero } from './hero';
-import { E7db } from './e7db';
+import { Hero, EquipedHero } from './hero';
+import { Suit, SuitAbility } from './suit';
 import { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria } from './optimizer';
 
-export { Gear, Range, E7db };
+export { Gear, Range, Suit, SuitAbility };
 export { Hero, HeroAbility, EquipedHero };
 export { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria };
 
 export const Constants = {
   CURRENT_PERSISTENT_DATA_VERSION: '0.3.0',
   KEY_VUEXDATA: 'vuex.data',
-  KEY_E7DBDAYA: 'vuex.e7db',
+
   GEAR_FILTER_DEFAULT: {
     sets: [],
     enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
@@ -48,10 +48,5 @@ export const Constants = {
 export type VuexData = {
   gears: Array<Gear.Gear>;
   profiles: Array<OptimizationProfile>;
-  heros: Array<Hero>;
-};
-
-export type E7dbData = {
-  date: number;
   heros: Array<Hero>;
 };

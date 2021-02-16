@@ -51,6 +51,8 @@ class GearStatRangeService {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 525][enhance - 1];
     } else if (level == 85) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 500][enhance - 1];
+    } else if (level == 78) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 475][enhance - 1];
     } else if (level == 75) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 465][enhance - 1];
     } else if (level == 70) {

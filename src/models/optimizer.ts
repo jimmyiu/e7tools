@@ -1,4 +1,4 @@
-import { Gear, Range } from '.';
+import { Gear, Range, SuitAbility } from '.';
 
 export type OptimizationCombinationCriteria = {
   forcedSets: Gear.Set[];
@@ -27,4 +27,8 @@ export type OptimizationProfile = {
   stat: OptimizationStatCriteria;
   combination: OptimizationCombinationCriteria;
   // criteria: OptimizerCriteria;
+};
+
+export type OptimizationResult = SuitAbility & {
+  sets: string[];
 };

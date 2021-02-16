@@ -41,26 +41,40 @@
     <v-card class="mt-2">
       <v-card-text>
         <v-row v-if="equippedHero">
-          <v-col class="d-flex" cols="12">
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/hp.png`)" />
             {{ equippedHero.hp }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/def.png`)" />
             {{ equippedHero.def }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/atk.png`)" />
             {{ equippedHero.atk }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/cri.png`)" />
             {{ equippedHero.cri }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/cdmg.png`)" />
             {{ equippedHero.cdmg }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/spd.png`)" />
             {{ equippedHero.spd }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/eff.png`)" />
             {{ equippedHero.eff }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/res.png`)" />
             {{ equippedHero.res }}
-            Damage: {{ equippedHero.damage }}, EHP:
-            {{ equippedHero.ehp }}
           </v-col>
+          <v-col class="d-flex" cols="2">Damage: {{ equippedHero.damage }}</v-col>
+          <v-col class="d-flex" cols="2">EHP: {{ equippedHero.ehp }}</v-col>
         </v-row>
         <v-row>
           <v-col cols="6" lg="2" sm="2">
@@ -92,7 +106,7 @@
 
     <v-card class="mt-2">
       <v-progress-linear v-if="progress > 0" height="20" indeterminate striped>
-        <strong>{{ progress }}%</strong>
+        <strong>Processed: {{ progress }}</strong>
       </v-progress-linear>
       <v-card-text>
         <v-row>

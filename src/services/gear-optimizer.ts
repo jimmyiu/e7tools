@@ -11,7 +11,7 @@ export interface IGearOptimizer {
 }
 
 export class DefaultGearOptimizer implements IGearOptimizer {
-  static COMBINATION_HARD_LIMIT = 10000000;
+  static COMBINATION_HARD_LIMIT = 20000000;
   // static COMBINATION_HARD_LIMIT = 10;
   static OPTIMIZE_RESULT_LIMIT = 10000;
   static REPORT_PROGRESS_COUNT = DefaultGearOptimizer.COMBINATION_HARD_LIMIT / 10;

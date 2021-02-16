@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="6" min-width="180px" outlined width="180px">
+  <v-card elevation="6" min-width="160px" outlined width="180px">
     <div v-if="gear && gear.id">
       <v-card-text class="pa-0">
         <v-row dense>
@@ -24,10 +24,10 @@
         </v-row>
         <v-divider class="mb-1" />
         <v-row v-for="(item, i) in subs" :key="i" class="d-flex flex-wrap" dense>
-          <v-col class="pl-2">
+          <v-col class="pl-3">
             <gear-stat-icon :stat="item[0]" />
           </v-col>
-          <v-col class="pr-2 text-right">
+          <v-col class="pr-3 text-right">
             {{ item[1] }}
           </v-col>
           <!-- {{ item }}
