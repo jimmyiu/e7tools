@@ -130,8 +130,7 @@
 
 <script lang="ts">
 import { GearDetailCard, GearSetIcon, OptimizationProfiler } from '@/components';
-import { Constants, Gear, EquipedHero, OptimizationProfile } from '@/models';
-import { E7dbData } from '@/models/persistence';
+import { Constants, Gear, EquipedHero, OptimizationProfile, Hero } from '@/models';
 import { DefaultGearOptimizer } from '@/services/gear-optimizer';
 import GearFilterService from '@/services/gear-filter-service';
 import GearCombinationService from '@/services/gear-combination-service';
@@ -141,16 +140,18 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 @Component({
   name: 'optimizer-page',
   components: { GearDetailCard, GearSetIcon, OptimizationProfiler },
-  computed: { ...mapState(['gears', 'e7db']), ...mapGetters(['getEquipped', 'getProfile']) },
-  methods: mapActions(['updateGear', 'updateProfiles'])
+  computed: { ...mapGetters(['heros', 'gears', 'getEquipped', 'getProfile', 'getHero', 'getGear']) },
+  methods: mapActions(['saveGears', 'updateProfiles'])
 })
 export default class OptimizerPage extends Vue {
   // vuex
   readonly gears!: Gear.Gear[];
-  readonly e7db!: E7dbData;
-  updateGear!: (gear: Gear.Gear) => void;
+  readonly heros!: Hero[];
+  saveGears!: (gear: Gear.Gear[]) => void;
   updateProfiles!: (profiles: OptimizationProfile[]) => void;
   getEquipped!: (heroId: string) => Gear.GearCombination;
+  getGear!: (gearId: string) => Gear.Gear;
+  getHero!: (heroId: string) => Hero;
   getProfile!: (heroId: string) => OptimizationProfile | undefined;
 
   // worker
@@ -159,7 +160,7 @@ export default class OptimizerPage extends Vue {
   // models
   profile: OptimizationProfile = {
     id: '',
-    hero: {},
+    heroId: '',
     filter: {},
     stat: {},
     combination: {}
@@ -186,14 +187,14 @@ export default class OptimizerPage extends Vue {
   get gearStore() {
     return new Gear.GearStore(
       GearFilterService.filter(this.gears, this.profile.filter, {
-        heroId: this.profile.hero ? this.profile.hero.id : ''
+        heroId: this.profile.heroId
       })
     );
   }
 
   get equippedHero(): EquipedHero | undefined {
-    if (this.profile.hero) {
-      return GearCombinationService.apply(this.getEquipped(this.profile.hero.id), this.profile.hero);
+    if (this.profile.heroId && this.selectedCombination) {
+      return GearCombinationService.apply(this.selectedCombination, this.getHero(this.profile.heroId));
     }
     return undefined;
   }
@@ -208,13 +209,14 @@ export default class OptimizerPage extends Vue {
     this.worker.postMessage({
       action: 'optimize',
       store: this.gearStore,
-      profile: this.profile
+      profile: this.profile,
+      hero: this.getHero(this.profile.heroId)
     });
   }
 
   reset() {
-    if (!this.profile.hero.id) {
-      this.profile.hero = this.e7db.heros[34];
+    if (!this.profile.heroId) {
+      this.profile.heroId = this.heros[34].id;
     }
     this.result.splice(0, this.result.length);
     this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
@@ -233,23 +235,30 @@ export default class OptimizerPage extends Vue {
     this.profile.combination = {
       forcedSets: [] // [Gear.Set.Speed, Gear.Set.Critical]
     };
-    // this.changeHero();
-    if (this.equippedHero) {
-      console.log('reset::profile.hero.id =', this.profile.hero.id);
-      // console.log(this.getEquipped(this.profile.hero.id));
-      this.selectedCombination = this.equippedHero.combination;
-    }
+    this.selectedCombination = this.getEquipped(this.profile.heroId);
   }
 
   clickRow(item: EquipedHero, e: any) {
     console.log('clickRow::item =', item);
     console.log('clickRow::e =', e);
     e.select();
-    this.selectedCombination = item.combination;
+    console.log('clickRow::armor =', item.combination.sets);
+    this.selectedCombination = this.test(item.combination);
+  }
+
+  test(foo: Gear.GearCombination) {
+    const builder = new Gear.GearCombinationBuilder();
+    builder.weapon(this.getGear(foo.weapon.id));
+    builder.helmet(this.getGear(foo.helmet.id));
+    builder.armor(this.getGear(foo.armor.id));
+    builder.necklace(this.getGear(foo.necklace.id));
+    builder.ring(this.getGear(foo.ring.id));
+    builder.boot(this.getGear(foo.boot.id));
+    return builder.build(-1);
   }
 
   equipAll() {
-    console.log('equipAll::hero =', this.profile.hero);
+    console.log('equipAll::heroId =', this.profile.heroId);
     if (this.selectedCombination) {
       this.unequipAll();
       console.log('equipAll::selectedCombination =', this.selectedCombination);
@@ -257,22 +266,26 @@ export default class OptimizerPage extends Vue {
       [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot]
         .filter(x => x.id)
         .forEach(x => {
-          x.equippedHero = this.profile.hero.id;
-          this.updateGear(x);
+          x.equippedHero = this.profile.heroId;
+          this.saveGears([x]);
         });
     }
   }
 
   unequipAll() {
-    if (this.equippedHero && this.equippedHero.combination) {
-      console.log('unequipAll::', this.equippedHero.combination);
-      const c = this.equippedHero.combination;
-      [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot]
-        .filter(x => x.id)
-        .forEach(x => {
-          x.equippedHero = '';
-          this.updateGear(x);
-        });
+    if (this.selectedCombination) {
+      console.log('unequipAll::', this.selectedCombination);
+      [
+        this.selectedCombination.weapon,
+        this.selectedCombination.helmet,
+        this.selectedCombination.armor,
+        this.selectedCombination.necklace,
+        this.selectedCombination.ring,
+        this.selectedCombination.boot
+      ].forEach(x => {
+        x.equippedHero = '';
+        this.saveGears([x]);
+      });
     }
   }
 
@@ -292,16 +305,15 @@ export default class OptimizerPage extends Vue {
   }
 
   loadProfile() {
-    console.log('loadProfile::hero.id =', this.profile.hero.id);
-    const profile = this.getProfile(this.profile.hero.id);
-    console.log('loadProfile::profile =', this.getProfile(this.profile.hero.id));
+    console.log('loadProfile::hero.id =', this.profile.heroId);
+    const profile = this.getProfile(this.profile.heroId);
+    console.log('loadProfile::profile =', this.getProfile(this.profile.heroId));
     if (profile) {
       Object.assign(this.profile, profile);
     }
   }
 
   created() {
-    // this.hero = this.e7db.heros[4];
     this.reset();
     this.worker.onmessage = e => {
       console.log('worker::onmessage::action =', e.data.action);

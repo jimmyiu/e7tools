@@ -1,4 +1,4 @@
-import { Gear, Hero, Range } from '.';
+import { Gear, Range } from '.';
 
 export type OptimizationCombinationCriteria = {
   forcedSets: Gear.Set[];
@@ -22,7 +22,7 @@ export type OptimizationStatCriteria = {
  */
 export type OptimizationProfile = {
   id: string;
-  hero: Hero;
+  heroId: string;
   filter: Gear.GearFilter;
   stat: OptimizationStatCriteria;
   combination: OptimizationCombinationCriteria;

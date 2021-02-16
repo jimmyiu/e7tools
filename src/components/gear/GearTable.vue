@@ -69,13 +69,13 @@ import { mapActions, mapGetters } from 'vuex';
 @Component({
   name: 'gear-table',
   components: { GearSetIcon, GearTypeIcon },
-  computed: { ...mapGetters(['getGearMap']) },
-  methods: mapActions(['updateGear', 'deleteGear'])
+  computed: { ...mapGetters(['getGear']) },
+  methods: mapActions(['saveGears', 'removeGears'])
 })
 export default class GearTable extends Vue {
-  readonly getGearMap!: Map<string, Gear.Gear>;
-  updateGear!: (gear: Gear.Gear) => void;
-  deleteGear!: (gear: Gear.Gear) => void;
+  getGear!: (gearId: string) => Gear.Gear;
+  saveGears!: (gear: Gear.Gear[]) => void;
+  removeGears!: (gear: Gear.Gear[]) => void;
 
   @Prop() readonly item!: any;
   @Prop() readonly gears!: Gear.Gear[];
@@ -144,10 +144,10 @@ export default class GearTable extends Vue {
   }
 
   lockGear(gear: Gear.Gear) {
-    let lockGear = this.getGearMap.get(gear.id);
+    let lockGear = this.getGear(gear.id);
     if (lockGear) {
       lockGear.locked = !lockGear.locked;
-      this.updateGear(lockGear);
+      this.saveGears([lockGear]);
     }
   }
 
@@ -158,7 +158,7 @@ export default class GearTable extends Vue {
 
   confirmDelete(gear: Gear.Gear) {
     if (window.confirm(`Are you sure to delete the gear with type = ${gear.type} and set = ${gear.set}?`)) {
-      this.deleteGear(gear);
+      this.removeGears([gear]);
     }
   }
 }

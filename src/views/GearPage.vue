@@ -7,11 +7,6 @@
         <gear-table :gears="filteredGears" @edit-gear="editGear" />
       </v-col>
     </v-row>
-    <!-- <v-row>
-      <v-col>
-        <gear-statistics :gears="filteredGears" />
-      </v-col>
-    </v-row> -->
     <v-btn bottom fab fixed right @click="createGear"><v-icon>mdi-plus</v-icon></v-btn>
     <v-bottom-sheet v-model="visible.overlay" scrollable>
       <gear-form-card
@@ -28,19 +23,19 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { GearFormCard, GearTable, GearTableFilter } from '@/components';
 import { Gear } from '@/models';
 
 @Component({
   name: 'gear-page',
   components: { GearFormCard, GearTable, GearTableFilter },
-  computed: { ...mapState(['gears']), ...mapGetters(['getGearMap']) },
-  methods: mapActions(['updateGear'])
+  computed: { ...mapGetters(['gears', 'getGear']) },
+  methods: mapActions(['saveGears'])
 })
 export default class GearPage extends Vue {
-  readonly getGearMap!: Map<string, Gear.Gear>;
-  updateGear!: (gear: Gear.Gear) => void;
+  getGear!: (gearId: string) => Gear.Gear;
+  saveGears!: (gear: Gear.Gear[]) => void;
 
   gears!: Gear.Gear[];
   gearToBeEdited?: Gear.Gear = undefined;
@@ -79,13 +74,13 @@ export default class GearPage extends Vue {
   }
 
   inputGear(gear: Gear.Gear) {
-    this.updateGear(gear);
+    this.saveGears([gear]);
     this.visible.completeMsg = true;
     this.visible.overlay = false;
   }
 
   editGear(gearId: string) {
-    this.gearToBeEdited = this.getGearMap.get(gearId);
+    this.gearToBeEdited = this.getGear(gearId);
     this.visible.overlay = true;
   }
 

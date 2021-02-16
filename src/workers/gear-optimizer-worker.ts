@@ -3,7 +3,6 @@ import { DefaultGearOptimizer, IGearOptimizer } from '@/services/gear-optimizer'
 
 const ACTIONS = {
   OPTIMIZE: 'optimize',
-  //
   PROGRESS: 'progress'
 };
 
@@ -18,7 +17,12 @@ addEventListener('message', (event: MessageEvent) => {
     //   action: 'optimize-result',
     //   result: GearOptimizer.optimize(event.data.store, event.data.criteria, reportProgress)
     // });
-    const optimizer: IGearOptimizer = new DefaultGearOptimizer(event.data.store, event.data.profile, reportProgress);
+    const optimizer: IGearOptimizer = new DefaultGearOptimizer(
+      event.data.store,
+      event.data.profile,
+      event.data.hero,
+      reportProgress
+    );
     (self as any).postMessage({
       action: 'optimize-result',
       result: optimizer.optimize()

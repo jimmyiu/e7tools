@@ -30,23 +30,23 @@
           <v-col class="pr-2 text-right">
             {{ item[1] }}
           </v-col>
-          <!-- {{ item }} -->
-          <!-- <v-col
-          v-if="gear[item.value] && item.value != gear.main.value"
-          :key="`${i}1`"
-          bottom
-          class="pl-1 caption align-self-center"
-          cols="4"
-        >
-          <gear-stat-icon :stat="item" />
-        </v-col>
-        <v-col
-          v-if="gear[item.value] && item.value != gear.main.value"
-          :key="`${i}2`"
-          class="pr-3 text-right"
-          cols="2"
-          >{{ gear[item.value] }}</v-col
-        > -->
+          <!-- {{ item }}
+          <v-col
+            v-if="gear[item.value] && item.value != gear.main.value"
+            :key="`${i}1`"
+            bottom
+            class="pl-1 caption align-self-center"
+            cols="4"
+          >
+            <gear-stat-icon :stat="item" />
+          </v-col>
+          <v-col
+            v-if="gear[item.value] && item.value != gear.main.value"
+            :key="`${i}2`"
+            class="pr-3 text-right"
+            cols="2"
+            >{{ gear[item.value] }}</v-col
+          > -->
         </v-row>
       </v-card-text>
     </div>

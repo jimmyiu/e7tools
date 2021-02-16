@@ -1,9 +1,10 @@
-import { Gear, HeroAbility, EquipedHero, OptimizationProfile } from '@/models';
+import { Gear, HeroAbility, EquipedHero, OptimizationProfile, Hero } from '@/models';
 import GearCombinationService from './gear-combination-service';
 
 export interface IGearOptimizer {
   store: Gear.GearStore;
   profile: OptimizationProfile;
+  hero: Hero;
   progressCallback: (x: number) => void;
 
   optimize: () => EquipedHero[];
@@ -12,12 +13,13 @@ export interface IGearOptimizer {
 export class DefaultGearOptimizer implements IGearOptimizer {
   static COMBINATION_HARD_LIMIT = 10000000;
   // static COMBINATION_HARD_LIMIT = 10;
-  static OPTIMIZE_RESULT_LIMIT = 50000;
+  static OPTIMIZE_RESULT_LIMIT = 10000;
   static REPORT_PROGRESS_COUNT = DefaultGearOptimizer.COMBINATION_HARD_LIMIT / 10;
 
   constructor(
     public readonly store: Gear.GearStore,
     public readonly profile: OptimizationProfile,
+    public readonly hero: Hero,
     public readonly progressCallback: (x: number) => void
   ) { }
 
@@ -150,7 +152,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
                 }
 
                 // let combination = builder.build();
-                const equipedHero = GearCombinationService.apply(builder.build(count), this.profile.hero);
+                const equipedHero = GearCombinationService.apply(builder.build(count), this.hero);
                 if (equipedHeroFilter(equipedHero)) {
                   result.push(equipedHero);
                   if (result.length >= DefaultGearOptimizer.OPTIMIZE_RESULT_LIMIT) {

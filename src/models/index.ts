@@ -9,7 +9,7 @@ export { Hero, HeroAbility, EquipedHero };
 export { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria };
 
 export const Constants = {
-  CURRENT_PERSISTENT_DATA_VERSION: '0.2.1',
+  CURRENT_PERSISTENT_DATA_VERSION: '0.3.0',
   KEY_VUEXDATA: 'vuex.data',
   KEY_E7DBDAYA: 'vuex.e7db',
   GEAR_FILTER_DEFAULT: {
@@ -43,4 +43,15 @@ export const Constants = {
     Gear.Stat.RES
   ],
   BOOT_STATS: [Gear.Stat.HPP, Gear.Stat.HP, Gear.Stat.DEFP, Gear.Stat.DEF, Gear.Stat.ATKP, Gear.Stat.ATK, Gear.Stat.SPD]
+};
+
+export type VuexData = {
+  gears: Array<Gear.Gear>;
+  profiles: Array<OptimizationProfile>;
+  heros: Array<Hero>;
+};
+
+export type E7dbData = {
+  date: number;
+  heros: Array<Hero>;
 };

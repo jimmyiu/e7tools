@@ -25,20 +25,20 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import ImportService from '@/services/import-service';
 import GearService from '@/services/gear-service';
 import { Gear } from '@/models/gear';
 
 @Component({
   name: 'import-page',
-  computed: { ...mapState(['gears']) },
-  methods: { ...mapActions(['updateGears']) }
+  computed: { ...mapGetters(['gears']) },
+  methods: { ...mapActions(['saveGears']) }
 })
 export default class GearPage extends Vue {
   readonly sample = JSON.stringify(require('@/assets/json/import-sample.json'));
   readonly gears!: Gear.Gear[];
-  updateGears!: (a: any) => any;
+  saveGears!: (a: any) => any;
   loading = false;
   complete = false;
   number = 0;
@@ -55,7 +55,7 @@ export default class GearPage extends Vue {
       // console.log(foo);
     });
     this.number = converted.length;
-    this.updateGears(GearService.mergeGears(this.gears, converted));
+    this.saveGears(GearService.mergeGears(this.gears, converted));
     this.loading = false;
     this.complete = true;
   }
