@@ -272,7 +272,8 @@ export default class OptimizerPage extends Vue {
       damage: {}
     };
     this.profile.combination = {
-      forcedSets: [] // [Gear.Set.Speed, Gear.Set.Critical]
+      forcedSets: [], // [Gear.Set.Speed, Gear.Set.Critical]
+      limit: Constants.OPTIMIZATION_PROCESS_LIMIT
     };
     this.selectedSuit = this.getSuit(this.profile.heroId);
   }
