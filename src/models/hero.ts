@@ -1,4 +1,4 @@
-import { Gear } from '.';
+import { Gear, Suit } from '.';
 import { HeroAbility } from './common';
 
 export type Hero = HeroAbility & {
@@ -9,6 +9,7 @@ export type Hero = HeroAbility & {
 
 export type EquipedHero = HeroAbility & {
   combination: Gear.GearCombination;
+  suit: Suit;
   damage: number;
   ehp: number;
 };

@@ -1,6 +1,17 @@
 import { Gear, Suit, SuitAbility } from '@/models';
 
 class SuitSetBuilder implements Record<Gear.Set, number> {
+  // static FOUR_PIECES = [Gear.Set.Speed, Gear.Set.Attack, Gear.Set.Destruction];
+  static TWO_PIECES = [
+    Gear.Set.Critical,
+    Gear.Set.Hit,
+    Gear.Set.Resist,
+    Gear.Set.Health,
+    Gear.Set.Defense,
+    Gear.Set.Immunity,
+    Gear.Set.Unity,
+    Gear.Set.Penetration
+  ];
   Speed = 0;
   Critical = 0;
   Hit = 0;
@@ -43,59 +54,42 @@ class SuitSetBuilder implements Record<Gear.Set, number> {
     return true;
   }
 
-  // private updateValue(set: Set, value: number) {
-  // if (set == Set.Hit) {
-  //   this.hit += value;
-  // } else if (set == Set.Destruction) {
-  //   this.destruction += value;
-  // } else if (set == Set.LifeSteal) {
-  //   this.lifeSteal += value;
-  // } else if (set == Set.Counter) {
-  //   this.counter += value;
-  // } else if (set == Set.Resist) {
-  //   this.resist += value;
-  // } else if (set == Set.Health) {
-  //   this.health += value;
-  // } else if (set == Set.Defense) {
-  //   this.defense += value;
-  // } else if (set == Set.Attack) {
-  //   this.attack += value;
-  // } else if (set == Set.Immunity) {
-  //   this.immunity += value;
-  // } else if (set == Set.Unity) {
-  //   this.unity += value;
-  // } else if (set == Set.Rage) {
-  //   this.rage += value;
-  // } else if (set == Set.Revenge) {
-  //   this.revenge += value;
-  // } else if (set == Set.Injury) {
-  //   this.injury += value;
-  // } else if (set == Set.Penetration) {
-  //   this.penetration += value;
-  // } else if (set == Set.Speed) {
-  //   this.speed += value;
-  // } else if (set == Set.Critical) {
-  //   this.critical += value;
-  // }
-  // }
-
   determineSets(): Gear.Set[] {
     const result: Gear.Set[] = [];
-    for (let key in this) {
-      const value = (this as any)[key];
-      // console.log('determineSets::key =', key, ', value =', value);
-      if (value < 2) {
-        continue;
-      }
-      if (key == Gear.Set.Speed || key == Gear.Set.Attack || key == Gear.Set.Destruction) {
-        if (value >= 4) {
-          result.push(key as Gear.Set);
-        } else {
-          continue;
-        }
-      } else {
-        for (let i = 0; i < Math.trunc(value / 2); i++) {
-          result.push(key as Gear.Set);
+    // case 1
+    if (this.Speed >= 4) {
+      result.push(Gear.Set.Speed);
+    } else if (this.Attack >= 4) {
+      result.push(Gear.Set.Attack);
+    } else if (this.Destruction >= 4) {
+      result.push(Gear.Set.Destruction);
+    } else if (this.LifeSteal >= 4) {
+      result.push(Gear.Set.Destruction);
+    } else if (this.Counter >= 4) {
+      result.push(Gear.Set.Counter);
+    } else if (this.Rage >= 4) {
+      result.push(Gear.Set.Rage);
+    } else if (this.Revenge >= 4) {
+      result.push(Gear.Set.Revenge);
+    } else if (this.Injury >= 4) {
+      result.push(Gear.Set.Injury);
+    }
+    // case 2
+    const two = [
+      this.Critical,
+      this.Hit,
+      this.Resist,
+      this.Health,
+      this.Defense,
+      this.Immunity,
+      this.Unity,
+      this.Penetration
+    ];
+    for (let i = 0; i < two.length; i++) {
+      const value = two[i];
+      if (value >= 2) {
+        for (let j = 0; j < Math.trunc(value / 2); j++) {
+          result.push(SuitSetBuilder.TWO_PIECES[i]);
         }
       }
     }
@@ -110,7 +104,7 @@ export class SuitBuilder {
   private _necklace?: Gear.Gear;
   private _ring?: Gear.Gear;
   private _boot?: Gear.Gear;
-  private _sets;
+  private _sets: SuitSetBuilder;
   private _ability: SuitAbility = {
     hpp: 0,
     hp: 0,
@@ -128,27 +122,27 @@ export class SuitBuilder {
   constructor() {
     this._sets = new SuitSetBuilder();
   }
-  weapon(weapon: Gear.Gear) {
+  weapon(weapon?: Gear.Gear) {
     this.change(this._weapon, weapon);
     this._weapon = weapon;
   }
-  helmet(helmet: Gear.Gear) {
+  helmet(helmet?: Gear.Gear) {
     this.change(this._helmet, helmet);
     this._helmet = helmet;
   }
-  armor(armor: Gear.Gear) {
+  armor(armor?: Gear.Gear) {
     this.change(this._armor, armor);
     this._armor = armor;
   }
-  necklace(necklace: Gear.Gear) {
+  necklace(necklace?: Gear.Gear) {
     this.change(this._necklace, necklace);
     this._necklace = necklace;
   }
-  ring(ring: Gear.Gear) {
+  ring(ring?: Gear.Gear) {
     this.change(this._ring, ring);
     this._ring = ring;
   }
-  boot(boot: Gear.Gear) {
+  boot(boot?: Gear.Gear) {
     this.change(this._boot, boot);
     this._boot = boot;
   }
@@ -179,7 +173,7 @@ export class SuitBuilder {
       necklace: this._necklace,
       ring: this._ring,
       boot: this._boot,
-      sets: []
+      sets: this._sets.determineSets()
     };
   }
   private change(from?: Gear.Gear, to?: Gear.Gear) {
@@ -195,7 +189,7 @@ export class SuitBuilder {
       this._ability.spd += (to.spd ?? 0) - (from.spd ?? 0);
       this._ability.eff += (to.eff ?? 0) - (from.eff ?? 0);
       this._ability.res += (to.res ?? 0) - (from.res ?? 0);
-      this._sets.change(to.set!, from.set);
+      this._sets.change(from.set, to.set);
     } else if (from == undefined && to != undefined) {
       this._ability.hpp += to.hpp ?? 0;
       this._ability.hp += to.hp ?? 0;

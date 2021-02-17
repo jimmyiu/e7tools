@@ -1,5 +1,5 @@
 import { Gear } from '@/models';
-import { DefaultGearOptimizer, IGearOptimizer } from '@/services/gear-optimizer';
+import { DefaultGearOptimizer, FastGearOptimizer, IGearOptimizer } from '@/services/gear-optimizer';
 
 const ACTIONS = {
   OPTIMIZE: 'optimize',
@@ -14,6 +14,7 @@ addEventListener('message', (event: MessageEvent) => {
   console.log('optimizer::message::start, event =', event);
   if (event.data.action == ACTIONS.OPTIMIZE) {
     const optimizer: IGearOptimizer = new DefaultGearOptimizer(
+      // const optimizer: IGearOptimizer = new FastGearOptimizer(
       event.data.store,
       event.data.profile,
       event.data.hero,

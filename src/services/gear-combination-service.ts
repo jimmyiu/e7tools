@@ -1,4 +1,4 @@
-import { Gear, Hero } from '@/models';
+import { Gear, Hero, Suit } from '@/models';
 import { EquipedHero } from '@/models/hero';
 
 class GearCombinationService {
@@ -14,6 +14,7 @@ class GearCombinationService {
       eff: hero.eff + combination.ability.eff + extra.eff,
       res: hero.res + combination.ability.res + extra.res,
       combination: combination,
+      suit: {} as Suit,
       damage: 0,
       ehp: 0
     };

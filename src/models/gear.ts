@@ -381,7 +381,7 @@ export namespace Gear {
       sets: SetCalculator
     ) {
       this.ability = Object.assign({}, ability);
-      this.sets = sets.determineSets();
+      this.sets = []; //sets.determineSets();
     }
   }
 

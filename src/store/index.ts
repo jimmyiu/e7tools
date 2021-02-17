@@ -33,11 +33,6 @@ export default new Vuex.Store({
     getHero: state => (heroId: string) => {
       return state.data.heros.find(x => x.id == heroId);
     },
-    getEquipped: state => (heroId: string) => {
-      const builder = new Gear.GearCombinationBuilder();
-      state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
-      return builder.build(-1);
-    },
     getSuit: state => (heroId: string) => {
       const builder = new SuitBuilder();
       state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));

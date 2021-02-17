@@ -1,4 +1,4 @@
-import { Gear, Range, SuitAbility } from '.';
+import { Gear, HeroAbility, Range, SuitAbility } from '.';
 
 export type OptimizationCombinationCriteria = {
   forcedSets: Gear.Set[];
@@ -29,6 +29,15 @@ export type OptimizationProfile = {
   // criteria: OptimizerCriteria;
 };
 
-export type OptimizationResult = SuitAbility & {
+export type OptimizationResult = HeroAbility & {
+  id: number;
+  damage: number;
+  ehp: number;
   sets: string[];
+  weaponId?: string;
+  helmetId?: string;
+  armorId?: string;
+  necklaceId?: string;
+  ringId?: string;
+  bootId?: string;
 };

@@ -115,16 +115,16 @@
               dense
               :footer-props="{ showFirstLastPage: true }"
               :headers="headers"
-              item-key="combination.id"
+              item-key="id"
               :items="result"
               :items-per-page="10"
               :multi-sort="false"
               single-select
               @click:row="clickRow"
             >
-              <template v-slot:item.combination.sets="{ item }">
+              <template v-slot:item.sets="{ item }">
                 <div class="d-flex">
-                  <gear-set-icon v-for="(set, key) in item.combination.sets" :key="key" :set="set" small />
+                  <gear-set-icon v-for="(set, key) in item.sets" :key="key" :set="set" small />
                 </div>
               </template>
             </v-data-table>
@@ -148,13 +148,14 @@ import { Constants, Gear, EquipedHero, OptimizationProfile, Hero, Suit } from '@
 import { DefaultGearOptimizer } from '@/services/gear-optimizer';
 import GearFilterService from '@/services/gear-filter-service';
 import { Vue, Component } from 'vue-property-decorator';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { SuitBuilder, heroService } from '@/services';
+import { OptimizationResult } from '@/models/optimizer';
 
 @Component({
   name: 'optimizer-page',
   components: { GearDetailCard, GearSetIcon, OptimizationProfiler },
-  computed: { ...mapGetters(['heros', 'gears', 'getSuit', 'getEquipped', 'getProfile', 'getHero', 'getGear']) },
+  computed: { ...mapGetters(['heros', 'gears', 'getSuit', 'getProfile', 'getHero', 'getGear']) },
   methods: mapActions(['saveGears', 'updateProfiles'])
 })
 export default class OptimizerPage extends Vue {
@@ -163,7 +164,6 @@ export default class OptimizerPage extends Vue {
   readonly heros!: Hero[];
   saveGears!: (gear: Gear.Gear[]) => void;
   updateProfiles!: (profiles: OptimizationProfile[]) => void;
-  getEquipped!: (heroId: string) => Gear.GearCombination;
   getSuit!: (heroId: string) => Suit;
   getGear!: (gearId: string) => Gear.Gear;
   getHero!: (heroId: string) => Hero;
@@ -180,13 +180,13 @@ export default class OptimizerPage extends Vue {
     stat: {},
     combination: {}
   } as OptimizationProfile;
-  result: EquipedHero[] = [];
+  result: OptimizationResult[] = [];
   selectedSuit = {} as Suit;
   progress = 0;
   popupMsg = 0;
   //
   headers = [
-    { text: 'Set', value: 'combination.sets', sortable: false },
+    { text: 'Set', value: 'sets', sortable: false },
     { text: 'HP', value: 'hp' },
     { text: 'DEF', value: 'def' },
     { text: 'ATK', value: 'atk' },
@@ -253,22 +253,21 @@ export default class OptimizerPage extends Vue {
     this.selectedSuit = this.getSuit(this.profile.heroId);
   }
 
-  clickRow(item: EquipedHero, e: any) {
+  clickRow(item: OptimizationResult, e: any) {
     console.log('clickRow::item =', item);
     console.log('clickRow::e =', e);
     e.select();
     // console.log('clickRow::armor =', item.combination.sets);
-    this.selectedSuit = this.toSuit(item.combination);
+    this.selectedSuit = this.toSuit(item);
   }
 
-  toSuit(foo: Gear.GearCombination) {
+  toSuit(foo: OptimizationResult) {
     const builder = new SuitBuilder();
-    builder.weapon(this.getGear(foo.weapon.id));
-    builder.helmet(this.getGear(foo.helmet.id));
-    builder.armor(this.getGear(foo.armor.id));
-    builder.necklace(this.getGear(foo.necklace.id));
-    builder.ring(this.getGear(foo.ring.id));
-    builder.boot(this.getGear(foo.boot.id));
+    [foo.weaponId, foo.helmetId, foo.armorId, foo.necklaceId, foo.ringId, foo.bootId].forEach(x => {
+      if (x != undefined) {
+        builder.setGear(this.getGear(x));
+      }
+    });
     return builder.build();
   }
 
