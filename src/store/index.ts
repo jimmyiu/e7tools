@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import { VuexData, Gear, Hero, OptimizationProfile } from '@/models';
 import E7dbDataHandler from '@/services/e7db-data-handler';
 import { persistenceService } from '@/services/presistence';
+import { SuitBuilder } from '@/services';
 
 Vue.use(Vuex);
 
@@ -36,6 +37,11 @@ export default new Vuex.Store({
       const builder = new Gear.GearCombinationBuilder();
       state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
       return builder.build(-1);
+    },
+    getSuit: state => (heroId: string) => {
+      const builder = new SuitBuilder();
+      state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
+      return builder.build();
     }
   },
   mutations: {

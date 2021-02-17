@@ -14,12 +14,13 @@ export type SuitAbility = {
   res: number;
 };
 
-export type Suit = SuitAbility & {
-  weapon: Gear.Gear;
-  helmet: Gear.Gear;
-  armor: Gear.Gear;
-  necklace: Gear.Gear;
-  ring: Gear.Gear;
-  boot: Gear.Gear;
+export type Suit = {
+  ability: SuitAbility;
   sets: Gear.Set[];
+  weapon?: Gear.Gear;
+  helmet?: Gear.Gear;
+  armor?: Gear.Gear;
+  necklace?: Gear.Gear;
+  ring?: Gear.Gear;
+  boot?: Gear.Gear;
 };

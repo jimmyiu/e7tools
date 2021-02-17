@@ -78,22 +78,22 @@
         </v-row>
         <v-row>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.weapon" />
+            <gear-detail-card :gear="selectedSuit.weapon" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.helmet" />
+            <gear-detail-card :gear="selectedSuit.helmet" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.armor" />
+            <gear-detail-card :gear="selectedSuit.armor" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.necklace" />
+            <gear-detail-card :gear="selectedSuit.necklace" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.ring" />
+            <gear-detail-card :gear="selectedSuit.ring" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.boot" />
+            <gear-detail-card :gear="selectedSuit.boot" />
           </v-col>
         </v-row>
       </v-card-text>
@@ -144,17 +144,17 @@
 
 <script lang="ts">
 import { GearDetailCard, GearSetIcon, OptimizationProfiler } from '@/components';
-import { Constants, Gear, EquipedHero, OptimizationProfile, Hero } from '@/models';
+import { Constants, Gear, EquipedHero, OptimizationProfile, Hero, Suit } from '@/models';
 import { DefaultGearOptimizer } from '@/services/gear-optimizer';
 import GearFilterService from '@/services/gear-filter-service';
-import GearCombinationService from '@/services/gear-combination-service';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters, mapState } from 'vuex';
+import { SuitBuilder, heroService } from '@/services';
 
 @Component({
   name: 'optimizer-page',
   components: { GearDetailCard, GearSetIcon, OptimizationProfiler },
-  computed: { ...mapGetters(['heros', 'gears', 'getEquipped', 'getProfile', 'getHero', 'getGear']) },
+  computed: { ...mapGetters(['heros', 'gears', 'getSuit', 'getEquipped', 'getProfile', 'getHero', 'getGear']) },
   methods: mapActions(['saveGears', 'updateProfiles'])
 })
 export default class OptimizerPage extends Vue {
@@ -164,6 +164,7 @@ export default class OptimizerPage extends Vue {
   saveGears!: (gear: Gear.Gear[]) => void;
   updateProfiles!: (profiles: OptimizationProfile[]) => void;
   getEquipped!: (heroId: string) => Gear.GearCombination;
+  getSuit!: (heroId: string) => Suit;
   getGear!: (gearId: string) => Gear.Gear;
   getHero!: (heroId: string) => Hero;
   getProfile!: (heroId: string) => OptimizationProfile | undefined;
@@ -180,7 +181,7 @@ export default class OptimizerPage extends Vue {
     combination: {}
   } as OptimizationProfile;
   result: EquipedHero[] = [];
-  selectedCombination = {} as Gear.GearCombination;
+  selectedSuit = {} as Suit;
   progress = 0;
   popupMsg = 0;
   //
@@ -207,8 +208,8 @@ export default class OptimizerPage extends Vue {
   }
 
   get equippedHero(): EquipedHero | undefined {
-    if (this.profile.heroId && this.selectedCombination) {
-      return GearCombinationService.apply(this.selectedCombination, this.getHero(this.profile.heroId));
+    if (this.profile.heroId && this.selectedSuit) {
+      return heroService.equip(this.getHero(this.profile.heroId), this.selectedSuit);
     }
     return undefined;
   }
@@ -249,68 +250,61 @@ export default class OptimizerPage extends Vue {
     this.profile.combination = {
       forcedSets: [] // [Gear.Set.Speed, Gear.Set.Critical]
     };
-    this.selectedCombination = this.getEquipped(this.profile.heroId);
+    this.selectedSuit = this.getSuit(this.profile.heroId);
   }
 
   clickRow(item: EquipedHero, e: any) {
     console.log('clickRow::item =', item);
     console.log('clickRow::e =', e);
     e.select();
-    console.log('clickRow::armor =', item.combination.sets);
-    this.selectedCombination = this.test(item.combination);
+    // console.log('clickRow::armor =', item.combination.sets);
+    this.selectedSuit = this.toSuit(item.combination);
   }
 
-  test(foo: Gear.GearCombination) {
-    const builder = new Gear.GearCombinationBuilder();
+  toSuit(foo: Gear.GearCombination) {
+    const builder = new SuitBuilder();
     builder.weapon(this.getGear(foo.weapon.id));
     builder.helmet(this.getGear(foo.helmet.id));
     builder.armor(this.getGear(foo.armor.id));
     builder.necklace(this.getGear(foo.necklace.id));
     builder.ring(this.getGear(foo.ring.id));
     builder.boot(this.getGear(foo.boot.id));
-    return builder.build(-1);
+    return builder.build();
   }
 
   equipAll() {
     console.log('equipAll::heroId =', this.profile.heroId);
-    if (this.selectedCombination) {
+    if (this.selectedSuit) {
       this.unequipAll();
-      console.log('equipAll::selectedCombination =', this.selectedCombination);
-      const c = this.selectedCombination;
-      [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot]
-        .filter(x => x.id)
-        .forEach(x => {
+      console.log('equipAll::selectedSuit =', this.selectedSuit);
+      const c = this.selectedSuit;
+      [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot].forEach(x => {
+        if (x != undefined) {
           x.equippedHero = this.profile.heroId;
           this.saveGears([x]);
-        });
-    }
-  }
-
-  unequipAll() {
-    if (this.selectedCombination) {
-      console.log('unequipAll::', this.selectedCombination);
-      [
-        this.selectedCombination.weapon,
-        this.selectedCombination.helmet,
-        this.selectedCombination.armor,
-        this.selectedCombination.necklace,
-        this.selectedCombination.ring,
-        this.selectedCombination.boot
-      ].forEach(x => {
-        x.equippedHero = '';
-        this.saveGears([x]);
+        }
       });
     }
   }
 
-  // changeHero() {
-  //   console.log('changeHero::start');
-  //   if (this.equippedHero) {
-  //     console.log('changeHero::profile.hero.id =', this.profile.hero.id);
-  //     // console.log(this.getEquipped(this.profile.hero.id));
-  //     this.selectedCombination = this.equippedHero.combination;
-  //   }
-  // }
+  unequipAll() {
+    if (this.selectedSuit) {
+      console.log('unequipAll::', this.selectedSuit);
+      [
+        this.selectedSuit.weapon,
+        this.selectedSuit.helmet,
+        this.selectedSuit.armor,
+        this.selectedSuit.necklace,
+        this.selectedSuit.ring,
+        this.selectedSuit.boot
+      ].forEach(x => {
+        if (x != undefined) {
+          x.equippedHero = '';
+          this.saveGears([x]);
+        }
+      });
+    }
+  }
 
   saveProfile() {
     console.log('saveProfile::profile =', this.profile);

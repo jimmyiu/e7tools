@@ -29,6 +29,7 @@
           </v-col>
           <v-col class="pr-3 text-right">
             {{ item[1] }}
+            <span v-if="item[0].percent">%</span>
           </v-col>
           <!-- {{ item }}
           <v-col

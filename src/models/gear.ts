@@ -30,6 +30,7 @@ export namespace Gear {
     [Set.Revenge, Set.Injury, Set.Penetration],
     [Set.Destruction, Set.Counter, Set.LifeSteal, Set.Resist]
   ];
+  export const ALL_SETS = Object.values(Set);
   export type SetAbility = {
     hpp: number;
     defp: number;
