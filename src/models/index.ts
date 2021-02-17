@@ -10,8 +10,7 @@ export { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationC
 
 export const Constants = {
   CURRENT_PERSISTENT_DATA_VERSION: '0.3.1',
-  OPTIMIZATION_CALCULATION_LIMIT: 20000000,
-  OPTIMIZATION_RESULT_LIMIT: 10000,
+  OPTIMIZATION_PROCESS_LIMIT: 20000000,
   DEFAULT_HERO_ID: 'iseria',
   KEY_VUEXDATA: 'vuex.data',
 
