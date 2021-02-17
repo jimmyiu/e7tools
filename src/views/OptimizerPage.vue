@@ -7,10 +7,9 @@
         <!-- Filter: {{ filter }}, Criteria: {{ criteria }}<br /> -->
         <!-- Distribution: {{ gearStore.distribution }}<br /> -->
         <br />
-        Number of combinations: {{ gearStore.numOfCombinations | formatNumber }} (Hard limit:
-        {{ hardLimit | formatNumber }})<br />
+        Number of combinations: {{ gearStore.numOfCombinations | formatNumber }}<br />
         Estimated processing time:
-        {{ Math.round(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber }}
+        {{ Math.ceil(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber }}
         minutes
         <!-- <v-icon>help_outlined</v-icon> -->
         <!-- <i>
@@ -23,63 +22,87 @@
     </v-card>
     <v-card class="mt-2">
       <v-card-text>
-        <optimization-profiler v-model="profile" @change-hero="reset" />
+        <optimization-profiler v-model="profile" @change-hero="changeHero" />
       </v-card-text>
       <v-divider />
       <!-- <v-card-text> Profile: {{ profile }} </v-card-text>
       <v-divider /> -->
       <v-card-actions>
         <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
-        <v-btn text @click="reset">Reset</v-btn>
+        <v-btn text @click="reset">Clear</v-btn>
         <v-divider class="mx-2" vertical />
         <v-btn class="font-weight-bold" color="success" text @click="saveProfile">Save</v-btn>
         <v-btn text @click="loadProfile">Load</v-btn>
         <v-divider class="mx-2" vertical />
+        <v-spacer />
+        <v-text-field
+          v-model="profile.combination.limit"
+          dense
+          hide-details
+          label="Process Limit"
+          outlined
+          style="max-width: 200px"
+          type="number"
+        />
       </v-card-actions>
     </v-card>
 
     <v-card class="mt-2">
       <v-card-text>
         <v-row v-if="equippedHero">
-          <v-col class="d-flex" cols="12">
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/hp.png`)" />
             {{ equippedHero.hp }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/def.png`)" />
             {{ equippedHero.def }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/atk.png`)" />
             {{ equippedHero.atk }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/cri.png`)" />
             {{ equippedHero.cri }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/cdmg.png`)" />
             {{ equippedHero.cdmg }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/spd.png`)" />
             {{ equippedHero.spd }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/eff.png`)" />
             {{ equippedHero.eff }}
+          </v-col>
+          <v-col class="d-flex" cols="1">
             <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/res.png`)" />
             {{ equippedHero.res }}
-            Damage: {{ equippedHero.damage }}, EHP:
-            {{ equippedHero.ehp }}
           </v-col>
+          <v-col class="d-flex" cols="2">Damage: {{ equippedHero.damage }}</v-col>
+          <v-col class="d-flex" cols="2">EHP: {{ equippedHero.ehp }}</v-col>
         </v-row>
         <v-row>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.weapon" />
+            <gear-detail-card :gear="selectedSuit.weapon" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.helmet" />
+            <gear-detail-card :gear="selectedSuit.helmet" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.armor" />
+            <gear-detail-card :gear="selectedSuit.armor" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.necklace" />
+            <gear-detail-card :gear="selectedSuit.necklace" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.ring" />
+            <gear-detail-card :gear="selectedSuit.ring" />
           </v-col>
           <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedCombination.boot" />
+            <gear-detail-card :gear="selectedSuit.boot" />
           </v-col>
         </v-row>
       </v-card-text>
@@ -92,7 +115,7 @@
 
     <v-card class="mt-2">
       <v-progress-linear v-if="progress > 0" height="20" indeterminate striped>
-        <strong>{{ progress }}%</strong>
+        <strong>Processed: {{ progress }}</strong>
       </v-progress-linear>
       <v-card-text>
         <v-row>
@@ -101,16 +124,16 @@
               dense
               :footer-props="{ showFirstLastPage: true }"
               :headers="headers"
-              item-key="combination.id"
+              item-key="id"
               :items="result"
               :items-per-page="10"
               :multi-sort="false"
               single-select
               @click:row="clickRow"
             >
-              <template v-slot:item.combination.sets="{ item }">
+              <template v-slot:item.sets="{ item }">
                 <div class="d-flex">
-                  <gear-set-icon v-for="(set, key) in item.combination.sets" :key="key" :set="set" small />
+                  <gear-set-icon v-for="(set, key) in item.sets" :key="key" :set="set" small />
                 </div>
               </template>
             </v-data-table>
@@ -130,28 +153,33 @@
 
 <script lang="ts">
 import { GearDetailCard, GearSetIcon, OptimizationProfiler } from '@/components';
-import { Constants, Gear, EquipedHero, OptimizationProfile } from '@/models';
-import { E7dbData } from '@/models/persistence';
-import { DefaultGearOptimizer } from '@/services/gear-optimizer';
+import { Constants, Gear, EquipedHero, OptimizationProfile, Hero, Suit, SiteState } from '@/models';
 import GearFilterService from '@/services/gear-filter-service';
-import GearCombinationService from '@/services/gear-combination-service';
 import { Vue, Component } from 'vue-property-decorator';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
+import { SuitBuilder, heroService } from '@/services';
+import { OptimizationResult } from '@/models/optimizer';
 
 @Component({
   name: 'optimizer-page',
   components: { GearDetailCard, GearSetIcon, OptimizationProfiler },
-  computed: { ...mapState(['gears', 'e7db']), ...mapGetters(['getEquipped', 'getProfile']) },
-  methods: mapActions(['updateGear', 'updateProfiles'])
+  computed: {
+    ...mapGetters(['siteState', 'heros', 'gears', 'getSuit', 'getProfile', 'getHero', 'getGear'])
+  },
+  methods: mapActions(['saveGears', 'updateProfiles', 'updateState'])
 })
 export default class OptimizerPage extends Vue {
   // vuex
   readonly gears!: Gear.Gear[];
-  readonly e7db!: E7dbData;
-  updateGear!: (gear: Gear.Gear) => void;
+  readonly heros!: Hero[];
+  readonly siteState!: SiteState;
+  saveGears!: (gear: Gear.Gear[]) => void;
   updateProfiles!: (profiles: OptimizationProfile[]) => void;
-  getEquipped!: (heroId: string) => Gear.GearCombination;
+  getSuit!: (heroId: string) => Suit;
+  getGear!: (gearId: string) => Gear.Gear;
+  getHero!: (heroId: string) => Hero;
   getProfile!: (heroId: string) => OptimizationProfile | undefined;
+  updateState!: (siteState: Partial<SiteState>) => void;
 
   // worker
   worker = new Worker('../workers/gear-optimizer-worker.ts', { type: 'module' });
@@ -159,18 +187,19 @@ export default class OptimizerPage extends Vue {
   // models
   profile: OptimizationProfile = {
     id: '',
-    hero: {},
+    heroId: '',
     filter: {},
     stat: {},
     combination: {}
   } as OptimizationProfile;
-  result: EquipedHero[] = [];
-  selectedCombination = {} as Gear.GearCombination;
+
+  result: OptimizationResult[] = [];
+  selectedSuit = {} as Suit;
   progress = 0;
   popupMsg = 0;
   //
   headers = [
-    { text: 'Set', value: 'combination.sets', sortable: false },
+    { text: 'Set', value: 'sets', sortable: false },
     { text: 'HP', value: 'hp' },
     { text: 'DEF', value: 'def' },
     { text: 'ATK', value: 'atk' },
@@ -186,20 +215,16 @@ export default class OptimizerPage extends Vue {
   get gearStore() {
     return new Gear.GearStore(
       GearFilterService.filter(this.gears, this.profile.filter, {
-        heroId: this.profile.hero ? this.profile.hero.id : ''
+        heroId: this.profile.heroId
       })
     );
   }
 
   get equippedHero(): EquipedHero | undefined {
-    if (this.profile.hero) {
-      return GearCombinationService.apply(this.getEquipped(this.profile.hero.id), this.profile.hero);
+    if (this.profile.heroId && this.selectedSuit) {
+      return heroService.equip(this.getHero(this.profile.heroId), this.selectedSuit);
     }
     return undefined;
-  }
-
-  get hardLimit() {
-    return DefaultGearOptimizer.COMBINATION_HARD_LIMIT;
   }
 
   async optimize() {
@@ -208,14 +233,30 @@ export default class OptimizerPage extends Vue {
     this.worker.postMessage({
       action: 'optimize',
       store: this.gearStore,
-      profile: this.profile
+      profile: this.profile,
+      hero: this.getHero(this.profile.heroId)
     });
   }
 
+  clickRow(item: OptimizationResult, e: any) {
+    console.log('clickRow::item =', item);
+    console.log('clickRow::e =', e);
+    e.select();
+    // console.log('clickRow::armor =', item.combination.sets);
+    this.selectedSuit = this.toSuit(item);
+  }
+
+  toSuit(foo: OptimizationResult) {
+    const builder = new SuitBuilder();
+    [foo.weaponId, foo.helmetId, foo.armorId, foo.necklaceId, foo.ringId, foo.bootId].forEach(x => {
+      if (x != undefined) {
+        builder.setGear(this.getGear(x));
+      }
+    });
+    return builder.build();
+  }
+
   reset() {
-    if (!this.profile.hero.id) {
-      this.profile.hero = this.e7db.heros[34];
-    }
     this.result.splice(0, this.result.length);
     this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
     this.profile.stat = {
@@ -233,57 +274,47 @@ export default class OptimizerPage extends Vue {
     this.profile.combination = {
       forcedSets: [] // [Gear.Set.Speed, Gear.Set.Critical]
     };
-    // this.changeHero();
-    if (this.equippedHero) {
-      console.log('reset::profile.hero.id =', this.profile.hero.id);
-      // console.log(this.getEquipped(this.profile.hero.id));
-      this.selectedCombination = this.equippedHero.combination;
-    }
+    this.selectedSuit = this.getSuit(this.profile.heroId);
   }
 
-  clickRow(item: EquipedHero, e: any) {
-    console.log('clickRow::item =', item);
-    console.log('clickRow::e =', e);
-    e.select();
-    this.selectedCombination = item.combination;
+  changeHero(heroId: string) {
+    this.updateState({ lastSelectedHeroId: heroId });
+    this.loadProfile();
   }
 
   equipAll() {
-    console.log('equipAll::hero =', this.profile.hero);
-    if (this.selectedCombination) {
+    console.log('equipAll::heroId =', this.profile.heroId);
+    if (this.selectedSuit) {
       this.unequipAll();
-      console.log('equipAll::selectedCombination =', this.selectedCombination);
-      const c = this.selectedCombination;
-      [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot]
-        .filter(x => x.id)
-        .forEach(x => {
-          x.equippedHero = this.profile.hero.id;
-          this.updateGear(x);
-        });
+      console.log('equipAll::selectedSuit =', this.selectedSuit);
+      const c = this.selectedSuit;
+      [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot].forEach(x => {
+        if (x != undefined) {
+          x.equippedHero = this.profile.heroId;
+          this.saveGears([x]);
+        }
+      });
     }
   }
 
   unequipAll() {
-    if (this.equippedHero && this.equippedHero.combination) {
-      console.log('unequipAll::', this.equippedHero.combination);
-      const c = this.equippedHero.combination;
-      [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot]
-        .filter(x => x.id)
-        .forEach(x => {
+    if (this.selectedSuit) {
+      console.log('unequipAll::', this.selectedSuit);
+      [
+        this.selectedSuit.weapon,
+        this.selectedSuit.helmet,
+        this.selectedSuit.armor,
+        this.selectedSuit.necklace,
+        this.selectedSuit.ring,
+        this.selectedSuit.boot
+      ].forEach(x => {
+        if (x != undefined) {
           x.equippedHero = '';
-          this.updateGear(x);
-        });
+          this.saveGears([x]);
+        }
+      });
     }
   }
-
-  // changeHero() {
-  //   console.log('changeHero::start');
-  //   if (this.equippedHero) {
-  //     console.log('changeHero::profile.hero.id =', this.profile.hero.id);
-  //     // console.log(this.getEquipped(this.profile.hero.id));
-  //     this.selectedCombination = this.equippedHero.combination;
-  //   }
-  // }
 
   saveProfile() {
     console.log('saveProfile::profile =', this.profile);
@@ -292,17 +323,23 @@ export default class OptimizerPage extends Vue {
   }
 
   loadProfile() {
-    console.log('loadProfile::hero.id =', this.profile.hero.id);
-    const profile = this.getProfile(this.profile.hero.id);
-    console.log('loadProfile::profile =', this.getProfile(this.profile.hero.id));
+    console.log('loadProfile::hero.id =', this.profile.heroId);
+    const profile = this.getProfile(this.profile.heroId);
+    console.log('loadProfile::profile =', this.getProfile(this.profile.heroId));
     if (profile) {
       Object.assign(this.profile, profile);
     }
+    this.selectedSuit = this.getSuit(this.profile.heroId);
   }
 
   created() {
-    // this.hero = this.e7db.heros[4];
+    this.setupWorker();
+    this.profile.heroId = this.siteState.lastSelectedHeroId;
     this.reset();
+    this.loadProfile();
+  }
+
+  setupWorker() {
     this.worker.onmessage = e => {
       console.log('worker::onmessage::action =', e.data.action);
       if (e.data.action == 'optimize-result') {

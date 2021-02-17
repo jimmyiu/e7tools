@@ -8,7 +8,11 @@
     <v-card>
       <v-toolbar color="success">Import</v-toolbar>
       <v-card-text>
-        <br />Paste previous exported JSON here, and then click 'Import'
+        <br />Paste previous exported JSON here, and then click 'Import' <br />
+        <span style="color: red">
+          CAUTION: existing data will be replaced without backup, please make sure you have backup (exported) data
+          properly
+        </span>
         <v-textarea ref="import-data" v-model="data" filled hide-details="" />
       </v-card-text>
       <v-divider></v-divider>
@@ -24,29 +28,32 @@
   </v-dialog>
 </template>
 <script lang="ts">
-import { Constants } from '@/models';
+import { Constants, VuexData } from '@/models';
 import { PersistentData } from '@/models/persistence';
-import { DataConverterFactory } from '@/services/data-converter';
 import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
+import { mapActions } from 'vuex';
 
 @Component({
-  name: 'import-setting-btn'
+  name: 'import-setting-btn',
+  methods: { ...mapActions(['initVuex']) }
 })
 export default class ImportSettingBtn extends Vue {
+  initVuex!: (data: VuexData) => void;
+  //
   dialog = false;
   data: string = '';
 
   importData() {
-    // localStorage.clear();
-    const importData = JSON.parse(this.data) as PersistentData;
-    console.log('importData::data.version =', importData.version);
-    if (importData.version == Constants.CURRENT_PERSISTENT_DATA_VERSION) {
+    if (this.isValid()) {
       localStorage.setItem(Constants.KEY_VUEXDATA, this.data);
-    } else {
-      console.log('importData::data conversion starts');
-      const result = DataConverterFactory.getDataConverter(importData.version).convert(importData);
+      this.$router.go(0);
     }
-    this.$router.go(0);
+  }
+
+  isValid() {
+    const importData = JSON.parse(this.data) as PersistentData;
+    // TODO: better validation
+    return importData.version != undefined;
   }
 }
 </script>

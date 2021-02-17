@@ -6,7 +6,7 @@
       </v-list-item-title>
     </v-list-item>
     <v-divider />
-    <data-setting-item />
+    <data-setting-list-item />
     <v-divider />
     <e7db-cache-setting-item />
     <v-divider />
@@ -24,19 +24,19 @@
         Version
       </v-list-item-content>
       <v-list-item-action>
-        0.2.0
+        0.3.0
       </v-list-item-action>
     </v-list-item>
   </v-navigation-drawer>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
-import { E7dbCacheSettingItem, DataSettingItem } from './setting';
+import { E7dbCacheSettingItem, DataSettingListItem } from './setting';
 import { Constants } from '@/models';
 
 @Component({
   name: 'site-setting',
-  components: { E7dbCacheSettingItem, DataSettingItem }
+  components: { E7dbCacheSettingItem, DataSettingListItem }
 })
 export default class SiteSetting extends Vue {
   @Model('input') readonly visible!: boolean;

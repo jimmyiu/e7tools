@@ -3,15 +3,14 @@
     <v-col cols="12" md="auto">
       <div style="max-width: 340px">
         <v-autocomplete
-          v-model="value.hero"
+          v-model="value.heroId"
           class="mb-4"
           hide-details
           item-text="name"
           item-value="id"
-          :items="e7db.heros"
+          :items="heros"
           label="Hero"
           outlined
-          return-object
           @change="changeHero"
         >
           <template v-slot:item="data">
@@ -55,22 +54,23 @@ import { Vue, Component, Model } from 'vue-property-decorator';
 import OptimizationCriteria from './OptimizationCriteria.vue';
 import OptimizationFilter from './OptimizationFilter.vue';
 import { Gear, OptimizationProfile } from '@/models';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 
 @Component({
   name: 'optimization-profiler',
   components: { OptimizationCriteria, OptimizationFilter },
-  computed: { ...mapState(['e7db']) }
+  computed: { ...mapGetters(['heros']) }
 })
 export default class OptimizationProfiler extends Vue {
+  @Model() readonly value!: OptimizationProfile;
+
   get sets() {
     return Object.values(Gear.Set);
   }
-  @Model() readonly value!: OptimizationProfile;
 
   changeHero() {
-    if (this.value.hero && this.value.hero.id) {
-      this.$emit('change-hero', this.value.hero);
+    if (this.value.heroId) {
+      this.$emit('change-hero', this.value.heroId);
     }
   }
 }

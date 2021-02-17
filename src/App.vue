@@ -19,6 +19,8 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapState } from 'vuex';
 import { TopNav, SiteSetting } from '@/components';
+import { persistenceService } from '@/services/presistence';
+import { VuexData } from './models';
 
 @Component({
   name: 'app',
@@ -27,13 +29,15 @@ import { TopNav, SiteSetting } from '@/components';
   methods: { ...mapActions(['initVuex']) }
 })
 export default class App extends Vue {
+  // vuex
+  initVuex!: (data: VuexData) => void;
   loading!: boolean;
-
+  //
   setting = false;
-  initVuex!: () => void;
 
   created() {
-    this.initVuex();
+    const data = persistenceService.getVuexData();
+    this.initVuex(data);
   }
 }
 </script>

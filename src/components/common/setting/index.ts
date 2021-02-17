@@ -1,4 +1,4 @@
 import E7dbCacheSettingItem from './E7dbCacheSettingItem.vue';
-import DataSettingItem from './DataSettingItem.vue';
+import DataSettingListItem from './DataSettingListItem.vue';
 
-export { E7dbCacheSettingItem, DataSettingItem };
+export { E7dbCacheSettingItem, DataSettingListItem };

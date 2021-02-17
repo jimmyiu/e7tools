@@ -1,15 +1,5 @@
-import { Gear } from '.';
-
-export type HeroAbility = {
-  hp: number;
-  def: number;
-  atk: number;
-  cri: number;
-  cdmg: number;
-  spd: number;
-  eff: number;
-  res: number;
-};
+import { Gear, Suit } from '.';
+import { HeroAbility } from './common';
 
 export type Hero = HeroAbility & {
   id: string;
@@ -19,6 +9,7 @@ export type Hero = HeroAbility & {
 
 export type EquipedHero = HeroAbility & {
   combination: Gear.GearCombination;
+  suit: Suit;
   damage: number;
   ehp: number;
 };

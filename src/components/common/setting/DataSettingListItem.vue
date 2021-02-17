@@ -69,10 +69,10 @@ import ImportSettingBtn from './ImportSettingBtn.vue';
 import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
 
 @Component({
-  name: 'data-setting-item',
+  name: 'data-setting-list-item',
   components: { ImportSettingBtn }
 })
-export default class DataSettingItem extends Vue {
+export default class DataSettingListItem extends Vue {
   clearDialog = false;
   dialog = {
     clear: false,

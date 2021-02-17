@@ -1,99 +1,97 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { Gear, Constants, Hero, OptimizationProfile } from '@/models';
-import { E7dbData, PersistentData, VuexData } from '@/models/persistence';
+import { VuexData, Gear, Hero, OptimizationProfile, SiteState } from '@/models';
 import E7dbDataHandler from '@/services/e7db-data-handler';
-import { DataUpgrader } from '@/services/data-converter';
+import { persistenceService } from '@/services/presistence';
+import { SuitBuilder } from '@/services';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     loading: false,
-    gears: Array<Gear.Gear>(),
-    e7db: {
-      date: Date.now(),
-      heros: []
-    } as E7dbData,
     data: {
-      version: Constants.CURRENT_PERSISTENT_DATA_VERSION,
       gears: [],
       // TODO: should NOT use vuex to store profile
-      profiles: []
+      profiles: [],
+      heros: [],
+      state: {
+        lastSelectedHeroId: ''
+      }
     } as VuexData
   },
   getters: {
-    getGearMap: state => {
-      let map = new Map<String, Gear.Gear>();
-      state.gears.forEach((x: Gear.Gear) => {
-        map.set(x.id, x);
-      });
-      return map;
+    gears: state => {
+      return state.data.gears;
     },
-    getEquipped: state => (heroId: string) => {
-      const builder = new Gear.GearCombinationBuilder();
-      state.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
-      return builder.build(-1);
+    heros: state => {
+      return state.data.heros;
+    },
+    siteState: state => {
+      return state.data.state;
+    },
+    getGear: state => (gearId: string) => {
+      return state.data.gears.find(x => x.id == gearId);
     },
     getProfile: state => (heroId: string) => {
-      return state.data.profiles.find(x => x.hero.id == heroId);
+      return state.data.profiles.find(x => x.heroId == heroId);
     },
     getHero: state => (heroId: string) => {
-      return state.e7db.heros.find(x => x.id == heroId);
+      return state.data.heros.find(x => x.id == heroId);
+    },
+    getSuit: state => (heroId: string) => {
+      const builder = new SuitBuilder();
+      state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
+      return builder.build();
     }
   },
   mutations: {
     loading(state: any, value) {
       state.loading = value;
     },
-    updateGears(state: any, value: Array<Gear.Gear>) {
-      Vue.set(state, 'gears', value);
+    state: (state, siteState: Partial<SiteState>) => {
+      Object.assign(state.data.state, siteState);
     },
-    updateGear(state: any, value: Gear.Gear) {
-      console.log('updateGear::value = ', value);
-      const index = state.gears.findIndex((x: Gear.Gear) => x.id == value.id);
+    saveGear(state: any, value: Gear.Gear) {
+      console.log('saveGear::value = ', value);
+      const index = state.data.gears.findIndex((x: Gear.Gear) => x.id == value.id);
       if (index < 0) {
-        state.gears.push(value);
+        state.data.gears.push(value);
       } else {
-        // Object.assign(state.gears[index], value);
-        state.gears.splice(index, 1, value);
+        state.data.gears.splice(index, 1, value);
       }
+      persistenceService.save(value);
     },
-    deleteGear(state: any, value: Gear.Gear) {
-      console.log('deleteGear::value = ', value);
-      const index = state.gears.findIndex((x: Gear.Gear) => x.id == value.id);
-      if (index >= 0) {
-        state.gears.splice(index, 1);
+    removeGear(state: any, value: Gear.Gear) {
+      console.log('removeGear::value = ', value);
+      if (value && value.id) {
+        const index = state.data.gears.findIndex((x: Gear.Gear) => x.id == value.id);
+        if (index >= 0) {
+          state.data.gears.splice(index, 1);
+        }
+        persistenceService.remove(value);
       }
     },
     saveProfile(state, profile: OptimizationProfile) {
-      if (profile.hero.id) {
+      if (profile.heroId) {
         // TODO: better deep clone solution
         const shadow = JSON.parse(JSON.stringify(profile)) as OptimizationProfile;
-        const index = state.data.profiles.findIndex(x => x.hero.id == shadow.hero.id);
+        const index = state.data.profiles.findIndex(x => x.heroId == shadow.heroId);
         if (index < 0) {
           state.data.profiles.push(shadow);
         } else {
           state.data.profiles.splice(index, 1, shadow);
         }
+        persistenceService.save(profile);
       }
     },
-    setE7dbHeros(state: any, value: Hero[]) {
-      state.e7db.date = Date.now();
-      state.e7db.heros = value;
+    replaceHeros: (state, heros: Hero[]) => {
+      state.data.heros = heros;
+      persistenceService.replaceAll(heros);
     },
     //
     restoreData(state: any, value: VuexData) {
       Vue.set(state, 'data', value);
-    },
-    restoreE7db(state: any, value: E7dbData) {
-      Vue.set(state, 'e7db', value);
-    },
-    persistData(state: any) {
-      localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(state.data));
-    },
-    persistE7db(state: any, value: E7dbData) {
-      localStorage.setItem(Constants.KEY_E7DBDAYA, JSON.stringify(state.e7db));
     }
   },
   actions: {
@@ -103,71 +101,39 @@ export default new Vuex.Store({
         fn().then(p => commit('loading', false));
       });
     },
-    updateGears: ({ commit, state }, gears: Array<Gear.Gear>) => {
-      commit('updateGears', gears);
-      state.data.gears = gears;
-      commit('persistData');
+    saveGears: ({ commit }, gears: Array<Gear.Gear>) => {
+      if (gears && gears.length > 0) {
+        gears.forEach(gear => commit('saveGear', gear));
+      }
     },
-    updateGear: ({ commit, state }, gear: Gear.Gear) => {
-      commit('updateGear', gear);
-      state.data.gears = state.gears;
-      commit('persistData');
+    removeGears: ({ commit }, gears: Gear.Gear[]) => {
+      if (gears && gears.length > 0) {
+        gears.forEach(gear => commit('removeGear', gear));
+      }
     },
-    deleteGear: ({ commit, state }, gear: Gear.Gear) => {
-      commit('deleteGear', gear);
-      state.data.gears = state.gears;
-      commit('persistData');
-    },
-    // profiles
     updateProfiles: ({ commit }, profiles: OptimizationProfile[]) => {
-      profiles.forEach(profile => commit('saveProfile', profile));
-      commit('persistData');
+      if (profiles && profiles.length > 0) {
+        profiles.forEach(profile => commit('saveProfile', profile));
+      }
+    },
+    updateState: ({ commit }, siteState: Partial<SiteState>) => {
+      commit('state', siteState);
     },
     // initialization
-    initVuex: ({ commit, dispatch }) => {
-      console.log('initVuex::called');
-      if (localStorage.getItem(Constants.KEY_VUEXDATA) != null) {
-        let data = JSON.parse(localStorage.getItem(Constants.KEY_VUEXDATA)!!);
-        if (data && (data as PersistentData).version) {
-          if ((data as PersistentData).version == Constants.CURRENT_PERSISTENT_DATA_VERSION) {
-            console.log('initVuex::data version matches');
-            commit('restoreData', data);
-          } else {
-            console.log('initVuex::CAUTION! Data version does not match');
-            const result = DataUpgrader.upgrade(data);
-            console.log(result);
-            data = result;
-            commit('restoreData', data);
-            commit('persistData');
-          }
-          commit(
-            'updateGears',
-            (data.gears as Array<Gear.Gear>).map(x => {
-              const result = new Gear.Gear(x.id, x.type, x.set, x.grade.name, x.level, x.enhance, x.main.value);
-              return Object.assign(result, x);
-            })
-          );
-        } else {
-          // TODO: alert if not match
-          console.log('initVuex::CAUTION! invalid persistent data');
-        }
-      }
-      if (localStorage.getItem(Constants.KEY_E7DBDAYA) != null) {
-        // TODO: validation
-        console.log('initVuex::restoreE7db');
-        commit('restoreE7db', JSON.parse(localStorage.getItem(Constants.KEY_E7DBDAYA)!!));
-      } else {
-        // cache data
-        // console.log('initE7dbData');
-        // dispatch('withLoading', async () => {
-        //   await dispatch('initE7dbData');
-        // });
+    initVuex: ({ commit, dispatch }, data: VuexData) => {
+      console.log('initVuex::start, data =', data);
+      commit('restoreData', data);
+      if (data.heros.length == 0) {
+        dispatch('refreshHeros');
       }
     },
-    initE7dbData: async ({ commit, state }) => {
-      const heros = await E7dbDataHandler.retrieveHeros();
-      commit('setE7dbHeros', heros);
-      localStorage.setItem(Constants.KEY_E7DBDAYA, JSON.stringify(state.e7db));
+    refreshHeros: async ({ commit, dispatch, state }) => {
+      dispatch('withLoading', async () => {
+        console.log('refreshHeros::start');
+        const heros = await E7dbDataHandler.retrieveHeros();
+        console.log('refreshHeros::heros.length =', heros.length);
+        commit('replaceHeros', heros);
+      });
     }
   },
   modules: {}

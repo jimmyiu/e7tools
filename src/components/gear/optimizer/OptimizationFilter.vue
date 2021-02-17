@@ -2,6 +2,19 @@
   <div style="max-width: 252px">
     <!-- <v-icon right>help_outlined</v-icon> -->
     <gear-set-select v-model="value.sets" multiple />
+    <!-- <v-autocomplete
+      v-model="value.sets"
+      class="mb-2"
+      clear-icon="mdi-close-circle-outline"
+      clearable
+      dense
+      hide-details
+      :items="sets"
+      label="Only Include Sets"
+      multiple
+      outlined
+      return-object
+    /> -->
     <v-select
       v-model="value.necklaces"
       class="mb-2"
@@ -87,6 +100,10 @@ export default class OptimizationFilter extends Vue {
       rings: Constants.RING_STATS,
       boots: Constants.BOOT_STATS
     };
+  }
+
+  get sets() {
+    return Object.values(Gear.Set);
   }
 }
 </script>

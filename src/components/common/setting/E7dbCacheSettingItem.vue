@@ -25,15 +25,15 @@ import { mapActions } from 'vuex';
 
 @Component({
   name: 'e7db-cache-setting-item',
-  methods: mapActions(['initE7dbData'])
+  methods: mapActions(['refreshHeros'])
 })
 export default class E7dbCacheSettingItem extends Vue {
-  initE7dbData!: () => Promise<void>;
+  refreshHeros!: () => Promise<void>;
   loading = false;
 
   async refresh() {
     this.loading = true;
-    await this.initE7dbData();
+    await this.refreshHeros();
     this.loading = false;
   }
 }

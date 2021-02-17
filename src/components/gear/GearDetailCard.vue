@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="6" min-width="180px" outlined width="180px">
+  <v-card elevation="6" min-width="160px" outlined width="180px">
     <div v-if="gear && gear.id">
       <v-card-text class="pa-0">
         <v-row dense>
@@ -23,30 +23,17 @@
           </v-col>
         </v-row>
         <v-divider class="mb-1" />
-        <v-row v-for="(item, i) in subs" :key="i" class="d-flex flex-wrap" dense>
-          <v-col class="pl-2">
-            <gear-stat-icon :stat="item[0]" />
-          </v-col>
-          <v-col class="pr-2 text-right">
-            {{ item[1] }}
-          </v-col>
-          <!-- {{ item }} -->
-          <!-- <v-col
-          v-if="gear[item.value] && item.value != gear.main.value"
-          :key="`${i}1`"
-          bottom
-          class="pl-1 caption align-self-center"
-          cols="4"
-        >
-          <gear-stat-icon :stat="item" />
-        </v-col>
-        <v-col
-          v-if="gear[item.value] && item.value != gear.main.value"
-          :key="`${i}2`"
-          class="pr-3 text-right"
-          cols="2"
-          >{{ gear[item.value] }}</v-col
-        > -->
+        <!-- class="d-flex flex-wrap" -->
+        <v-row dense>
+          <template v-for="(item, i) in subs">
+            <v-col :key="2 * i" class="pl-2 d-flex align-center" cols="3">
+              <gear-stat-icon :stat="item[0]" />
+            </v-col>
+            <v-col :key="2 * i + 1" class="pr-2 d-flex align-center justify-end" cols="3">
+              {{ item[1] }}
+              <span v-if="item[0].percent">%</span>
+            </v-col>
+          </template>
         </v-row>
       </v-card-text>
     </div>

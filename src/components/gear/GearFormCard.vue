@@ -92,7 +92,7 @@ import { Vue, Component, Prop, Emit, Watch } from 'vue-property-decorator';
 import GearFormStatSelect from './GearFormStatSelect.vue';
 import GearStatInput from './GearStatInput.vue';
 import GearService from '@/services/gear-service';
-import GearStatRangeService from '@/services/gear-stat-range-service';
+import { gearStatRangeService } from '@/services';
 
 /**
  * This is a gear form, it takes a gear for edit (undefined for create) and returns a gear object
@@ -130,7 +130,7 @@ export default class GearFormCard extends Vue {
   @Watch('mainChanger', { immediate: false, deep: false })
   onMainChangerChanged(val: any) {
     console.log('onMainChangerChanged::val =', val);
-    const main = GearStatRangeService.getMain(val.type, val.main, val.level, val.enhance);
+    const main = gearStatRangeService.getMain(val.type, val.main, val.level, val.enhance);
     if (main) {
       this.form.statInputs[0].value = main;
     }
