@@ -2,6 +2,7 @@ import { Gear, HeroAbility, Range, SuitAbility } from '.';
 
 export type OptimizationCombinationCriteria = {
   forcedSets: Gear.Set[];
+  limit: number;
 };
 
 export type OptimizationStatCriteria = {

@@ -73,7 +73,8 @@ export class OptimizationPorfileMapper {
       },
       stat: profile.stat,
       combination: {
-        forcedSets: profile.combination.forcedSets.map(x => x as Gear.Set)
+        forcedSets: profile.combination.forcedSets.map(x => x as Gear.Set),
+        limit: profile.combination.limit
       }
     };
   }
@@ -93,7 +94,8 @@ export class OptimizationPorfileMapper {
       },
       stat: profile.stat,
       combination: {
-        forcedSets: profile.combination.forcedSets.map(x => x as Gear.Set)
+        forcedSets: profile.combination.forcedSets.map(x => x as Gear.Set),
+        limit: profile.combination.limit
       }
     };
   }

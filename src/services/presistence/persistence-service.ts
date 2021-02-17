@@ -1,9 +1,7 @@
 import { Constants, Gear, Hero, OptimizationProfile, VuexData } from '@/models';
 import { BaseEntity, HeroEntity, PersistentData, PersistentDataKey } from '@/models/persistence';
-import { V_0_3_0 as Current } from '@/models/persistence/persistence-v0.3.0';
 import { DataUpgrader } from '.';
 import { GearMapper, OptimizationPorfileMapper } from './mapper';
-import GearService from '../gear-service';
 
 export interface PersistenceService {
   /**
@@ -37,7 +35,7 @@ export interface PersistenceService {
 }
 
 export class DefaultPersistenceService implements PersistenceService {
-  private _data: Current.PersistentData;
+  private _data: PersistentData;
 
   constructor() {
     this._data = {
@@ -73,8 +71,10 @@ export class DefaultPersistenceService implements PersistenceService {
 
   save(data: any): void {
     // TODO: better check object type logic
+    console.log('save::data = ', data);
     if (data && data.id) {
       const key = this.typeof(data);
+      console.log('save::key = ', key);
       let entity: BaseEntity = data;
       if (key == 'gears') {
         entity = GearMapper.toGearEntity(data);
@@ -89,7 +89,10 @@ export class DefaultPersistenceService implements PersistenceService {
     return {
       gears: this._data.gears.map(x => GearMapper.toGear(x)),
       profiles: this._data.profiles.map(x => OptimizationPorfileMapper.toProfile(x)),
-      heros: this._data.heros
+      heros: this._data.heros,
+      state: {
+        lastSelectedHeroId: Constants.DEFAULT_HERO_ID
+      }
     };
   }
 

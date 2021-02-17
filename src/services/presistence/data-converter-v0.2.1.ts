@@ -4,7 +4,7 @@ import { V_0_3_0 } from '@/models/persistence/persistence-v0.3.0';
 import { DataConverter } from './data-converter';
 
 export class DataConverter_0_2_1 implements DataConverter {
-  convert(data: BasePersistentData): PersistentData {
+  convert(data: BasePersistentData) {
     console.log(data);
     const pastData = data as V_0_2_1.PersistentData;
     const result: V_0_3_0.PersistentData = {

@@ -1,4 +1,4 @@
-import { V_0_3_0 as Current } from './persistence-v0.3.0';
+import { V_0_3_1 as Current } from './persistence-v0.3.1';
 
 export type BasePersistentData = {
   version: string;

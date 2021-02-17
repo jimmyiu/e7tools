@@ -6,6 +6,8 @@
     :items="filteredGears"
     :items-per-page="15"
     :multi-sort="false"
+    sort-by="level"
+    :sort-desc="true"
   >
     <!-- header -->
     <template v-slot:header.type="{ item }">

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { VuexData, Gear, Hero, OptimizationProfile } from '@/models';
+import { VuexData, Gear, Hero, OptimizationProfile, SiteState } from '@/models';
 import E7dbDataHandler from '@/services/e7db-data-handler';
 import { persistenceService } from '@/services/presistence';
 import { SuitBuilder } from '@/services';
@@ -14,7 +14,10 @@ export default new Vuex.Store({
       gears: [],
       // TODO: should NOT use vuex to store profile
       profiles: [],
-      heros: []
+      heros: [],
+      state: {
+        lastSelectedHeroId: ''
+      }
     } as VuexData
   },
   getters: {
@@ -23,6 +26,9 @@ export default new Vuex.Store({
     },
     heros: state => {
       return state.data.heros;
+    },
+    siteState: state => {
+      return state.data.state;
     },
     getGear: state => (gearId: string) => {
       return state.data.gears.find(x => x.id == gearId);
@@ -42,6 +48,9 @@ export default new Vuex.Store({
   mutations: {
     loading(state: any, value) {
       state.loading = value;
+    },
+    state: (state, siteState: Partial<SiteState>) => {
+      Object.assign(state.data.state, siteState);
     },
     saveGear(state: any, value: Gear.Gear) {
       console.log('saveGear::value = ', value);
@@ -73,6 +82,7 @@ export default new Vuex.Store({
         } else {
           state.data.profiles.splice(index, 1, shadow);
         }
+        persistenceService.save(profile);
       }
     },
     replaceHeros: (state, heros: Hero[]) => {
@@ -105,6 +115,9 @@ export default new Vuex.Store({
       if (profiles && profiles.length > 0) {
         profiles.forEach(profile => commit('saveProfile', profile));
       }
+    },
+    updateState: ({ commit }, siteState: Partial<SiteState>) => {
+      commit('state', siteState);
     },
     // initialization
     initVuex: ({ commit, dispatch }, data: VuexData) => {

@@ -1,5 +1,5 @@
 import { Gear } from '@/models';
-import { DefaultGearOptimizer, FastGearOptimizer, IGearOptimizer } from '@/services/gear-optimizer';
+import { DefaultGearOptimizer, IGearOptimizer } from '@/services/gear-optimizer';
 
 const ACTIONS = {
   OPTIMIZE: 'optimize',

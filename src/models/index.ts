@@ -9,7 +9,10 @@ export { Hero, HeroAbility, EquipedHero };
 export { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria };
 
 export const Constants = {
-  CURRENT_PERSISTENT_DATA_VERSION: '0.3.0',
+  CURRENT_PERSISTENT_DATA_VERSION: '0.3.1',
+  OPTIMIZATION_CALCULATION_LIMIT: 20000000,
+  OPTIMIZATION_RESULT_LIMIT: 10000,
+  DEFAULT_HERO_ID: 'iseria',
   KEY_VUEXDATA: 'vuex.data',
 
   GEAR_FILTER_DEFAULT: {
@@ -45,8 +48,13 @@ export const Constants = {
   BOOT_STATS: [Gear.Stat.HPP, Gear.Stat.HP, Gear.Stat.DEFP, Gear.Stat.DEF, Gear.Stat.ATKP, Gear.Stat.ATK, Gear.Stat.SPD]
 };
 
+export type SiteState = {
+  lastSelectedHeroId: string;
+};
+
 export type VuexData = {
   gears: Array<Gear.Gear>;
   profiles: Array<OptimizationProfile>;
   heros: Array<Hero>;
+  state: SiteState;
 };
