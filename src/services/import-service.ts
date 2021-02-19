@@ -1,6 +1,6 @@
 import { Vue } from 'vue-property-decorator';
 import { Gear } from '@/models/gear';
-import GearService from './gear-service';
+import { gearService } from '.';
 
 interface Stat {
   Name: number;
@@ -78,9 +78,7 @@ class ImportService {
         Vue.set(result, stat.value, this.covertStatValue(stat, it.Value));
       }
     });
-    result.score = GearService.calculateScore(result);
-    result.defScore = GearService.calculateDefScore(result);
-    result.offScore = GearService.calculateOffScore(result);
+    gearService.assignScore(result);
     return result;
   }
 

@@ -64,7 +64,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { Gear } from '@/models';
-import GearService from '@/services/gear-service';
+import { gearService } from '@/services';
 import { GearSetIcon, GearTypeIcon } from './common';
 import { mapActions, mapGetters } from 'vuex';
 
@@ -109,7 +109,7 @@ export default class GearTable extends Vue {
   }
 
   get statistics() {
-    return GearService.calculateStatistics(this.filteredGears);
+    return gearService.calculateStatistics(this.filteredGears);
   }
 
   headers = [

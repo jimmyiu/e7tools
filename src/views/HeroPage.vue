@@ -1,12 +1,14 @@
 <template>
   <div>
     for testing<br />
-    <v-btn @click="refresh">refresh</v-btn>
-    <div v-if="result">{{ result }}</div>
+    <!-- <v-btn @click="refresh">refresh</v-btn> -->
+    <!-- <div v-if="result">{{ result }}</div> -->
     <v-divider />
-    <span v-for="(item, key) in heros" :key="key">
+    <div>Five star heros:</div>
+    <span v-for="(item, key) in fiveStarHeros" :key="key">
       <img :src="item.icon" width="24" />
     </span>
+    <br />Average HP: {{ average.hp }} <br />Average DEF: {{ average.def }} <br />Average ATK: {{ average.atk }}
   </div>
 </template>
 <script lang="ts">
@@ -22,16 +24,29 @@ import { mapActions, mapGetters } from 'vuex';
 })
 export default class HeroPage extends Vue {
   withLoading!: (fn: () => Promise<any>) => void;
-  // updateE7dbHeros!: (heros: Hero[]) => void;
   heros!: Hero[];
   //
   result: Hero[] = [];
 
-  async refresh() {
-    this.withLoading(async () => {
-      // this.result = await E7dbDataHandler.retrieveHeros();
-      // this.updateE7dbHeros(this.result);
+  get fiveStarHeros() {
+    return this.heros.filter(x => x.rarity == 5);
+  }
+
+  get average() {
+    const result = {
+      hp: 0,
+      def: 0,
+      atk: 0
+    };
+    this.fiveStarHeros.forEach(x => {
+      result.hp += x.hp;
+      result.def += x.def;
+      result.atk += x.atk;
     });
+    result.hp = result.hp / this.fiveStarHeros.length;
+    result.def = result.def / this.fiveStarHeros.length;
+    result.atk = result.atk / this.fiveStarHeros.length;
+    return result;
   }
 }
 </script>

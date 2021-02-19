@@ -12,6 +12,9 @@ export namespace V_0_3_2 {
     HeroAbility & {
       name: string;
       icon: string;
+      rarity: number;
+      attribute: string;
+      role: string;
     };
 
   export type GearEntity = BaseEntity & {

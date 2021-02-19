@@ -1,6 +1,6 @@
 import { Gear, Hero, OptimizationProfile } from '@/models';
 import { GearEntity, HeroEntity, OptimizationProfileEntity } from '@/models/persistence';
-import GearService from '@/services/gear-service';
+import { gearService } from '@/services';
 
 export class GearMapper {
   static toGear(gear: GearEntity): Gear.Gear {
@@ -27,7 +27,7 @@ export class GearMapper {
     // v0.2.0
     result.locked = gear.locked;
     result.equippedHero = gear.equippedHero;
-    GearService.assignScore(result);
+    gearService.assignScore(result);
     return result;
   }
 

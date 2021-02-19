@@ -283,6 +283,7 @@ export default class OptimizerPage extends Vue {
 
   changeHero(heroId: string) {
     this.updateState({ lastSelectedHeroId: heroId });
+    this.reset();
     this.loadProfile();
   }
 

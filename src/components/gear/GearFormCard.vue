@@ -91,8 +91,7 @@ import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from './comm
 import { Vue, Component, Prop, Emit, Watch } from 'vue-property-decorator';
 import GearFormStatSelect from './GearFormStatSelect.vue';
 import GearStatInput from './GearStatInput.vue';
-import GearService from '@/services/gear-service';
-import { gearStatRangeService } from '@/services';
+import { gearService, gearStatRangeService } from '@/services';
 
 /**
  * This is a gear form, it takes a gear for edit (undefined for create) and returns a gear object
@@ -233,7 +232,7 @@ export default class GearFormCard extends Vue {
         Vue.set(gear, this.form.statInputs[i].stat!.value, this.form.statInputs[i].value);
       }
     }
-    GearService.assignScore(gear);
+    gearService.assignScore(gear);
     console.log('submit::gear =', gear);
     this.$emit('input', gear);
   }

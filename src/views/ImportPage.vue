@@ -27,7 +27,7 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
 import ImportService from '@/services/import-service';
-import GearService from '@/services/gear-service';
+import { gearService } from '@/services';
 import { Gear } from '@/models/gear';
 
 @Component({
@@ -55,7 +55,7 @@ export default class GearPage extends Vue {
       // console.log(foo);
     });
     this.number = converted.length;
-    this.saveGears(GearService.mergeGears(this.gears, converted));
+    this.saveGears(gearService.mergeGears(this.gears, converted));
     this.loading = false;
     this.complete = true;
   }

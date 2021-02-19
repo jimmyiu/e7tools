@@ -5,6 +5,9 @@ export type Hero = HeroAbility & {
   id: string;
   name: string;
   icon: string;
+  rarity: number;
+  attribute: string;
+  role: string;
 };
 
 export type EquipedHero = HeroAbility & {

@@ -12,9 +12,23 @@ export class DataConverter_0_3_0 implements DataConverter {
       version: '0.3.2',
       gears: pastData.gears,
       profiles: this.convertProfiles(pastData.profiles),
-      heros: pastData.heros
+      heros: this.convertHeros(pastData.heros)
     };
     console.log('convert::result =', result);
+    return result;
+  }
+
+  private convertHeros(heros: V_0_3_0.HeroEntity[]): V_0_3_2.HeroEntity[] {
+    const result: V_0_3_2.HeroEntity[] = [];
+    for (let i = 0; i < heros.length; i++) {
+      const past = heros[i];
+      result.push({
+        ...past,
+        attribute: '',
+        role: '',
+        rarity: 0
+      });
+    }
     return result;
   }
 
