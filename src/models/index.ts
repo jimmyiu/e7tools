@@ -9,9 +9,9 @@ export { Hero, HeroAbility, EquipedHero };
 export { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria };
 
 export const Constants = {
-  CURRENT_PERSISTENT_DATA_VERSION: '0.3.1',
+  CURRENT_PERSISTENT_DATA_VERSION: '0.3.2',
   OPTIMIZATION_PROCESS_LIMIT: 20000000,
-  DEFAULT_HERO_ID: 'iseria',
+  DEFAULT_HERO_ID: 'arbiter-vildred', // 'iseria',
   KEY_VUEXDATA: 'vuex.data',
 
   GEAR_FILTER_DEFAULT: {
@@ -21,7 +21,8 @@ export const Constants = {
     rings: [], // [Gear.Stat.ATKP, Gear.Stat.ATK],
     boots: [],
     locked: false,
-    equipped: false
+    equipped: false,
+    score: 0
   } as Gear.GearFilter,
   //
   NECKLACE_STATS: [

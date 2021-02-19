@@ -261,6 +261,7 @@ export namespace Gear {
     boots: Stat[];
     locked: boolean;
     equipped: boolean;
+    score: number;
   };
 
   export type TableFilter = BaseGearFilter & {

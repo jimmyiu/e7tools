@@ -12,4 +12,5 @@ export type EquipedHero = HeroAbility & {
   suit: Suit;
   damage: number;
   ehp: number;
+  dms: number;
 };

@@ -16,6 +16,7 @@ class GearCombinationService {
       combination: combination,
       suit: {} as Suit,
       damage: 0,
+      dms: 0,
       ehp: 0
     };
     result.damage = Math.trunc((result.atk * Math.min(result.cdmg, 350)) / 1000);

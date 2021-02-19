@@ -1,5 +1,5 @@
 {
-  "version": "0.3.2",
+  "version": "0.3.1",
   "gears": [
     {
       "id": "i-1",
@@ -502,14 +502,14 @@
       "type": "Helmet",
       "set": "Counter",
       "grade": "Epic",
-      "level": 90,
+      "level": 85,
       "enhance": 15,
       "main": "hp",
-      "hpp": 28,
-      "hp": 2835,
-      "def": 76,
-      "atkp": 5,
-      "eff": 14,
+      "hpp": 23,
+      "hp": 2700,
+      "def": 58,
+      "atkp": 4,
+      "eff": 11,
       "locked": false,
       "equippedHero": ""
     },
@@ -1231,7 +1231,7 @@
       "atkp": 17,
       "spd": 13,
       "locked": false,
-      "equippedHero": "fallen-cecilia"
+      "equippedHero": ""
     },
     {
       "id": "i-zD",
@@ -2207,7 +2207,7 @@
       "cdmg": 19,
       "eff": 8,
       "locked": false,
-      "equippedHero": "fallen-cecilia"
+      "equippedHero": ""
     },
     {
       "id": "i-zzG",
@@ -2351,7 +2351,7 @@
       "cdmg": 13,
       "spd": 7,
       "locked": false,
-      "equippedHero": "fallen-cecilia"
+      "equippedHero": ""
     },
     {
       "id": "i-zzQ",
@@ -3432,7 +3432,7 @@
       "eff": 17,
       "res": 19,
       "locked": false,
-      "equippedHero": "fallen-cecilia"
+      "equippedHero": ""
     },
     {
       "id": "i-zzz^",
@@ -4405,7 +4405,7 @@
       "cri": 5,
       "spd": 45,
       "locked": false,
-      "equippedHero": "fallen-cecilia"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzze",
@@ -4547,7 +4547,7 @@
       "spd": 8,
       "res": 11,
       "locked": false,
-      "equippedHero": "fallen-cecilia"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzzn",
@@ -5567,107 +5567,9 @@
       "res": 14,
       "locked": false,
       "equippedHero": ""
-    },
-    {
-      "id": "8e3cd977bh",
-      "type": "Necklace",
-      "set": "Counter",
-      "grade": "Epic",
-      "level": 90,
-      "enhance": 15,
-      "main": "hpp",
-      "hpp": 65,
-      "hp": 457,
-      "defp": 7,
-      "atkp": 45,
-      "eff": 7,
-      "locked": false,
-      "equippedHero": ""
     }
   ],
-  "profiles": [
-    {
-      "id": "arbiter-vildred",
-      "heroId": "arbiter-vildred",
-      "filter": {
-        "sets": ["Speed", "Critical"],
-        "enhanceMode": 2,
-        "locked": false,
-        "equipped": false,
-        "score": 0,
-        "necklaces": ["cdmg"],
-        "rings": ["atkp"],
-        "boots": ["spd"]
-      },
-      "stat": {
-        "hp": { "min": "27509" },
-        "def": {},
-        "atk": {},
-        "cri": { "max": 110, "min": "" },
-        "cdmg": { "max": 360 },
-        "spd": { "min": "200" },
-        "eff": { "min": "", "max": "" },
-        "res": {},
-        "ehp": { "min": "" },
-        "damage": { "min": "" }
-      },
-      "combination": { "forcedSets": ["Speed", "Critical"], "limit": "20000000", "brokenSet": true }
-    },
-    {
-      "id": "auxiliary-lots",
-      "heroId": "auxiliary-lots",
-      "filter": {
-        "sets": [],
-        "enhanceMode": 2,
-        "locked": false,
-        "equipped": false,
-        "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": ["spd"]
-      },
-      "stat": {
-        "hp": { "min": "27509" },
-        "def": {},
-        "atk": {},
-        "cri": { "max": 110, "min": "" },
-        "cdmg": { "max": 360 },
-        "spd": { "min": "200" },
-        "eff": { "min": "", "max": "" },
-        "res": {},
-        "ehp": { "min": "" },
-        "damage": { "min": "" }
-      },
-      "combination": { "forcedSets": ["Speed"], "limit": "20000000", "brokenSet": true }
-    },
-    {
-      "id": "fallen-cecilia",
-      "heroId": "fallen-cecilia",
-      "filter": {
-        "sets": ["Speed", "Health"],
-        "enhanceMode": 2,
-        "locked": false,
-        "equipped": false,
-        "score": 0,
-        "necklaces": ["hpp", "hp"],
-        "rings": ["hpp", "hp"],
-        "boots": ["spd"]
-      },
-      "stat": {
-        "hp": { "min": "27509" },
-        "def": {},
-        "atk": {},
-        "cri": { "max": 110, "min": "" },
-        "cdmg": { "max": 360 },
-        "spd": { "min": "200" },
-        "eff": { "min": "", "max": "" },
-        "res": {},
-        "ehp": { "min": "150000" },
-        "damage": { "min": "" }
-      },
-      "combination": { "forcedSets": ["Speed", "Health"], "limit": "20000000", "brokenSet": true }
-    }
-  ],
+  "profiles": [],
   "heros": [
     {
       "id": "alencia",
