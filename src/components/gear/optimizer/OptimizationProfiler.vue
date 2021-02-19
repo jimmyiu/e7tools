@@ -45,6 +45,7 @@
         outlined
         return-object
       />
+      <!-- <v-checkbox class="mr-3 my-0" dense hide-details label="Broken Set"></v-checkbox> -->
     </v-col>
   </v-row>
 </template>

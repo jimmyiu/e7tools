@@ -14,7 +14,14 @@
         <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/${item[0].value}.png`)" />
       </v-col>
       <v-col>
-        <v-text-field v-model="value[item[0].value].min" dense hide-details label="min" solo-inverted />
+        <v-text-field
+          v-model="value[item[0].value].min"
+          dense
+          hide-details
+          label="min"
+          solo-inverted
+          style="min-height: 28px"
+        />
       </v-col>
       <v-col>
         <v-text-field v-model="value[item[0].value].max" dense flat hide-details label="max" solo-inverted />
@@ -66,6 +73,10 @@
 ::v-deep input
   font-size: 14px
   max-height: 20px
+// ::v-deep .v-text-field.v-input--dense > .v-input__control
+//   min-height: 32px
+// ::v-deep .v-input__control > .v-input__slot
+//   min-height: 32px
 </style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
