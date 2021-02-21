@@ -25,6 +25,7 @@
       </ol>
     </message-box>
     <message-box hide-default title="Progress">
+      [2021-02-21] add number of gears in gear page<br />
       [2021-02-19] add broken set flag in optimizer<br />
       [2021-02-17] complete revising persistent data<br />
       [2021-02-10] start to revise persistence data<br />
