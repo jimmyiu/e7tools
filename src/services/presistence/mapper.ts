@@ -1,6 +1,6 @@
 import { Gear, Hero, OptimizationProfile } from '@/models';
 import { GearEntity, HeroEntity, OptimizationProfileEntity } from '@/models/persistence';
-import GearService from '@/services/gear-service';
+import { gearService } from '@/services';
 
 export class GearMapper {
   static toGear(gear: GearEntity): Gear.Gear {
@@ -27,7 +27,7 @@ export class GearMapper {
     // v0.2.0
     result.locked = gear.locked;
     result.equippedHero = gear.equippedHero;
-    GearService.assignScore(result);
+    gearService.assignScore(result);
     return result;
   }
 
@@ -67,6 +67,7 @@ export class OptimizationPorfileMapper {
         enhanceMode: profile.filter.enhanceMode,
         locked: profile.filter.locked,
         equipped: profile.filter.equipped,
+        score: profile.filter.score,
         necklaces: profile.filter.necklaces.map(x => Gear.Stat.getInstance(x)),
         rings: profile.filter.rings.map(x => Gear.Stat.getInstance(x)),
         boots: profile.filter.boots.map(x => Gear.Stat.getInstance(x))
@@ -74,7 +75,8 @@ export class OptimizationPorfileMapper {
       stat: profile.stat,
       combination: {
         forcedSets: profile.combination.forcedSets.map(x => x as Gear.Set),
-        limit: profile.combination.limit
+        limit: profile.combination.limit,
+        brokenSet: profile.combination.brokenSet
       }
     };
   }
@@ -88,6 +90,7 @@ export class OptimizationPorfileMapper {
         enhanceMode: profile.filter.enhanceMode,
         locked: profile.filter.locked,
         equipped: profile.filter.equipped,
+        score: profile.filter.score,
         necklaces: profile.filter.necklaces.map(x => x.value),
         rings: profile.filter.rings.map(x => x.value),
         boots: profile.filter.boots.map(x => x.value)
@@ -95,7 +98,8 @@ export class OptimizationPorfileMapper {
       stat: profile.stat,
       combination: {
         forcedSets: profile.combination.forcedSets.map(x => x as Gear.Set),
-        limit: profile.combination.limit
+        limit: profile.combination.limit,
+        brokenSet: profile.combination.brokenSet
       }
     };
   }

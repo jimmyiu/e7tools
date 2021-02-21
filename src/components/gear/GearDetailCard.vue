@@ -4,15 +4,15 @@
       <v-card-text class="pa-0">
         <v-row dense>
           <v-col class="d-flex pl-2 align-center">
-            <gear-type-icon small style="padding-bottom: 1px" :type="gear.type" />
-            <gear-set-icon :set="gear.set" small />
+            <gear-type-icon style="padding-bottom: 1px" :type="gear.type" />
+            <gear-set-icon :set="gear.set" />
             <div>
               <span :style="'color: ' + gear.grade.color">{{ gear.level }}</span>
               <span class="caption">+{{ gear.enhance }}</span>
             </div>
           </v-col>
-          <v-col class="pa-2" cols="auto" style="height: 46px">
-            <v-img v-if="hero" :src="hero.icon" width="30" />
+          <v-col class="pa-2" cols="auto" style="height: 44px">
+            <v-img v-if="hero" :alt="hero.id" :src="hero.icon" width="28" />
             <!-- {{ gear.equippedHero }} -->
           </v-col>
         </v-row>
@@ -34,6 +34,12 @@
               <span v-if="item[0].percent">%</span>
             </v-col>
           </template>
+        </v-row>
+        <v-divider />
+        <v-row dense>
+          <v-col>
+            <div class="pa-1 text-center">{{ gear.score }} / {{ gear.offScore }} / {{ gear.defScore }}</div>
+          </v-col>
         </v-row>
       </v-card-text>
     </div>

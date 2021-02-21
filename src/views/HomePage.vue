@@ -3,15 +3,10 @@
     <message-box title="Current Status">
       <p>This tool is under development</p>
       <ul>
-        <li style="color: red">
-          CAUTION: I am working on a better persistent data model, please bare in mind you may have a risk that the
-          inputted data cannot be restored. However, I will offer help, leave an issue in the GitHub and I will follow
-          up.
-        </li>
         <li>Gear Management & Gear Optimizer features are working, but definitely a lot of things have to improve</li>
-        <li>Next target: Revise persistent data</li>
+        <li>Next target: Revise gear page</li>
       </ul>
-      <br />2021-02-10
+      <br />2021-02-19
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -30,6 +25,9 @@
       </ol>
     </message-box>
     <message-box hide-default title="Progress">
+      [2021-02-21] add number of gears in gear page<br />
+      [2021-02-19] add broken set flag in optimizer<br />
+      [2021-02-17] complete revising persistent data<br />
       [2021-02-10] start to revise persistence data<br />
       [2021-02-01] add equipped and locked flags<br />
       [2021-02-08] complete basic optimizer<br />

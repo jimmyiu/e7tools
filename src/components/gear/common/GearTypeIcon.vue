@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <v-img :max-height="width" :max-width="width" :src="require(`@/assets/img/gear/gear${type.toLowerCase()}.png`)" />
-  </div>
+  <v-img :max-height="size" :max-width="size" :src="require(`@/assets/img/gear/gear${type.toLowerCase()}.png`)" />
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
@@ -12,10 +10,9 @@ import { Gear } from '@/models';
 })
 export default class GearTypeIcon extends Vue {
   @Prop() readonly type!: Gear.Type;
-  @Prop({ type: Boolean, default: false }) readonly small!: Boolean;
 
-  get width(): number {
-    return this.small ? 22 : 44;
+  get size(): number {
+    return 22;
   }
 }
 </script>

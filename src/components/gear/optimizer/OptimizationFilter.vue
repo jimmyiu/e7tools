@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 252px">
+  <div style="max-width: 260px">
     <!-- <v-icon right>help_outlined</v-icon> -->
     <gear-set-select v-model="value.sets" multiple />
     <!-- <v-autocomplete
@@ -57,7 +57,7 @@
       outlined
       return-object
     />
-    <!-- <v-text-field dense hide-details label="Gear Score (Min)" outlined /> -->
+    <v-text-field v-model="value.score" dense hide-details label="Gear Score (Min)" outlined />
     <v-checkbox
       v-model="value.enhanceMode"
       class="mr-3 my-0"
@@ -66,7 +66,7 @@
       label="+15 Only"
       :value="2"
     ></v-checkbox>
-    <!-- <v-checkbox v-model="value.locked" class="mr-3 my-0" dense hide-details label="Include Locked"></v-checkbox> -->
+    <v-checkbox v-model="value.locked" class="mr-3 my-0" dense hide-details label="Include Locked"></v-checkbox>
     <v-checkbox v-model="value.equipped" class="mr-3 my-0" dense hide-details label="Include Equipped"></v-checkbox>
     <!-- class="justify-center" -->
     <!-- <v-checkbox

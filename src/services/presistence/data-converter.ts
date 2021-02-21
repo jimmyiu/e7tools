@@ -13,6 +13,7 @@ export class DataConverterFactory {
       case '0.2.1':
         return new DataConverter_0_2_1();
       case '0.3.0':
+      case '0.3.1':
         return new DataConverter_0_3_0();
     }
     throw new Error('Invalid version number');

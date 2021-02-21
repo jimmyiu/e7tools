@@ -34,16 +34,6 @@
         <v-btn class="font-weight-bold" color="success" text @click="saveProfile">Save</v-btn>
         <v-btn text @click="loadProfile">Load</v-btn>
         <v-divider class="mx-2" vertical />
-        <v-spacer />
-        <v-text-field
-          v-model="profile.combination.limit"
-          dense
-          hide-details
-          label="Process Limit"
-          outlined
-          style="max-width: 200px"
-          type="number"
-        />
       </v-card-actions>
     </v-card>
 
@@ -114,8 +104,11 @@
     </v-card>
 
     <v-card class="mt-2">
-      <v-progress-linear v-if="progress > 0" height="20" indeterminate striped>
-        <strong>Processed: {{ progress }}</strong>
+      <v-progress-linear v-if="progress.processTime >= 0" height="25" :indeterminate="optimizing" striped>
+        <strong>
+          Processed ({{ progress.proceeded | formatNumber }}) / Evaluated ({{ progress.evaluated | formatNumber }}) /
+          Found ({{ progress.found | formatNumber }}) in {{ progress.processTime }} seconds
+        </strong>
       </v-progress-linear>
       <v-card-text>
         <v-row>
@@ -133,7 +126,7 @@
             >
               <template v-slot:item.sets="{ item }">
                 <div class="d-flex">
-                  <gear-set-icon v-for="(set, key) in item.sets" :key="key" :set="set" small />
+                  <gear-set-icon v-for="(set, key) in item.sets" :key="key" :set="set" />
                 </div>
               </template>
             </v-data-table>
@@ -145,8 +138,8 @@
       </v-card-text>
     </v-card>
 
-    <v-snackbar v-if="profile.hero" v-model="popupMsg" color="success" rounded="pill" timeout="1500" top>
-      <div class="text-center">{{ profile.hero.name }} profile saved</div>
+    <v-snackbar v-if="popupMsg" v-model="popupMsg" bottom color="success" outlined timeout="1500">
+      <div v-if="popupMsg == 1" class="text-center">Profile saved</div>
     </v-snackbar>
   </div>
 </template>
@@ -154,11 +147,11 @@
 <script lang="ts">
 import { GearDetailCard, GearSetIcon, OptimizationProfiler } from '@/components';
 import { Constants, Gear, EquipedHero, OptimizationProfile, Hero, Suit, SiteState } from '@/models';
-import GearFilterService from '@/services/gear-filter-service';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
-import { SuitBuilder, heroService } from '@/services';
+import { SuitBuilder, heroService, gearFilterService } from '@/services';
 import { OptimizationResult } from '@/models/optimizer';
+import { GearOptimizerProgress } from '@/services/gear-optimizer';
 
 @Component({
   name: 'optimizer-page',
@@ -195,7 +188,14 @@ export default class OptimizerPage extends Vue {
 
   result: OptimizationResult[] = [];
   selectedSuit = {} as Suit;
-  progress = 0;
+  //
+  optimizing = false;
+  progress: GearOptimizerProgress = {
+    evaluated: 0,
+    proceeded: 0,
+    found: 0,
+    processTime: -1
+  };
   popupMsg = 0;
   //
   headers = [
@@ -209,12 +209,13 @@ export default class OptimizerPage extends Vue {
     { text: 'EFF', value: 'eff' },
     { text: 'RES', value: 'res' },
     { text: 'Damage', value: 'damage' },
+    { text: 'DMS', value: 'dms' },
     { text: 'EHP', value: 'ehp' }
   ];
 
   get gearStore() {
     return new Gear.GearStore(
-      GearFilterService.filter(this.gears, this.profile.filter, {
+      gearFilterService.filter(this.gears, this.profile.filter, {
         heroId: this.profile.heroId
       })
     );
@@ -230,6 +231,7 @@ export default class OptimizerPage extends Vue {
   async optimize() {
     console.log('optimize::start');
     this.result.splice(0, this.result.length);
+    this.optimizing = true;
     this.worker.postMessage({
       action: 'optimize',
       store: this.gearStore,
@@ -273,18 +275,27 @@ export default class OptimizerPage extends Vue {
     };
     this.profile.combination = {
       forcedSets: [], // [Gear.Set.Speed, Gear.Set.Critical]
-      limit: Constants.OPTIMIZATION_PROCESS_LIMIT
+      limit: Constants.OPTIMIZATION_PROCESS_LIMIT,
+      brokenSet: true
     };
     this.selectedSuit = this.getSuit(this.profile.heroId);
   }
 
   changeHero(heroId: string) {
     this.updateState({ lastSelectedHeroId: heroId });
+    this.reset();
     this.loadProfile();
   }
 
   equipAll() {
     console.log('equipAll::heroId =', this.profile.heroId);
+    const current = this.getSuit(this.profile.heroId);
+    [current.weapon, current.helmet, current.armor, current.necklace, current.ring, current.boot].forEach(x => {
+      if (x != undefined) {
+        x.equippedHero = '';
+        this.saveGears([x]);
+      }
+    });
     if (this.selectedSuit) {
       this.unequipAll();
       console.log('equipAll::selectedSuit =', this.selectedSuit);
@@ -329,6 +340,9 @@ export default class OptimizerPage extends Vue {
     console.log('loadProfile::profile =', this.getProfile(this.profile.heroId));
     if (profile) {
       Object.assign(this.profile, profile);
+    } else {
+      console.log('loadProfile::no saved profile');
+      this.profile.id = this.profile.heroId;
     }
     this.selectedSuit = this.getSuit(this.profile.heroId);
   }
@@ -345,7 +359,11 @@ export default class OptimizerPage extends Vue {
       console.log('worker::onmessage::action =', e.data.action);
       if (e.data.action == 'optimize-result') {
         this.result = e.data.result;
+        this.optimizing = false;
       } else if (e.data.action == 'progress') {
+        console.log('worker::onmessage::result =', e.data.result);
+        // this.progress.calculated = e.data.result.calculated;
+        // this.progress.proceeded = e.data.result.proceeded;
         this.progress = e.data.result;
       }
     };

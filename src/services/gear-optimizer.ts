@@ -1,39 +1,58 @@
 import { Gear, HeroAbility, EquipedHero, OptimizationProfile, Hero } from '@/models';
 import { OptimizationResult } from '@/models/optimizer';
 import { heroService, SuitBuilder } from '.';
-import GearCombinationService from '@/services/gear-combination-service';
 
-export interface IGearOptimizer {
+export interface GearOptimizer {
   store: Gear.GearStore;
   profile: OptimizationProfile;
   hero: Hero;
-  progressCallback: (x: number) => void;
+  progressCallback: (x: GearOptimizerProgress) => void;
 
   optimize: () => OptimizationResult[];
 }
 
-export class DefaultGearOptimizer implements IGearOptimizer {
+export type GearOptimizerProgress = {
+  evaluated: number;
+  proceeded: number;
+  found: number;
+  processTime: number;
+};
+
+export class DefaultGearOptimizer implements GearOptimizer {
   static OPTIMIZE_RESULT_LIMIT = 20000;
   reportProgressCount: number;
+  startTime: number;
+  result: EquipedHero[] = [];
+  progress: GearOptimizerProgress = {
+    evaluated: 0,
+    proceeded: 0,
+    found: 0,
+    processTime: 0
+  };
 
   constructor(
     public readonly store: Gear.GearStore,
     public readonly profile: OptimizationProfile,
     public readonly hero: Hero,
-    public readonly progressCallback: (x: number) => void
+    public readonly progressCallback: (x: GearOptimizerProgress) => void
   ) {
     this.reportProgressCount = Math.ceil(this.profile.combination.limit / 10);
+    this.startTime = Date.now();
+  }
+
+  reportProgress() {
+    this.progress.found = this.result.length;
+    this.progress.processTime = (Date.now() - this.startTime) / 1000;
+    this.progressCallback(this.progress);
   }
 
   optimize(): OptimizationResult[] {
     console.log('optimize::start');
     console.log('optimize::profile =', this.profile);
-    let start = Date.now();
-    this.progressCallback(1);
-    const result: EquipedHero[] = this.performOptimize();
-    this.progressCallback(0);
-    console.log('optimize::processing time =', (Date.now() - start) / 1000, 'seconds');
-    return this.toResult(result);
+    this.performOptimize();
+    this.reportProgress();
+    console.log('optimize::processing time =', (Date.now() - this.startTime) / 1000, 'seconds');
+    return this.toResult(this.result);
   }
 
   minFilter(stat: string) {
@@ -51,26 +70,32 @@ export class DefaultGearOptimizer implements IGearOptimizer {
   }
 
   combinationFilter() {
-    if (this.profile.combination.forcedSets.length == 0) {
-      return (sets: SuitBuilder, emptySlot: number) => true;
-    }
-    const target: any = {};
-    // TODO: currently assumed input sets is make sense
-    for (let i = 0; i < this.profile.combination.forcedSets.length; i++) {
-      const set = this.profile.combination.forcedSets[i];
-      switch (set) {
-        case Gear.Set.Speed:
-        case Gear.Set.Attack:
-        case Gear.Set.Destruction:
-          target[set] = target[set] ?? 4;
-          break;
-        default:
-          target[set] = (target[set] ?? 0) + 2;
-          break;
+    let forcedSet = (sets: SuitBuilder) => true;
+    if (this.profile.combination.forcedSets.length > 0) {
+      const target: Partial<Record<Gear.Set, number>> = {};
+      // TODO: currently assumed input sets is make sense
+      for (let i = 0; i < this.profile.combination.forcedSets.length; i++) {
+        const set = this.profile.combination.forcedSets[i];
+        switch (set) {
+          case Gear.Set.Speed:
+          case Gear.Set.Attack:
+          case Gear.Set.Destruction:
+            target[set] = target[set] ?? 4;
+            break;
+          default:
+            target[set] = (target[set] ?? 0) + 2;
+            break;
+        }
       }
+      forcedSet = (builder: SuitBuilder) => builder.assertTargetSets(target);
     }
-    return (builder: SuitBuilder, emptySlot: number) => {
-      return builder.assertTargetSets(target, emptySlot);
+
+    let brokenSet = (sets: SuitBuilder) => true;
+    if (!this.profile.combination.brokenSet) {
+      brokenSet = (builder: SuitBuilder) => !builder.isBrokenSet();
+    }
+    return (builder: SuitBuilder) => {
+      return forcedSet(builder) && brokenSet(builder); // && forcedSet(builder);
     };
   }
 
@@ -134,6 +159,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
         res: hero.res,
         ehp: hero.ehp,
         damage: hero.damage,
+        dms: hero.dms,
         sets: hero.suit.sets,
         weaponId: hero.suit.weapon ? hero.suit.weapon.id : undefined,
         helmetId: hero.suit.helmet ? hero.suit.helmet.id : undefined,
@@ -147,9 +173,10 @@ export class DefaultGearOptimizer implements IGearOptimizer {
   }
 
   performOptimize(): EquipedHero[] {
-    let actualCount = 0;
-    let count = 0;
-    const result: EquipedHero[] = [];
+    this.result = [];
+    this.startTime = Date.now();
+    this.reportProgress();
+    //
     const builder = new SuitBuilder();
     const equipedHeroFilter = this.equipedHeroFilter();
     const combinationFilter = this.combinationFilter();
@@ -159,25 +186,25 @@ export class DefaultGearOptimizer implements IGearOptimizer {
         builder.helmet(this.store.helmets[i2]);
         for (let i3 = 0, n3 = this.store.armors.length; i3 < n3; i3++) {
           builder.armor(this.store.armors[i3]);
-          if (!combinationFilter(builder, 3)) {
-            actualCount += this.store.necklaces.length * this.store.rings.length * this.store.boots.length;
+          if (!combinationFilter(builder)) {
+            this.progress.proceeded += this.store.necklaces.length * this.store.rings.length * this.store.boots.length;
             continue;
           }
           for (let i4 = 0, n4 = this.store.necklaces.length; i4 < n4; i4++) {
             builder.necklace(this.store.necklaces[i4]);
-            if (!combinationFilter(builder, 2)) {
-              actualCount += this.store.rings.length * this.store.boots.length;
+            if (!combinationFilter(builder)) {
+              this.progress.proceeded += this.store.rings.length * this.store.boots.length;
               continue;
             }
             for (let i5 = 0, n5 = this.store.rings.length; i5 < n5; i5++) {
               builder.ring(this.store.rings[i5]);
-              if (!combinationFilter(builder, 1)) {
-                actualCount += this.store.boots.length;
+              if (!combinationFilter(builder)) {
+                this.progress.proceeded += this.store.boots.length;
                 continue;
               }
               for (let i6 = 0, n6 = this.store.boots.length; i6 < n6; i6++) {
                 builder.boot(this.store.boots[i6]);
-                if (++actualCount && !combinationFilter(builder, 0)) {
+                if (++this.progress.proceeded && !combinationFilter(builder)) {
                   continue;
                 }
 
@@ -185,34 +212,34 @@ export class DefaultGearOptimizer implements IGearOptimizer {
                 // const equipedHero = GearCombinationService.apply(builder.build(), this.hero);
                 const equipedHero = heroService.equip(this.hero, builder.build());
                 if (equipedHeroFilter(equipedHero)) {
-                  result.push(equipedHero);
-                  if (result.length >= DefaultGearOptimizer.OPTIMIZE_RESULT_LIMIT) {
+                  this.result.push(equipedHero);
+                  if (this.result.length >= DefaultGearOptimizer.OPTIMIZE_RESULT_LIMIT) {
                     console.log(
-                      'optimize::hit result limit, actualCount =',
-                      actualCount,
+                      'optimize::hit result limit, proceeded =',
+                      this.progress.proceeded,
                       ', result.length =',
-                      result.length
+                      this.result.length
                     );
-                    return result;
+                    return this.result;
                   }
                 }
 
-                if (++count % this.reportProgressCount == 0) {
+                if (++this.progress.evaluated % this.reportProgressCount == 0) {
                   console.log(
-                    'optimize::actualCount =',
-                    actualCount,
-                    ',count =',
-                    count,
+                    'optimize::proceeded =',
+                    this.progress.proceeded,
+                    ',evaluated =',
+                    this.progress.evaluated,
                     ',result.length =',
-                    result.length
+                    this.result.length
                   );
                   // this.progressCallback(Math.trunc((100 * count) / DefaultGearOptimizer.COMBINATION_HARD_LIMIT));
-                  this.progressCallback(count);
+                  this.reportProgress();
 
                   // hard limit check
-                  if (count >= this.profile.combination.limit) {
-                    console.log('optimize::hit calculation hard limit');
-                    return result;
+                  if (this.progress.evaluated >= this.profile.combination.limit) {
+                    console.log('optimize::hit evaluation hard limit');
+                    return this.result;
                   }
                 }
               }
@@ -226,7 +253,7 @@ export class DefaultGearOptimizer implements IGearOptimizer {
       }
       builder.helmet(undefined);
     }
-    return result;
+    return this.result;
   }
 }
 

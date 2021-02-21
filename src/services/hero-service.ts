@@ -13,11 +13,13 @@ export function equip(hero: Hero, suit: Suit): EquipedHero {
     res: hero.res + suit.ability.res + extra.res,
     damage: 0,
     ehp: 0,
+    dms: 0,
     suit: suit,
     combination: {} as Gear.GearCombination
   };
   result.damage = Math.trunc((result.atk * Math.min(result.cdmg, 350)) / 1000);
   result.ehp = Math.trunc(result.hp * (1 + result.def / 300));
+  result.dms = Math.trunc((result.damage * result.spd) / 100);
   return result;
 }
 function determineSetsExtraAbility(sets: Gear.Set[]) {

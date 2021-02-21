@@ -2,8 +2,8 @@
   <div>
     <v-row dense>
       <v-col>
-        <gear-table-filter v-model="filter" />
-        <v-divider class="mt-1" />
+        <gear-table-filter v-model="filter" :gears="filteredGears" />
+        <!-- <v-divider class="mt-1" /> -->
         <gear-table :gears="filteredGears" @edit-gear="editGear" />
       </v-col>
     </v-row>
@@ -16,7 +16,7 @@
         @input="inputGear"
       />
     </v-bottom-sheet>
-    <v-snackbar v-model="visible.completeMsg" color="success" rounded="pill" timeout="1500" top>
+    <v-snackbar v-model="visible.completeMsg" bottom color="success" outlined timeout="1500">
       <div class="text-center">A gear is updated</div>
     </v-snackbar>
   </div>
@@ -49,7 +49,8 @@ export default class GearPage extends Vue {
     level: 0,
     mode: 0,
     main: false,
-    enhanceMode: Gear.EnhanceModeFilter.ALL
+    enhanceMode: Gear.EnhanceModeFilter.ALL,
+    equipped: true
   };
 
   get filteredGears() {
@@ -61,7 +62,8 @@ export default class GearPage extends Vue {
         !this.filter.enhanceMode ||
         (this.filter.enhanceMode == Gear.EnhanceModeFilter.LESS_THAN_15 && it.enhance!! < 15) ||
         (this.filter.enhanceMode == Gear.EnhanceModeFilter.ONLY_15 && it.enhance!! == 15);
-      return type && set && level && enhance;
+      let equipped = this.filter.equipped || (!this.filter.equipped && it.equippedHero == '');
+      return type && set && level && enhance && equipped;
     });
     if (!this.filter.main) {
       result = result.map(x => {

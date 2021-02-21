@@ -24,7 +24,7 @@
         Version
       </v-list-item-content>
       <v-list-item-action>
-        0.3.0
+        {{ version }}
       </v-list-item-action>
     </v-list-item>
   </v-navigation-drawer>
@@ -40,6 +40,10 @@ import { Constants } from '@/models';
 })
 export default class SiteSetting extends Vue {
   @Model('input') readonly visible!: boolean;
+
+  get version() {
+    return Constants.CURRENT_PERSISTENT_DATA_VERSION;
+  }
 
   toggleDarkMode() {
     this.$vuetify.theme.dark = !this.$vuetify.theme.dark;

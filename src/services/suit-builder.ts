@@ -28,6 +28,7 @@ class SuitSetBuilder implements Record<Gear.Set, number> {
   Revenge = 0;
   Injury = 0;
   Penetration = 0;
+  emptySlot = 6;
 
   change(from: Gear.Set, to: Gear.Set) {
     if (from == to) {
@@ -39,15 +40,102 @@ class SuitSetBuilder implements Record<Gear.Set, number> {
 
   assign(set: Gear.Set) {
     this[set] += 1;
+    this.emptySlot--;
+    // if (this.emptySlot < 0) {
+    //   throw new Error('invalid set assignment');
+    // }
   }
 
   remove(set: Gear.Set) {
     this[set] -= 1;
+    this.emptySlot++;
+    // if (this.emptySlot > 6) {
+    //   throw new Error('invalid set assignment');
+    // }
   }
 
-  assertTargetSets(target: Record<Gear.Set, number>, emptySlot: number) {
-    for (let set of Gear.ALL_SETS) {
-      if (target[set] > this[set] + emptySlot) {
+  isBroken() {
+    if (this.emptySlot == 0) {
+      for (const key of Gear.ALL_SETS) {
+        const value = this[key];
+        if (value > 0) {
+          if (
+            key == Gear.Set.Speed ||
+            key == Gear.Set.Attack ||
+            key == Gear.Set.Destruction ||
+            key == Gear.Set.LifeSteal ||
+            key == Gear.Set.Counter ||
+            key == Gear.Set.Rage ||
+            key == Gear.Set.Revenge ||
+            key == Gear.Set.Injury
+          ) {
+            if (value != 4) {
+              return true;
+            }
+          } else {
+            if (value % 2 == 1) {
+              return true;
+            }
+          }
+        }
+      }
+    } else if (this.emptySlot == 1) {
+      let oddCount = 0;
+      for (const key of Gear.ALL_SETS) {
+        const value = this[key];
+        if (value > 0) {
+          if (value % 2 == 1) {
+            oddCount++;
+          }
+          if (
+            key == Gear.Set.Speed ||
+            key == Gear.Set.Attack ||
+            key == Gear.Set.Destruction ||
+            key == Gear.Set.LifeSteal ||
+            key == Gear.Set.Counter ||
+            key == Gear.Set.Rage ||
+            key == Gear.Set.Revenge ||
+            key == Gear.Set.Injury
+          ) {
+            if (value < 3 || value > 4) {
+              return true;
+            }
+          }
+        }
+      }
+      if (oddCount > 1) {
+        return false;
+      }
+    } else if (this.emptySlot == 2) {
+      //
+    } else if (this.emptySlot == 3) {
+      let numOfFourPieceSets = 0;
+      for (const key of Gear.ALL_SETS) {
+        const value = this[key];
+        if (
+          value > 0 &&
+          (key == Gear.Set.Speed ||
+            key == Gear.Set.Attack ||
+            key == Gear.Set.Destruction ||
+            key == Gear.Set.LifeSteal ||
+            key == Gear.Set.Counter ||
+            key == Gear.Set.Rage ||
+            key == Gear.Set.Revenge ||
+            key == Gear.Set.Injury)
+        ) {
+          numOfFourPieceSets++;
+        }
+      }
+      if (numOfFourPieceSets > 1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  assertTargetSets(target: Partial<Record<Gear.Set, number>>) {
+    for (const key in target) {
+      if (target[key as Gear.Set]! > this[key as Gear.Set] + this.emptySlot) {
         return false;
       }
     }
@@ -64,7 +152,7 @@ class SuitSetBuilder implements Record<Gear.Set, number> {
     } else if (this.Destruction >= 4) {
       result.push(Gear.Set.Destruction);
     } else if (this.LifeSteal >= 4) {
-      result.push(Gear.Set.Destruction);
+      result.push(Gear.Set.LifeSteal);
     } else if (this.Counter >= 4) {
       result.push(Gear.Set.Counter);
     } else if (this.Rage >= 4) {
@@ -161,8 +249,11 @@ export class SuitBuilder {
       this.boot(gear);
     }
   }
-  assertTargetSets(target: Record<Gear.Set, number>, emptySlot: number) {
-    return this._sets.assertTargetSets(target, emptySlot);
+  assertTargetSets(target: Partial<Record<Gear.Set, number>>) {
+    return this._sets.assertTargetSets(target);
+  }
+  isBrokenSet() {
+    return this._sets.isBroken();
   }
   build(): Suit {
     return {

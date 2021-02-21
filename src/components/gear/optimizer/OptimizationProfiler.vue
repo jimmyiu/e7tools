@@ -35,6 +35,7 @@
     <v-col>
       <v-select
         v-model="value.combination.forcedSets"
+        class="mb-2"
         clear-icon="mdi-close-circle-outline"
         clearable
         dense
@@ -45,7 +46,22 @@
         outlined
         return-object
       />
-      <!-- <v-checkbox class="mr-3 my-0" dense hide-details label="Broken Set"></v-checkbox> -->
+      <v-text-field
+        v-model="value.combination.limit"
+        class="mb-2"
+        dense
+        hide-details
+        label="Evaluation Limit"
+        outlined
+        type="number"
+      />
+      <v-checkbox
+        v-model="value.combination.brokenSet"
+        class="mr-3 my-0"
+        dense
+        hide-details
+        label="Allow Broken Set"
+      ></v-checkbox>
     </v-col>
   </v-row>
 </template>
