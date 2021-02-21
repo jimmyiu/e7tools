@@ -31,7 +31,7 @@
       "spd": 8,
       "res": 14,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "arbiter-vildred"
     },
     {
       "id": "i-3",
@@ -191,7 +191,7 @@
       "atk": 525,
       "res": 5,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "last-rider-krau"
     },
     {
       "id": "i-=",
@@ -383,7 +383,7 @@
       "spd": 15,
       "res": 6,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "last-rider-krau"
     },
     {
       "id": "i-I",
@@ -1119,7 +1119,7 @@
       "spd": 17,
       "eff": 8,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "last-rider-krau"
     },
     {
       "id": "i-w",
@@ -1231,7 +1231,7 @@
       "atkp": 17,
       "spd": 13,
       "locked": false,
-      "equippedHero": "fallen-cecilia"
+      "equippedHero": ""
     },
     {
       "id": "i-zD",
@@ -1455,7 +1455,7 @@
       "cdmg": 5,
       "spd": 17,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "last-rider-krau"
     },
     {
       "id": "i-zR",
@@ -2207,7 +2207,7 @@
       "cdmg": 19,
       "eff": 8,
       "locked": false,
-      "equippedHero": "fallen-cecilia"
+      "equippedHero": ""
     },
     {
       "id": "i-zzG",
@@ -2413,7 +2413,7 @@
       "cri": 6,
       "spd": 12,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "last-rider-krau"
     },
     {
       "id": "i-zzU",
@@ -2509,7 +2509,7 @@
       "spd": 45,
       "res": 17,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "last-rider-krau"
     },
     {
       "id": "i-zz[",
@@ -2877,7 +2877,7 @@
       "cdmg": 11,
       "spd": 12,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "arbiter-vildred"
     },
     {
       "id": "i-zzr",
@@ -2973,7 +2973,7 @@
       "cri": 6,
       "cdmg": 5,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "arbiter-vildred"
     },
     {
       "id": "i-zzx",
@@ -3432,7 +3432,7 @@
       "eff": 17,
       "res": 19,
       "locked": false,
-      "equippedHero": "fallen-cecilia"
+      "equippedHero": ""
     },
     {
       "id": "i-zzz^",
@@ -3879,7 +3879,7 @@
       "spd": 45,
       "eff": 25,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "arbiter-vildred"
     },
     {
       "id": "i-zzzz",
@@ -4531,7 +4531,7 @@
       "spd": 7,
       "eff": 5,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "fallen-cecilia"
     },
     {
       "id": "i-zzzzm",
@@ -4819,7 +4819,7 @@
       "spd": 12,
       "res": 27,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "fallen-cecilia"
     },
     {
       "id": "i-zzzzzF",
@@ -4899,7 +4899,7 @@
       "def": 310,
       "res": 17,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "fallen-cecilia"
     },
     {
       "id": "i-zzzzzL",
@@ -5262,7 +5262,7 @@
       "cdmg": 7,
       "spd": 7,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "arbiter-vildred"
     },
     {
       "id": "i-zzzzzd",
@@ -5438,7 +5438,7 @@
       "cri": 14,
       "cdmg": 70,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "arbiter-vildred"
     },
     {
       "id": "35c359g39d",
@@ -5600,16 +5600,16 @@
         "boots": ["spd"]
       },
       "stat": {
-        "hp": { "min": "27509" },
+        "hp": { "min": "" },
         "def": {},
         "atk": {},
-        "cri": { "max": 110, "min": "" },
+        "cri": { "max": 110, "min": "98" },
         "cdmg": { "max": 360 },
-        "spd": { "min": "200" },
+        "spd": { "min": "210" },
         "eff": { "min": "", "max": "" },
         "res": {},
         "ehp": { "min": "" },
-        "damage": { "min": "" }
+        "damage": { "min": "1090" }
       },
       "combination": { "forcedSets": ["Speed", "Critical"], "limit": "20000000", "brokenSet": true }
     },
@@ -5666,6 +5666,87 @@
         "damage": { "min": "" }
       },
       "combination": { "forcedSets": ["Speed", "Health"], "limit": "20000000", "brokenSet": true }
+    },
+    {
+      "id": "cerise",
+      "heroId": "cerise",
+      "filter": {
+        "sets": [],
+        "enhanceMode": 2,
+        "locked": false,
+        "equipped": false,
+        "score": 0,
+        "necklaces": [],
+        "rings": [],
+        "boots": ["spd"]
+      },
+      "stat": {
+        "hp": {},
+        "def": {},
+        "atk": {},
+        "cri": { "max": 110 },
+        "cdmg": { "max": 360 },
+        "spd": { "min": "276" },
+        "eff": {},
+        "res": {},
+        "ehp": {},
+        "damage": {}
+      },
+      "combination": { "forcedSets": ["Speed"], "limit": "100000000", "brokenSet": true }
+    },
+    {
+      "id": "seaside-bellona",
+      "heroId": "seaside-bellona",
+      "filter": {
+        "sets": ["Critical", "LifeSteal", "Immunity"],
+        "enhanceMode": 2,
+        "locked": false,
+        "equipped": false,
+        "score": 0,
+        "necklaces": [],
+        "rings": [],
+        "boots": []
+      },
+      "stat": {
+        "hp": {},
+        "def": {},
+        "atk": {},
+        "cri": { "max": 110, "min": "90" },
+        "cdmg": { "max": 360 },
+        "spd": { "min": "", "max": "" },
+        "eff": { "min": "", "max": "" },
+        "res": { "max": "" },
+        "ehp": { "min": "67000" },
+        "damage": {}
+      },
+      "combination": { "forcedSets": ["LifeSteal"], "limit": 20000000, "brokenSet": false }
+    },
+    {
+      "id": "last-rider-krau",
+      "heroId": "last-rider-krau",
+      "filter": {
+        "sets": ["Speed", "Immunity"],
+        "enhanceMode": 2,
+        "locked": false,
+        "equipped": false,
+        "score": 0,
+        "necklaces": [],
+        "rings": [],
+        "boots": ["spd"]
+      },
+      "stat": {
+        "hp": { "min": "22500" },
+        "def": {},
+        "atk": {},
+        "cri": { "max": 110 },
+        "cdmg": { "max": 360 },
+        "spd": { "min": "231", "max": "231" },
+        "eff": { "min": "", "max": "" },
+        "res": { "min": "", "max": "" },
+        "ehp": { "min": "120000" },
+        "damage": {}
+      },
+      "combination": { "forcedSets": ["Speed", "Immunity"], "limit": 20000000, "brokenSet": true }
     }
   ],
   "heros": [

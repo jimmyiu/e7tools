@@ -16,8 +16,8 @@
     <!-- item -->
     <template v-slot:item.type="{ item }">
       <div class="d-flex align-center" style="white-space:nowrap; max-width: 82px">
-        <gear-type-icon small :type="item.type" />
-        <gear-set-icon :set="item.set" small />
+        <gear-type-icon :type="item.type" />
+        <gear-set-icon :set="item.set" />
         <div>
           <span :style="'color: ' + item.grade.color">{{ item.level }}</span
           >+{{ item.enhance }}
@@ -25,7 +25,7 @@
       </div>
     </template>
     <template v-slot:item.set="{ item }">
-      <gear-set-icon :set="item.set" small />
+      <gear-set-icon :set="item.set" />
     </template>
     <template v-slot:item.grade="{ item }">
       <v-chip :color="item.grade.color" label small text-color="white">{{ item.grade.name.substring(0, 1) }}</v-chip>

@@ -126,7 +126,7 @@
             >
               <template v-slot:item.sets="{ item }">
                 <div class="d-flex">
-                  <gear-set-icon v-for="(set, key) in item.sets" :key="key" :set="set" small />
+                  <gear-set-icon v-for="(set, key) in item.sets" :key="key" :set="set" />
                 </div>
               </template>
             </v-data-table>
@@ -276,7 +276,7 @@ export default class OptimizerPage extends Vue {
     this.profile.combination = {
       forcedSets: [], // [Gear.Set.Speed, Gear.Set.Critical]
       limit: Constants.OPTIMIZATION_PROCESS_LIMIT,
-      brokenSet: false
+      brokenSet: true
     };
     this.selectedSuit = this.getSuit(this.profile.heroId);
   }
@@ -289,6 +289,13 @@ export default class OptimizerPage extends Vue {
 
   equipAll() {
     console.log('equipAll::heroId =', this.profile.heroId);
+    const current = this.getSuit(this.profile.heroId);
+    [current.weapon, current.helmet, current.armor, current.necklace, current.ring, current.boot].forEach(x => {
+      if (x != undefined) {
+        x.equippedHero = '';
+        this.saveGears([x]);
+      }
+    });
     if (this.selectedSuit) {
       this.unequipAll();
       console.log('equipAll::selectedSuit =', this.selectedSuit);

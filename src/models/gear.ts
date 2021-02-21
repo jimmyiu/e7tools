@@ -1,6 +1,14 @@
-import { Range } from './common';
-
 export namespace Gear {
+  export enum Type {
+    Weapon = 'Weapon',
+    Helmet = 'Helmet',
+    Armor = 'Armor',
+    Necklace = 'Necklace',
+    Ring = 'Ring',
+    Boot = 'Boot'
+  }
+  export type TypeFigures = Record<Type, number>;
+
   export enum Set {
     Speed = 'Speed',
     Critical = 'Critical',
@@ -23,6 +31,7 @@ export namespace Gear {
     Injury = 'Injury',
     Penetration = 'Penetration'
   }
+  export type SetFigures = Record<Set, number>;
   export const SETS = [
     [Set.Speed, Set.Critical, Set.Hit],
     [Set.Attack, Set.Health, Set.Defense],
@@ -88,15 +97,6 @@ export namespace Gear {
       public readonly label: string,
       public readonly percent: boolean
     ) { }
-  }
-
-  export enum Type {
-    Weapon = 'Weapon',
-    Helmet = 'Helmet',
-    Armor = 'Armor',
-    Necklace = 'Necklace',
-    Ring = 'Ring',
-    Boot = 'Boot'
   }
 
   export class Grade {
@@ -269,6 +269,7 @@ export namespace Gear {
     level: number;
     mode: number;
     main: boolean;
+    equipped: boolean;
   };
 
   export type StatInput = {

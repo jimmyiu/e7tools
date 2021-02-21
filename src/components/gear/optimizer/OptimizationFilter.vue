@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 252px">
+  <div style="max-width: 260px">
     <!-- <v-icon right>help_outlined</v-icon> -->
     <gear-set-select v-model="value.sets" multiple />
     <!-- <v-autocomplete

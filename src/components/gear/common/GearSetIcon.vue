@@ -1,20 +1,23 @@
 <template>
-  <div>
-    <v-img :max-height="width" :max-width="width" :src="require(`@/assets/img/gear/set/${set.toLowerCase()}.png`)" />
-  </div>
+  <v-img
+    :max-height="size"
+    :max-width="size"
+    :src="require(`@/assets/img/gear/set/${set.toLowerCase()}.png`)"
+    style="margin-top: 3px"
+  />
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { Gear } from '@/models';
 
-@Component
+@Component({
+  name: 'gear-set-icon'
+})
 export default class GearSetIcon extends Vue {
-  name: string = 'gear-set-icon';
   @Prop() readonly set!: Gear.Set;
-  @Prop({ type: Boolean, default: false }) readonly small!: Boolean;
 
-  get width(): number {
-    return this.small ? 26 : 44;
+  get size(): number {
+    return 26;
   }
 }
 </script>
