@@ -63,12 +63,14 @@ function calculateScore(gear: Gear.Gear) {
   stats.delete(gear.main!!);
   let score = 0;
   stats.forEach((v: number | undefined, k: Stat) => {
-    if ([Stat.HPP, Stat.DEFP, Stat.ATKP, Stat.CDMG, Stat.EFF, Stat.RES].includes(k)) {
+    if ([Stat.HPP, Stat.DEFP, Stat.ATKP, Stat.EFF, Stat.RES].includes(k)) {
       score += v || 0;
     } else if (Stat.CRI == k) {
       score += ((v || 0) * 16) / 10;
     } else if (Stat.SPD == k) {
       score += (v || 0) * 2;
+    } else if (Stat.CDMG == k) {
+      score += ((v || 0) * 8) / 7;
     } else if (Stat.HP == k) {
       score += Math.round(((v || 0) / STAT_AVERAGE.hp) * 1000) / 10;
     } else if (Stat.DEF == k) {
@@ -102,8 +104,10 @@ function calculateOffScore(gear: Gear.Gear) {
   stats.delete(gear.main!!);
   let score = 0;
   stats.forEach((v: number | undefined, k: Stat) => {
-    if ([Stat.ATKP, Stat.CDMG, Stat.EFF].includes(k)) {
+    if ([Stat.ATKP, Stat.EFF].includes(k)) {
       score += v || 0;
+    } else if (Stat.CDMG == k) {
+      score += ((v || 0) * 8) / 7;
     } else if (Stat.SPD == k) {
       score += (v || 0) * 2;
     } else if (Stat.CRI == k) {

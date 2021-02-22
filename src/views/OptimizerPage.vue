@@ -3,9 +3,6 @@
     <v-sheet class="section body-2 py-1 pl-2" rounded>
       <strong>Debug Panel</strong><br />
       <span v-for="(item, key) in gearStore.distribution" :key="key">{{ key }} ({{ item }}), </span>
-      <!-- Filter: {{ filter }}, Criteria: {{ criteria }}<br /> -->
-      <!-- Distribution: {{ gearStore.distribution }}<br /> -->
-      <!-- <br /> -->
       Number of combinations: <strong class="body-1">{{ gearStore.numOfCombinations | formatNumber }}</strong> /
       Estimated processing time:
       <strong class="body-1">{{
@@ -210,11 +207,15 @@ export default class OptimizerPage extends Vue {
   ];
 
   get gearStore() {
-    return new Gear.GearStore(
-      gearFilterService.filter(this.gears, this.profile.filter, {
-        heroId: this.profile.hero.id
-      })
-    );
+    // return new Gear.GearStore(
+    //   gearFilterService.filter(this.gears, this.profile.filter, {
+    //     heroId: this.profile.hero.id
+    //   })
+    // );
+    return gearFilterService.createGearStore(this.gears, this.profile.filter, {
+      heroId: this.profile.hero.id,
+      heroAbility: this.getHero(this.profile.hero.id)
+    });
   }
 
   get equippedHero(): EquipedHero | undefined {
