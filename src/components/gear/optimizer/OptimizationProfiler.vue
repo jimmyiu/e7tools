@@ -1,7 +1,11 @@
 <template>
   <v-row no-gutters>
     <v-col cols="12" sm="auto">
-      <optimization-hero-sheet v-model="value.hero" :class="{ 'hero-sheet-size': $vuetify.breakpoint.smAndUp }" />
+      <optimization-hero-sheet
+        v-model="value.hero"
+        :class="{ 'hero-sheet-size': $vuetify.breakpoint.smAndUp }"
+        @change-hero="$emit('change-hero', value.hero.id)"
+      />
     </v-col>
     <v-col cols="12" sm="auto">
       <optimization-stat-criteria-sheet

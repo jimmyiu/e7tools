@@ -50,3 +50,54 @@ export type OptimizationResult = HeroAbility & {
   ringId?: string;
   bootId?: string;
 };
+
+export const EMPTY_PROFILE: OptimizationProfile = Object.freeze({
+  id: '',
+  hero: {
+    id: '',
+    bonusAbility: {
+      atk: undefined,
+      atkp: undefined
+    }
+  },
+  filter: {
+    sets: [],
+    enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
+    necklaces: [], // [Gear.Stat.CDMG, Gear.Stat.ATKP, Gear.Stat.ATK],
+    rings: [], // [Gear.Stat.ATKP, Gear.Stat.ATK],
+    boots: [],
+    locked: false,
+    equipped: false,
+    score: 0,
+    rating: {
+      point: {
+        hp: 1,
+        def: 1,
+        atk: 1,
+        cri: 1,
+        cdmg: 1,
+        spd: 1,
+        eff: 1,
+        res: 1
+      },
+      threshold: 100
+    }
+  },
+  stat: {
+    hp: {},
+    def: {},
+    atk: {}, // { min: 3500 },
+    cri: { max: 110 }, // min: 96,
+    cdmg: { max: 360 }, // min: 270,
+    spd: {}, // min: 218
+    eff: {},
+    res: {},
+    ehp: {},
+    damage: {}
+  },
+  evaluation: {
+    forcedSets: [], // [Gear.Set.Speed, Gear.Set.Critical]
+    limit: 20000000,
+    brokenSet: true
+  }
+});

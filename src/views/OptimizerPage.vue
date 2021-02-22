@@ -143,7 +143,7 @@ import { Constants, Gear, EquipedHero, OptimizationProfile, Hero, Suit, SiteStat
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
 import { SuitBuilder, heroService, gearFilterService } from '@/services';
-import { OptimizationResult } from '@/models/optimizer';
+import { EMPTY_PROFILE, OptimizationResult } from '@/models/optimizer';
 import { GearOptimizerProgress } from '@/services/gear-optimizer';
 
 @Component({
@@ -173,9 +173,24 @@ export default class OptimizerPage extends Vue {
   // models
   profile: OptimizationProfile = {
     id: '',
-    hero: {},
-    filter: {},
-    stat: {},
+    hero: {
+      bonusAbility: {}
+    },
+    filter: {
+      rating: {}
+    },
+    stat: {
+      hp: {},
+      def: {},
+      atk: {},
+      cri: {},
+      cdmg: {},
+      spd: {},
+      eff: {},
+      res: {},
+      ehp: {},
+      damage: {}
+    },
     evaluation: {}
   } as OptimizationProfile;
 
@@ -220,6 +235,8 @@ export default class OptimizerPage extends Vue {
 
   get equippedHero(): EquipedHero | undefined {
     if (this.profile.hero.id && this.selectedSuit) {
+      console.log(this.selectedSuit);
+      console.log('equippedHero = ', this.profile.hero.id);
       return heroService.equip(this.getHero(this.profile.hero.id), this.selectedSuit);
     }
     return undefined;
@@ -256,47 +273,51 @@ export default class OptimizerPage extends Vue {
   }
 
   reset() {
+    console.log('reset');
     this.result.splice(0, this.result.length);
-    this.profile.hero = {
-      id: this.profile.hero.id,
-      bonusAbility: {
-        // hpp: undefined,
-        // hp: undefined,
-        // defp: undefined,
-        // def: undefined,
-        // atkp: undefined,
-        // atk: undefined,
-        // cri: undefined,
-        // cdmg: undefined,
-        // spd: undefined,
-        // eff: undefined,
-        // res: undefined
-      }
-    };
-    this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
-    this.profile.stat = {
-      hp: {},
-      def: {},
-      atk: {}, // { min: 3500 },
-      cri: { max: 110 }, // min: 96,
-      cdmg: { max: 360 }, // min: 270,
-      spd: {}, // min: 218
-      eff: {},
-      res: {},
-      ehp: {},
-      damage: {}
-    };
-    this.profile.evaluation = {
-      forcedSets: [], // [Gear.Set.Speed, Gear.Set.Critical]
-      limit: Constants.OPTIMIZATION_PROCESS_LIMIT,
-      brokenSet: true
-    };
+    // this.profile.hero = {
+    //   id: this.profile.hero.id,
+    //   bonusAbility: {
+    //     hpp: undefined,
+    //     hp: undefined,
+    //     defp: undefined,
+    //     def: undefined,
+    //     atkp: 0,
+    //     atk: undefined,
+    //     cri: undefined,
+    //     cdmg: undefined,
+    //     spd: undefined,
+    //     eff: undefined,
+    //     res: undefined
+    //   }
+    // };
+    // this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
+    // this.profile.stat = {
+    //   hp: {},
+    //   def: {},
+    //   atk: {}, // { min: 3500 },
+    //   cri: { max: 110 }, // min: 96,
+    //   cdmg: { max: 360 }, // min: 270,
+    //   spd: {}, // min: 218
+    //   eff: {},
+    //   res: {},
+    //   ehp: {},
+    //   damage: {}
+    // };
+    // this.profile.evaluation = {
+    //   forcedSets: [], // [Gear.Set.Speed, Gear.Set.Critical]
+    //   limit: Constants.OPTIMIZATION_PROCESS_LIMIT,
+    //   brokenSet: true
+    // };
+    this.assignProfile(EMPTY_PROFILE);
     this.selectedSuit = this.getSuit(this.profile.hero.id);
   }
 
   changeHero(heroId: string) {
     this.updateState({ lastSelectedHeroId: heroId });
     this.reset();
+    console.log('changeHero::heroId =', heroId);
+    this.profile.hero.id = heroId;
     this.loadProfile();
   }
 
@@ -351,9 +372,9 @@ export default class OptimizerPage extends Vue {
     console.log('loadProfile::hero.id =', this.profile.hero.id);
     const profile = this.getProfile(this.profile.hero.id);
     console.log('loadProfile::profile =', profile);
-    console.log('loadProfile::debug = ', typeof profile?.hero.bonusAbility.atkp);
     if (profile) {
-      Object.assign(this.profile, profile);
+      // Object.assign(this.profile, profile);
+      this.assignProfile(profile);
     } else {
       console.log('loadProfile::no saved profile');
       this.profile.id = this.profile.hero.id;
@@ -361,10 +382,29 @@ export default class OptimizerPage extends Vue {
     this.selectedSuit = this.getSuit(this.profile.hero.id);
   }
 
+  assignProfile(profile: OptimizationProfile) {
+    this.profile.id = profile.id;
+    // this.profile.hero.id = profile.hero.id;
+    console.log('assignProfile', profile.hero.bonusAbility);
+    this.profile.hero.bonusAbility = Object.assign({}, profile.hero.bonusAbility);
+    this.profile.filter = Object.assign({}, profile.filter);
+    // this.profile.filter.rating = Object.assign({}, profile.filter.rating);
+    this.profile.stat.hp = Object.assign({}, profile.stat.hp);
+    this.profile.stat.def = Object.assign({}, profile.stat.def);
+    this.profile.stat.atk = Object.assign({}, profile.stat.atk);
+    this.profile.stat.cri = Object.assign({}, profile.stat.cri);
+    this.profile.stat.cdmg = Object.assign({}, profile.stat.cdmg);
+    this.profile.stat.spd = Object.assign({}, profile.stat.spd);
+    this.profile.stat.eff = Object.assign({}, profile.stat.eff);
+    this.profile.stat.ehp = Object.assign({}, profile.stat.ehp);
+    this.profile.stat.damage = Object.assign({}, profile.stat.damage);
+    this.profile.evaluation = Object.assign({}, profile.evaluation);
+  }
+
   created() {
     this.setupWorker();
-    this.profile.hero.id = this.siteState.lastSelectedHeroId;
     this.reset();
+    this.profile.hero.id = this.siteState.lastSelectedHeroId;
     this.loadProfile();
   }
 

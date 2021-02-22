@@ -270,6 +270,7 @@ export class SuitBuilder {
     return this._sets.isBroken();
   }
   build(): Suit {
+    console.log('build::ability = ', this._ability);
     return {
       ability: Object.assign({}, this._ability),
       weapon: this._weapon,
