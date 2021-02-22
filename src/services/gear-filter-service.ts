@@ -1,11 +1,15 @@
-import { Gear } from '@/models';
+import { Gear, HeroAbility } from '@/models';
 import { noop } from 'vue-class-component/lib/util';
 
 type Filter = (it: Gear.Gear) => boolean;
 const noopFilter: Filter = (it: Gear.Gear) => true;
 
 // TODO: refactor hero id
-export function filter(gears: Gear.Gear[], filter: Gear.GearFilter, params: { heroId: string }) {
+export function filter(
+  gears: Gear.Gear[],
+  filter: Gear.GearFilter,
+  params: { heroId: string; heroAbility: HeroAbility }
+) {
   type Filter = (it: Gear.Gear) => boolean;
   // console.log('filter::filter =', filter);
 
@@ -55,4 +59,48 @@ export function filter(gears: Gear.Gear[], filter: Gear.GearFilter, params: { he
   return gears.filter(it => {
     return locked(it) && equiped(it) && set(it) && enhance(it) && necklace(it) && ring(it) && boot(it) && score(it);
   });
+}
+
+export function createGearStore(
+  gears: Gear.Gear[],
+  filterCondition: Gear.GearFilter,
+  params: { heroId: string; heroAbility: HeroAbility }
+) {
+  const store = new Gear.GearStore(filter(gears, filterCondition, params));
+  if (filterCondition.rating.threshold < 100 && params.heroId) {
+    console.log(`createGearStore::threshold = ${filterCondition.rating.threshold}`);
+    [Gear.Type.Weapon, Gear.Type.Helmet, Gear.Type.Armor, Gear.Type.Necklace, Gear.Type.Ring, Gear.Type.Boot].forEach(
+      type => {
+        const foo = store.getGearsByType(type);
+        const removeCount = Math.trunc(foo.length * (1 - filterCondition.rating.threshold / 100));
+        console.log(
+          `createGearStore::type = ${type}, original length = ${foo.length} will be removed ${removeCount} items`
+        );
+        if (removeCount > 0) {
+          foo.sort((a, b) =>
+            calculateRating(a, filterCondition.rating.point, params.heroAbility) >
+              calculateRating(b, filterCondition.rating.point, params.heroAbility)
+              ? -1
+              : 1
+          );
+          foo.splice(foo.length - removeCount, removeCount);
+        }
+        console.log(`createGearStore::new size = ${foo.length}`);
+      }
+    );
+  }
+  return store;
+}
+
+function calculateRating(gear: Gear.Gear, points: HeroAbility, ability: HeroAbility) {
+  let result = 0;
+  result += points.hp * (gear.hpp ?? 0) + (gear.hp ?? 0) / ability.hp;
+  result += points.def * (gear.defp ?? 0) + (gear.def ?? 0) / ability.def;
+  result += points.atk * (gear.atkp ?? 0) + (gear.atk ?? 0) / ability.atk;
+  result += points.cri * (gear.cri ?? 0) * 1.6;
+  result += (points.cdmg * (gear.cdmg ?? 0) * 8) / 7;
+  result += points.spd * (gear.spd ?? 0) * 2;
+  result += points.eff * (gear.eff ?? 0);
+  result += points.res * (gear.res ?? 0);
+  return Math.round(result * 10) / 10;
 }
