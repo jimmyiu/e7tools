@@ -34,7 +34,7 @@ export default new Vuex.Store({
       return state.data.gears.find(x => x.id == gearId);
     },
     getProfile: state => (heroId: string) => {
-      return state.data.profiles.find(x => x.heroId == heroId);
+      return state.data.profiles.find(x => x.hero.id == heroId);
     },
     getHero: state => (heroId: string) => {
       return state.data.heros.find(x => x.id == heroId);
@@ -73,10 +73,10 @@ export default new Vuex.Store({
       }
     },
     saveProfile(state, profile: OptimizationProfile) {
-      if (profile.heroId) {
+      if (profile.hero.id) {
         // TODO: better deep clone solution
         const shadow = JSON.parse(JSON.stringify(profile)) as OptimizationProfile;
-        const index = state.data.profiles.findIndex(x => x.heroId == shadow.heroId);
+        const index = state.data.profiles.findIndex(x => x.hero.id == shadow.hero.id);
         if (index < 0) {
           state.data.profiles.push(shadow);
         } else {

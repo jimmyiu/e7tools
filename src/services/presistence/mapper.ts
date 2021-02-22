@@ -61,7 +61,10 @@ export class OptimizationPorfileMapper {
   static toProfile(profile: OptimizationProfileEntity): OptimizationProfile {
     return {
       id: profile.id,
-      heroId: profile.heroId,
+      hero: {
+        id: profile.hero.id,
+        bonusAbility: Object.assign({}, profile.hero.bonusAbility)
+      },
       filter: {
         sets: profile.filter.sets.map(x => x as Gear.Set),
         enhanceMode: profile.filter.enhanceMode,
@@ -70,13 +73,17 @@ export class OptimizationPorfileMapper {
         score: profile.filter.score,
         necklaces: profile.filter.necklaces.map(x => Gear.Stat.getInstance(x)),
         rings: profile.filter.rings.map(x => Gear.Stat.getInstance(x)),
-        boots: profile.filter.boots.map(x => Gear.Stat.getInstance(x))
+        boots: profile.filter.boots.map(x => Gear.Stat.getInstance(x)),
+        rating: {
+          point: Object.assign({}, profile.filter.rating.point),
+          threshold: profile.filter.rating.threshold
+        }
       },
       stat: profile.stat,
-      combination: {
-        forcedSets: profile.combination.forcedSets.map(x => x as Gear.Set),
-        limit: profile.combination.limit,
-        brokenSet: profile.combination.brokenSet
+      evaluation: {
+        forcedSets: profile.evaluation.forcedSets.map(x => x as Gear.Set),
+        limit: profile.evaluation.limit,
+        brokenSet: profile.evaluation.brokenSet
       }
     };
   }
@@ -84,7 +91,10 @@ export class OptimizationPorfileMapper {
   static toProfileEntity(profile: OptimizationProfile): OptimizationProfileEntity {
     return {
       id: profile.id,
-      heroId: profile.heroId,
+      hero: {
+        id: profile.hero.id,
+        bonusAbility: Object.assign({}, profile.hero.bonusAbility)
+      },
       filter: {
         sets: profile.filter.sets,
         enhanceMode: profile.filter.enhanceMode,
@@ -93,13 +103,17 @@ export class OptimizationPorfileMapper {
         score: profile.filter.score,
         necklaces: profile.filter.necklaces.map(x => x.value),
         rings: profile.filter.rings.map(x => x.value),
-        boots: profile.filter.boots.map(x => x.value)
+        boots: profile.filter.boots.map(x => x.value),
+        rating: {
+          point: Object.assign({}, profile.filter.rating.point),
+          threshold: profile.filter.rating.threshold
+        }
       },
       stat: profile.stat,
-      combination: {
-        forcedSets: profile.combination.forcedSets.map(x => x as Gear.Set),
-        limit: profile.combination.limit,
-        brokenSet: profile.combination.brokenSet
+      evaluation: {
+        forcedSets: profile.evaluation.forcedSets.map(x => x as Gear.Set),
+        limit: profile.evaluation.limit,
+        brokenSet: profile.evaluation.brokenSet
       }
     };
   }

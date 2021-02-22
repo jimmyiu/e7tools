@@ -67,6 +67,7 @@ import { Gear } from '@/models';
 import { gearService } from '@/services';
 import { GearSetIcon, GearTypeIcon } from './common';
 import { mapActions, mapGetters } from 'vuex';
+import { GearAbility } from '@/models/common';
 
 @Component({
   name: 'gear-table',
@@ -81,7 +82,7 @@ export default class GearTable extends Vue {
 
   @Prop() readonly item!: any;
   @Prop() readonly gears!: Gear.Gear[];
-  filter: Gear.GearAbility & Gear.GearScore = {
+  filter: GearAbility & Gear.GearScore = {
     score: 0,
     offScore: 0,
     defScore: 0

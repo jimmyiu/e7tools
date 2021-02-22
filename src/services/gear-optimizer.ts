@@ -36,7 +36,7 @@ export class DefaultGearOptimizer implements GearOptimizer {
     public readonly hero: Hero,
     public readonly progressCallback: (x: GearOptimizerProgress) => void
   ) {
-    this.reportProgressCount = Math.ceil(this.profile.combination.limit / 10);
+    this.reportProgressCount = Math.ceil(this.profile.evaluation.limit / 10);
     this.startTime = Date.now();
   }
 
@@ -69,13 +69,13 @@ export class DefaultGearOptimizer implements GearOptimizer {
     return (ability: HeroAbility) => true;
   }
 
-  combinationFilter() {
+  evaluationFilter() {
     let forcedSet = (sets: SuitBuilder) => true;
-    if (this.profile.combination.forcedSets.length > 0) {
+    if (this.profile.evaluation.forcedSets.length > 0) {
       const target: Partial<Record<Gear.Set, number>> = {};
       // TODO: currently assumed input sets is make sense
-      for (let i = 0; i < this.profile.combination.forcedSets.length; i++) {
-        const set = this.profile.combination.forcedSets[i];
+      for (let i = 0; i < this.profile.evaluation.forcedSets.length; i++) {
+        const set = this.profile.evaluation.forcedSets[i];
         switch (set) {
           case Gear.Set.Speed:
           case Gear.Set.Attack:
@@ -91,7 +91,7 @@ export class DefaultGearOptimizer implements GearOptimizer {
     }
 
     let brokenSet = (sets: SuitBuilder) => true;
-    if (!this.profile.combination.brokenSet) {
+    if (!this.profile.evaluation.brokenSet) {
       brokenSet = (builder: SuitBuilder) => !builder.isBrokenSet();
     }
     return (builder: SuitBuilder) => {
@@ -178,8 +178,10 @@ export class DefaultGearOptimizer implements GearOptimizer {
     this.reportProgress();
     //
     const builder = new SuitBuilder();
+    console.log('this.profile.hero.bonusAbility =', this.profile.hero.bonusAbility);
+    builder.bonus(this.profile.hero.bonusAbility);
     const equipedHeroFilter = this.equipedHeroFilter();
-    const combinationFilter = this.combinationFilter();
+    const combinationFilter = this.evaluationFilter();
     for (let i1 = 0, n1 = this.store.weapons.length; i1 < n1; i1++) {
       builder.weapon(this.store.weapons[i1]);
       for (let i2 = 0, n2 = this.store.helmets.length; i2 < n2; i2++) {
@@ -237,7 +239,7 @@ export class DefaultGearOptimizer implements GearOptimizer {
                   this.reportProgress();
 
                   // hard limit check
-                  if (this.progress.evaluated >= this.profile.combination.limit) {
+                  if (this.progress.evaluated >= this.profile.evaluation.limit) {
                     console.log('optimize::hit evaluation hard limit');
                     return this.result;
                   }

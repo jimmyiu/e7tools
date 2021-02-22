@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-wrap">
     <!-- 'mr-2': i == sets.length - 1,  -->
-    <div v-for="(set, i) in sets" :key="i" :class="{ 'mb-2': true }">
+    <div v-for="(set, i) in sets" :key="i" :class="{ 'mb-1': true }">
       <v-btn-toggle class="gear-filter" dense :multiple="multiple" :value="value" @change="change">
         <v-btn v-for="(item, index) in set" :key="index" :class="{ 'with-figure': displayFigures }" :value="item">
           <div class="d-flex flex-column justify-center align-center">

@@ -1,3 +1,5 @@
+import { GearAbility, HeroAbility } from './common';
+
 export namespace Gear {
   export enum Type {
     Weapon = 'Weapon',
@@ -127,20 +129,6 @@ export namespace Gear {
     private constructor(public readonly name: string, public readonly color: string) { }
   }
 
-  export type GearAbility = {
-    hpp?: number;
-    hp?: number;
-    defp?: number;
-    def?: number;
-    atkp?: number;
-    atk?: number;
-    cri?: number;
-    cdmg?: number;
-    spd?: number;
-    eff?: number;
-    res?: number;
-  };
-
   export type GearScore = {
     score: number;
     offScore: number;
@@ -262,6 +250,10 @@ export namespace Gear {
     locked: boolean;
     equipped: boolean;
     score: number;
+    rating: {
+      point: HeroAbility;
+      threshold: number;
+    };
   };
 
   export type TableFilter = BaseGearFilter & {

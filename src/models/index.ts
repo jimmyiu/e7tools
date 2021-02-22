@@ -2,14 +2,19 @@ import { Range, HeroAbility } from './common';
 import { Gear } from './gear';
 import { Hero, EquipedHero } from './hero';
 import { Suit, SuitAbility } from './suit';
-import { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria } from './optimizer';
+import {
+  OptimizationProfile,
+  OptimizationStatCriteria,
+  OptimizationEvaluationCriteria,
+  OptimizationHero
+} from './optimizer';
 
 export { Gear, Range, Suit, SuitAbility };
 export { Hero, HeroAbility, EquipedHero };
-export { OptimizationProfile, OptimizationStatCriteria, OptimizationCombinationCriteria };
+export { OptimizationProfile, OptimizationStatCriteria, OptimizationEvaluationCriteria, OptimizationHero };
 
 export const Constants = {
-  CURRENT_PERSISTENT_DATA_VERSION: '0.3.2',
+  CURRENT_PERSISTENT_DATA_VERSION: '0.4.0',
   OPTIMIZATION_PROCESS_LIMIT: 20000000,
   DEFAULT_HERO_ID: 'arbiter-vildred', // 'iseria',
   KEY_VUEXDATA: 'vuex.data',
@@ -22,7 +27,20 @@ export const Constants = {
     boots: [],
     locked: false,
     equipped: false,
-    score: 0
+    score: 0,
+    rating: {
+      point: {
+        hp: 1,
+        def: 1,
+        atk: 1,
+        cri: 1,
+        cdmg: 1,
+        spd: 1,
+        eff: 1,
+        res: 1
+      },
+      threshold: 100
+    }
   } as Gear.GearFilter,
   //
   NECKLACE_STATS: [

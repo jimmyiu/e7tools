@@ -1,32 +1,34 @@
 <template>
   <div>
-    <v-card class="section">
-      <v-card-text>
-        <strong>Debug Panel</strong><br />
-        <span v-for="(item, key) in gearStore.distribution" :key="key">{{ key }} ({{ item }}), </span>
-        <!-- Filter: {{ filter }}, Criteria: {{ criteria }}<br /> -->
-        <!-- Distribution: {{ gearStore.distribution }}<br /> -->
-        <br />
-        Number of combinations: {{ gearStore.numOfCombinations | formatNumber }}<br />
-        Estimated processing time:
-        {{ Math.ceil(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber }}
-        minutes
-        <!-- <v-icon>help_outlined</v-icon> -->
-        <!-- <i>
+    <v-sheet class="section body-2 py-1 pl-2" rounded>
+      <strong>Debug Panel</strong><br />
+      <span v-for="(item, key) in gearStore.distribution" :key="key">{{ key }} ({{ item }}), </span>
+      <!-- Filter: {{ filter }}, Criteria: {{ criteria }}<br /> -->
+      <!-- Distribution: {{ gearStore.distribution }}<br /> -->
+      <!-- <br /> -->
+      Number of combinations: <strong class="body-1">{{ gearStore.numOfCombinations | formatNumber }}</strong> /
+      Estimated processing time:
+      <strong class="body-1">{{
+        Math.ceil(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber
+      }}</strong>
+      minutes
+      <!-- <v-icon>help_outlined</v-icon> -->
+      <!-- <i>
           Remark:<br />
           - only first {{ hardLimit | formatNumber }} combinations will be evaluated now (Performance
           issue)<br />
           - 10,000,000 combinations take around 7.1 seconds in the testing machine
         </i> -->
-      </v-card-text>
-    </v-card>
+    </v-sheet>
     <v-card class="mt-2">
-      <v-card-text>
-        <optimization-profiler v-model="profile" @change-hero="changeHero" />
-      </v-card-text>
+      <optimization-profiler v-model="profile" @change-hero="changeHero" />
       <v-divider />
-      <!-- <v-card-text> Profile: {{ profile }} </v-card-text>
-      <v-divider /> -->
+      <v-progress-linear v-if="progress.processTime >= 0" height="25" :indeterminate="optimizing" striped>
+        <strong>
+          Processed ({{ progress.proceeded | formatNumber }}) / Evaluated ({{ progress.evaluated | formatNumber }}) /
+          Found ({{ progress.found | formatNumber }}) in {{ progress.processTime }} seconds
+        </strong>
+      </v-progress-linear>
       <v-card-actions>
         <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
         <v-btn text @click="reset">Clear</v-btn>
@@ -104,12 +106,6 @@
     </v-card>
 
     <v-card class="mt-2">
-      <v-progress-linear v-if="progress.processTime >= 0" height="25" :indeterminate="optimizing" striped>
-        <strong>
-          Processed ({{ progress.proceeded | formatNumber }}) / Evaluated ({{ progress.evaluated | formatNumber }}) /
-          Found ({{ progress.found | formatNumber }}) in {{ progress.processTime }} seconds
-        </strong>
-      </v-progress-linear>
       <v-card-text>
         <v-row>
           <v-col>
@@ -180,10 +176,10 @@ export default class OptimizerPage extends Vue {
   // models
   profile: OptimizationProfile = {
     id: '',
-    heroId: '',
+    hero: {},
     filter: {},
     stat: {},
-    combination: {}
+    evaluation: {}
   } as OptimizationProfile;
 
   result: OptimizationResult[] = [];
@@ -216,14 +212,14 @@ export default class OptimizerPage extends Vue {
   get gearStore() {
     return new Gear.GearStore(
       gearFilterService.filter(this.gears, this.profile.filter, {
-        heroId: this.profile.heroId
+        heroId: this.profile.hero.id
       })
     );
   }
 
   get equippedHero(): EquipedHero | undefined {
-    if (this.profile.heroId && this.selectedSuit) {
-      return heroService.equip(this.getHero(this.profile.heroId), this.selectedSuit);
+    if (this.profile.hero.id && this.selectedSuit) {
+      return heroService.equip(this.getHero(this.profile.hero.id), this.selectedSuit);
     }
     return undefined;
   }
@@ -236,7 +232,7 @@ export default class OptimizerPage extends Vue {
       action: 'optimize',
       store: this.gearStore,
       profile: this.profile,
-      hero: this.getHero(this.profile.heroId)
+      hero: this.getHero(this.profile.hero.id)
     });
   }
 
@@ -260,6 +256,22 @@ export default class OptimizerPage extends Vue {
 
   reset() {
     this.result.splice(0, this.result.length);
+    this.profile.hero = {
+      id: this.profile.hero.id,
+      bonusAbility: {
+        // hpp: undefined,
+        // hp: undefined,
+        // defp: undefined,
+        // def: undefined,
+        // atkp: undefined,
+        // atk: undefined,
+        // cri: undefined,
+        // cdmg: undefined,
+        // spd: undefined,
+        // eff: undefined,
+        // res: undefined
+      }
+    };
     this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
     this.profile.stat = {
       hp: {},
@@ -273,12 +285,12 @@ export default class OptimizerPage extends Vue {
       ehp: {},
       damage: {}
     };
-    this.profile.combination = {
+    this.profile.evaluation = {
       forcedSets: [], // [Gear.Set.Speed, Gear.Set.Critical]
       limit: Constants.OPTIMIZATION_PROCESS_LIMIT,
       brokenSet: true
     };
-    this.selectedSuit = this.getSuit(this.profile.heroId);
+    this.selectedSuit = this.getSuit(this.profile.hero.id);
   }
 
   changeHero(heroId: string) {
@@ -288,8 +300,8 @@ export default class OptimizerPage extends Vue {
   }
 
   equipAll() {
-    console.log('equipAll::heroId =', this.profile.heroId);
-    const current = this.getSuit(this.profile.heroId);
+    console.log('equipAll::hero.id =', this.profile.hero.id);
+    const current = this.getSuit(this.profile.hero.id);
     [current.weapon, current.helmet, current.armor, current.necklace, current.ring, current.boot].forEach(x => {
       if (x != undefined) {
         x.equippedHero = '';
@@ -302,7 +314,7 @@ export default class OptimizerPage extends Vue {
       const c = this.selectedSuit;
       [c.weapon, c.helmet, c.armor, c.necklace, c.ring, c.boot].forEach(x => {
         if (x != undefined) {
-          x.equippedHero = this.profile.heroId;
+          x.equippedHero = this.profile.hero.id;
           this.saveGears([x]);
         }
       });
@@ -335,21 +347,22 @@ export default class OptimizerPage extends Vue {
   }
 
   loadProfile() {
-    console.log('loadProfile::hero.id =', this.profile.heroId);
-    const profile = this.getProfile(this.profile.heroId);
-    console.log('loadProfile::profile =', this.getProfile(this.profile.heroId));
+    console.log('loadProfile::hero.id =', this.profile.hero.id);
+    const profile = this.getProfile(this.profile.hero.id);
+    console.log('loadProfile::profile =', profile);
+    console.log('loadProfile::debug = ', typeof profile?.hero.bonusAbility.atkp);
     if (profile) {
       Object.assign(this.profile, profile);
     } else {
       console.log('loadProfile::no saved profile');
-      this.profile.id = this.profile.heroId;
+      this.profile.id = this.profile.hero.id;
     }
-    this.selectedSuit = this.getSuit(this.profile.heroId);
+    this.selectedSuit = this.getSuit(this.profile.hero.id);
   }
 
   created() {
     this.setupWorker();
-    this.profile.heroId = this.siteState.lastSelectedHeroId;
+    this.profile.hero.id = this.siteState.lastSelectedHeroId;
     this.reset();
     this.loadProfile();
   }

@@ -1,6 +1,7 @@
 import { Gear, HeroAbility, Range } from '.';
+import { GearAbility } from './common';
 
-export type OptimizationCombinationCriteria = {
+export type OptimizationEvaluationCriteria = {
   forcedSets: Gear.Set[];
   limit: number;
   brokenSet: boolean;
@@ -19,15 +20,20 @@ export type OptimizationStatCriteria = {
   damage: Range;
 };
 
+export type OptimizationHero = {
+  id: string;
+  bonusAbility: GearAbility;
+};
+
 /**
  * Full configuration of an optimization process
  */
 export type OptimizationProfile = {
   id: string;
-  heroId: string;
+  hero: OptimizationHero;
   filter: Gear.GearFilter;
   stat: OptimizationStatCriteria;
-  combination: OptimizationCombinationCriteria;
+  evaluation: OptimizationEvaluationCriteria;
   // criteria: OptimizerCriteria;
 };
 

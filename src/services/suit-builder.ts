@@ -1,4 +1,5 @@
 import { Gear, Suit, SuitAbility } from '@/models';
+import { GearAbility } from '@/models/common';
 
 class SuitSetBuilder implements Record<Gear.Set, number> {
   // static FOUR_PIECES = [Gear.Set.Speed, Gear.Set.Attack, Gear.Set.Destruction];
@@ -209,6 +210,19 @@ export class SuitBuilder {
 
   constructor() {
     this._sets = new SuitSetBuilder();
+  }
+  bonus(bonus: GearAbility) {
+    this._ability.hpp += bonus.hpp ?? 0;
+    this._ability.hp += bonus.hp ?? 0;
+    this._ability.defp += bonus.defp ?? 0;
+    this._ability.def += bonus.def ?? 0;
+    this._ability.atkp += bonus.atkp ?? 0;
+    this._ability.atk += bonus.atk ?? 0;
+    this._ability.cri += bonus.cri ?? 0;
+    this._ability.cdmg += bonus.cdmg ?? 0;
+    this._ability.spd += bonus.spd ?? 0;
+    this._ability.eff += bonus.eff ?? 0;
+    this._ability.res += bonus.res ?? 0;
   }
   weapon(weapon?: Gear.Gear) {
     this.change(this._weapon, weapon);

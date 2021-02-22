@@ -232,6 +232,8 @@ export default class GearFormCard extends Vue {
         Vue.set(gear, this.form.statInputs[i].stat!.value, this.form.statInputs[i].value);
       }
     }
+    gear.locked = this.gear ? this.gear.locked : false;
+    gear.equippedHero = this.gear ? this.gear.equippedHero : '';
     gearService.assignScore(gear);
     console.log('submit::gear =', gear);
     this.$emit('input', gear);

@@ -1,9 +1,10 @@
 import { BasePersistentData } from '.';
 import { Gear as GearNs, Range } from '../';
+import { GearAbility } from '../common';
 
 export namespace V_0_2_1 {
   type GearScore = GearNs.GearScore;
-  type GearAbility = GearNs.GearAbility;
+  // type GearAbility = GearAbility;
 
   export type StatInput = {
     stat?: Stat;
@@ -260,7 +261,6 @@ export namespace V_0_2_1 {
     filter: GearFilter;
     stat: OptimizationStatCriteria;
     combination: OptimizationCombinationCriteria;
-    // criteria: OptimizerCriteria;
   };
 
   export type PersistentData = BasePersistentData & {
