@@ -77,7 +77,7 @@ function calculateScore(gear: Gear.Gear) {
       score += Math.round(((v || 0) / STAT_AVERAGE.atk) * 1000) / 10;
     }
   });
-  return score;
+  return Math.round(score * 10) / 10;
 }
 
 function calculateDefScore(gear: Gear.Gear) {
@@ -95,7 +95,7 @@ function calculateDefScore(gear: Gear.Gear) {
       score += Math.round(((v || 0) / STAT_AVERAGE.def) * 1000) / 10;
     }
   });
-  return score;
+  return Math.round(score * 10) / 10;
 }
 function calculateOffScore(gear: Gear.Gear) {
   let stats = gear.getStatMap();
@@ -112,7 +112,7 @@ function calculateOffScore(gear: Gear.Gear) {
       score += Math.round(((v || 0) / STAT_AVERAGE.atk) * 1000) / 10;
     }
   });
-  return score;
+  return Math.round(score * 10) / 10;
 }
 
 export function calculateStatistics(gears: Gear.Gear[]) {
