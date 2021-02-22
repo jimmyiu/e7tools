@@ -4,9 +4,9 @@
       <p>This tool is under development</p>
       <ul>
         <li>Gear Management & Gear Optimizer features are working, but definitely a lot of things have to improve</li>
-        <li>Next target: Revise gear page</li>
+        <li>Next target: Revise rating filter</li>
       </ul>
-      <br />2021-02-19
+      <br />2021-02-22
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
