@@ -1,10 +1,10 @@
 import { Gear, Hero, Suit } from '@/models';
-import { EquipedHero } from '@/models/hero';
+import { EquippedHero } from '@/models/hero';
 
 class GearCombinationService {
-  public apply(combination: Gear.GearCombination, hero: Hero): EquipedHero {
+  public apply(combination: Gear.GearCombination, hero: Hero): EquippedHero {
     const extra = this.determineSetsExtraAbility(combination.sets);
-    const result: EquipedHero = {
+    const result: EquippedHero = {
       hp: Math.trunc(hero.hp * (1 + (combination.ability.hpp + extra.hpp) / 100)) + combination.ability.hp,
       def: Math.trunc(hero.def * (1 + (combination.ability.defp + extra.defp) / 100)) + combination.ability.def,
       atk: Math.trunc(hero.atk * (1 + (combination.ability.atkp + extra.atkp) / 100)) + combination.ability.atk,

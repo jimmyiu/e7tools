@@ -2733,7 +2733,7 @@
       "spd": 18,
       "eff": 5,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "roana"
     },
     {
       "id": "i-zzi",
@@ -4994,7 +4994,7 @@
       "def": 36,
       "spd": 8,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "roana"
     },
     {
       "id": "i-zzzzzS",
@@ -5198,7 +5198,7 @@
       "cdmg": 13,
       "spd": 13,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "roana"
     },
     {
       "id": "i-zzzzz`",
@@ -5566,7 +5566,7 @@
       "spd": 8,
       "res": 14,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "roana"
     },
     {
       "id": "8e3cd977bh",
@@ -5646,7 +5646,7 @@
       "spd": 14,
       "res": 18,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "roana"
     },
     {
       "id": "724ia8ci38",
@@ -5662,7 +5662,7 @@
       "spd": 6,
       "res": 14,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "roana"
     },
     {
       "id": "487ab07658",
@@ -5723,13 +5723,13 @@
         "locked": true,
         "equipped": true,
         "score": 0,
-        "necklaces": ["cdmg", "atkp", "atk"],
-        "rings": ["atkp", "atk"],
+        "necklaces": ["cdmg"],
+        "rings": ["atkp"],
         "boots": ["spd"],
         "rating": {
-          "point": { "hp": 1, "def": 1, "atk": "3", "cri": "3", "cdmg": "3", "spd": "3", "eff": 1, "res": 1 },
-          "threshold": "100",
-          "minSize": 25
+          "point": { "hp": 1, "def": 1, "atk": "3", "cri": "3", "cdmg": "3", "spd": "2", "eff": 1, "res": "0" },
+          "threshold": "20",
+          "minSize": 10
         }
       },
       "stat": {
@@ -5742,9 +5742,9 @@
         "eff": { "min": "", "max": "" },
         "res": {},
         "ehp": { "min": "" },
-        "damage": { "min": "1160" }
+        "damage": { "min": "1200" }
       },
-      "evaluation": { "forcedSets": ["Speed", "Critical"], "limit": "40000000", "brokenSet": true, "lv85": true }
+      "evaluation": { "forcedSets": ["Speed", "Critical"], "limit": "40000000", "brokenSet": false, "lv85": false }
     },
     {
       "id": "1",
@@ -5904,6 +5904,102 @@
         "damage": { "min": "" }
       },
       "evaluation": { "forcedSets": ["Speed", "Immunity"], "limit": "40000000", "brokenSet": false }
+    },
+    {
+      "id": "roana",
+      "hero": { "id": "roana", "bonusAbility": { "hp": 667, "atk": 74 } },
+      "filter": {
+        "sets": [],
+        "enhanceMode": 2,
+        "locked": false,
+        "equipped": false,
+        "score": 0,
+        "necklaces": ["hpp", "hp", "defp", "def"],
+        "rings": ["hpp", "hp", "defp", "def"],
+        "boots": ["hpp", "hp", "defp", "def", "spd"],
+        "rating": {
+          "point": { "hp": "3", "def": "3", "atk": "0", "cri": "0", "cdmg": "0", "spd": "2", "eff": "0", "res": "2" },
+          "threshold": "100",
+          "minSize": 20
+        }
+      },
+      "stat": {
+        "hp": {},
+        "def": {},
+        "atk": {},
+        "cri": { "max": 110 },
+        "cdmg": { "max": 360 },
+        "spd": { "min": "230" },
+        "eff": { "min": "125" },
+        "res": {},
+        "ehp": {},
+        "damage": {}
+      },
+      "evaluation": { "forcedSets": ["Counter"], "limit": "20000000", "brokenSet": true, "lv85": false }
+    },
+    {
+      "id": "kayron",
+      "hero": { "id": "kayron", "bonusAbility": {} },
+      "filter": {
+        "sets": [],
+        "enhanceMode": 2,
+        "locked": false,
+        "equipped": false,
+        "score": 0,
+        "necklaces": [],
+        "rings": [],
+        "boots": [],
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 20
+        }
+      },
+      "stat": {
+        "hp": {},
+        "def": {},
+        "atk": {},
+        "cri": { "max": 110 },
+        "cdmg": { "max": 360 },
+        "spd": { "min": "230" },
+        "eff": { "min": "125" },
+        "res": {},
+        "ehp": {},
+        "damage": {}
+      },
+      "evaluation": { "forcedSets": ["Counter", "Immunity"], "limit": 20000000, "brokenSet": true, "lv85": false }
+    },
+    {
+      "id": "politis",
+      "hero": { "id": "politis", "bonusAbility": {} },
+      "filter": {
+        "sets": ["Speed", "Immunity"],
+        "enhanceMode": null,
+        "locked": false,
+        "equipped": false,
+        "score": 0,
+        "necklaces": ["hpp", "hp", "defp", "def"],
+        "rings": ["hp", "hpp", "defp", "def", "eff"],
+        "boots": ["spd"],
+        "rating": {
+          "point": { "hp": "1", "def": 1, "atk": "0", "cri": "0", "cdmg": "0", "spd": 1, "eff": 1, "res": "0" },
+          "threshold": "90",
+          "minSize": 20
+        }
+      },
+      "stat": {
+        "hp": {},
+        "def": {},
+        "atk": {},
+        "cri": { "max": 110 },
+        "cdmg": { "max": 360 },
+        "spd": { "min": "230" },
+        "eff": { "min": "125" },
+        "res": {},
+        "ehp": {},
+        "damage": {}
+      },
+      "evaluation": { "forcedSets": ["Speed", "Immunity"], "limit": 20000000, "brokenSet": true, "lv85": false }
     }
   ],
   "heros": [

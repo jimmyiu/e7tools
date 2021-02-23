@@ -36,66 +36,33 @@
       </v-card-actions>
     </v-card>
 
-    <v-card class="mt-2">
-      <v-card-text>
-        <v-row v-if="equippedHero">
-          <v-col class="d-flex" cols="1">
-            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/hp.png`)" />
-            {{ equippedHero.hp }}
-          </v-col>
-          <v-col class="d-flex" cols="1">
-            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/def.png`)" />
-            {{ equippedHero.def }}
-          </v-col>
-          <v-col class="d-flex" cols="1">
-            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/atk.png`)" />
-            {{ equippedHero.atk }}
-          </v-col>
-          <v-col class="d-flex" cols="1">
-            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/cri.png`)" />
-            {{ equippedHero.cri }}
-          </v-col>
-          <v-col class="d-flex" cols="1">
-            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/cdmg.png`)" />
-            {{ equippedHero.cdmg }}
-          </v-col>
-          <v-col class="d-flex" cols="1">
-            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/spd.png`)" />
-            {{ equippedHero.spd }}
-          </v-col>
-          <v-col class="d-flex" cols="1">
-            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/eff.png`)" />
-            {{ equippedHero.eff }}
-          </v-col>
-          <v-col class="d-flex" cols="1">
-            <v-img max-height="18" max-width="18" :src="require(`@/assets/img/stat/res.png`)" />
-            {{ equippedHero.res }}
-          </v-col>
-          <v-col class="d-flex" cols="2">Damage: {{ equippedHero.damage }}</v-col>
-          <v-col class="d-flex" cols="2">EHP: {{ equippedHero.ehp }}</v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedSuit.weapon" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedSuit.helmet" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedSuit.armor" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedSuit.necklace" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedSuit.ring" />
-          </v-col>
-          <v-col cols="6" lg="2" sm="2">
-            <gear-detail-card :gear="selectedSuit.boot" />
-          </v-col>
-        </v-row>
-      </v-card-text>
-      <v-divider />
+    <v-card class="mt-2 pa-2">
+      <!-- <v-card-text> -->
+      <v-row dense>
+        <v-col cols="12" lg="auto">
+          <hero-detail-card :hero-id="profile.hero.id" :rating="profile.filter.rating.point" :suit="selectedSuit" />
+        </v-col>
+        <v-col cols="6" lg="auto">
+          <gear-detail-card :gear="selectedSuit.weapon" />
+        </v-col>
+        <v-col cols="6" lg="auto">
+          <gear-detail-card :gear="selectedSuit.helmet" />
+        </v-col>
+        <v-col cols="6" lg="auto">
+          <gear-detail-card :gear="selectedSuit.armor" />
+        </v-col>
+        <v-col cols="6" lg="auto">
+          <gear-detail-card :gear="selectedSuit.necklace" />
+        </v-col>
+        <v-col cols="6" lg="auto">
+          <gear-detail-card :gear="selectedSuit.ring" />
+        </v-col>
+        <v-col cols="6" lg="auto">
+          <gear-detail-card :gear="selectedSuit.boot" />
+        </v-col>
+      </v-row>
+      <!-- </v-card-text> -->
+      <v-divider class="mt-2" />
       <v-card-actions>
         <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip All</v-btn>
         <v-btn text @click="unequipAll">Unequip All</v-btn>
@@ -138,8 +105,8 @@
 </template>
 
 <script lang="ts">
-import { GearDetailCard, GearSetIcon, OptimizationProfiler } from '@/components';
-import { Gear, EquipedHero, OptimizationProfile, Hero, Suit, SiteState } from '@/models';
+import { GearDetailCard, GearSetIcon, HeroDetailCard, OptimizationProfiler } from '@/components';
+import { Gear, EquippedHero, OptimizationProfile, Hero, Suit, SiteState } from '@/models';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
 import { SuitBuilder, heroService, gearFilterService } from '@/services';
@@ -148,7 +115,7 @@ import { GearOptimizerProgress } from '@/services/gear-optimizer';
 
 @Component({
   name: 'optimizer-page',
-  components: { GearDetailCard, GearSetIcon, OptimizationProfiler },
+  components: { GearDetailCard, GearSetIcon, HeroDetailCard, OptimizationProfiler },
   computed: {
     ...mapGetters(['siteState', 'heros', 'gears', 'getSuit', 'getProfile', 'getHero', 'getGear'])
   },
@@ -218,7 +185,8 @@ export default class OptimizerPage extends Vue {
     { text: 'RES', value: 'res' },
     { text: 'Damage', value: 'damage' },
     { text: 'DMS', value: 'dms' },
-    { text: 'EHP', value: 'ehp' }
+    { text: 'EHP', value: 'ehp' },
+    { text: 'Rate', value: 'rating' }
   ];
 
   get gearStore() {
@@ -228,7 +196,7 @@ export default class OptimizerPage extends Vue {
     });
   }
 
-  get equippedHero(): EquipedHero | undefined {
+  get equippedHero(): EquippedHero | undefined {
     if (this.profile.hero.id && this.selectedSuit) {
       console.log(this.selectedSuit);
       console.log('equippedHero = ', this.profile.hero.id);

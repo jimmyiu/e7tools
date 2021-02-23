@@ -1,0 +1,96 @@
+<template>
+  <v-sheet :class="{ size: $vuetify.breakpoint.smAndUp }" elevation="0" outlined rounded>
+    <v-row class="pa-1" no-gutters>
+      <v-col cols="auto">
+        <v-img :src="hero.icon" width="48"></v-img>
+        <div class="d-flex flex-wrap" style="width: 54px">
+          <gear-set-icon v-for="(set, key) in equippedHero.suit.sets" :key="key" :set="set" />
+        </div>
+      </v-col>
+      <v-col>
+        <v-row no-gutters>
+          <template v-for="(item, key) in stats">
+            <v-col :key="`${key}-1`" class="d-flex align-center pl-1" cols="1">
+              <gear-stat-icon :stat="item" />
+            </v-col>
+            <v-col :key="`${key}-2`" class="text-right" cols="3">
+              {{ equippedHero[item.value] }}
+            </v-col>
+            <v-col :key="`${key}-3`" class="text-right caption d-flex align-center justify-end" cols="2">
+              <span v-if="key < 3">
+                (+{{ Math.round(100 * (equippedHero[item.value] / hero[item.value] - 1)) }}%)
+              </span>
+              <span v-else>(+{{ equippedHero[item.value] - hero[item.value] }})</span>
+            </v-col>
+          </template>
+          <v-col class="pl-1" cols="6">Damage: {{ equippedHero.damage }}</v-col>
+          <v-col class="pl-1" cols="6">EHP: {{ equippedHero.ehp }}</v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+    <v-divider />
+    <v-row class="pa-1" no-gutters>
+      <v-col class="text-center">Score: {{ totalScore }} / Rating: {{ ratingScore }}</v-col>
+    </v-row>
+  </v-sheet>
+</template>
+<style lang="sass" scoped>
+.size
+  max-width: 340px
+</style>
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Constants, EquippedHero, Hero, HeroAbility, Suit } from '@/models';
+import { GearSetIcon, GearStatIcon } from '..';
+import { mapGetters } from 'vuex';
+import { gearService, heroService } from '@/services';
+
+@Component({
+  name: 'hero-detail-card',
+  components: { GearSetIcon, GearStatIcon },
+  computed: mapGetters(['getHero'])
+})
+export default class HeroDetailCard extends Vue {
+  // vuex
+  getHero!: (heroId: string) => Hero | undefined;
+  // prop
+  @Prop() readonly heroId!: string;
+  @Prop() readonly suit!: Suit;
+  @Prop() readonly rating!: HeroAbility | undefined;
+  // getter
+  get stats() {
+    return Constants.HERO_STATS;
+  }
+  get hero(): Hero | undefined {
+    return this.getHero(this.heroId);
+  }
+  get equippedHero(): EquippedHero | undefined {
+    if (this.suit && this.hero) {
+      return heroService.equip(this.hero, this.suit);
+    }
+    return undefined;
+  }
+  get totalScore() {
+    if (this.equippedHero) {
+      return (
+        Math.round(
+          10 *
+            ((this.equippedHero.suit.weapon?.score ?? 0) +
+              (this.equippedHero.suit.helmet?.score ?? 0) +
+              (this.equippedHero.suit.armor?.score ?? 0) +
+              (this.equippedHero.suit.necklace?.score ?? 0) +
+              (this.equippedHero.suit.ring?.score ?? 0) +
+              (this.equippedHero.suit.boot?.score ?? 0))
+        ) / 10
+      );
+    }
+    return 0;
+  }
+  get ratingScore() {
+    if (this.equippedHero && this.hero && this.rating) {
+      return gearService.calculateSuitRating(this.equippedHero!, this.hero!, this.rating);
+    }
+    return 0;
+  }
+}
+</script>
