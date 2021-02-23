@@ -1,8 +1,8 @@
-import { EquipedHero, Gear, Hero, Suit } from '@/models';
+import { EquippedHero, Gear, Hero, Suit } from '@/models';
 
-export function equip(hero: Hero, suit: Suit): EquipedHero {
+export function equip(hero: Hero, suit: Suit): EquippedHero {
   const extra = determineSetsExtraAbility(suit.sets);
-  const result: EquipedHero = {
+  const result: EquippedHero = {
     hp: Math.trunc(hero.hp * (1 + (suit.ability.hpp + extra.hpp) / 100)) + suit.ability.hp,
     def: Math.trunc(hero.def * (1 + (suit.ability.defp + extra.defp) / 100)) + suit.ability.def,
     atk: Math.trunc(hero.atk * (1 + (suit.ability.atkp + extra.atkp) / 100)) + suit.ability.atk,
@@ -54,7 +54,3 @@ function determineSetsExtraAbility(sets: Gear.Set[]) {
   }
   return result;
 }
-
-// public apply(combination: Gear.GearCombination, hero: Hero): EquipedHero {
-
-// }

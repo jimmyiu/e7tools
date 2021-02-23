@@ -10,7 +10,7 @@ export type Hero = HeroAbility & {
   role: string;
 };
 
-export type EquipedHero = HeroAbility & {
+export type EquippedHero = HeroAbility & {
   combination: Gear.GearCombination;
   suit: Suit;
   damage: number;

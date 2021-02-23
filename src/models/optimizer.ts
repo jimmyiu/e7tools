@@ -43,6 +43,7 @@ export type OptimizationResult = HeroAbility & {
   damage: number;
   dms: number;
   ehp: number;
+  rating: number;
   sets: string[];
   weaponId?: string;
   helmetId?: string;

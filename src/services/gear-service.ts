@@ -1,3 +1,4 @@
+import { HeroAbility } from '@/models';
 import { Gear } from '@/models/gear';
 import Stat = Gear.Stat;
 const STAT_AVERAGE = {
@@ -117,6 +118,21 @@ function calculateOffScore(gear: Gear.Gear) {
     }
   });
   return Math.round(score * 10) / 10;
+}
+
+export function calculateSuitRating(equippedHero: HeroAbility, hero: HeroAbility, rating: HeroAbility) {
+  let score = 0;
+  if (rating && equippedHero && hero) {
+    score += (equippedHero.hp / hero.hp - 1) * 100 * rating.hp;
+    score += (equippedHero.def / hero.def - 1) * 100 * rating.def;
+    score += (equippedHero.atk / hero.atk - 1) * 100 * rating.atk;
+    score += (Math.min(equippedHero.cri, 100) - hero.cri) * 1.6 * rating.cri;
+    score += (Math.min(equippedHero.cdmg, 350) - hero.cdmg) * (8 / 7) * rating.cdmg;
+    score += (equippedHero.spd - hero.spd) * 2 * rating.spd;
+    score += (equippedHero.eff - hero.eff) * rating.eff;
+    score += (equippedHero.res - hero.res) * rating.res;
+  }
+  return Math.round(10 * score) / 10;
 }
 
 export function calculateStatistics(gears: Gear.Gear[]) {
