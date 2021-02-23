@@ -5,6 +5,7 @@ export type OptimizationEvaluationCriteria = {
   forcedSets: Gear.Set[];
   limit: number;
   brokenSet: boolean;
+  lv85: boolean;
 };
 
 export type OptimizationStatCriteria = {
@@ -49,4 +50,54 @@ export type OptimizationResult = HeroAbility & {
   necklaceId?: string;
   ringId?: string;
   bootId?: string;
+};
+
+export const EMPTY_PROFILE: OptimizationProfile = {
+  id: '',
+  hero: {
+    id: '',
+    bonusAbility: {}
+  },
+  filter: {
+    sets: [],
+    necklaces: [],
+    rings: [],
+    boots: [],
+    enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
+    equipped: false,
+    locked: false,
+    score: 0,
+    rating: {
+      point: {
+        hp: 1,
+        def: 1,
+        atk: 1,
+        cri: 1,
+        cdmg: 1,
+        spd: 1,
+        eff: 1,
+        res: 1
+      },
+      threshold: 100,
+      minSize: 20
+    }
+  },
+  stat: {
+    hp: {},
+    def: {},
+    atk: {}, // { min: 3500 },
+    cri: { max: 110 }, // min: 96,
+    cdmg: { max: 360 }, // min: 270,
+    spd: {}, // min: 218
+    eff: {},
+    res: {},
+    ehp: {},
+    damage: {}
+  },
+  evaluation: {
+    forcedSets: [],
+    brokenSet: true,
+    limit: 20000000,
+    lv85: false
+  }
 };

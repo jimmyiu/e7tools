@@ -30,6 +30,7 @@
           hide-details
           label="Allow Broken Set"
         ></v-checkbox>
+        <v-checkbox v-model="value.lv85" class="mr-3 my-0" dense hide-details label="With Lv85 Gear" />
       </v-col>
     </v-row>
   </v-sheet>

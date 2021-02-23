@@ -130,8 +130,19 @@
               v-model="value.rating.threshold"
               dense
               hide-details
-              label="Rating threshold"
+              label="Threshold"
               max="100"
+              min="1"
+              outlined
+              type="number"
+            />
+          </v-col>
+          <v-col>
+            <v-text-field
+              v-model.number="value.rating.minSize"
+              dense
+              hide-details
+              label="Minimum"
               min="1"
               outlined
               type="number"

@@ -59,11 +59,12 @@ export class DataConverter_0_4_0 implements DataConverter {
               eff: 1,
               res: 1
             },
-            threshold: 100
+            threshold: 100,
+            minSize: 25
           }
         },
         stat: past.stat,
-        evaluation: past.combination
+        evaluation: { ...past.combination, lv85: false }
       });
     }
     return result;

@@ -1,7 +1,11 @@
 <template>
   <v-row no-gutters>
     <v-col cols="12" sm="auto">
-      <optimization-hero-sheet v-model="value.hero" :class="{ 'hero-sheet-size': $vuetify.breakpoint.smAndUp }" />
+      <optimization-hero-sheet
+        v-model="value.hero"
+        :class="{ 'hero-sheet-size': $vuetify.breakpoint.smAndUp }"
+        @change-hero="changeHero"
+      />
     </v-col>
     <v-col cols="12" sm="auto">
       <optimization-stat-criteria-sheet
@@ -26,7 +30,7 @@
 .stat-sheet-size
   max-width: 340px
 .filter-sheet-size
-  max-width: 500px
+  max-width: 520px
 .eval-sheet-size
   max-width: 200px
 </style>

@@ -76,14 +76,16 @@ export class OptimizationPorfileMapper {
         boots: profile.filter.boots.map(x => Gear.Stat.getInstance(x)),
         rating: {
           point: Object.assign({}, profile.filter.rating.point),
-          threshold: profile.filter.rating.threshold
+          threshold: profile.filter.rating.threshold,
+          minSize: profile.filter.rating.minSize
         }
       },
       stat: profile.stat,
       evaluation: {
         forcedSets: profile.evaluation.forcedSets.map(x => x as Gear.Set),
         limit: profile.evaluation.limit,
-        brokenSet: profile.evaluation.brokenSet
+        brokenSet: profile.evaluation.brokenSet,
+        lv85: profile.evaluation.lv85
       }
     };
   }
@@ -106,14 +108,16 @@ export class OptimizationPorfileMapper {
         boots: profile.filter.boots.map(x => x.value),
         rating: {
           point: Object.assign({}, profile.filter.rating.point),
-          threshold: profile.filter.rating.threshold
+          threshold: profile.filter.rating.threshold,
+          minSize: profile.filter.rating.minSize
         }
       },
       stat: profile.stat,
       evaluation: {
         forcedSets: profile.evaluation.forcedSets.map(x => x as Gear.Set),
         limit: profile.evaluation.limit,
-        brokenSet: profile.evaluation.brokenSet
+        brokenSet: profile.evaluation.brokenSet,
+        lv85: profile.evaluation.lv85
       }
     };
   }
