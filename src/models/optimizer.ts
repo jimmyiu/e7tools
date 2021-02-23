@@ -5,6 +5,7 @@ export type OptimizationEvaluationCriteria = {
   forcedSets: Gear.Set[];
   limit: number;
   brokenSet: boolean;
+  lv85: boolean;
 };
 
 export type OptimizationStatCriteria = {
@@ -51,23 +52,20 @@ export type OptimizationResult = HeroAbility & {
   bootId?: string;
 };
 
-export const EMPTY_PROFILE: OptimizationProfile = Object.freeze({
+export const EMPTY_PROFILE: OptimizationProfile = {
   id: '',
   hero: {
     id: '',
-    bonusAbility: {
-      atk: undefined,
-      atkp: undefined
-    }
+    bonusAbility: {}
   },
   filter: {
     sets: [],
-    enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
-    necklaces: [], // [Gear.Stat.CDMG, Gear.Stat.ATKP, Gear.Stat.ATK],
-    rings: [], // [Gear.Stat.ATKP, Gear.Stat.ATK],
+    necklaces: [],
+    rings: [],
     boots: [],
-    locked: false,
+    enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
     equipped: false,
+    locked: false,
     score: 0,
     rating: {
       point: {
@@ -80,7 +78,8 @@ export const EMPTY_PROFILE: OptimizationProfile = Object.freeze({
         eff: 1,
         res: 1
       },
-      threshold: 100
+      threshold: 100,
+      minSize: 20
     }
   },
   stat: {
@@ -96,8 +95,9 @@ export const EMPTY_PROFILE: OptimizationProfile = Object.freeze({
     damage: {}
   },
   evaluation: {
-    forcedSets: [], // [Gear.Set.Speed, Gear.Set.Critical]
+    forcedSets: [],
+    brokenSet: true,
     limit: 20000000,
-    brokenSet: true
+    lv85: false
   }
-});
+};

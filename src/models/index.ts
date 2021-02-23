@@ -19,29 +19,29 @@ export const Constants = {
   DEFAULT_HERO_ID: 'arbiter-vildred', // 'iseria',
   KEY_VUEXDATA: 'vuex.data',
 
-  GEAR_FILTER_DEFAULT: {
-    sets: [],
-    enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
-    necklaces: [], // [Gear.Stat.CDMG, Gear.Stat.ATKP, Gear.Stat.ATK],
-    rings: [], // [Gear.Stat.ATKP, Gear.Stat.ATK],
-    boots: [],
-    locked: false,
-    equipped: false,
-    score: 0,
-    rating: {
-      point: {
-        hp: 1,
-        def: 1,
-        atk: 1,
-        cri: 1,
-        cdmg: 1,
-        spd: 1,
-        eff: 1,
-        res: 1
-      },
-      threshold: 100
-    }
-  } as Gear.GearFilter,
+  // GEAR_FILTER_DEFAULT: {
+  //   sets: [],
+  //   enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
+  //   necklaces: [], // [Gear.Stat.CDMG, Gear.Stat.ATKP, Gear.Stat.ATK],
+  //   rings: [], // [Gear.Stat.ATKP, Gear.Stat.ATK],
+  //   boots: [],
+  //   locked: false,
+  //   equipped: false,
+  //   score: 0,
+  //   rating: {
+  //     point: {
+  //       hp: 1,
+  //       def: 1,
+  //       atk: 1,
+  //       cri: 1,
+  //       cdmg: 1,
+  //       spd: 1,
+  //       eff: 1,
+  //       res: 1
+  //     },
+  //     threshold: 100
+  //   }
+  // } as Gear.GearFilter,
   //
   NECKLACE_STATS: [
     Gear.Stat.HPP,

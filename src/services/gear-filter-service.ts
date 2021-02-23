@@ -72,7 +72,10 @@ export function createGearStore(
     [Gear.Type.Weapon, Gear.Type.Helmet, Gear.Type.Armor, Gear.Type.Necklace, Gear.Type.Ring, Gear.Type.Boot].forEach(
       type => {
         const foo = store.getGearsByType(type);
-        const removeCount = Math.trunc(foo.length * (1 - filterCondition.rating.threshold / 100));
+        let removeCount = Math.trunc(foo.length * (1 - filterCondition.rating.threshold / 100));
+        if (foo.length - removeCount < filterCondition.rating.minSize) {
+          removeCount = foo.length - filterCondition.rating.minSize;
+        }
         console.log(
           `createGearStore::type = ${type}, original length = ${foo.length} will be removed ${removeCount} items`
         );

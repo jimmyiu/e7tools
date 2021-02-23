@@ -70,7 +70,7 @@ export class DefaultGearOptimizer implements GearOptimizer {
   }
 
   evaluationFilter() {
-    let forcedSet = (sets: SuitBuilder) => true;
+    let forcedSet = (builder: SuitBuilder) => true;
     if (this.profile.evaluation.forcedSets.length > 0) {
       const target: Partial<Record<Gear.Set, number>> = {};
       // TODO: currently assumed input sets is make sense
@@ -80,6 +80,11 @@ export class DefaultGearOptimizer implements GearOptimizer {
           case Gear.Set.Speed:
           case Gear.Set.Attack:
           case Gear.Set.Destruction:
+          case Gear.Set.LifeSteal:
+          case Gear.Set.Counter:
+          case Gear.Set.Rage:
+          case Gear.Set.Revenge:
+          case Gear.Set.Injury:
             target[set] = target[set] ?? 4;
             break;
           default:
@@ -90,12 +95,32 @@ export class DefaultGearOptimizer implements GearOptimizer {
       forcedSet = (builder: SuitBuilder) => builder.assertTargetSets(target);
     }
 
-    let brokenSet = (sets: SuitBuilder) => true;
+    let brokenSet = (builder: SuitBuilder) => true;
     if (!this.profile.evaluation.brokenSet) {
       brokenSet = (builder: SuitBuilder) => !builder.isBrokenSet();
     }
+
     return (builder: SuitBuilder) => {
       return forcedSet(builder) && brokenSet(builder); // && forcedSet(builder);
+    };
+  }
+
+  postEvaluationFilter() {
+    let lv85 = (hero: EquipedHero) => true;
+    if (this.profile.evaluation.lv85) {
+      lv85 = (hero: EquipedHero) => {
+        return (
+          hero.suit.weapon?.level == 85 ||
+          hero.suit.helmet?.level == 85 ||
+          hero.suit.armor?.level == 85 ||
+          hero.suit.necklace?.level == 85 ||
+          hero.suit.ring?.level == 85 ||
+          hero.suit.boot?.level == 85
+        );
+      };
+    }
+    return (hero: EquipedHero) => {
+      return lv85(hero);
     };
   }
 
@@ -181,39 +206,40 @@ export class DefaultGearOptimizer implements GearOptimizer {
     console.log('this.profile.hero.bonusAbility =', this.profile.hero.bonusAbility);
     builder.bonus(this.profile.hero.bonusAbility);
     const equipedHeroFilter = this.equipedHeroFilter();
-    const combinationFilter = this.evaluationFilter();
+    const evaluationFilter = this.evaluationFilter();
+    const postEvaluationFilter = this.postEvaluationFilter();
     for (let i1 = 0, n1 = this.store.weapons.length; i1 < n1; i1++) {
       builder.weapon(this.store.weapons[i1]);
       for (let i2 = 0, n2 = this.store.helmets.length; i2 < n2; i2++) {
         builder.helmet(this.store.helmets[i2]);
         for (let i3 = 0, n3 = this.store.armors.length; i3 < n3; i3++) {
           builder.armor(this.store.armors[i3]);
-          if (!combinationFilter(builder)) {
+          if (!evaluationFilter(builder)) {
             this.progress.proceeded += this.store.necklaces.length * this.store.rings.length * this.store.boots.length;
             continue;
           }
           for (let i4 = 0, n4 = this.store.necklaces.length; i4 < n4; i4++) {
             builder.necklace(this.store.necklaces[i4]);
-            if (!combinationFilter(builder)) {
+            if (!evaluationFilter(builder)) {
               this.progress.proceeded += this.store.rings.length * this.store.boots.length;
               continue;
             }
             for (let i5 = 0, n5 = this.store.rings.length; i5 < n5; i5++) {
               builder.ring(this.store.rings[i5]);
-              if (!combinationFilter(builder)) {
+              if (!evaluationFilter(builder)) {
                 this.progress.proceeded += this.store.boots.length;
                 continue;
               }
               for (let i6 = 0, n6 = this.store.boots.length; i6 < n6; i6++) {
                 builder.boot(this.store.boots[i6]);
-                if (++this.progress.proceeded && !combinationFilter(builder)) {
+                if (++this.progress.proceeded && !evaluationFilter(builder)) {
                   continue;
                 }
 
                 // let combination = builder.build();
                 // const equipedHero = GearCombinationService.apply(builder.build(), this.hero);
                 const equipedHero = heroService.equip(this.hero, builder.build());
-                if (equipedHeroFilter(equipedHero)) {
+                if (postEvaluationFilter(equipedHero) && equipedHeroFilter(equipedHero)) {
                   this.result.push(equipedHero);
                   if (this.result.length >= DefaultGearOptimizer.OPTIMIZE_RESULT_LIMIT) {
                     console.log(

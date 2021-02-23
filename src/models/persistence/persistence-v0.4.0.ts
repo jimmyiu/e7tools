@@ -59,6 +59,7 @@ export namespace V_0_4_0 {
       rating: {
         point: HeroAbility;
         threshold: number;
+        minSize: number;
       };
     };
     stat: {
@@ -77,6 +78,7 @@ export namespace V_0_4_0 {
       forcedSets: string[];
       limit: number;
       brokenSet: boolean;
+      lv85: boolean;
     };
   };
 

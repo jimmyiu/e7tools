@@ -4,7 +4,7 @@
       <optimization-hero-sheet
         v-model="value.hero"
         :class="{ 'hero-sheet-size': $vuetify.breakpoint.smAndUp }"
-        @change-hero="$emit('change-hero', value.hero.id)"
+        @change-hero="changeHero"
       />
     </v-col>
     <v-col cols="12" sm="auto">
@@ -30,7 +30,7 @@
 .stat-sheet-size
   max-width: 340px
 .filter-sheet-size
-  max-width: 500px
+  max-width: 520px
 .eval-sheet-size
   max-width: 200px
 </style>

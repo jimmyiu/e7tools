@@ -139,7 +139,7 @@
 
 <script lang="ts">
 import { GearDetailCard, GearSetIcon, OptimizationProfiler } from '@/components';
-import { Constants, Gear, EquipedHero, OptimizationProfile, Hero, Suit, SiteState } from '@/models';
+import { Gear, EquipedHero, OptimizationProfile, Hero, Suit, SiteState } from '@/models';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
 import { SuitBuilder, heroService, gearFilterService } from '@/services';
@@ -222,11 +222,6 @@ export default class OptimizerPage extends Vue {
   ];
 
   get gearStore() {
-    // return new Gear.GearStore(
-    //   gearFilterService.filter(this.gears, this.profile.filter, {
-    //     heroId: this.profile.hero.id
-    //   })
-    // );
     return gearFilterService.createGearStore(this.gears, this.profile.filter, {
       heroId: this.profile.hero.id,
       heroAbility: this.getHero(this.profile.hero.id)
@@ -275,40 +270,6 @@ export default class OptimizerPage extends Vue {
   reset() {
     console.log('reset');
     this.result.splice(0, this.result.length);
-    // this.profile.hero = {
-    //   id: this.profile.hero.id,
-    //   bonusAbility: {
-    //     hpp: undefined,
-    //     hp: undefined,
-    //     defp: undefined,
-    //     def: undefined,
-    //     atkp: 0,
-    //     atk: undefined,
-    //     cri: undefined,
-    //     cdmg: undefined,
-    //     spd: undefined,
-    //     eff: undefined,
-    //     res: undefined
-    //   }
-    // };
-    // this.profile.filter = Object.assign({}, Constants.GEAR_FILTER_DEFAULT);
-    // this.profile.stat = {
-    //   hp: {},
-    //   def: {},
-    //   atk: {}, // { min: 3500 },
-    //   cri: { max: 110 }, // min: 96,
-    //   cdmg: { max: 360 }, // min: 270,
-    //   spd: {}, // min: 218
-    //   eff: {},
-    //   res: {},
-    //   ehp: {},
-    //   damage: {}
-    // };
-    // this.profile.evaluation = {
-    //   forcedSets: [], // [Gear.Set.Speed, Gear.Set.Critical]
-    //   limit: Constants.OPTIMIZATION_PROCESS_LIMIT,
-    //   brokenSet: true
-    // };
     this.assignProfile(EMPTY_PROFILE);
     this.selectedSuit = this.getSuit(this.profile.hero.id);
   }

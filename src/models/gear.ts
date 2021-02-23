@@ -253,6 +253,7 @@ export namespace Gear {
     rating: {
       point: HeroAbility;
       threshold: number;
+      minSize: number;
     };
   };
 
