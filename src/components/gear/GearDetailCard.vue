@@ -20,7 +20,7 @@
           <v-col>
             <div class="pa-1 text-center">
               <span>{{ gear.main.label }}: {{ gear[gear.main.value] }}</span>
-              <span v-if="showPercent(gear.main)" class="caption">
+              <span v-if="showPercent(gear.main) && hero" class="caption">
                 ({{ Math.round((100 * gear[gear.main.value]) / hero[gear.main.value]) }}%)
               </span>
             </div>
@@ -36,7 +36,7 @@
             <v-col :key="2 * i + 1" class="pr-2 d-flex align-center justify-end mb-1" cols="3">
               {{ item[1] }}
               <span v-if="item[0].percent">%</span>
-              <span v-else-if="showPercent(item[0])" class="caption">
+              <span v-else-if="showPercent(item[0]) && hero" class="caption">
                 ({{ Math.round((100 * gear[item[0].value]) / hero[item[0].value]) }}%)
               </span>
             </v-col>
@@ -90,9 +90,9 @@ export default class GearDetailCard extends Vue {
   }
 
   get scores(): Gear.GearScore {
-    if (this.hero) {
-      return gearService.calculateScores(this.hero, this.gear);
-    }
+    // if (this.hero && this.gear) {
+    //   return gearService.calculateScores(this.hero, this.gear);
+    // }
     return this.gear;
   }
 
