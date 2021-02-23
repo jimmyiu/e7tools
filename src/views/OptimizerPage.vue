@@ -62,7 +62,7 @@
         </v-col>
       </v-row>
       <!-- </v-card-text> -->
-      <v-divider />
+      <v-divider class="mt-2" />
       <v-card-actions>
         <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip All</v-btn>
         <v-btn text @click="unequipAll">Unequip All</v-btn>

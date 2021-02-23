@@ -1,47 +1,17 @@
 import { HeroAbility } from '@/models';
 import { Gear } from '@/models/gear';
 import Stat = Gear.Stat;
-const STAT_AVERAGE = {
-  atk: 1077,
+const STAT_AVERAGE: HeroAbility = {
   hp: 5610,
-  spd: 108,
-  def: 623
+  def: 623,
+  atk: 1077,
+  cri: 0,
+  cdmg: 0,
+  spd: 0,
+  eff: 0,
+  res: 0
 };
-// class GearService {
-// applyFilter(gears: Gear.Gear[], filter: Gear.GearFilter) {
-//   type Filter = (it: Gear.Gear) => boolean;
-//   const defaultFilter: Filter = (it: Gear.Gear) => true;
-//   // prepare set filter
-//   let set = defaultFilter;
-//   if (filter.sets.length > 0) {
-//     set = (it: Gear.Gear) => filter.sets.indexOf(it.set!) >= 0;
-//   }
-//   // prepare enhance filter
-//   let enhance = defaultFilter;
-//   if (filter.enhanceMode == Gear.EnhanceModeFilter.LESS_THAN_15) {
-//     enhance = (it: Gear.Gear) => it.enhance! < 15;
-//   } else if (filter.enhanceMode == Gear.EnhanceModeFilter.ONLY_15) {
-//     enhance = (it: Gear.Gear) => it.enhance! == 15;
-//   }
-//   let necklace = defaultFilter;
-//   if (filter.necklaces.length > 0) {
-//     const necklaceValues = filter.necklaces.map(x => x.value);
-//     necklace = (it: Gear.Gear) => it.type! != Gear.Type.Necklace || necklaceValues.indexOf(it.main!.value) >= 0;
-//   }
-//   let ring = defaultFilter;
-//   if (filter.rings.length > 0) {
-//     const ringValues = filter.rings.map(x => x.value);
-//     ring = (it: Gear.Gear) => it.type! != Gear.Type.Ring || ringValues.indexOf(it.main!.value) >= 0;
-//   }
-//   let boot = defaultFilter;
-//   if (filter.boots.length > 0) {
-//     const bootValues = filter.boots.map(x => x.value);
-//     boot = (it: Gear.Gear) => it.type! != Gear.Type.Boot || bootValues.indexOf(it.main!.value) >= 0;
-//   }
-//   return gears.filter(it => {
-//     return set(it) && enhance(it) && necklace(it) && ring(it) && boot(it);
-//   });
-// }
+
 export function mergeGears(original: Gear.Gear[], extra: Gear.Gear[]) {
   let map = new Map<String, Gear.Gear>();
   if (original) {
@@ -53,68 +23,70 @@ export function mergeGears(original: Gear.Gear[], extra: Gear.Gear[]) {
   return Array.from(map.values());
 }
 
+export function calculateScores(hero: HeroAbility, gear: Gear.Gear): Gear.GearScore {
+  return {
+    score: calculateScore(hero, gear),
+    offScore: calculateOffScore(hero, gear),
+    defScore: calculateDefScore(hero, gear)
+  };
+}
+
 export function assignScore(gear: Gear.Gear) {
-  gear.score = calculateScore(gear);
-  gear.offScore = calculateOffScore(gear);
-  gear.defScore = calculateDefScore(gear);
+  gear.score = calculateScore(STAT_AVERAGE, gear);
+  gear.offScore = calculateOffScore(STAT_AVERAGE, gear);
+  gear.defScore = calculateDefScore(STAT_AVERAGE, gear);
 }
 
-function calculateScore(gear: Gear.Gear) {
+function determineScore(hero: HeroAbility, stat: Gear.Stat, value?: number) {
+  if (value == undefined) {
+    return 0;
+  }
+  if ([Stat.HPP, Stat.DEFP, Stat.ATKP, Stat.EFF, Stat.RES].includes(stat)) {
+    return value;
+  } else if (Stat.CRI == stat) {
+    return (value * 16) / 10;
+  } else if (Stat.SPD == stat) {
+    return value * 2;
+  } else if (Stat.CDMG == stat) {
+    return value * (8 / 7);
+  } else if (Stat.HP == stat) {
+    return Math.round((value / hero.hp) * 1000) / 10;
+  } else if (Stat.DEF == stat) {
+    return Math.round((value / hero.def) * 1000) / 10;
+  } else if (Stat.ATK == stat) {
+    return Math.round((value / hero.atk) * 1000) / 10;
+  }
+  return 0;
+}
+
+function calculateScore(hero: HeroAbility, gear: Gear.Gear) {
   let stats = gear.getStatMap();
   stats.delete(gear.main!!);
   let score = 0;
-  stats.forEach((v: number | undefined, k: Stat) => {
-    if ([Stat.HPP, Stat.DEFP, Stat.ATKP, Stat.EFF, Stat.RES].includes(k)) {
-      score += v || 0;
-    } else if (Stat.CRI == k) {
-      score += ((v || 0) * 16) / 10;
-    } else if (Stat.SPD == k) {
-      score += (v || 0) * 2;
-    } else if (Stat.CDMG == k) {
-      score += ((v || 0) * 8) / 7;
-    } else if (Stat.HP == k) {
-      score += Math.round(((v || 0) / STAT_AVERAGE.hp) * 1000) / 10;
-    } else if (Stat.DEF == k) {
-      score += Math.round(((v || 0) / STAT_AVERAGE.def) * 1000) / 10;
-    } else if (Stat.ATK == k) {
-      score += Math.round(((v || 0) / STAT_AVERAGE.atk) * 1000) / 10;
-    }
+  stats.forEach((value: number | undefined, stat: Stat) => {
+    score += determineScore(hero, stat, value);
   });
   return Math.round(score * 10) / 10;
 }
 
-function calculateDefScore(gear: Gear.Gear) {
+function calculateDefScore(hero: HeroAbility, gear: Gear.Gear) {
   let stats = gear.getStatMap();
   stats.delete(gear.main!!);
   let score = 0;
   stats.forEach((v: number | undefined, k: Stat) => {
-    if ([Stat.HPP, Stat.DEFP, Stat.RES].includes(k)) {
-      score += v || 0;
-    } else if (Stat.SPD == k) {
-      score += (v || 0) * 2;
-    } else if (Stat.HP == k) {
-      score += Math.round(((v || 0) / STAT_AVERAGE.hp) * 1000) / 10;
-    } else if (Stat.DEF == k) {
-      score += Math.round(((v || 0) / STAT_AVERAGE.def) * 1000) / 10;
+    if ([Stat.HPP, Stat.HP, Stat.DEFP, Stat.DEF, Stat.SPD, Stat.RES].includes(k)) {
+      score += determineScore(hero, k, v);
     }
   });
   return Math.round(score * 10) / 10;
 }
-function calculateOffScore(gear: Gear.Gear) {
+function calculateOffScore(hero: HeroAbility, gear: Gear.Gear) {
   let stats = gear.getStatMap();
   stats.delete(gear.main!!);
   let score = 0;
   stats.forEach((v: number | undefined, k: Stat) => {
-    if ([Stat.ATKP, Stat.EFF].includes(k)) {
-      score += v || 0;
-    } else if (Stat.CDMG == k) {
-      score += ((v || 0) * 8) / 7;
-    } else if (Stat.SPD == k) {
-      score += (v || 0) * 2;
-    } else if (Stat.CRI == k) {
-      score += ((v || 0) * 16) / 10;
-    } else if (Stat.ATK == k) {
-      score += Math.round(((v || 0) / STAT_AVERAGE.atk) * 1000) / 10;
+    if ([Stat.ATKP, Stat.ATK, Stat.CRI, Stat.CDMG, Stat.SPD, Stat.EFF].includes(k)) {
+      score += determineScore(hero, k, v);
     }
   });
   return Math.round(score * 10) / 10;

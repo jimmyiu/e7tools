@@ -13,32 +13,39 @@
           </v-col>
           <v-col class="pa-2" cols="auto" style="height: 44px">
             <v-img v-if="hero" :alt="hero.id" :src="hero.icon" width="28" />
-            <!-- {{ gear.equippedHero }} -->
           </v-col>
         </v-row>
         <v-divider />
         <v-row>
           <v-col>
-            <div class="pa-1 text-center">{{ gear.main.label }}: {{ gear[gear.main.value] }}</div>
+            <div class="pa-1 text-center">
+              <span>{{ gear.main.label }}: {{ gear[gear.main.value] }}</span>
+              <span v-if="showPercent(gear.main)" class="caption">
+                ({{ Math.round((100 * gear[gear.main.value]) / hero[gear.main.value]) }}%)
+              </span>
+            </div>
           </v-col>
         </v-row>
         <v-divider class="mb-1" />
         <!-- class="d-flex flex-wrap" -->
-        <v-row dense>
+        <v-row class="pl-1" no-gutters>
           <template v-for="(item, i) in subs">
-            <v-col :key="2 * i" class="pl-2 d-flex align-center" cols="3">
+            <v-col :key="2 * i" class="d-flex align-center mb-1" cols="3">
               <gear-stat-icon :stat="item[0]" />
             </v-col>
-            <v-col :key="2 * i + 1" class="pr-2 d-flex align-center justify-end" cols="3">
+            <v-col :key="2 * i + 1" class="pr-2 d-flex align-center justify-end mb-1" cols="3">
               {{ item[1] }}
               <span v-if="item[0].percent">%</span>
+              <span v-else-if="showPercent(item[0])" class="caption">
+                ({{ Math.round((100 * gear[item[0].value]) / hero[item[0].value]) }}%)
+              </span>
             </v-col>
           </template>
         </v-row>
         <v-divider />
         <v-row dense>
           <v-col>
-            <div class="pa-1 text-center">{{ gear.score }} / {{ gear.offScore }} / {{ gear.defScore }}</div>
+            <div class="pa-1 text-center">{{ scores.score }} / {{ scores.offScore }} / {{ scores.defScore }}</div>
           </v-col>
         </v-row>
       </v-card-text>
@@ -55,6 +62,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import { GearSetIcon, GearStatIcon, GearTypeIcon } from './common';
 import { Gear, Hero } from '@/models';
 import { mapGetters } from 'vuex';
+import { gearService } from '@/services';
 
 @Component({
   name: 'gear-detail-card',
@@ -79,6 +87,17 @@ export default class GearDetailCard extends Vue {
 
   get width() {
     return '170';
+  }
+
+  get scores(): Gear.GearScore {
+    if (this.hero) {
+      return gearService.calculateScores(this.hero, this.gear);
+    }
+    return this.gear;
+  }
+
+  showPercent(stat: Gear.Stat) {
+    return stat == Gear.Stat.HP || stat == Gear.Stat.DEF || stat == Gear.Stat.ATK;
   }
 }
 </script>

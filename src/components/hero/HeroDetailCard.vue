@@ -24,7 +24,7 @@
             </v-col>
           </template>
           <v-col class="pl-1" cols="6">Damage: {{ equippedHero.damage }}</v-col>
-          <v-col cols="6">EHP: {{ equippedHero.ehp }}</v-col>
+          <v-col class="pl-1" cols="6">EHP: {{ equippedHero.ehp }}</v-col>
         </v-row>
       </v-col>
     </v-row>
