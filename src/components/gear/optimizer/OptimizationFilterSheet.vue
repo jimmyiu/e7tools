@@ -104,7 +104,7 @@
         <v-row v-for="(item, key) in ratingStats" :key="key" dense>
           <v-col v-for="(i, k) in [0, 1]" :key="k">
             <v-text-field
-              v-model="value.rating.point[item[i].value]"
+              v-model.number="value.rating.point[item[i].value]"
               class="rating"
               dense
               hide-details
@@ -127,7 +127,7 @@
         <v-row dense>
           <v-col>
             <v-text-field
-              v-model="value.rating.threshold"
+              v-model.number="value.rating.threshold"
               dense
               hide-details
               label="Threshold"

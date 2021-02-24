@@ -22,7 +22,7 @@
           outlined
           return-object
         />
-        <v-text-field v-model="value.limit" dense hide-details label="Evaluation Limit" outlined type="number" />
+        <v-text-field v-model.number="value.limit" dense hide-details label="Evaluation Limit" outlined type="number" />
         <v-checkbox
           v-model="value.brokenSet"
           class="mr-3 my-0"

@@ -1,8 +1,10 @@
 <template>
-  <v-sheet :class="{ size: $vuetify.breakpoint.smAndUp }" elevation="0" outlined rounded>
+  <v-sheet v-if="heroId" :class="{ size: $vuetify.breakpoint.smAndUp }" elevation="0" outlined rounded>
     <v-row class="pa-1" no-gutters>
       <v-col cols="auto">
-        <v-img :src="hero.icon" width="48"></v-img>
+        <div>
+          <v-img :src="hero.icon" width="48"></v-img>
+        </div>
         <div class="d-flex flex-wrap" style="width: 54px">
           <gear-set-icon v-for="(set, key) in equippedHero.suit.sets" :key="key" :set="set" />
         </div>
@@ -62,7 +64,10 @@ export default class HeroDetailCard extends Vue {
     return Constants.HERO_STATS;
   }
   get hero(): Hero | undefined {
-    return this.getHero(this.heroId);
+    if (this.heroId) {
+      return this.getHero(this.heroId);
+    }
+    return undefined;
   }
   get equippedHero(): EquippedHero | undefined {
     if (this.suit && this.hero) {

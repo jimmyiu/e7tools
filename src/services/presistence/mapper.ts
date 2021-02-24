@@ -80,7 +80,18 @@ export class OptimizationPorfileMapper {
           minSize: profile.filter.rating.minSize
         }
       },
-      stat: profile.stat,
+      stat: {
+        hp: { min: profile.stat.atk.min, max: profile.stat.atk.max },
+        def: { min: profile.stat.def.min, max: profile.stat.def.max },
+        atk: { min: profile.stat.atk.min, max: profile.stat.atk.max },
+        cri: { min: profile.stat.cri.min, max: profile.stat.cri.max },
+        cdmg: { min: profile.stat.cdmg.min, max: profile.stat.cdmg.max },
+        spd: { min: profile.stat.spd.min, max: profile.stat.spd.max },
+        eff: { min: profile.stat.eff.min, max: profile.stat.eff.max },
+        res: { min: profile.stat.res.min, max: profile.stat.res.max },
+        ehp: { min: profile.stat.ehp.min, max: profile.stat.ehp.max },
+        damage: { min: profile.stat.damage.min, max: profile.stat.damage.max }
+      },
       evaluation: {
         forcedSets: profile.evaluation.forcedSets.map(x => x as Gear.Set),
         limit: profile.evaluation.limit,
@@ -112,7 +123,18 @@ export class OptimizationPorfileMapper {
           minSize: profile.filter.rating.minSize
         }
       },
-      stat: profile.stat,
+      stat: {
+        hp: { min: profile.stat.atk.min, max: profile.stat.atk.max },
+        def: { min: profile.stat.def.min, max: profile.stat.def.max },
+        atk: { min: profile.stat.atk.min, max: profile.stat.atk.max },
+        cri: { min: profile.stat.cri.min, max: profile.stat.cri.max },
+        cdmg: { min: profile.stat.cdmg.min, max: profile.stat.cdmg.max },
+        spd: { min: profile.stat.spd.min, max: profile.stat.spd.max },
+        eff: { min: profile.stat.eff.min, max: profile.stat.eff.max },
+        res: { min: profile.stat.res.min, max: profile.stat.res.max },
+        ehp: { min: profile.stat.ehp.min, max: profile.stat.ehp.max },
+        damage: { min: profile.stat.damage.min, max: profile.stat.damage.max }
+      },
       evaluation: {
         forcedSets: profile.evaluation.forcedSets.map(x => x as Gear.Set),
         limit: profile.evaluation.limit,

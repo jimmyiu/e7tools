@@ -43,22 +43,22 @@
           <hero-detail-card :hero-id="profile.hero.id" :rating="profile.filter.rating.point" :suit="selectedSuit" />
         </v-col>
         <v-col cols="6" lg="auto">
-          <gear-detail-card :gear="selectedSuit.weapon" />
+          <gear-detail-card :gear="selectedSuit.weapon" :ref-hero-id="profile.hero.id" />
         </v-col>
         <v-col cols="6" lg="auto">
-          <gear-detail-card :gear="selectedSuit.helmet" />
+          <gear-detail-card :gear="selectedSuit.helmet" :ref-hero-id="profile.hero.id" />
         </v-col>
         <v-col cols="6" lg="auto">
-          <gear-detail-card :gear="selectedSuit.armor" />
+          <gear-detail-card :gear="selectedSuit.armor" :ref-hero-id="profile.hero.id" />
         </v-col>
         <v-col cols="6" lg="auto">
-          <gear-detail-card :gear="selectedSuit.necklace" />
+          <gear-detail-card :gear="selectedSuit.necklace" :ref-hero-id="profile.hero.id" />
         </v-col>
         <v-col cols="6" lg="auto">
-          <gear-detail-card :gear="selectedSuit.ring" />
+          <gear-detail-card :gear="selectedSuit.ring" :ref-hero-id="profile.hero.id" />
         </v-col>
         <v-col cols="6" lg="auto">
-          <gear-detail-card :gear="selectedSuit.boot" />
+          <gear-detail-card :gear="selectedSuit.boot" :ref-hero-id="profile.hero.id" />
         </v-col>
       </v-row>
       <!-- </v-card-text> -->
@@ -112,6 +112,7 @@ import { mapActions, mapGetters } from 'vuex';
 import { SuitBuilder, heroService, gearFilterService } from '@/services';
 import { EMPTY_PROFILE, OptimizationResult } from '@/models/optimizer';
 import { GearOptimizerProgress } from '@/services/gear-optimizer';
+import { GearAbility } from '@/models/common';
 
 @Component({
   name: 'optimizer-page',
@@ -128,7 +129,7 @@ export default class OptimizerPage extends Vue {
   readonly siteState!: SiteState;
   saveGears!: (gear: Gear.Gear[]) => void;
   updateProfiles!: (profiles: OptimizationProfile[]) => void;
-  getSuit!: (heroId: string) => Suit;
+  getSuit!: (heroId: string, bonusAbility?: GearAbility) => Suit;
   getGear!: (gearId: string) => Gear.Gear;
   getHero!: (heroId: string) => Hero;
   getProfile!: (heroId: string) => OptimizationProfile | undefined;
@@ -141,10 +142,32 @@ export default class OptimizerPage extends Vue {
   profile: OptimizationProfile = {
     id: '',
     hero: {
+      id: '',
       bonusAbility: {}
     },
     filter: {
-      rating: {}
+      sets: [],
+      necklaces: [],
+      rings: [],
+      boots: [],
+      enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
+      locked: false,
+      equipped: false,
+      score: 0,
+      rating: {
+        point: {
+          hp: 1,
+          def: 1,
+          atk: 1,
+          cri: 1,
+          cdmg: 1,
+          spd: 1,
+          eff: 1,
+          res: 1
+        },
+        threshold: 100,
+        minSize: 20
+      }
     },
     stat: {
       hp: {},
@@ -158,7 +181,12 @@ export default class OptimizerPage extends Vue {
       ehp: {},
       damage: {}
     },
-    evaluation: {}
+    evaluation: {
+      forcedSets: [],
+      limit: 10000000,
+      brokenSet: false,
+      lv85: false
+    }
   } as OptimizationProfile;
 
   result: OptimizationResult[] = [];
@@ -227,6 +255,7 @@ export default class OptimizerPage extends Vue {
 
   toSuit(foo: OptimizationResult) {
     const builder = new SuitBuilder();
+    builder.bonus(this.profile.hero.bonusAbility);
     [foo.weaponId, foo.helmetId, foo.armorId, foo.necklaceId, foo.ringId, foo.bootId].forEach(x => {
       if (x != undefined) {
         builder.setGear(this.getGear(x));
@@ -239,7 +268,7 @@ export default class OptimizerPage extends Vue {
     console.log('reset');
     this.result.splice(0, this.result.length);
     this.assignProfile(EMPTY_PROFILE);
-    this.selectedSuit = this.getSuit(this.profile.hero.id);
+    this.selectedSuit = this.getSuit(this.profile.hero.id, this.profile.hero.bonusAbility);
   }
 
   changeHero(heroId: string) {
@@ -292,7 +321,7 @@ export default class OptimizerPage extends Vue {
   }
 
   saveProfile() {
-    console.log('saveProfile::profile =', this.profile);
+    console.log(`saveProfile::profile.id = ${this.profile.hero.id}, profile =`, this.profile);
     this.updateProfiles([this.profile]);
     this.popupMsg = 1;
   }
@@ -308,16 +337,26 @@ export default class OptimizerPage extends Vue {
       console.log('loadProfile::no saved profile');
       this.profile.id = this.profile.hero.id;
     }
-    this.selectedSuit = this.getSuit(this.profile.hero.id);
+    this.selectedSuit = this.getSuit(this.profile.hero.id, this.profile.hero.bonusAbility);
   }
 
   assignProfile(profile: OptimizationProfile) {
+    console.log('assignProfile::profile =', profile);
     this.profile.id = profile.id;
     // this.profile.hero.id = profile.hero.id;
-    console.log('assignProfile', profile.hero.bonusAbility);
+    // console.log('assignProfile', profile.hero.bonusAbility);
     this.profile.hero.bonusAbility = Object.assign({}, profile.hero.bonusAbility);
-    this.profile.filter = Object.assign({}, profile.filter);
-    // this.profile.filter.rating = Object.assign({}, profile.filter.rating);
+    this.profile.filter.sets = [...profile.filter.sets];
+    this.profile.filter.necklaces = [...profile.filter.necklaces];
+    this.profile.filter.rings = [...profile.filter.rings];
+    this.profile.filter.boots = [...profile.filter.boots];
+    this.profile.filter.enhanceMode = profile.filter.enhanceMode;
+    this.profile.filter.locked = profile.filter.locked;
+    this.profile.filter.equipped = profile.filter.equipped;
+    this.profile.filter.score = profile.filter.score;
+    this.profile.filter.rating.threshold = profile.filter.rating.threshold;
+    this.profile.filter.rating.minSize = profile.filter.rating.minSize;
+    this.profile.filter.rating.point = Object.assign({}, profile.filter.rating.point);
     this.profile.stat.hp = Object.assign({}, profile.stat.hp);
     this.profile.stat.def = Object.assign({}, profile.stat.def);
     this.profile.stat.atk = Object.assign({}, profile.stat.atk);
@@ -325,6 +364,7 @@ export default class OptimizerPage extends Vue {
     this.profile.stat.cdmg = Object.assign({}, profile.stat.cdmg);
     this.profile.stat.spd = Object.assign({}, profile.stat.spd);
     this.profile.stat.eff = Object.assign({}, profile.stat.eff);
+    this.profile.stat.res = Object.assign({}, profile.stat.res);
     this.profile.stat.ehp = Object.assign({}, profile.stat.ehp);
     this.profile.stat.damage = Object.assign({}, profile.stat.damage);
     this.profile.evaluation = Object.assign({}, profile.evaluation);
