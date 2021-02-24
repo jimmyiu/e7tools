@@ -6,7 +6,7 @@ export function equip(hero: Hero, suit: Suit): EquippedHero {
     hp: Math.trunc(hero.hp * (1 + (suit.ability.hpp + extra.hpp) / 100)) + suit.ability.hp,
     def: Math.trunc(hero.def * (1 + (suit.ability.defp + extra.defp) / 100)) + suit.ability.def,
     atk: Math.trunc(hero.atk * (1 + (suit.ability.atkp + extra.atkp) / 100)) + suit.ability.atk,
-    cri: hero.cri + suit.ability.cri + extra.cri,
+    cri: Math.trunc((hero.cri + suit.ability.cri + extra.cri) * 10) / 10,
     cdmg: hero.cdmg + suit.ability.cdmg + extra.cdmg,
     spd: Math.trunc(hero.spd * (1 + extra.spdp / 100)) + suit.ability.spd,
     eff: hero.eff + suit.ability.eff + extra.eff,
@@ -35,9 +35,9 @@ function determineSetsExtraAbility(sets: Gear.Set[]) {
   };
   for (let i = 0; i < sets.length; i++) {
     if (sets[i] == Gear.Set.Health) {
-      result.hpp += 12;
+      result.hpp += 15;
     } else if (sets[i] == Gear.Set.Defense) {
-      result.defp += 12;
+      result.defp += 15;
     } else if (sets[i] == Gear.Set.Attack) {
       result.atkp += 35;
     } else if (sets[i] == Gear.Set.Critical) {
@@ -47,9 +47,9 @@ function determineSetsExtraAbility(sets: Gear.Set[]) {
     } else if (sets[i] == Gear.Set.Speed) {
       result.spdp += 25;
     } else if (sets[i] == Gear.Set.Hit) {
-      result.eff += 12;
+      result.eff += 20;
     } else if (sets[i] == Gear.Set.Resist) {
-      result.res += 12;
+      result.res += 20;
     }
   }
   return result;

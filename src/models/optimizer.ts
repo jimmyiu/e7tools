@@ -97,8 +97,8 @@ export const EMPTY_PROFILE: OptimizationProfile = {
   },
   evaluation: {
     forcedSets: [],
-    brokenSet: true,
-    limit: 20000000,
+    brokenSet: false,
+    limit: 10000000,
     lv85: false
   }
 };

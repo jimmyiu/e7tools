@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { VuexData, Gear, Hero, OptimizationProfile, SiteState } from '@/models';
+import { VuexData, Gear, Hero, OptimizationProfile, SiteState, HeroAbility } from '@/models';
 import E7dbDataHandler from '@/services/e7db-data-handler';
 import { persistenceService } from '@/services/presistence';
 import { SuitBuilder } from '@/services';
+import { GearAbility } from '@/models/common';
 
 Vue.use(Vuex);
 
@@ -39,8 +40,11 @@ export default new Vuex.Store({
     getHero: state => (heroId: string) => {
       return state.data.heros.find(x => x.id == heroId);
     },
-    getSuit: state => (heroId: string) => {
+    getSuit: state => (heroId: string, bonusAbility?: GearAbility) => {
       const builder = new SuitBuilder();
+      if (bonusAbility) {
+        builder.bonus(bonusAbility);
+      }
       state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
       return builder.build();
     }
