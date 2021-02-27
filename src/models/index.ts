@@ -1,4 +1,4 @@
-import { Range, HeroAbility } from './common';
+import { Range, HeroAbility, FilterMode } from './common';
 import { Gear } from './gear';
 import { Hero, EquippedHero } from './hero';
 import { Suit, SuitAbility } from './suit';
@@ -9,7 +9,7 @@ import {
   OptimizationHero
 } from './optimizer';
 
-export { Gear, Range, Suit, SuitAbility };
+export { Gear, Range, Suit, SuitAbility, FilterMode };
 export { Hero, HeroAbility, EquippedHero };
 export { OptimizationProfile, OptimizationStatCriteria, OptimizationEvaluationCriteria, OptimizationHero };
 

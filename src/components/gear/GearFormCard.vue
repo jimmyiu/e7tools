@@ -74,7 +74,7 @@
     </v-card-text>
     <v-divider />
     <v-card-actions>
-      <v-btn class="font-weight-bold" color="primary" outlined @click="submit">{{ gear ? 'Edit' : 'Create' }}</v-btn>
+      <v-btn class="font-weight-bold" color="primary" text @click="submit">{{ gear ? 'Edit' : 'Create' }}</v-btn>
       <v-btn text @click="reset">Reset</v-btn>
       <v-spacer />
       <v-btn text @click="$emit('close')">Close</v-btn>
@@ -112,7 +112,6 @@ export default class GearFormCard extends Vue {
   @Prop({ type: Gear.Gear, required: false, default: undefined }) readonly gear!: Gear.Gear;
 
   form = this.defaultForm();
-  readonly sets = Gear.SETS;
   readonly types = Object.values(Gear.Type);
   readonly grades = Object.values(Gear.Grade);
   levelTicks = [67, 70, 71, 75, 78, 80, 85, 88, 90];

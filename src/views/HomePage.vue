@@ -1,12 +1,11 @@
 <template>
   <div class="about">
     <message-box title="Current Status">
-      <p>This tool is under development</p>
       <ul>
-        <li>Gear Management & Gear Optimizer features are working, but definitely a lot of things have to improve</li>
-        <li>Next target: Revise gear page</li>
+        <li>Gear Management & Gear Optimizer features are working now</li>
+        <li>Next target: Enhance gear page with better filtering and statistics</li>
       </ul>
-      <br />2021-02-19
+      <br />2021-02-24
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -14,7 +13,7 @@
       gear is good or bad, and also hard to optimize the equip combination to achieve a desired ability.<br /><br />
       2020-12-06
     </message-box>
-    <message-box hide-default title="Milestones">
+    <!-- <message-box hide-default title="Milestones">
       My first target is to complete the MVP with a simple gear management tool. Basically, it has to supports:
       <ol>
         <li>create / list / update / delete gears</li>
@@ -23,8 +22,9 @@
           import gears JSON from <a href="https://github.com/e7-tools/gear-reader" target="_blank">E7 Gear Reader</a>
         </li>
       </ol>
-    </message-box>
+    </message-box> -->
     <message-box hide-default title="Progress">
+      [2021-02-24] add rating for optimization<br />
       [2021-02-21] add number of gears in gear page<br />
       [2021-02-19] add broken set flag in optimizer<br />
       [2021-02-17] complete revising persistent data<br />

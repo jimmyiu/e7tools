@@ -3,9 +3,9 @@
     <top-nav @toggle-setting="setting = !setting" />
     <v-main>
       <v-container fluid>
-        <v-alert class="hidden-sm-and-up" dense dismissible outlined type="error">
+        <!-- <v-alert class="hidden-sm-and-up" dense dismissible outlined type="error">
           This tool is intended to design for desktop users.
-        </v-alert>
+        </v-alert> -->
         <router-view />
       </v-container>
     </v-main>

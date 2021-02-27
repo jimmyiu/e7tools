@@ -1,3 +1,15 @@
+export enum FilterMode {
+  ALL = 0,
+  YES = 1,
+  NO = 2
+}
+
+export enum SortingOrder {
+  NONE = 0,
+  ASCENDING = 1,
+  DESCENDING = 2
+}
+
 export type Range = {
   min?: number;
   max?: number;
