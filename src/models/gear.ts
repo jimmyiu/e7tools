@@ -1,4 +1,4 @@
-import { GearAbility, HeroAbility } from './common';
+import { FilterMode, GearAbility, HeroAbility } from './common';
 
 export namespace Gear {
   export enum Type {
@@ -34,13 +34,6 @@ export namespace Gear {
     Penetration = 'Penetration'
   }
   export type SetFigures = Record<Set, number>;
-  export const SETS = [
-    [Set.Speed, Set.Critical, Set.Hit],
-    [Set.Attack, Set.Health, Set.Defense],
-    [Set.Immunity, Set.Unity, Set.Rage],
-    [Set.Revenge, Set.Injury, Set.Penetration],
-    [Set.Destruction, Set.Counter, Set.LifeSteal, Set.Resist]
-  ];
   export const ALL_SETS = Object.values(Set);
   export type SetAbility = {
     hpp: number;
@@ -60,11 +53,11 @@ export namespace Gear {
     static readonly DEF = Object.freeze(new Stat('def', 'DEF', false));
     static readonly ATKP = Object.freeze(new Stat('atkp', 'ATK %', true));
     static readonly ATK = Object.freeze(new Stat('atk', 'ATK', false));
-    static readonly CRI = Object.freeze(new Stat('cri', 'CRI', false));
-    static readonly CDMG = Object.freeze(new Stat('cdmg', 'CDMG', false));
+    static readonly CRI = Object.freeze(new Stat('cri', 'CRI', true));
+    static readonly CDMG = Object.freeze(new Stat('cdmg', 'CDMG', true));
     static readonly SPD = Object.freeze(new Stat('spd', 'SPD', false));
-    static readonly EFF = Object.freeze(new Stat('eff', 'EFF', false));
-    static readonly RES = Object.freeze(new Stat('res', 'RES', false));
+    static readonly EFF = Object.freeze(new Stat('eff', 'EFF', true));
+    static readonly RES = Object.freeze(new Stat('res', 'RES', true));
     static getInstance(value: string) {
       switch (value) {
         case Stat.HPP.value:
@@ -232,18 +225,27 @@ export namespace Gear {
     }
   }
 
+  export enum LevelFilterMode {
+    ALL = 0,
+    LV85 = 1,
+    LV90 = 2,
+    OTHERS = 3
+  }
+
   export enum EnhanceModeFilter {
     ALL = 0,
     LESS_THAN_15 = 1,
     ONLY_15 = 2
   }
 
-  export type BaseGearFilter = {
+  // export type BaseGearFilter = {
+  //   sets: Set[];
+  //   enhanceMode: EnhanceModeFilter;
+  // };
+
+  export type GearFilter = {
     sets: Set[];
     enhanceMode: EnhanceModeFilter;
-  };
-
-  export type GearFilter = BaseGearFilter & {
     necklaces: Stat[];
     rings: Stat[];
     boots: Stat[];
@@ -257,13 +259,9 @@ export namespace Gear {
     };
   };
 
-  export type TableFilter = BaseGearFilter & {
-    type?: Type;
-    level: number;
-    mode: number;
-    main: boolean;
-    equipped: boolean;
-  };
+  // score: number = 0;
+  //   offScore: number = 0;
+  //   defScore: number = 0;
 
   export type StatInput = {
     stat?: Stat;
