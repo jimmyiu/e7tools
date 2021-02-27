@@ -41,7 +41,7 @@ export default class ImportSettingBtn extends Vue {
   initVuex!: (data: VuexData) => void;
   //
   dialog = false;
-  data: string = '';
+  data: string = JSON.stringify(require('@/assets/json/xceoj.json'));
 
   importData() {
     if (this.isValid()) {
