@@ -31,22 +31,7 @@
               <v-btn depressed min-width="38" :value="1"><v-icon small>mdi-check-bold</v-icon></v-btn>
             </v-btn-toggle>
           </v-col>
-          <v-col align-self="end" cols="auto">
-            <!-- <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-checkbox
-                v-model="form.main"
-                v-bind="attrs"
-                class="mt-0"
-                dense
-                hide-details
-                label="Main"
-                v-on="on"
-              ></v-checkbox>
-            </template>
-            <span>Display main stat value in the table</span>
-          </v-tooltip> -->
-          </v-col>
+          <v-col align-self="end" cols="auto"></v-col>
         </v-row>
       </v-col>
     </v-row>
@@ -54,9 +39,7 @@
     <v-row no-gutters style="margin-left: -6px">
       <template v-for="(stat, key) in stats">
         <v-col :key="`${key}-1`" class="d-flex align-center mb-1" cols="4">
-          <v-btn icon small @click="toggleSort(stat.value)"><gear-stat-icon :stat="stat"/></v-btn>
-          <!-- </v-col>
-        <v-col :key="`${key}-2`" class="d-flex align-center" cols="3"> -->
+          <v-btn icon @click="toggleSort(stat.value)"><gear-stat-icon :stat="stat"/></v-btn>
           <v-text-field
             v-model.number="form.minStat[stat.value]"
             dense
@@ -70,39 +53,22 @@
           </v-text-field>
         </v-col>
       </template>
-      <v-col class="d-flex align-center mb-1" cols="4">
-        <v-btn icon small><v-icon size="18">mdi-alpha-s-box</v-icon></v-btn>
-        <v-text-field v-model.number="form.minStat.score" dense hide-details label="Min" min="0" outlined type="number">
-        </v-text-field>
-      </v-col>
-      <v-col class="d-flex align-center" cols="4">
-        <v-btn icon small @click="toggleSort('offScore')"><v-icon size="18">mdi-alpha-a-box</v-icon></v-btn>
+      <v-col v-for="(item, key) in scores" :key="key" class="d-flex align-center mb-1" cols="4">
+        <v-btn icon @click="toggleSort(item.value)"
+          ><v-icon size="18">{{ item.icon }}</v-icon></v-btn
+        >
         <v-text-field
-          v-model.number="form.minStat.offScore"
+          v-model.number="form.minStat[item.value]"
           dense
           hide-details
           label="Min"
           min="0"
           outlined
           type="number"
-        >
-        </v-text-field>
+        />
       </v-col>
-      <v-col class="d-flex align-center" cols="4">
-        <v-btn icon small><v-icon size="18">mdi-alpha-d-box</v-icon></v-btn>
-        <v-text-field
-          v-model.number="form.minStat.defScore"
-          dense
-          hide-details
-          label="Min"
-          min="0"
-          outlined
-          type="number"
-        >
-        </v-text-field>
-      </v-col>
-      <v-col align-self="center" cols="4" style="margin-left: -2px">
-        <v-checkbox v-model="form.applyToMain" class="mt-0 pt-0 pl-1 caption" dense hide-details label="Filter Main" />
+      <v-col align-self="center" cols="4" style="padding-left: 2px">
+        <v-checkbox v-model="form.applyToMain" class="mt-0 pt-0 pl-1 caption" dense hide-details label="Apply Main" />
       </v-col>
     </v-row>
     <v-row dense>
@@ -118,7 +84,7 @@
         />
       </v-col>
       <v-col align-self="center" cols="2">
-        <v-btn icon>
+        <v-btn icon @click="toggleSort()">
           <v-icon>mdi-order-numeric-{{ isDescending ? 'descending' : 'ascending' }} </v-icon>
         </v-btn>
       </v-col>
@@ -176,6 +142,20 @@ export default class GearFilterInputSheet extends Vue {
     'offScore',
     'defScore'
   ];
+  readonly scores = [
+    {
+      value: 'score',
+      icon: 'mdi-alpha-s-box'
+    },
+    {
+      value: 'offScore',
+      icon: 'mdi-alpha-a-box'
+    },
+    {
+      value: 'defScore',
+      icon: 'mdi-alpha-d-box'
+    }
+  ];
 
   get typeFigures(): Gear.TypeFigures {
     const result = {
@@ -229,8 +209,8 @@ export default class GearFilterInputSheet extends Vue {
     this.form.sortingOrder = SortingOrder.DESCENDING;
   }
 
-  toggleSort(column: SortingColumn) {
-    if (this.form.sortingColumn == column) {
+  toggleSort(column?: SortingColumn) {
+    if (this.form.sortingColumn == column || column == undefined) {
       this.form.sortingOrder =
         this.form.sortingOrder == SortingOrder.ASCENDING ? SortingOrder.DESCENDING : SortingOrder.ASCENDING;
     } else {
@@ -238,7 +218,5 @@ export default class GearFilterInputSheet extends Vue {
       this.form.sortingOrder = SortingOrder.DESCENDING;
     }
   }
-
-  sort() {}
 }
 </script>

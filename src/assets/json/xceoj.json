@@ -5806,6 +5806,22 @@
       "res": 12,
       "locked": false,
       "equippedHero": ""
+    },
+    {
+      "id": "fa8gfi8ba6",
+      "type": "Armor",
+      "set": "Immunity",
+      "grade": "Epic",
+      "level": 88,
+      "enhance": 15,
+      "main": "def",
+      "hpp": 23,
+      "defp": 18,
+      "def": 310,
+      "cri": 11,
+      "spd": 9,
+      "locked": false,
+      "equippedHero": ""
     }
   ],
   "profiles": [

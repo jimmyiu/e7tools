@@ -8,6 +8,13 @@ $body-font-family: 'Inconsolata', monospace
 @import '~vuetify/src/styles/styles.sass'
 // @import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900&display=swap")
 
+/* remove number scroll */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button
+  -webkit-appearance: none
+  margin: 0
+input[type=number]
+  -moz-appearance: textfield
+
 .placeholder--italic input::placeholder
   font-style: italic !important
   color: map.get($grey, "darken-2") !important

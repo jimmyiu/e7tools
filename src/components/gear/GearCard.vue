@@ -10,15 +10,19 @@
         </v-col>
         <v-col class="d-flex align-center" cols="4">
           <gear-stat-icon class="mr-1" :stat="gear.main" />
-          {{ gear[gear.main.value] }}
-          <span v-if="gear.main.percent">%</span>
-          <span v-else-if="showPercent(gear.main) && refHero" class="caption ml-1">
-            ({{ Math.round((100 * gear[gear.main.value]) / refHero[gear.main.value]) }}%)
-          </span>
+          <div class="px-1 d-flex align-center" :class="{ 'highlight-1': isHighlight1(gear.main.value) }">
+            {{ gear[gear.main.value] }}
+            <span v-if="gear.main.percent">%</span>
+            <span v-else-if="showPercent(gear.main) && refHero" class="caption ml-1">
+              ({{ Math.round((100 * gear[gear.main.value]) / refHero[gear.main.value]) }}%)
+            </span>
+          </div>
         </v-col>
         <v-col class="d-flex align-center" cols="3">
-          <v-icon class="mr-1" size="18">mdi-alpha-s-box</v-icon>
-          {{ scores.score }}
+          <v-icon size="18">mdi-alpha-s-box</v-icon>
+          <div class="px-1" :class="{ 'highlight-1': isHighlight1('score') }">
+            {{ scores.score }}
+          </div>
         </v-col>
         <v-col class="d-flex align-center justify-end" cols="1">
           <v-img v-if="equippedHero" :alt="equippedHero.id" max-width="28" :src="equippedHero.icon" />
@@ -28,20 +32,26 @@
       <v-row class="px-2" no-gutters>
         <template v-for="(item, i) in gear.getSubs()">
           <v-col :key="`${i}_1`" class="d-flex align-center" cols="4">
-            <gear-stat-icon class="mr-1" :stat="item[0]" />
-            {{ item[1] }}<span v-if="item[0].percent">%</span>
-            <span v-if="showPercent(item[0]) && refHero" class="caption ml-1">
-              ({{ Math.round((100 * gear[item[0].value]) / refHero[item[0].value]) }}%)
-            </span>
+            <gear-stat-icon :stat="item[0]" />
+            <div class="px-1 d-flex align-center" :class="{ 'highlight-1': isHighlight1(item[0].value) }">
+              {{ item[1] }}<span v-if="item[0].percent">%</span>
+              <span v-if="showPercent(item[0]) && refHero" class="caption ml-1"
+                >({{ Math.round((100 * gear[item[0].value]) / refHero[item[0].value]) }}%)</span
+              >
+            </div>
           </v-col>
         </template>
         <v-col class="d-flex align-center" cols="4">
-          <v-icon class="mr-1" size="18">mdi-alpha-a-box</v-icon>
-          {{ scores.offScore }}
+          <v-icon size="18">mdi-alpha-a-box</v-icon>
+          <div class="px-1" :class="{ 'highlight-1': isHighlight1('offScore') }">
+            {{ scores.offScore }}
+          </div>
         </v-col>
         <v-col class="d-flex align-center" cols="4">
-          <v-icon class="mr-1" size="18">mdi-alpha-d-box</v-icon>
-          {{ scores.defScore }}
+          <v-icon size="18">mdi-alpha-d-box</v-icon>
+          <div class="px-1" :class="{ 'highlight-1': isHighlight1('defScore') }">
+            {{ scores.defScore }}
+          </div>
         </v-col>
       </v-row>
       <!-- <v-divider />
@@ -58,8 +68,9 @@
   </v-sheet>
 </template>
 <style lang="sass" scoped>
-.set
-  margin-top: -2px
+.highlight-1
+  background-color: green
+  border-radius: 4px
 </style>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
@@ -79,6 +90,7 @@ export default class GearCard extends Vue {
   //
   @Prop() readonly gear!: Gear.Gear;
   @Prop() readonly refHeroId!: string;
+  @Prop() readonly highlight1!: string | undefined;
   // getter
   get refHero(): Hero | undefined {
     if (this.refHeroId) {
@@ -116,6 +128,10 @@ export default class GearCard extends Vue {
 
   showPercent(stat: Gear.Stat) {
     return stat.value == Gear.Stat.HP.value || stat.value == Gear.Stat.DEF.value || stat.value == Gear.Stat.ATK.value;
+  }
+
+  isHighlight1(value: string) {
+    return this.highlight1 == value;
   }
 }
 </script>

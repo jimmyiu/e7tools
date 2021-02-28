@@ -11,7 +11,7 @@
           <!-- <v-btn right @click="createGear"><v-icon>mdi-plus</v-icon></v-btn> -->
           <v-btn class="font-weight-bold" color="primary" text @click="createGear">Create</v-btn>
         </v-sheet>
-        <gear-list-view class="mt-2" :gears="filteredGears" />
+        <gear-list-view class="mt-2" :gears="filteredGears" :sort-col="filter.sortingColumn" />
         <!-- <gear-table :gears="filteredGears" @edit-gear="editGear" /> -->
         <v-btn bottom class="hidden-sm-and-up" fab fixed right small @click="goToTop">
           <v-icon>mdi-chevron-up</v-icon>

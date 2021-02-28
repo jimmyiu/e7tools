@@ -2,12 +2,11 @@
   <v-row no-gutters>
     <!-- <v-col v-for="(item, key) in filteredGears" :key="key" cols="12" sm="auto">
       <gear-card :gear="item" style="border: 1px solid green" />
-    </v-col>
-     -->
+    </v-col> -->
     <v-col cols="12">
       <v-virtual-scroll height="708" item-height="102" :items="gears">
         <template v-slot:default="{ item }">
-          <gear-card :gear="item" />
+          <gear-card :gear="item" :highlight1="sortCol" />
         </template>
       </v-virtual-scroll>
     </v-col>
@@ -34,30 +33,20 @@ import { mapActions, mapGetters } from 'vuex';
   name: 'gear-table',
   components: { GearCard },
   computed: { ...mapGetters(['getGear']) }
-  // methods: mapActions(['saveGears', 'removeGears'])
 })
 export default class GearListView extends Vue {
   getGear!: (gearId: string) => Gear.Gear;
-  // saveGears!: (gear: Gear.Gear[]) => void;
-  // removeGears!: (gear: Gear.Gear[]) => void;
-
-  // @Prop() readonly item!: any;
   @Prop() readonly gears!: Gear.Gear[];
-  // filter: GearAbility & Gear.GearScore = {
-  //   score: 0,
-  //   offScore: 0,
-  //   defScore: 0
-  // };
-  // model
-  pageSize = 10;
-  currentPage = 1;
+  @Prop() readonly sortCol!: string | undefined;
+  // pageSize = 10;
+  // currentPage = 1;
 
-  get filteredGears() {
-    return this.gears.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
-  }
-  get numOfPages() {
-    return Math.ceil(this.gears.length / this.pageSize);
-  }
+  // get filteredGears() {
+  //   return this.gears.slice((this.currentPage - 1) * this.pageSize, this.currentPage * this.pageSize);
+  // }
+  // get numOfPages() {
+  //   return Math.ceil(this.gears.length / this.pageSize);
+  // }
 
   // get statistics() {
   //   return gearService.calculateStatistics(this.filteredGears);
@@ -102,11 +91,6 @@ export default class GearListView extends Vue {
   //     lockGear.locked = !lockGear.locked;
   //     this.saveGears([lockGear]);
   //   }
-  // }
-
-  // @Emit()
-  // editGear(gear: Gear.Gear) {
-  //   return gear.id;
   // }
 
   // confirmDelete(gear: Gear.Gear) {
