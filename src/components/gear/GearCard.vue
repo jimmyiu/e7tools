@@ -1,5 +1,14 @@
 <template>
-  <v-sheet class="py-1" elevation="6" min-width="351" outlined rounded>
+  <v-sheet
+    v-ripple
+    class="py-1"
+    :class="{ selectable: selectable }"
+    elevation="6"
+    max-width="351"
+    outlined
+    rounded
+    @click="onClick"
+  >
     <div v-if="gear && gear.id">
       <v-row class="px-2" no-gutters>
         <v-col class="d-flex align-center" cols="4">
@@ -68,6 +77,8 @@
   </v-sheet>
 </template>
 <style lang="sass" scoped>
+.selectable
+  cursor: pointer
 .highlight-1
   background-color: green
   border-radius: 4px
@@ -91,6 +102,9 @@ export default class GearCard extends Vue {
   @Prop() readonly gear!: Gear.Gear;
   @Prop() readonly refHeroId!: string;
   @Prop() readonly highlight1!: string | undefined;
+  @Prop() readonly selectable: boolean | undefined;
+  // model
+
   // getter
   get refHero(): Hero | undefined {
     if (this.refHeroId) {
@@ -110,13 +124,6 @@ export default class GearCard extends Vue {
     return Object.values(Gear.Stat);
   }
 
-  // get subs() {
-  //   return this.gear.getSubs();
-  // }
-  // get width() {
-  //   return '170';
-  // }
-
   get scores(): Gear.GearScore {
     if (this.refHero && this.gear) {
       return gearService.calculateScores(this.refHero, this.gear);
@@ -132,6 +139,12 @@ export default class GearCard extends Vue {
 
   isHighlight1(value: string) {
     return this.highlight1 == value;
+  }
+
+  onClick() {
+    if (this.selectable) {
+      this.$emit('select', this.gear);
+    }
   }
 }
 </script>

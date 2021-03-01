@@ -24,6 +24,8 @@ function getRightMain(stat: Gear.Stat, level: number, enhance: number) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40][enhance - 1];
     } else if (stat.value == Gear.Stat.HP.value) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1944, 0, 0, 2700][enhance - 1];
+    } else if (stat.value == Gear.Stat.DEF.value) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 300][enhance - 1];
     }
     return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 0, 0, 60][enhance - 1];
   } else if (level == 90) {
@@ -35,6 +37,8 @@ function getRightMain(stat: Gear.Stat, level: number, enhance: number) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 525][enhance - 1];
     } else if (stat.value == Gear.Stat.HP.value) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2835][enhance - 1];
+    } else if (stat.value == Gear.Stat.DEF.value) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 310][enhance - 1];
     }
     return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65][enhance - 1];
   } else if (level == 88) {

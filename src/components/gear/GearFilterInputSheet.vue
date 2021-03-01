@@ -35,8 +35,15 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-divider class="my-2" />
-    <v-row no-gutters style="margin-left: -6px">
+    <v-row class="mt-1" no-gutters>
+      <v-col align-self="center">
+        <v-divider class="" />
+      </v-col>
+      <v-col cols="auto">
+        <v-btn icon small @click="resetStat"><v-icon size="21">mdi-delete-outline</v-icon></v-btn>
+      </v-col>
+    </v-row>
+    <v-row class="mt-1" no-gutters style="margin-left: -6px">
       <template v-for="(stat, key) in stats">
         <v-col :key="`${key}-1`" class="d-flex align-center mb-1" cols="4">
           <v-btn icon @click="toggleSort(stat.value)"><gear-stat-icon :stat="stat"/></v-btn>
@@ -75,7 +82,6 @@
       <v-col cols="10">
         <v-select
           v-model="form.sortingColumn"
-          clearable
           dense
           hide-details
           :items="sortingColumns"
@@ -203,6 +209,13 @@ export default class GearFilterInputSheet extends Vue {
     this.form.levelMode = Gear.LevelFilterMode.ALL;
     this.form.enhanceMode = Gear.EnhanceModeFilter.ALL;
     this.form.equippedMode = FilterMode.ALL;
+    this.form.applyToMain = false;
+    Object.keys(this.form.minStat).forEach(key => Vue.set(this.form.minStat, key, undefined));
+    this.form.sortingColumn = 'level';
+    this.form.sortingOrder = SortingOrder.DESCENDING;
+  }
+
+  resetStat() {
     this.form.applyToMain = false;
     Object.keys(this.form.minStat).forEach(key => Vue.set(this.form.minStat, key, undefined));
     this.form.sortingColumn = 'level';
