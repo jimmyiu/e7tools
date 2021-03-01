@@ -582,14 +582,4 @@ export namespace Gear {
       this._sets.change(to.set!, from.set);
     }
   }
-
-  // v0.2.0
-  export type GearInputForm = GearAbility & {
-    type?: Type;
-    set?: Set;
-    grade: Grade;
-    level: number;
-    enhance: number;
-    statInputs: Array<Gear.StatInput>;
-  };
 }

@@ -1,32 +1,22 @@
 <template>
-  <div class="mx-auto" style="max-width: 720px">
+  <div class="mx-auto" style="max-width: 1000px">
     <v-row dense>
       <v-col cols="12" sm="auto">
         <gear-filter-input-sheet v-model="filter" :gears="filteredGears" />
         <!-- <gear-list-view-display-config-sheet /> -->
-        <gear-statistics-sheet class="mt-2" :gears="filteredGears" />
+      </v-col>
+      <v-col cols="12" sm="auto">
+        <gear-statistics-sheet :gears="filteredGears" />
       </v-col>
       <v-col>
-        <v-sheet class="pa-1">
-          <!-- <v-btn right @click="createGear"><v-icon>mdi-plus</v-icon></v-btn> -->
-          <v-btn class="font-weight-bold" color="primary" text @click="createGear">Create</v-btn>
-        </v-sheet>
-        <gear-list-view class="mt-2" :gears="filteredGears" :sort-col="filter.sortingColumn" />
+        <gear-action-card v-model="selectedGearId" />
+        <gear-list-view class="mt-2" :gears="filteredGears" :sort-col="filter.sortingColumn" @select="selectGear" />
         <!-- <gear-table :gears="filteredGears" @edit-gear="editGear" /> -->
         <v-btn bottom class="hidden-sm-and-up" fab fixed right small @click="goToTop">
           <v-icon>mdi-chevron-up</v-icon>
         </v-btn>
       </v-col>
     </v-row>
-
-    <v-bottom-sheet v-model="visible.overlay" scrollable>
-      <gear-form-card
-        v-if="visible.overlay"
-        :gear="gearToBeEdited"
-        @close="visible.overlay = false"
-        @input="inputGear"
-      />
-    </v-bottom-sheet>
     <v-snackbar v-model="visible.completeMsg" bottom color="success" outlined timeout="1500">
       <div class="text-center">A gear is updated</div>
     </v-snackbar>
@@ -36,7 +26,7 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
 import {
-  GearFormCard,
+  GearActionCard,
   GearTable,
   GearFilterInputSheet,
   GearCard,
@@ -46,13 +36,13 @@ import {
   GearListView
 } from '@/components';
 import { FilterMode, Gear } from '@/models';
-import { GearPageFilter } from '@/models/gear-page';
+import { GearPageFilter, GearStatFilter } from '@/models/gear-page';
 import { SortingOrder } from '@/models/common';
 
 @Component({
   name: 'gear-page',
   components: {
-    GearFormCard,
+    GearActionCard,
     GearTable,
     GearFilterInputSheet,
     GearCard,
@@ -61,15 +51,13 @@ import { SortingOrder } from '@/models/common';
     GearListView,
     GearListViewDisplayConfigSheet
   },
-  computed: { ...mapGetters(['gears', 'getGear']) },
-  methods: mapActions(['saveGears'])
+  computed: { ...mapGetters(['gears', 'getGear']) }
 })
 export default class GearPage extends Vue {
   getGear!: (gearId: string) => Gear.Gear;
-  saveGears!: (gear: Gear.Gear[]) => void;
 
   gears!: Gear.Gear[];
-  gearToBeEdited?: Gear.Gear = undefined;
+  selectedGearId: string = '';
   visible = {
     overlay: false,
     completeMsg: false
@@ -77,7 +65,6 @@ export default class GearPage extends Vue {
   filter: GearPageFilter = {
     type: undefined,
     sets: [],
-    // main: true,
     levelMode: Gear.LevelFilterMode.ALL,
     enhanceMode: Gear.EnhanceModeFilter.ALL,
     equippedMode: FilterMode.ALL,
@@ -105,21 +92,28 @@ export default class GearPage extends Vue {
         !this.filter.equippedMode ||
         (this.filter.equippedMode == FilterMode.YES && it.equippedHero != '') ||
         (this.filter.equippedMode == FilterMode.NO && it.equippedHero == '');
+
+      const minStatFilter = (stat: keyof GearStatFilter) => {
+        if (it.main.value == stat && !this.filter.applyToMain && (this.filter.minStat[stat] ?? 0) > 0) {
+          return false;
+        }
+        return (it[stat] ?? 0) >= (this.filter.minStat[stat] ?? 0);
+      };
       let min =
-        (it.hpp ?? 0) >= (this.filter.minStat.hpp ?? 0) &&
-        (it.hp ?? 0) >= (this.filter.minStat.hp ?? 0) &&
-        (it.defp ?? 0) >= (this.filter.minStat.defp ?? 0) &&
-        (it.def ?? 0) >= (this.filter.minStat.def ?? 0) &&
-        (it.atkp ?? 0) >= (this.filter.minStat.atkp ?? 0) &&
-        (it.atk ?? 0) >= (this.filter.minStat.atk ?? 0) &&
-        (it.cri ?? 0) >= (this.filter.minStat.cri ?? 0) &&
-        (it.cdmg ?? 0) >= (this.filter.minStat.cdmg ?? 0) &&
-        (it.spd ?? 0) >= (this.filter.minStat.spd ?? 0) &&
-        (it.eff ?? 0) >= (this.filter.minStat.eff ?? 0) &&
-        (it.res ?? 0) >= (this.filter.minStat.res ?? 0) &&
-        it.score >= (this.filter.minStat.score ?? 0) &&
-        it.offScore >= (this.filter.minStat.offScore ?? 0) &&
-        it.defScore >= (this.filter.minStat.defScore ?? 0);
+        minStatFilter('hpp') &&
+        minStatFilter('hp') &&
+        minStatFilter('defp') &&
+        minStatFilter('def') &&
+        minStatFilter('atkp') &&
+        minStatFilter('atk') &&
+        minStatFilter('cri') &&
+        minStatFilter('cdmg') &&
+        minStatFilter('spd') &&
+        minStatFilter('eff') &&
+        minStatFilter('res') &&
+        minStatFilter('score') &&
+        minStatFilter('offScore') &&
+        minStatFilter('defScore');
       return type && set && level && enhance && equipped && min;
     });
     // if (!this.filter.main) {
@@ -165,25 +159,12 @@ export default class GearPage extends Vue {
     return result;
   }
 
-  inputGear(gear: Gear.Gear) {
-    this.saveGears([gear]);
-    this.visible.completeMsg = true;
-    this.visible.overlay = false;
-  }
-
-  editGear(gearId: string) {
-    this.gearToBeEdited = this.getGear(gearId);
-    this.visible.overlay = true;
-  }
-
-  createGear() {
-    this.gearToBeEdited = undefined;
-    this.visible.overlay = true;
+  selectGear(gear: Gear.Gear) {
+    this.selectedGearId = gear.id;
   }
 
   goToTop() {
     console.log('called');
-    // this.$vuetify.goTo(0);
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }
 }

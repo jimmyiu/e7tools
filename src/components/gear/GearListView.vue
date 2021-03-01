@@ -1,12 +1,12 @@
 <template>
   <v-row no-gutters>
-    <!-- <v-col v-for="(item, key) in filteredGears" :key="key" cols="12" sm="auto">
-      <gear-card :gear="item" style="border: 1px solid green" />
-    </v-col> -->
     <v-col cols="12">
-      <v-virtual-scroll height="708" item-height="102" :items="gears">
+      <v-virtual-scroll height="606" item-height="102" :items="gears">
         <template v-slot:default="{ item }">
-          <gear-card :gear="item" :highlight1="sortCol" />
+          <!-- <div class="d-flex align-center">
+            <v-checkbox /> -->
+          <gear-card :gear="item" :highlight1="sortCol" :selectable="true" @select="selectGear" />
+          <!-- </div> -->
         </template>
       </v-virtual-scroll>
     </v-col>
@@ -38,6 +38,12 @@ export default class GearListView extends Vue {
   getGear!: (gearId: string) => Gear.Gear;
   @Prop() readonly gears!: Gear.Gear[];
   @Prop() readonly sortCol!: string | undefined;
+  selectedGearId: string = '';
+
+  selectGear(gear: Gear.Gear) {
+    this.$emit('select', gear);
+  }
+
   // pageSize = 10;
   // currentPage = 1;
 

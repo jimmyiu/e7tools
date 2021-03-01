@@ -1,5 +1,5 @@
 {
-  "version": "0.3.2",
+  "version": "0.4.0",
   "gears": [
     {
       "id": "0866b9daeb",
@@ -1472,12 +1472,60 @@
       "eff": 7,
       "locked": false,
       "equippedHero": ""
+    },
+    {
+      "id": "ii2971hj1f",
+      "type": "Ring",
+      "set": "Critical",
+      "grade": "Hero",
+      "level": 90,
+      "enhance": 15,
+      "main": "def",
+      "hp": 493,
+      "defp": 6,
+      "def": 310,
+      "spd": 16,
+      "eff": 6,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "34e50i6i04",
+      "type": "Armor",
+      "set": "Speed",
+      "grade": "Epic",
+      "level": 85,
+      "enhance": 15,
+      "main": "def",
+      "hpp": 16,
+      "defp": 6,
+      "def": 300,
+      "cri": 7,
+      "res": 16,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "e65geh73dh",
+      "type": "Helmet",
+      "set": "Hit",
+      "grade": "Epic",
+      "level": 85,
+      "enhance": 15,
+      "main": "hp",
+      "hp": 2700,
+      "atk": 34,
+      "cdmg": 11,
+      "spd": 13,
+      "eff": 12,
+      "locked": false,
+      "equippedHero": ""
     }
   ],
   "profiles": [
     {
       "id": "0",
-      "heroId": "arbiter-vildred",
+      "hero": { "id": "arbiter-vildred", "bonusAbility": {} },
       "filter": {
         "sets": ["Health", "Rage"],
         "necklaces": ["defp"],
@@ -1486,7 +1534,12 @@
         "enhanceMode": null,
         "locked": true,
         "equipped": true,
-        "score": 0
+        "score": 0,
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": { "min": "111", "max": "222" },
@@ -1500,20 +1553,25 @@
         "ehp": { "min": "166" },
         "damage": { "min": "17" }
       },
-      "combination": { "forcedSets": ["Critical", "Destruction"], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": ["Critical", "Destruction"], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "1",
-      "heroId": "iseria",
+      "hero": { "id": "iseria", "bonusAbility": {} },
       "filter": {
         "sets": [],
+        "necklaces": [],
+        "rings": [],
+        "boots": [],
         "enhanceMode": null,
         "locked": false,
         "equipped": true,
         "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": []
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1527,20 +1585,25 @@
         "ehp": { "min": "" },
         "damage": { "min": "900" }
       },
-      "combination": { "forcedSets": [], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "2",
-      "heroId": "alexa",
+      "hero": { "id": "alexa", "bonusAbility": {} },
       "filter": {
         "sets": [],
+        "necklaces": [],
+        "rings": [],
+        "boots": [],
         "enhanceMode": null,
         "locked": false,
         "equipped": false,
         "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": []
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1554,20 +1617,25 @@
         "ehp": {},
         "damage": { "min": "900" }
       },
-      "combination": { "forcedSets": [], "limit": 20000000, "brokenSet": true }
+      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
     {
       "id": "3",
-      "heroId": "tamarinne",
+      "hero": { "id": "tamarinne", "bonusAbility": {} },
       "filter": {
         "sets": [],
+        "necklaces": [],
+        "rings": [],
+        "boots": [],
         "enhanceMode": null,
         "locked": false,
         "equipped": false,
         "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": []
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": { "min": "16000" },
@@ -1581,20 +1649,25 @@
         "ehp": { "min": "90000" },
         "damage": {}
       },
-      "combination": { "forcedSets": [], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "4",
-      "heroId": "general-purrgis",
+      "hero": { "id": "general-purrgis", "bonusAbility": {} },
       "filter": {
         "sets": [],
+        "necklaces": [],
+        "rings": [],
+        "boots": [],
         "enhanceMode": null,
         "locked": false,
         "equipped": false,
         "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": []
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1608,11 +1681,11 @@
         "ehp": { "min": "154000" },
         "damage": {}
       },
-      "combination": { "forcedSets": [], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "5",
-      "heroId": "silver-blade-aramintha",
+      "hero": { "id": "silver-blade-aramintha", "bonusAbility": {} },
       "filter": {
         "sets": [],
         "necklaces": [],
@@ -1621,7 +1694,12 @@
         "enhanceMode": 2,
         "locked": false,
         "equipped": false,
-        "score": 0
+        "score": 0,
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1635,20 +1713,25 @@
         "ehp": {},
         "damage": {}
       },
-      "combination": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "6",
-      "heroId": "politis",
+      "hero": { "id": "politis", "bonusAbility": {} },
       "filter": {
         "sets": ["Speed", "Immunity"],
+        "necklaces": [],
+        "rings": [],
+        "boots": ["spd"],
         "enhanceMode": 2,
         "locked": false,
         "equipped": false,
         "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": ["spd"]
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1662,11 +1745,11 @@
         "ehp": { "min": "61000" },
         "damage": {}
       },
-      "combination": { "forcedSets": ["Immunity", "Speed"], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": ["Immunity", "Speed"], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "7",
-      "heroId": "furious",
+      "hero": { "id": "furious", "bonusAbility": {} },
       "filter": {
         "sets": [],
         "necklaces": [],
@@ -1675,7 +1758,12 @@
         "enhanceMode": null,
         "locked": false,
         "equipped": false,
-        "score": 0
+        "score": 0,
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1689,11 +1777,11 @@
         "ehp": {},
         "damage": {}
       },
-      "combination": { "forcedSets": [], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "8",
-      "heroId": "batisse",
+      "hero": { "id": "batisse", "bonusAbility": {} },
       "filter": {
         "sets": [],
         "necklaces": [],
@@ -1702,7 +1790,12 @@
         "enhanceMode": 2,
         "locked": false,
         "equipped": false,
-        "score": 0
+        "score": 0,
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1716,11 +1809,11 @@
         "ehp": {},
         "damage": {}
       },
-      "combination": { "forcedSets": ["Attack"], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": ["Attack"], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "9",
-      "heroId": "angelic-montmorancy",
+      "hero": { "id": "angelic-montmorancy", "bonusAbility": {} },
       "filter": {
         "sets": [],
         "necklaces": [],
@@ -1729,7 +1822,12 @@
         "enhanceMode": null,
         "locked": false,
         "equipped": false,
-        "score": 0
+        "score": 0,
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1743,11 +1841,11 @@
         "ehp": { "min": "" },
         "damage": {}
       },
-      "combination": { "forcedSets": [], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "10",
-      "heroId": "lena",
+      "hero": { "id": "lena", "bonusAbility": {} },
       "filter": {
         "sets": [],
         "necklaces": [],
@@ -1756,7 +1854,12 @@
         "enhanceMode": null,
         "locked": false,
         "equipped": false,
-        "score": 0
+        "score": 0,
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1770,20 +1873,25 @@
         "ehp": {},
         "damage": {}
       },
-      "combination": { "forcedSets": [], "limit": 20000000, "brokenSet": false }
+      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
-      "id": "cerise",
-      "heroId": "cerise",
+      "id": "11",
+      "hero": { "id": "cerise", "bonusAbility": {} },
       "filter": {
         "sets": [],
+        "necklaces": [],
+        "rings": [],
+        "boots": ["spd"],
         "enhanceMode": 2,
         "locked": false,
         "equipped": false,
         "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": ["spd"]
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1797,20 +1905,25 @@
         "ehp": {},
         "damage": {}
       },
-      "combination": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": true }
+      "evaluation": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
     {
-      "id": "landy",
-      "heroId": "landy",
+      "id": "12",
+      "hero": { "id": "landy", "bonusAbility": {} },
       "filter": {
         "sets": [],
+        "necklaces": [],
+        "rings": [],
+        "boots": [],
         "enhanceMode": 2,
         "locked": false,
         "equipped": false,
         "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": []
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1824,20 +1937,25 @@
         "ehp": { "min": "42000" },
         "damage": { "min": "900" }
       },
-      "combination": { "forcedSets": [], "limit": 20000000, "brokenSet": true }
+      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
     {
-      "id": "blood-moon-haste",
-      "heroId": "blood-moon-haste",
+      "id": "13",
+      "hero": { "id": "blood-moon-haste", "bonusAbility": {} },
       "filter": {
         "sets": [],
+        "necklaces": [],
+        "rings": [],
+        "boots": [],
         "enhanceMode": 2,
         "locked": false,
         "equipped": false,
         "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": []
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1851,20 +1969,25 @@
         "ehp": { "min": "100000" },
         "damage": {}
       },
-      "combination": { "forcedSets": [], "limit": 20000000, "brokenSet": true }
+      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
     {
-      "id": "diene",
-      "heroId": "diene",
+      "id": "14",
+      "hero": { "id": "diene", "bonusAbility": {} },
       "filter": {
         "sets": [],
+        "necklaces": [],
+        "rings": [],
+        "boots": [],
         "enhanceMode": null,
         "locked": false,
         "equipped": false,
         "score": 0,
-        "necklaces": [],
-        "rings": [],
-        "boots": []
+        "rating": {
+          "point": { "hp": 1, "def": 1, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": 1 },
+          "threshold": 100,
+          "minSize": 25
+        }
       },
       "stat": {
         "hp": {},
@@ -1878,7 +2001,7 @@
         "ehp": { "min": "110000" },
         "damage": {}
       },
-      "combination": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": true }
+      "evaluation": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": true, "lv85": false }
     }
   ],
   "heros": [
