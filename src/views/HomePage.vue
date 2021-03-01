@@ -24,6 +24,7 @@
       </ol>
     </message-box> -->
     <message-box hide-default title="Progress">
+      [2021-03-02] enhance gear management page<br />
       [2021-02-28] enhance gear management page to support mobile<br />
       [2021-02-24] add rating for optimization<br />
       [2021-02-21] add number of gears in gear page<br />
