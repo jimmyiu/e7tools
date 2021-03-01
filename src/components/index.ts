@@ -9,6 +9,7 @@ import GearStatisticsSheet from './gear/GearStatisticsSheet.vue';
 import GearTable from './gear/GearTable.vue';
 import GearActionCard from './gear/GearActionCard.vue';
 import HeroDetailCard from './hero/HeroDetailCard.vue';
+import HeroFormCard from './hero/HeroFormCard.vue';
 import MessageBox from './common/MessageBox.vue';
 import OptimizationProfiler from './gear/optimizer/OptimizationProfiler.vue';
 import SiteSetting from './common/SiteSetting.vue';
@@ -27,6 +28,7 @@ export {
   GearTable,
   GearTypeIcon,
   HeroDetailCard,
+  HeroFormCard,
   MessageBox,
   OptimizationProfiler,
   SiteSetting,

@@ -29,6 +29,11 @@ const routes = [
     path: '/hero',
     name: 'hero',
     component: () => import(/* webpackChunkName: "other" */ '../views/HeroPage.vue')
+  },
+  {
+    path: '/tier',
+    name: 'tier',
+    component: () => import(/* webpackChunkName: "other" */ '../views/TierPage.vue')
   }
 
   // {
