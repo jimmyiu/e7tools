@@ -14,10 +14,24 @@ export { Hero, HeroAbility, EquippedHero };
 export { OptimizationProfile, OptimizationStatCriteria, OptimizationEvaluationCriteria, OptimizationHero };
 
 export const Constants = {
-  CURRENT_PERSISTENT_DATA_VERSION: '0.4.0',
+  CURRENT_PERSISTENT_DATA_VERSION: '0.5.0',
   OPTIMIZATION_PROCESS_LIMIT: 20000000,
   DEFAULT_HERO_ID: 'arbiter-vildred', // 'iseria',
   KEY_VUEXDATA: 'vuex.data',
+
+  PRIMITIVE_STATS: Object.freeze([
+    Gear.Stat.HPP,
+    Gear.Stat.HP,
+    Gear.Stat.DEFP,
+    Gear.Stat.DEF,
+    Gear.Stat.ATKP,
+    Gear.Stat.ATK,
+    Gear.Stat.CRI,
+    Gear.Stat.CDMG,
+    Gear.Stat.SPD,
+    Gear.Stat.EFF,
+    Gear.Stat.RES
+  ]),
 
   NECKLACE_STATS: [
     Gear.Stat.HPP,

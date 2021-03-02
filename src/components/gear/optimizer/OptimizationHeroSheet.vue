@@ -23,13 +23,13 @@
             <v-avatar class="mr-2" left size="32">
               <v-img :src="data.item.icon"></v-img>
             </v-avatar>
-            {{ data.item.name }}
+            {{ data.item.name }} {{ data.item.tier ? `(${data.item.tier})` : '' }}
           </template>
           <template v-slot:selection="data">
             <v-avatar class="mr-2" left size="32">
               <v-img :src="data.item.icon"></v-img>
             </v-avatar>
-            {{ data.item.name }}
+            {{ data.item.name }} {{ data.item.tier ? `(${data.item.tier})` : '' }}
           </template>
         </v-autocomplete>
       </v-col>

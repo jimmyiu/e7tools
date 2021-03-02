@@ -33,15 +33,23 @@ class E7dbDataHandler {
       hp: detail.calculatedStatus.lv60SixStarFullyAwakened.hp,
       def: detail.calculatedStatus.lv60SixStarFullyAwakened.def,
       atk: detail.calculatedStatus.lv60SixStarFullyAwakened.atk,
-      // cri: detail.calculatedStatus.lv60SixStarFullyAwakened.chc,
-      // cdmg: detail.calculatedStatus.lv60SixStarFullyAwakened.chd,
       cri: Math.trunc(detail.calculatedStatus.lv60SixStarFullyAwakened.chc * 100),
       cdmg: Math.trunc(detail.calculatedStatus.lv60SixStarFullyAwakened.chd * 100),
       spd: detail.calculatedStatus.lv60SixStarFullyAwakened.spd,
-      // eff: detail.calculatedStatus.lv60SixStarFullyAwakened.eff,
-      // res: detail.calculatedStatus.lv60SixStarFullyAwakened.efr
       eff: Math.trunc(detail.calculatedStatus.lv60SixStarFullyAwakened.eff * 100),
-      res: Math.trunc(detail.calculatedStatus.lv60SixStarFullyAwakened.efr * 100)
+      res: Math.trunc(detail.calculatedStatus.lv60SixStarFullyAwakened.efr * 100),
+      tier: 0,
+      bonusAbility: {},
+      abilityRating: {
+        hp: 1,
+        def: 1,
+        atk: 1,
+        cri: 1,
+        cdmg: 1,
+        spd: 1,
+        eff: 1,
+        res: 1
+      }
     };
   }
 }

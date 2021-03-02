@@ -89,6 +89,16 @@ export default new Vuex.Store({
         persistenceService.save(profile);
       }
     },
+    saveHero: (state, hero: Hero) => {
+      console.log('saveHero::hero = ', hero);
+      const index = state.data.heros.findIndex(x => x.id == hero.id);
+      if (index < 0) {
+        throw new Error('Not able to insert new hero now');
+      } else {
+        state.data.heros.splice(index, 1, hero);
+      }
+      persistenceService.save(hero);
+    },
     replaceHeros: (state, heros: Hero[]) => {
       state.data.heros = heros;
       persistenceService.replaceAll(heros);
@@ -118,6 +128,11 @@ export default new Vuex.Store({
     updateProfiles: ({ commit }, profiles: OptimizationProfile[]) => {
       if (profiles && profiles.length > 0) {
         profiles.forEach(profile => commit('saveProfile', profile));
+      }
+    },
+    saveHeros: ({ commit }, heros: Hero[]) => {
+      if (heros && heros.length > 0) {
+        heros.forEach(hero => commit('saveHero', hero));
       }
     },
     updateState: ({ commit }, siteState: Partial<SiteState>) => {
