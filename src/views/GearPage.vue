@@ -163,7 +163,10 @@ export default class GearPage extends Vue {
 
   goToTop() {
     console.log('called');
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    // this.$vuetify.goTo(0, { container: '#app' });
+    // this.$vuetify.goTo('#app', { offset: -100 });
+    (document.getElementById('app') as any).scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }
 }
 </script>

@@ -9,7 +9,6 @@
         Math.ceil(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber
       }}</strong>
       minutes
-      {{ form.hero }}
       <!-- <v-icon>help_outlined</v-icon> -->
       <!-- <i>
           Remark:<br />
