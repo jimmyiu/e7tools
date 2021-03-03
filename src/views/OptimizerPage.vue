@@ -64,8 +64,8 @@
       </v-card-text>
       <v-divider />
       <v-card-actions>
-        <v-btn text @click="unequipAll">Unequip All</v-btn>
         <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip All</v-btn>
+        <v-btn text @click="unequipAll">Unequip All</v-btn>
       </v-card-actions>
     </v-card>
 
