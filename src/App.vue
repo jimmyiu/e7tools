@@ -1,17 +1,17 @@
 <template>
   <v-app>
     <v-main>
-      <!-- <top-nav @toggle-setting="setting = !setting" /> -->
+      <top-nav @toggle-setting="setting = !setting" />
       <v-container>
         <!-- <v-alert class="hidden-sm-and-up" dense dismissible outlined type="error">
           This tool is intended to design for desktop users.
         </v-alert> -->
         <router-view />
       </v-container>
-      <!-- <site-setting v-model="setting" />
+      <site-setting v-model="setting" />
       <v-overlay v-if="loading" :value="loading">
         <v-progress-circular indeterminate />
-      </v-overlay> -->
+      </v-overlay>
     </v-main>
   </v-app>
 </template>
