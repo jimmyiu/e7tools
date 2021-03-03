@@ -2,8 +2,12 @@
   <div class="about">
     <message-box title="Current Status">
       <ul>
-        <li>Gear Management & Gear Optimizer features are working now</li>
+        <li>
+          This site is lack of documentations at this moment. You can try Setting > Import to play around with the
+          sample data
+        </li>
         <li>You can use Others > Tier to configure hero bonus stat and <strong>tier</strong></li>
+        <li>Gear Management & Gear Optimizer features are working</li>
         <li>Next target: UI enhancement</li>
       </ul>
       <br />2021-03-03
