@@ -31,18 +31,21 @@
       <v-card-text class="pa-2">
         <v-row dense>
           <v-col cols="12" sm="auto">
+            Last
             <hero-detail-card
               v-if="lastEquipped && form.hero"
               class="mb-2"
               :hero="form.hero"
               :suit="lastEquipped.suit"
             />
+            Current
             <hero-detail-card
               v-if="currentEquipped && form.hero"
               class="mb-2"
               :hero="form.hero"
               :suit="currentEquipped.suit"
             />
+            Selected
             <hero-detail-card v-if="selectionEquipped" :hero="form.hero" :suit="selectionEquipped.suit" />
           </v-col>
           <v-col>
