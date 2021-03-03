@@ -32,6 +32,12 @@
         <v-row dense>
           <v-col cols="12" sm="auto">
             <hero-detail-card
+              v-if="lastEquipped && form.hero"
+              class="mb-2"
+              :hero="form.hero"
+              :suit="lastEquipped.suit"
+            />
+            <hero-detail-card
               v-if="currentEquipped && form.hero"
               class="mb-2"
               :hero="form.hero"
@@ -48,17 +54,6 @@
             <gear-detail-card :gear="item" :ref-hero-id="form.profile.hero.id" />
           </v-col> -->
             </v-row>
-            <div class="d-flex flex-wrap">
-              <!-- <gear-detail-card :gear="selectedSuit.weapon" :ref-hero-id="form.profile.hero.id" /> -->
-
-              <!-- <gear-card :gear="selectedSuit.weapon" :ref-hero-id="form.profile.hero.id" />
-          <gear-card :gear="selectedSuit.helmet" :ref-hero-id="form.profile.hero.id" />
-          <gear-detail-card :gear="selectedSuit.helmet" :ref-hero-id="form.profile.hero.id" />
-          <gear-detail-card :gear="selectedSuit.armor" :ref-hero-id="form.profile.hero.id" />
-          <gear-detail-card :gear="selectedSuit.necklace" :ref-hero-id="form.profile.hero.id" />
-          <gear-detail-card :gear="selectedSuit.ring" :ref-hero-id="form.profile.hero.id" />
-          <gear-detail-card :gear="selectedSuit.boot" :ref-hero-id="form.profile.hero.id" /> -->
-            </div>
           </v-col>
         </v-row>
       </v-card-text>
@@ -103,7 +98,7 @@
 <script lang="ts">
 import TitleSheet from '@/components/common/TitleSheet.vue';
 import { GearCard, GearDetailCard, GearSetIcon, HeroDetailCard, OptimizationProfiler } from '@/components';
-import { Gear, EquippedHero, OptimizationProfile, Hero, Suit, SiteState } from '@/models';
+import { Gear, EquippedHero, Hero, Suit } from '@/models';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
 import { SuitBuilder, HeroService, gearFilterService, ConstantService } from '@/services';
@@ -114,7 +109,7 @@ import { GearOptimizerProgress } from '@/services/gear-optimizer';
   name: 'optimizer-page',
   components: { GearCard, GearDetailCard, GearSetIcon, HeroDetailCard, OptimizationProfiler, TitleSheet },
   computed: {
-    ...mapGetters(['heros', 'gears', 'getEquippedHero', 'getHero', 'getGear'])
+    ...mapGetters(['heros', 'gears', 'getEquippedHero', 'getHero', 'getGear', 'getLastEquippedSuit'])
   },
   methods: mapActions(['saveGears', 'updateState'])
 })
@@ -125,6 +120,7 @@ export default class OptimizerPage extends Vue {
   getEquippedHero!: (heroId: string) => EquippedHero | undefined;
   getGear!: (gearId: string) => Gear.Gear;
   getHero!: (heroId: string) => Hero;
+  getLastEquippedSuit!: (heroId: string) => Suit | undefined;
   saveGears!: (gear: Gear.Gear[]) => void;
 
   // worker
@@ -177,6 +173,14 @@ export default class OptimizerPage extends Vue {
 
   get currentEquipped(): EquippedHero | undefined {
     return this.getEquippedHero(this.form.hero.id);
+  }
+
+  get lastEquipped() {
+    const lastEquipped = this.getLastEquippedSuit(this.form.hero.id);
+    if (lastEquipped) {
+      return HeroService.equip(this.form.hero, lastEquipped);
+    }
+    return undefined;
   }
 
   get selectionEquipped(): EquippedHero | undefined {

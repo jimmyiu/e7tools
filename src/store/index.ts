@@ -4,7 +4,6 @@ import { VuexData, Gear, Hero, OptimizationProfile, SiteState, HeroAbility } fro
 import E7dbDataHandler from '@/services/e7db-data-handler';
 import { persistenceService } from '@/services/presistence';
 import { ConstantService, HeroService, ObjectUtils, SuitBuilder } from '@/services';
-import { GearAbility } from '@/models/common';
 
 Vue.use(Vuex);
 
@@ -16,6 +15,7 @@ export default new Vuex.Store({
       // TODO: should NOT use vuex to store profile
       profiles: [],
       heros: [],
+      suits: [],
       state: {
         lastSelectedHeroId: ''
       }
@@ -40,15 +40,6 @@ export default new Vuex.Store({
     getHero: state => (heroId: string) => {
       return state.data.heros.find(x => x.id == heroId);
     },
-    // getSuit: (state, getters) => (heroId: string) => {
-    //   const builder = new SuitBuilder();
-    //   const hero: Hero = getters.getHero(heroId);
-    //   if (hero && hero.bonusAbility) {
-    //     builder.bonus(hero.bonusAbility);
-    //   }
-    //   state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
-    //   return builder.build();
-    // },
     getEquippedHero: (state, getters) => (heroId: string) => {
       const hero: Hero = getters.getHero(heroId);
       if (hero) {
@@ -60,6 +51,35 @@ export default new Vuex.Store({
         return HeroService.equip(hero, builder.build());
       }
       return undefined;
+    },
+    getLastEquippedSuit: (state, getters) => (heroId: string) => {
+      const heroSuit = state.data.suits.find(x => x.heroSuitId == heroId);
+      const hero: Hero = getters.getHero(heroId);
+      const builder = new SuitBuilder();
+      if (hero) {
+        builder.bonus(hero.bonusAbility);
+      }
+      if (heroSuit) {
+        [
+          heroSuit.weaponId,
+          heroSuit.armorId,
+          heroSuit.helmetId,
+          heroSuit.necklaceId,
+          heroSuit.ringId,
+          heroSuit.bootId
+        ].forEach(x => {
+          if (x) {
+            const gear = getters.getGear(x);
+            if (gear) {
+              builder.setGear(gear);
+            }
+          }
+        });
+      }
+      // state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
+      // return HeroService.equip(hero, builder.build());
+      // }
+      return builder.build();
     }
   },
   mutations: {

@@ -1,5 +1,15 @@
 import { Gear } from '.';
 
+export type HeroSuit = {
+  heroSuitId: string;
+  weaponId?: string;
+  armorId?: string;
+  helmetId?: string;
+  necklaceId?: string;
+  ringId?: string;
+  bootId?: string;
+};
+
 export type SuitAbility = {
   hpp: number;
   hp: number;
