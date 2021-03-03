@@ -1,4 +1,4 @@
-import { Gear, HeroAbility, Range } from '.';
+import { Gear, Hero, HeroAbility, Range } from '.';
 import { GearAbility } from './common';
 
 export type OptimizationEvaluationCriteria = {
@@ -23,7 +23,6 @@ export type OptimizationStatCriteria = {
 
 export type OptimizationHero = {
   id: string;
-  bonusAbility: GearAbility;
 };
 
 /**
@@ -32,7 +31,7 @@ export type OptimizationHero = {
 export type OptimizationProfile = {
   id: string;
   hero: OptimizationHero;
-  filter: Gear.GearFilter;
+  filter: OptimizationFilter;
   stat: OptimizationStatCriteria;
   evaluation: OptimizationEvaluationCriteria;
   // criteria: OptimizerCriteria;
@@ -53,52 +52,28 @@ export type OptimizationResult = HeroAbility & {
   bootId?: string;
 };
 
-export const EMPTY_PROFILE: OptimizationProfile = {
-  id: '',
-  hero: {
-    id: '',
-    bonusAbility: {}
-  },
-  filter: {
-    sets: [],
-    necklaces: [],
-    rings: [],
-    boots: [],
-    enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
-    equipped: false,
-    locked: false,
-    score: 0,
-    rating: {
-      point: {
-        hp: 1,
-        def: 1,
-        atk: 1,
-        cri: 1,
-        cdmg: 1,
-        spd: 1,
-        eff: 1,
-        res: 1
-      },
-      threshold: 100,
-      minSize: 20
-    }
-  },
-  stat: {
-    hp: {},
-    def: {},
-    atk: {}, // { min: 3500 },
-    cri: { max: 110 }, // min: 96,
-    cdmg: { max: 360 }, // min: 270,
-    spd: {}, // min: 218
-    eff: {},
-    res: {},
-    ehp: {},
-    damage: {}
-  },
-  evaluation: {
-    forcedSets: [],
-    brokenSet: false,
-    limit: 10000000,
-    lv85: false
-  }
+export enum OptimizationFilterEquippedMode {
+  ALL = 0,
+  SAME_TIER = 1,
+  LOWER_TIER = 2,
+  NONE = 3
+}
+
+export type OptimizationFilter = {
+  sets: Gear.Set[];
+  necklaces: Gear.Stat[];
+  rings: Gear.Stat[];
+  boots: Gear.Stat[];
+  maxSize: number;
+  enhanceMode: Gear.EnhanceModeFilter;
+  equippedMode: OptimizationFilterEquippedMode;
+};
+
+// export type OptimizationHeroForm = HeroAbility & {
+//   id: string;
+// };
+
+export type OptimizationForm = {
+  profile: OptimizationProfile;
+  hero: Hero;
 };

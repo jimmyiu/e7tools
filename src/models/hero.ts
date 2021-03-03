@@ -15,7 +15,8 @@ export type Hero = HeroAbility & {
 };
 
 export type EquippedHero = HeroAbility & {
-  combination: Gear.GearCombination;
+  // combination: Gear.GearCombination;
+  hero: Readonly<Hero>;
   suit: Suit;
   damage: number;
   ehp: number;

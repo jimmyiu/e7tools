@@ -4,6 +4,9 @@ type Constants = {
   GearStat: {
     PRIMITIVE: Readonly<Gear.Stat[]>;
   };
+  GearSet: {
+    ALL: Readonly<Gear.Set[]>;
+  };
   HERO_STATS: Readonly<Gear.Stat[]>;
 };
 
@@ -22,6 +25,9 @@ export const Constants: Constants = {
       Gear.Stat.EFF,
       Gear.Stat.RES
     ])
+  },
+  GearSet: {
+    ALL: Object.freeze([...Object.values(Gear.Set)])
   },
   HERO_STATS: Object.freeze([
     Gear.Stat.HP,

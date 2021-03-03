@@ -31,7 +31,6 @@ import {
   GearFilterInputSheet,
   GearCard,
   GearStatisticsSheet,
-  GearDetailCard,
   GearListViewDisplayConfigSheet,
   GearListView
 } from '@/components';
@@ -46,7 +45,6 @@ import { SortingOrder } from '@/models/common';
     GearTable,
     GearFilterInputSheet,
     GearCard,
-    GearDetailCard,
     GearStatisticsSheet,
     GearListView,
     GearListViewDisplayConfigSheet

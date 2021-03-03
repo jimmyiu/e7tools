@@ -243,21 +243,16 @@ export namespace Gear {
   //   enhanceMode: EnhanceModeFilter;
   // };
 
-  export type GearFilter = {
-    sets: Set[];
-    enhanceMode: EnhanceModeFilter;
-    necklaces: Stat[];
-    rings: Stat[];
-    boots: Stat[];
-    locked: boolean;
-    equipped: boolean;
-    score: number;
-    rating: {
-      point: HeroAbility;
-      threshold: number;
-      minSize: number;
-    };
-  };
+  // export type GearFilter = {
+  //   sets: Set[];
+  //   enhanceMode: EnhanceModeFilter;
+  //   necklaces: Stat[];
+  //   rings: Stat[];
+  //   boots: Stat[];
+  //   locked: boolean;
+  //   equipped: boolean;
+  //   maxSize: number;
+  // };
 
   // score: number = 0;
   //   offScore: number = 0;

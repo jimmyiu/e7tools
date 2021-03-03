@@ -1,5 +1,6 @@
 import { Hero } from '@/models';
 import axios from 'axios';
+import { ConstantService } from '.';
 
 class E7dbDataHandler {
   async retrieveHeros(): Promise<Array<Hero>> {
@@ -39,7 +40,7 @@ class E7dbDataHandler {
       eff: Math.trunc(detail.calculatedStatus.lv60SixStarFullyAwakened.eff * 100),
       res: Math.trunc(detail.calculatedStatus.lv60SixStarFullyAwakened.efr * 100),
       tier: 0,
-      bonusAbility: {},
+      bonusAbility: ConstantService.emptyGearAbility(),
       abilityRating: {
         hp: 1,
         def: 1,

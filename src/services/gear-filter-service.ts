@@ -1,15 +1,12 @@
-import { Gear, HeroAbility } from '@/models';
-import { noop } from 'vue-class-component/lib/util';
+import { Gear, Hero } from '@/models';
+import { OptimizationFilter, OptimizationFilterEquippedMode } from '@/models/optimizer';
+import { HeroService } from '.';
 
 type Filter = (it: Gear.Gear) => boolean;
 const noopFilter: Filter = (it: Gear.Gear) => true;
 
 // TODO: refactor hero id
-export function filter(
-  gears: Gear.Gear[],
-  filter: Gear.GearFilter,
-  params: { heroId: string; heroAbility: HeroAbility }
-) {
+function filter(gears: Gear.Gear[], filter: OptimizationFilter, params: { hero: Hero; heros: Hero[] }) {
   type Filter = (it: Gear.Gear) => boolean;
   // console.log('filter::filter =', filter);
 
@@ -40,52 +37,51 @@ export function filter(
     const bootValues = filter.boots.map(x => x.value);
     boot = (it: Gear.Gear) => it.type! != Gear.Type.Boot || bootValues.indexOf(it.main!.value) >= 0;
   }
-  let locked = noopFilter;
-  if (!filter.locked) {
-    locked = (it: Gear.Gear) => !it.locked;
-  }
   let equiped = noopFilter;
-  if (!filter.equipped) {
-    if (params.heroId) {
-      equiped = (it: Gear.Gear) => it.equippedHero == '' || it.equippedHero == params.heroId;
-    } else {
-      equiped = (it: Gear.Gear) => it.equippedHero == '';
+  if (filter.equippedMode) {
+    const getGearTier = (gear: Gear.Gear) => {
+      if (gear.equippedHero) {
+        const hero = params.heros.find(x => x.id == gear.equippedHero);
+        return hero ? hero.tier : 0;
+      }
+      return 0;
+    };
+    if (filter.equippedMode == OptimizationFilterEquippedMode.NONE) {
+      equiped = (it: Gear.Gear) => it.equippedHero == '' || it.equippedHero == params.hero.id;
+    } else if (filter.equippedMode == OptimizationFilterEquippedMode.LOWER_TIER) {
+      equiped = (it: Gear.Gear) => {
+        const tier = getGearTier(it);
+        return it.equippedHero == '' || it.equippedHero == params.hero.id || tier == 0 || tier > params.hero.tier;
+      };
+    } else if (filter.equippedMode == OptimizationFilterEquippedMode.SAME_TIER) {
+      equiped = (it: Gear.Gear) => {
+        const tier = getGearTier(it);
+        return it.equippedHero == '' || it.equippedHero == params.hero.id || tier == 0 || tier >= params.hero.tier;
+      };
     }
   }
-  let score = noopFilter;
-  if (filter.score > 0) {
-    score = (it: Gear.Gear) => it.score >= filter.score;
-  }
   return gears.filter(it => {
-    return locked(it) && equiped(it) && set(it) && enhance(it) && necklace(it) && ring(it) && boot(it) && score(it);
+    return equiped(it) && set(it) && enhance(it) && necklace(it) && ring(it) && boot(it);
   });
 }
 
 export function createGearStore(
   gears: Gear.Gear[],
-  filterCondition: Gear.GearFilter,
-  params: { heroId: string; heroAbility: HeroAbility }
+  filterCondition: OptimizationFilter,
+  params: { hero: Hero; heros: Hero[] }
 ) {
   const store = new Gear.GearStore(filter(gears, filterCondition, params));
-  if (filterCondition.rating.threshold < 100 && params.heroId) {
-    console.log(`createGearStore::threshold = ${filterCondition.rating.threshold}`);
+  if (filterCondition.maxSize > 0 && params.hero) {
+    console.log(`createGearStore::maxSize = ${filterCondition.maxSize}, heroId = ${params.hero.id}`);
     [Gear.Type.Weapon, Gear.Type.Helmet, Gear.Type.Armor, Gear.Type.Necklace, Gear.Type.Ring, Gear.Type.Boot].forEach(
       type => {
         const foo = store.getGearsByType(type);
-        let removeCount = Math.trunc(foo.length * (1 - filterCondition.rating.threshold / 100));
-        if (foo.length - removeCount < filterCondition.rating.minSize) {
-          removeCount = foo.length - filterCondition.rating.minSize;
-        }
+        let removeCount = foo.length <= filterCondition.maxSize ? 0 : foo.length - filterCondition.maxSize;
         console.log(
           `createGearStore::type = ${type}, original length = ${foo.length} will be removed ${removeCount} items`
         );
         if (removeCount > 0) {
-          foo.sort((a, b) =>
-            calculateRating(a, filterCondition.rating.point, params.heroAbility) >
-              calculateRating(b, filterCondition.rating.point, params.heroAbility)
-              ? -1
-              : 1
-          );
+          foo.sort((a, b) => (calculateRating(a, params.hero!) > calculateRating(b, params.hero!) ? -1 : 1));
           foo.splice(foo.length - removeCount, removeCount);
         }
         console.log(`createGearStore::new size = ${foo.length}`);
@@ -95,15 +91,15 @@ export function createGearStore(
   return store;
 }
 
-function calculateRating(gear: Gear.Gear, points: HeroAbility, ability: HeroAbility) {
+function calculateRating(gear: Gear.Gear, hero: Hero) {
   let result = 0;
-  result += points.hp * (gear.hpp ?? 0) + (gear.hp ?? 0) / ability.hp;
-  result += points.def * (gear.defp ?? 0) + (gear.def ?? 0) / ability.def;
-  result += points.atk * (gear.atkp ?? 0) + (gear.atk ?? 0) / ability.atk;
-  result += points.cri * (gear.cri ?? 0) * 1.6;
-  result += (points.cdmg * (gear.cdmg ?? 0) * 8) / 7;
-  result += points.spd * (gear.spd ?? 0) * 2;
-  result += points.eff * (gear.eff ?? 0);
-  result += points.res * (gear.res ?? 0);
+  result += hero.abilityRating.hp * (gear.hpp ?? 0) + (gear.hp ?? 0) / hero.hp;
+  result += hero.abilityRating.def * (gear.defp ?? 0) + (gear.def ?? 0) / hero.def;
+  result += hero.abilityRating.atk * (gear.atkp ?? 0) + (gear.atk ?? 0) / hero.atk;
+  result += hero.abilityRating.cri * (gear.cri ?? 0) * 1.6;
+  result += (hero.abilityRating.cdmg * (gear.cdmg ?? 0) * 8) / 7;
+  result += hero.abilityRating.spd * (gear.spd ?? 0) * 2;
+  result += hero.abilityRating.eff * (gear.eff ?? 0);
+  result += hero.abilityRating.res * (gear.res ?? 0);
   return Math.round(result * 10) / 10;
 }

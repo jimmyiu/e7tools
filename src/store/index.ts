@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import { VuexData, Gear, Hero, OptimizationProfile, SiteState, HeroAbility } from '@/models';
 import E7dbDataHandler from '@/services/e7db-data-handler';
 import { persistenceService } from '@/services/presistence';
-import { SuitBuilder } from '@/services';
+import { HeroService, SuitBuilder } from '@/services';
 import { GearAbility } from '@/models/common';
 
 Vue.use(Vuex);
@@ -40,13 +40,26 @@ export default new Vuex.Store({
     getHero: state => (heroId: string) => {
       return state.data.heros.find(x => x.id == heroId);
     },
-    getSuit: state => (heroId: string, bonusAbility?: GearAbility) => {
-      const builder = new SuitBuilder();
-      if (bonusAbility) {
-        builder.bonus(bonusAbility);
+    // getSuit: (state, getters) => (heroId: string) => {
+    //   const builder = new SuitBuilder();
+    //   const hero: Hero = getters.getHero(heroId);
+    //   if (hero && hero.bonusAbility) {
+    //     builder.bonus(hero.bonusAbility);
+    //   }
+    //   state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
+    //   return builder.build();
+    // },
+    getEquippedHero: (state, getters) => (heroId: string) => {
+      const hero: Hero = getters.getHero(heroId);
+      if (hero) {
+        const builder = new SuitBuilder();
+        if (hero && hero.bonusAbility) {
+          builder.bonus(hero.bonusAbility);
+        }
+        state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
+        return HeroService.equip(hero, builder.build());
       }
-      state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
-      return builder.build();
+      return undefined;
     }
   },
   mutations: {

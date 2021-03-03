@@ -49,22 +49,16 @@ export namespace V_0_5_0 {
   export type OptimizationProfileEntity = BaseEntity & {
     hero: {
       id: string;
-      bonusAbility: GearAbility;
     };
     filter: {
       sets: string[];
-      enhanceMode: number;
       necklaces: string[];
       rings: string[];
       boots: string[];
-      locked: boolean;
-      equipped: boolean;
-      score: number;
-      rating: {
-        point: HeroAbility;
-        threshold: number;
-        minSize: number;
-      };
+      maxSize: number;
+      // flag
+      enhanceMode: number;
+      equippedMode: number;
     };
     stat: {
       hp: Range;

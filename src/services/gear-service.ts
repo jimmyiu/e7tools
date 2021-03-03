@@ -1,4 +1,4 @@
-import { HeroAbility } from '@/models';
+import { EquippedHero, Hero, HeroAbility } from '@/models';
 import { Gear } from '@/models/gear';
 import Stat = Gear.Stat;
 const STAT_AVERAGE: HeroAbility = {
@@ -92,17 +92,18 @@ function calculateOffScore(hero: HeroAbility, gear: Gear.Gear) {
   return Math.round(score * 10) / 10;
 }
 
-export function calculateSuitRating(equippedHero: HeroAbility, hero: HeroAbility, rating: HeroAbility) {
+export function calculateSuitRating(equippedHero: EquippedHero) {
   let score = 0;
-  if (rating && equippedHero && hero) {
-    score += (equippedHero.hp / hero.hp - 1) * 100 * rating.hp;
-    score += (equippedHero.def / hero.def - 1) * 100 * rating.def;
-    score += (equippedHero.atk / hero.atk - 1) * 100 * rating.atk;
-    score += (Math.min(equippedHero.cri, 100) - hero.cri) * 1.6 * rating.cri;
-    score += (Math.min(equippedHero.cdmg, 350) - hero.cdmg) * (8 / 7) * rating.cdmg;
-    score += (equippedHero.spd - hero.spd) * 2 * rating.spd;
-    score += (equippedHero.eff - hero.eff) * rating.eff;
-    score += (equippedHero.res - hero.res) * rating.res;
+  if (equippedHero) {
+    score += (equippedHero.hp / equippedHero.hp - 1) * 100 * equippedHero.hero.abilityRating.hp;
+    score += (equippedHero.def / equippedHero.hero.def - 1) * 100 * equippedHero.hero.abilityRating.def;
+    score += (equippedHero.atk / equippedHero.hero.atk - 1) * 100 * equippedHero.hero.abilityRating.atk;
+    score += (Math.min(equippedHero.cri, 100) - equippedHero.hero.cri) * 1.6 * equippedHero.hero.abilityRating.cri;
+    score +=
+      (Math.min(equippedHero.cdmg, 350) - equippedHero.hero.cdmg) * (8 / 7) * equippedHero.hero.abilityRating.cdmg;
+    score += (equippedHero.spd - equippedHero.hero.spd) * 2 * equippedHero.hero.abilityRating.spd;
+    score += (equippedHero.eff - equippedHero.hero.eff) * equippedHero.hero.abilityRating.eff;
+    score += (equippedHero.res - equippedHero.hero.res) * equippedHero.hero.abilityRating.res;
   }
   return Math.round(10 * score) / 10;
 }
