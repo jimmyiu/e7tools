@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <top-nav @toggle-setting="setting = !setting" />
+    <!-- <top-nav @toggle-setting="setting = !setting" /> -->
     <v-main>
       <v-container>
         <!-- <v-alert class="hidden-sm-and-up" dense dismissible outlined type="error">
