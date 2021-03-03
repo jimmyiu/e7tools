@@ -23,11 +23,11 @@ function getRightMain(stat: Gear.Stat, level: number, enhance: number) {
     } else if (stat.value == Gear.Stat.SPD.value) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40][enhance - 1];
     } else if (stat.value == Gear.Stat.HP.value) {
-      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1944, 0, 0, 2700][enhance - 1];
+      return [0, 0, 0, 0, 0, 0, 0, 0, 1512, 0, 0, 1944, 0, 0, 2700][enhance - 1];
     } else if (stat.value == Gear.Stat.DEF.value) {
-      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 300][enhance - 1];
+      return [0, 0, 0, 0, 0, 0, 0, 0, 168, 0, 0, 0, 0, 0, 300][enhance - 1];
     }
-    return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 0, 0, 60][enhance - 1];
+    return [0, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 43, 0, 0, 60][enhance - 1];
   } else if (level == 90) {
     if (stat.value == Gear.Stat.CDMG.value) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70][enhance - 1];

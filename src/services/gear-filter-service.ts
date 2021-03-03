@@ -51,12 +51,22 @@ function filter(gears: Gear.Gear[], filter: OptimizationFilter, params: { hero: 
     } else if (filter.equippedMode == OptimizationFilterEquippedMode.LOWER_TIER) {
       equiped = (it: Gear.Gear) => {
         const tier = getGearTier(it);
-        return it.equippedHero == '' || it.equippedHero == params.hero.id || tier == 0 || tier > params.hero.tier;
+        return (
+          it.equippedHero == '' ||
+          it.equippedHero == params.hero.id ||
+          tier == 0 ||
+          (params.hero.tier > 0 && tier > params.hero.tier)
+        );
       };
     } else if (filter.equippedMode == OptimizationFilterEquippedMode.SAME_TIER) {
       equiped = (it: Gear.Gear) => {
         const tier = getGearTier(it);
-        return it.equippedHero == '' || it.equippedHero == params.hero.id || tier == 0 || tier >= params.hero.tier;
+        return (
+          it.equippedHero == '' ||
+          it.equippedHero == params.hero.id ||
+          tier == 0 ||
+          (params.hero.tier > 0 && tier >= params.hero.tier)
+        );
       };
     }
   }
