@@ -7,7 +7,7 @@
       </v-col>
     </v-row>
     <v-row dense>
-      <v-col cols="12" sm="5">
+      <v-col cols="12">
         <v-autocomplete
           v-model="value.sets"
           class="mb-2"
@@ -15,7 +15,7 @@
           clearable
           dense
           hide-details
-          :items="sets"
+          :items="$const.GearSet.ALL"
           label="Only Include Sets"
           multiple
           outlined
@@ -83,84 +83,22 @@
             <span v-if="index === 1" class="grey--text caption"> (+{{ value.boots.length - 1 }} others) </span>
           </template>
         </v-select>
-        <v-text-field v-model="value.score" dense hide-details label="Gear Score (Min)" outlined />
-      </v-col>
-      <!-- <v-col cols="auto">
-        <v-divider vertical />
-      </v-col> -->
-      <!-- <v-col cols="auto">
-        <v-checkbox
-          v-model="value.enhanceMode"
-          class="mr-3 my-0"
+        <v-text-field v-model.number="value.maxSize" dense hide-details label="Max Size" outlined type="number" />
+        <!-- </v-col>
+      <v-col cols="4"> -->
+
+        <v-select
+          v-model.number="value.equippedMode"
+          class="mt-2"
           dense
           hide-details
-          label="+15 Only"
-          :value="2"
-        ></v-checkbox>
-        <v-checkbox v-model="value.locked" class="mr-3 my-0" dense hide-details label="Locked"></v-checkbox>
-        <v-checkbox v-model="value.equipped" class="mr-3 my-0" dense hide-details label="Equipped"></v-checkbox>
-      </v-col> -->
-      <v-col cols="7" sm="4">
-        <v-row v-for="(item, key) in ratingStats" :key="key" dense>
-          <v-col v-for="(i, k) in [0, 1]" :key="k">
-            <v-text-field
-              v-model.number="value.rating.point[item[i].value]"
-              class="rating"
-              dense
-              hide-details
-              max="3"
-              min="-1"
-              outlined
-              type="number"
-            >
-              <template v-slot:prepend-inner>
-                <v-img
-                  max-height="18"
-                  max-width="18"
-                  :src="require(`@/assets/img/stat/${item[i].value}.png`)"
-                  style="margin: 2px 4px 0 0"
-                />
-              </template>
-            </v-text-field>
-          </v-col>
-        </v-row>
-        <v-row dense>
-          <v-col>
-            <v-text-field
-              v-model.number="value.rating.threshold"
-              dense
-              hide-details
-              label="Threshold"
-              max="100"
-              min="1"
-              outlined
-              type="number"
-            />
-          </v-col>
-          <v-col>
-            <v-text-field
-              v-model.number="value.rating.minSize"
-              dense
-              hide-details
-              label="Minimum"
-              min="1"
-              outlined
-              type="number"
-            />
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-col cols="auto">
-        <v-checkbox
-          v-model="value.enhanceMode"
-          class="mr-3 my-0"
-          dense
-          hide-details
-          label="+15 Only"
-          :value="2"
-        ></v-checkbox>
-        <v-checkbox v-model="value.locked" class="mr-3 my-0" dense hide-details label="Locked"></v-checkbox>
-        <v-checkbox v-model="value.equipped" class="mr-3 my-0" dense hide-details label="Equipped"></v-checkbox>
+          item-text="label"
+          item-value="value"
+          :items="equippedModes"
+          label="Equipped"
+          outlined
+        />
+        <v-checkbox v-model="value.enhanceMode" class="mr-3 my-0" dense hide-details label="+15 Only" :value="2" />
       </v-col>
     </v-row>
   </v-sheet>
@@ -173,6 +111,7 @@
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
 import { Constants, Gear } from '@/models';
 import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from '../common';
+import { OptimizationFilter } from '@/models/optimizer';
 
 @Component({
   name: 'optimization-filter-sheet',
@@ -183,13 +122,25 @@ import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from '../com
     GearTypeSelect
   }
 })
-export default class OptimizationFilter extends Vue {
-  @Model() readonly value!: Gear.GearFilter;
-  readonly ratingStats = [
-    [Gear.Stat.HP, Gear.Stat.DEF],
-    [Gear.Stat.ATK, Gear.Stat.CRI],
-    [Gear.Stat.CDMG, Gear.Stat.SPD],
-    [Gear.Stat.EFF, Gear.Stat.RES]
+export default class OptimizationFilterSheet extends Vue {
+  @Model() readonly value!: OptimizationFilter;
+  readonly equippedModes = [
+    {
+      label: 'All',
+      value: 0
+    },
+    {
+      label: 'Same Or Lower Tiers',
+      value: 1
+    },
+    {
+      label: 'Lower Tiers',
+      value: 2
+    },
+    {
+      label: 'None',
+      value: 3
+    }
   ];
 
   get stats() {
@@ -198,10 +149,6 @@ export default class OptimizationFilter extends Vue {
       rings: Constants.RING_STATS,
       boots: Constants.BOOT_STATS
     };
-  }
-
-  get sets() {
-    return Object.values(Gear.Set);
   }
 }
 </script>

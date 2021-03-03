@@ -62,26 +62,19 @@ export class OptimizationPorfileMapper {
     return {
       id: profile.id,
       hero: {
-        id: profile.hero.id,
-        bonusAbility: Object.assign({}, profile.hero.bonusAbility)
+        id: profile.hero.id
       },
       filter: {
         sets: profile.filter.sets.map(x => x as Gear.Set),
-        enhanceMode: profile.filter.enhanceMode,
-        locked: profile.filter.locked,
-        equipped: profile.filter.equipped,
-        score: profile.filter.score,
         necklaces: profile.filter.necklaces.map(x => Gear.Stat.getInstance(x)),
         rings: profile.filter.rings.map(x => Gear.Stat.getInstance(x)),
         boots: profile.filter.boots.map(x => Gear.Stat.getInstance(x)),
-        rating: {
-          point: Object.assign({}, profile.filter.rating.point),
-          threshold: profile.filter.rating.threshold,
-          minSize: profile.filter.rating.minSize
-        }
+        maxSize: profile.filter.maxSize,
+        enhanceMode: profile.filter.enhanceMode,
+        equippedMode: profile.filter.equippedMode
       },
       stat: {
-        hp: { min: profile.stat.atk.min, max: profile.stat.atk.max },
+        hp: { min: profile.stat.hp.min, max: profile.stat.hp.max },
         def: { min: profile.stat.def.min, max: profile.stat.def.max },
         atk: { min: profile.stat.atk.min, max: profile.stat.atk.max },
         cri: { min: profile.stat.cri.min, max: profile.stat.cri.max },
@@ -105,26 +98,19 @@ export class OptimizationPorfileMapper {
     return {
       id: profile.id,
       hero: {
-        id: profile.hero.id,
-        bonusAbility: Object.assign({}, profile.hero.bonusAbility)
+        id: profile.hero.id
       },
       filter: {
         sets: profile.filter.sets,
-        enhanceMode: profile.filter.enhanceMode,
-        locked: profile.filter.locked,
-        equipped: profile.filter.equipped,
-        score: profile.filter.score,
         necklaces: profile.filter.necklaces.map(x => x.value),
         rings: profile.filter.rings.map(x => x.value),
         boots: profile.filter.boots.map(x => x.value),
-        rating: {
-          point: Object.assign({}, profile.filter.rating.point),
-          threshold: profile.filter.rating.threshold,
-          minSize: profile.filter.rating.minSize
-        }
+        maxSize: profile.filter.maxSize,
+        enhanceMode: profile.filter.enhanceMode,
+        equippedMode: profile.filter.equippedMode
       },
       stat: {
-        hp: { min: profile.stat.atk.min, max: profile.stat.atk.max },
+        hp: { min: profile.stat.hp.min, max: profile.stat.hp.max },
         def: { min: profile.stat.def.min, max: profile.stat.def.max },
         atk: { min: profile.stat.atk.min, max: profile.stat.atk.max },
         cri: { min: profile.stat.cri.min, max: profile.stat.cri.max },

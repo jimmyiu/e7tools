@@ -7,7 +7,7 @@
         </v-btn>
         <div class="ml-1 mr-3">{{ title }}</div>
         <v-divider />
-        <v-btn icon small @click="$emit('reset')"><v-icon size="21">mdi-delete-outline</v-icon></v-btn>
+        <v-btn v-if="reset" icon small @click="$emit('reset')"><v-icon size="21">mdi-delete-outline</v-icon></v-btn>
       </v-col>
     </v-row>
     <v-row v-if="visible" class="mt-0" no-gutters>
@@ -26,5 +26,6 @@ import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
 export default class TitleSheet extends Vue {
   visible: boolean = true;
   @Prop() readonly title!: string;
+  @Prop({ required: false, default: true }) readonly reset!: boolean;
 }
 </script>

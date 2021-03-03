@@ -3,9 +3,10 @@
     <message-box title="Current Status">
       <ul>
         <li>Gear Management & Gear Optimizer features are working now</li>
-        <li>Next target: Enhance gear page ui and statistics</li>
+        <li>You can use Others > Tier to configure hero bonus stat and <strong>tier</strong></li>
+        <li>Next target: UI enhancement</li>
       </ul>
-      <br />2021-02-28
+      <br />2021-03-03
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -24,6 +25,7 @@
       </ol>
     </message-box> -->
     <message-box hide-default title="Progress">
+      [2021-03-03] add tier support for hero and optimizer<br />
       [2021-03-02] enhance gear management page<br />
       [2021-02-28] enhance gear management page to support mobile<br />
       [2021-02-24] add rating for optimization<br />

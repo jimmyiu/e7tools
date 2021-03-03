@@ -16,13 +16,23 @@
           clearable
           dense
           hide-details
-          :items="sets"
+          :items="$const.GearSet.ALL"
           label="Force Sets"
           multiple
           outlined
           return-object
         />
-        <v-text-field v-model.number="value.limit" dense hide-details label="Evaluation Limit" outlined type="number" />
+        <!-- v-model.number="value.limit" -->
+        <v-text-field
+          dense
+          hide-details
+          label="Evaluation Limit"
+          outlined
+          suffix=",000,000"
+          type="number"
+          :value="limit"
+          @input="inputLimit"
+        />
         <v-checkbox
           v-model="value.brokenSet"
           class="mr-3 my-0"
@@ -51,8 +61,13 @@ import { Gear } from '@/models';
 })
 export default class OptimizationEvaluationCriteriaSheet extends Vue {
   @Model() readonly value!: OptimizationEvaluationCriteria;
-  get sets() {
-    return Object.values(Gear.Set);
+
+  get limit() {
+    return Math.trunc(this.value.limit / 1000000);
+  }
+
+  inputLimit(limit: any) {
+    this.value.limit = limit * 1000000;
   }
 }
 </script>

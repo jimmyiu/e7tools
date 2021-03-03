@@ -15,7 +15,7 @@ export function equip(hero: Hero, suit: Suit): EquippedHero {
     ehp: 0,
     dms: 0,
     suit: suit,
-    combination: {} as Gear.GearCombination
+    hero: hero
   };
   result.damage = Math.trunc((result.atk * Math.min(result.cdmg, 350)) / 1000);
   result.ehp = Math.trunc(result.hp * (1 + result.def / 300));

@@ -1,6 +1,6 @@
 import { Gear, HeroAbility, EquippedHero, OptimizationProfile, Hero } from '@/models';
 import { OptimizationResult } from '@/models/optimizer';
-import { gearService, heroService, SuitBuilder } from '.';
+import { gearService, HeroService, SuitBuilder } from '.';
 
 export interface GearOptimizer {
   store: Gear.GearStore;
@@ -185,7 +185,7 @@ export class DefaultGearOptimizer implements GearOptimizer {
         ehp: hero.ehp,
         damage: hero.damage,
         dms: hero.dms,
-        rating: gearService.calculateSuitRating(hero, this.hero, this.profile.filter.rating.point),
+        rating: gearService.calculateSuitRating(hero),
         sets: hero.suit.sets,
         weaponId: hero.suit.weapon ? hero.suit.weapon.id : undefined,
         helmetId: hero.suit.helmet ? hero.suit.helmet.id : undefined,
@@ -204,8 +204,8 @@ export class DefaultGearOptimizer implements GearOptimizer {
     this.reportProgress();
     //
     const builder = new SuitBuilder();
-    console.log('this.profile.hero.bonusAbility =', this.profile.hero.bonusAbility);
-    builder.bonus(this.profile.hero.bonusAbility);
+    console.log('this.profile.hero.bonusAbility =', this.hero.bonusAbility);
+    builder.bonus(this.hero.bonusAbility);
     const equippedHeroFilter = this.equippedHeroFilter();
     const evaluationFilter = this.evaluationFilter();
     const postEvaluationFilter = this.postEvaluationFilter();
@@ -236,7 +236,7 @@ export class DefaultGearOptimizer implements GearOptimizer {
                 if (++this.progress.proceeded && !evaluationFilter(builder)) {
                   continue;
                 }
-                const equippedHero = heroService.equip(this.hero, builder.build());
+                const equippedHero = HeroService.equip(this.hero, builder.build());
                 if (postEvaluationFilter(equippedHero) && equippedHeroFilter(equippedHero)) {
                   this.result.push(equippedHero);
                   if (this.result.length >= DefaultGearOptimizer.OPTIMIZE_RESULT_LIMIT) {

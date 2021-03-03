@@ -1568,6 +1568,22 @@
       "cdmg": 5,
       "locked": false,
       "equippedHero": ""
+    },
+    {
+      "id": "j58i2j9g43",
+      "type": "Necklace",
+      "set": "Critical",
+      "grade": "Epic",
+      "level": 90,
+      "enhance": 15,
+      "main": "hp",
+      "hp": 2835,
+      "def": 83,
+      "cri": 6,
+      "spd": 19,
+      "eff": 9,
+      "locked": false,
+      "equippedHero": ""
     }
   ],
   "profiles": [
