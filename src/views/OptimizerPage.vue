@@ -9,7 +9,7 @@
         Math.ceil(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber
       }}</strong>
       minutes
-      <!-- {{ form.profile }} -->
+      {{ form.hero }}
       <!-- <v-icon>help_outlined</v-icon> -->
       <!-- <i>
           Remark:<br />
@@ -28,64 +28,47 @@
       </strong>
     </v-progress-linear>
 
-    <v-row dense>
-      <v-col cols="12" sm="auto">
-        <hero-detail-card
-          v-if="currentEquipped && form.hero"
-          class="mb-2"
-          :hero="form.hero"
-          :suit="currentEquipped.suit"
-        />
-        <hero-detail-card v-if="selectionEquipped" :hero="form.hero" :suit="selectionEquipped.suit" />
-      </v-col>
-      <v-col>
+    <v-card>
+      <v-card-text class="pa-2">
         <v-row dense>
-          <v-col v-for="(item, key) in selectedSuitGears" :key="key" cols="12" sm="6">
-            <gear-card :gear="item" :ref-hero-id="form.profile.hero.id" />
+          <v-col cols="12" sm="auto">
+            <hero-detail-card
+              v-if="currentEquipped && form.hero"
+              class="mb-2"
+              :hero="form.hero"
+              :suit="currentEquipped.suit"
+            />
+            <hero-detail-card v-if="selectionEquipped" :hero="form.hero" :suit="selectionEquipped.suit" />
           </v-col>
-          <!-- <v-col v-for="(item, key) in selectedSuitGears" :key="key">
+          <v-col>
+            <v-row dense>
+              <v-col v-for="(item, key) in selectedSuitGears" :key="key" cols="12" sm="6">
+                <gear-card :gear="item" :ref-hero-id="form.profile.hero.id" />
+              </v-col>
+              <!-- <v-col v-for="(item, key) in selectedSuitGears" :key="key">
             <gear-detail-card :gear="item" :ref-hero-id="form.profile.hero.id" />
           </v-col> -->
-        </v-row>
-        <div class="d-flex flex-wrap">
-          <!-- <gear-detail-card :gear="selectedSuit.weapon" :ref-hero-id="form.profile.hero.id" /> -->
+            </v-row>
+            <div class="d-flex flex-wrap">
+              <!-- <gear-detail-card :gear="selectedSuit.weapon" :ref-hero-id="form.profile.hero.id" /> -->
 
-          <!-- <gear-card :gear="selectedSuit.weapon" :ref-hero-id="form.profile.hero.id" />
+              <!-- <gear-card :gear="selectedSuit.weapon" :ref-hero-id="form.profile.hero.id" />
           <gear-card :gear="selectedSuit.helmet" :ref-hero-id="form.profile.hero.id" />
           <gear-detail-card :gear="selectedSuit.helmet" :ref-hero-id="form.profile.hero.id" />
           <gear-detail-card :gear="selectedSuit.armor" :ref-hero-id="form.profile.hero.id" />
           <gear-detail-card :gear="selectedSuit.necklace" :ref-hero-id="form.profile.hero.id" />
           <gear-detail-card :gear="selectedSuit.ring" :ref-hero-id="form.profile.hero.id" />
           <gear-detail-card :gear="selectedSuit.boot" :ref-hero-id="form.profile.hero.id" /> -->
-        </div>
-      </v-col>
-    </v-row>
-
-    <!-- <v-row class="mt-2" dense>
-      <v-col cols="12" md="auto" sm="6">
-        <title-sheet :reset="false" title="Current">
-          
-          <div class="mt-1">
-            <v-btn text @click="unequipAll">Unequip All</v-btn>
-          </div>
-        </title-sheet>
-      </v-col>
-      <v-col xs="12">
-        <title-sheet :reset="false" title="Selected">
-          <v-row dense>
-            <v-col cols="auto">
-              
-            </v-col>
-            <v-col class="d-flex">
-              
-            </v-col>
-          </v-row>
-          <div class="mt-1" style="overflow: auto">
-            <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip All</v-btn>
-          </div>
-        </title-sheet>
-      </v-col>
-    </v-row> -->
+            </div>
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <v-divider />
+      <v-card-actions>
+        <v-btn text @click="unequipAll">Unequip All</v-btn>
+        <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip All</v-btn>
+      </v-card-actions>
+    </v-card>
 
     <v-card class="mt-2">
       <v-card-text>

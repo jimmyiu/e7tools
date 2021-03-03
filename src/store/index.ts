@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import { VuexData, Gear, Hero, OptimizationProfile, SiteState, HeroAbility } from '@/models';
 import E7dbDataHandler from '@/services/e7db-data-handler';
 import { persistenceService } from '@/services/presistence';
-import { HeroService, SuitBuilder } from '@/services';
+import { ConstantService, HeroService, ObjectUtils, SuitBuilder } from '@/services';
 import { GearAbility } from '@/models/common';
 
 Vue.use(Vuex);
@@ -99,7 +99,7 @@ export default new Vuex.Store({
         } else {
           state.data.profiles.splice(index, 1, shadow);
         }
-        persistenceService.save(profile);
+        persistenceService.save(shadow);
       }
     },
     saveHero: (state, hero: Hero) => {
@@ -108,9 +108,11 @@ export default new Vuex.Store({
       if (index < 0) {
         throw new Error('Not able to insert new hero now');
       } else {
-        state.data.heros.splice(index, 1, hero);
+        const shadow = ConstantService.emptyHero();
+        ObjectUtils.assignHero(shadow, hero);
+        state.data.heros.splice(index, 1, shadow);
+        persistenceService.save(shadow);
       }
-      persistenceService.save(hero);
     },
     replaceHeros: (state, heros: Hero[]) => {
       state.data.heros = heros;
