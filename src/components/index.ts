@@ -1,5 +1,6 @@
 import { GearSetIcon, GearTypeIcon, GearStatIcon } from './gear/common';
 import GearActionCard from './gear/GearActionCard.vue';
+import GearSortingCard from './gear/GearSortingCard.vue';
 import GearCard from './gear/GearCard.vue';
 import GearDetailCard from './gear/GearDetailCard.vue';
 import GearFilterInputSheet from './gear/GearFilterInputSheet.vue';
@@ -18,6 +19,7 @@ import SuitMgtCard from './suit/SuitMgtCard.vue';
 import TopNav from './common/TopNav.vue';
 export {
   GearActionCard,
+  GearSortingCard,
   GearCard,
   GearDetailCard,
   GearFilterInputSheet,

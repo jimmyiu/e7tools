@@ -1,5 +1,5 @@
 <template>
-  <title-sheet :class="{ 'card-size': $vuetify.breakpoint.smAndUp }" title="Filtering &amp; Sorting" @reset="reset">
+  <title-sheet :class="{ 'card-size': $vuetify.breakpoint.smAndUp }" title="Filtering" @reset="reset">
     <v-row class="mt-1" dense>
       <v-col class="text-center" cols="12">
         <gear-type-select v-model="form.type" :figures="typeFigures" />
@@ -36,6 +36,9 @@
       </v-col>
     </v-row>
     <v-row class="mt-1" no-gutters>
+      <v-col align-self="center" class="pr-2" cols="auto">
+        Stat Filter
+      </v-col>
       <v-col align-self="center">
         <v-divider class="" />
       </v-col>
@@ -43,42 +46,25 @@
         <v-btn icon small @click="resetStat"><v-icon size="21">mdi-delete-outline</v-icon></v-btn>
       </v-col>
     </v-row>
-    <v-row class="mt-1" no-gutters style="margin-left: -6px">
-      <template v-for="(stat, key) in stats">
-        <v-col :key="`${key}-1`" class="d-flex align-center mb-1" cols="4">
-          <v-btn icon @click="toggleSort(stat.value)"><gear-stat-icon :stat="stat"/></v-btn>
-          <v-text-field
-            v-model.number="form.minStat[stat.value]"
-            dense
-            hide-details
-            label="Min"
-            min="0"
-            outlined
-            type="number"
-          >
-            <template v-if="stat.percent" v-slot:append><div class="pt-1">%</div></template>
-          </v-text-field>
-        </v-col>
-      </template>
-      <v-col v-for="(item, key) in scores" :key="key" class="d-flex align-center mb-1" cols="4">
-        <v-btn icon @click="toggleSort(item.value)"
-          ><v-icon size="18">{{ item.icon }}</v-icon></v-btn
-        >
-        <v-text-field
-          v-model.number="form.minStat[item.value]"
-          dense
-          hide-details
-          label="Min"
-          min="0"
-          outlined
-          type="number"
-        />
+    <v-row class="mt-0" dense>
+      <v-col v-for="(item, key) in $const.GearStat.PRIMITIVE" :key="key" cols="3">
+        <gear-stat-input v-model.number="form.minStat[item.value]" :stat="item" />
       </v-col>
-      <v-col align-self="center" cols="4" style="padding-left: 2px">
-        <v-checkbox v-model="form.applyToMain" class="mt-0 pt-0 pl-1 caption" dense hide-details label="Apply Main" />
+      <v-col class="d-flex align-center" cols="3">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <span v-bind="attrs" v-on="on">
+              <v-checkbox v-model="form.applyToMain" class="mt-0 pt-0 pl-1 caption" dense hide-details label="Main" />
+            </span>
+          </template>
+          <span>Apply stat filter to main stat</span>
+        </v-tooltip>
+      </v-col>
+      <v-col v-for="(item, key) in $const.GearStat.SCORES" :key="`s${key}`" cols="3">
+        <gear-stat-input v-model.number="form.minStat[item.value]" :stat="item" />
       </v-col>
     </v-row>
-    <v-row dense>
+    <!-- <v-row dense>
       <v-col cols="10">
         <v-select
           v-model="form.sortingColumn"
@@ -94,7 +80,7 @@
           <v-icon>mdi-order-numeric-{{ isDescending ? 'descending' : 'ascending' }} </v-icon>
         </v-btn>
       </v-col>
-    </v-row>
+    </v-row> -->
     <!-- <v-row>
       <v-col color="section">
         {{ form }}
@@ -104,13 +90,13 @@
 </template>
 <style lang="sass" scoped>
 .card-size
-  max-width: 328px
-  min-width: 328px
+  max-width: 320px
+  min-width: 320px
 </style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
 import { Constants, FilterMode, Gear } from '@/models';
-import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect, GearStatIcon } from './common';
+import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect, GearStatIcon, GearStatInput } from './common';
 import TitleSheet from '../common/TitleSheet.vue';
 import { GearPageFilter, GearStatFilter, SortingColumn } from '@/models/gear-page';
 import { SortingOrder } from '@/models/common';
@@ -120,6 +106,7 @@ import { SortingOrder } from '@/models/common';
   components: {
     TitleSheet,
     GearStatIcon,
+    GearStatInput,
     GearSetIcon,
     GearSetSelect,
     GearTypeIcon,
@@ -127,10 +114,8 @@ import { SortingOrder } from '@/models/common';
   }
 })
 export default class GearFilterInputSheet extends Vue {
-  // types = Object.values(Gear.Type);
   @Model() readonly form!: GearPageFilter;
   @Prop() readonly gears!: Gear.Gear[];
-  readonly stats = Object.values(Gear.Stat);
   readonly sortingColumns: SortingColumn[] = [
     'level',
     'hpp',
@@ -147,20 +132,6 @@ export default class GearFilterInputSheet extends Vue {
     'score',
     'offScore',
     'defScore'
-  ];
-  readonly scores = [
-    {
-      value: 'score',
-      icon: 'mdi-alpha-s-box'
-    },
-    {
-      value: 'offScore',
-      icon: 'mdi-alpha-a-box'
-    },
-    {
-      value: 'defScore',
-      icon: 'mdi-alpha-d-box'
-    }
   ];
 
   get typeFigures(): Gear.TypeFigures {
@@ -220,16 +191,6 @@ export default class GearFilterInputSheet extends Vue {
     Object.keys(this.form.minStat).forEach(key => Vue.set(this.form.minStat, key, undefined));
     this.form.sortingColumn = 'level';
     this.form.sortingOrder = SortingOrder.DESCENDING;
-  }
-
-  toggleSort(column?: SortingColumn) {
-    if (this.form.sortingColumn == column || column == undefined) {
-      this.form.sortingOrder =
-        this.form.sortingOrder == SortingOrder.ASCENDING ? SortingOrder.DESCENDING : SortingOrder.ASCENDING;
-    } else {
-      this.form.sortingColumn = column;
-      this.form.sortingOrder = SortingOrder.DESCENDING;
-    }
   }
 }
 </script>

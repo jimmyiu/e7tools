@@ -1,12 +1,6 @@
 <template>
-  <v-card class="pa-1">
-    <!-- <div style="height: 96px">
-      <gear-card v-if="gearId" :gear="gear" />
-      <div v-else class="pa-2" style="border: 1px dashed grey; border-radius: 4px; height: 100%">
-        Click to select gear
-      </div>
-    </div> -->
-    <v-card-actions class="pa-0 mt-1 d-flex justify-space-between">
+  <v-card class="pa-1" elevation="0" outlined>
+    <v-card-actions class="pa-0 mt-0 d-flex justify-space-between">
       <div>
         <v-btn class="font-weight-bold" color="primary" text @click="createGear">Create</v-btn>
         <!-- <v-btn :disabled="!gear" text @click="clear">Clear</v-btn> -->

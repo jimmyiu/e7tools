@@ -6,11 +6,11 @@
           This site is lack of documentations at this moment. You can try Setting > Import to play around with the
           sample data
         </li>
-        <li>You can use Others > Hero to configure hero bonus stat and <strong>tier</strong></li>
+        <li>You can use Others > Hero to configure hero bonus stat and tier</li>
         <li>Gear Management & Gear Optimizer features are working</li>
         <li>Next target: UI enhancement</li>
       </ul>
-      <br />2021-03-03
+      <br />2021-03-05
     </message-box>
     <message-box hide-default title="Project Background">
       I am going to work on an <a href="https://page.onstove.com/epicseven/global" target="_blank">Epic Seven</a> online
@@ -29,6 +29,7 @@
       </ol>
     </message-box> -->
     <message-box hide-default title="Progress">
+      [2021-03-04] enhance gear page<br />
       [2021-03-03] add tier support for hero and optimizer<br />
       [2021-03-02] enhance gear management page<br />
       [2021-02-28] enhance gear management page to support mobile<br />

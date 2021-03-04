@@ -58,6 +58,14 @@ export namespace Gear {
     static readonly SPD = Object.freeze(new Stat('spd', 'SPD', false));
     static readonly EFF = Object.freeze(new Stat('eff', 'EFF', true));
     static readonly RES = Object.freeze(new Stat('res', 'RES', true));
+    //
+    static readonly SCORE = Object.freeze(new Stat('score', 'Score', false));
+    static readonly OFF_SCORE = Object.freeze(new Stat('offScore', 'Offensive Score', false));
+    static readonly DEF_SCORE = Object.freeze(new Stat('defScore', 'Defensive Score', false));
+    static readonly RATING = Object.freeze(new Stat('rating', 'Rating', false));
+    //
+    static readonly EHP = Object.freeze(new Stat('ehp', 'EHP', false));
+    static readonly DAMAGE = Object.freeze(new Stat('damage', 'Damage', false));
     static getInstance(value: string) {
       switch (value) {
         case Stat.HPP.value:
@@ -82,6 +90,18 @@ export namespace Gear {
           return Stat.EFF;
         case Stat.RES.value:
           return Stat.RES;
+        case Stat.SCORE.value:
+          return Stat.SCORE;
+        case Stat.OFF_SCORE.value:
+          return Stat.OFF_SCORE;
+        case Stat.DEF_SCORE.value:
+          return Stat.DEF_SCORE;
+        case Stat.RATING.value:
+          return Stat.RATING;
+        case Stat.EHP.value:
+          return Stat.EHP;
+        case Stat.DAMAGE.value:
+          return Stat.DAMAGE;
       }
       console.error('getInstance::fail to convert stat=', value);
       throw new Error('fail to convert stat=' + value);

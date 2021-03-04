@@ -89,9 +89,6 @@ export default class GearDetailCard extends Vue {
     }
     return undefined;
   }
-  get stats() {
-    return Object.values(Gear.Stat);
-  }
 
   // get subs() {
   //   return this.gear.getSubs();
