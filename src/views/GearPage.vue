@@ -2,15 +2,16 @@
   <div class="mx-auto" style="max-width: 1000px">
     <v-row dense>
       <v-col cols="12" sm="auto">
-        <gear-filter-input-sheet v-model="filter" :gears="filteredGears" />
-        <!-- <gear-list-view-display-config-sheet /> -->
+        <gear-filter-input-sheet v-model="filter" class="mb-2" :gears="filteredGears" />
       </v-col>
       <v-col cols="12" sm="auto">
         <gear-statistics-sheet :gears="filteredGears" />
       </v-col>
-      <v-col>
-        <gear-action-card v-model="selectedGearId" />
-        <gear-list-view v-model="selectedGearId" class="mt-2" :gears="filteredGears" :sort-col="filter.sortingColumn" />
+      <v-col cols="12" sm="auto">
+        <gear-sorting-card v-model="filter" class="mb-2" />
+        <gear-action-card v-model="selectedGearId" class="mb-2" />
+
+        <gear-list-view v-model="selectedGearId" :gears="filteredGears" :sort-col="filter.sortingColumn" />
         <!-- <gear-table :gears="filteredGears" @edit-gear="editGear" /> -->
         <v-btn bottom class="hidden-sm-and-up" fab fixed right small @click="goToTop">
           <v-icon>mdi-chevron-up</v-icon>
@@ -27,6 +28,7 @@ import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
 import {
   GearActionCard,
+  GearSortingCard,
   GearTable,
   GearFilterInputSheet,
   GearCard,
@@ -41,6 +43,7 @@ import { SortingOrder } from '@/models/common';
   name: 'gear-page',
   components: {
     GearActionCard,
+    GearSortingCard,
     GearTable,
     GearFilterInputSheet,
     GearCard,

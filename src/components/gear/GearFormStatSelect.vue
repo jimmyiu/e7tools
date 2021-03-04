@@ -27,9 +27,8 @@ class StatBtnConfig {
   name: 'gear-form-stat-select'
 })
 export default class GearFormStatSelect extends Vue {
-  readonly ALL_STATS = Object.values(Gear.Stat);
   readonly SELECTION_CONFIG = {
-    // in the sequence of Object.values(Gear.Stat)
+    // in the sequence of this.$const.GearStat.PRIMITIVE
     // i.e. HPP, HP, DEFP, DEF, ATKP, ATK, CRI, CDMG, SPD, EFF, RES
     // 0 - none, 1 - sub only, 2 - main only, 3 - main + sub
     Weapon: [1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 1],
@@ -66,8 +65,8 @@ export default class GearFormStatSelect extends Vue {
 
   created() {
     console.log('created::value=', this.value);
-    for (let i = 0; i < this.ALL_STATS.length; i++) {
-      this.btns.push(new StatBtnConfig(this.ALL_STATS[i], true, true));
+    for (let i = 0; i < this.$const.GearStat.PRIMITIVE.length; i++) {
+      this.btns.push(new StatBtnConfig(this.$const.GearStat.PRIMITIVE[i], true, true));
     }
     this.onTypeChanged(this.type);
   }
@@ -76,13 +75,13 @@ export default class GearFormStatSelect extends Vue {
   onTypeChanged(type?: Gear.Type) {
     console.log('onTypeChanged::start, type =', type);
     if (type == undefined) {
-      for (let i = 0; i < this.ALL_STATS.length; i++) {
+      for (let i = 0; i < this.$const.GearStat.PRIMITIVE.length; i++) {
         this.btns[i].main = this.btns[i].sub = false;
       }
       return;
     }
     let typeConfig = this.SELECTION_CONFIG[type];
-    for (let i = 0; i < this.ALL_STATS.length; i++) {
+    for (let i = 0; i < this.$const.GearStat.PRIMITIVE.length; i++) {
       this.btns[i].main = (typeConfig[i] & 2) > 0;
       this.btns[i].sub = (typeConfig[i] & 1) > 0;
     }

@@ -1,4 +1,5 @@
 import { EquippedHero, Hero, HeroAbility } from '@/models';
+import { Constants } from '@/models/constant';
 import { Gear } from '@/models/gear';
 import Stat = Gear.Stat;
 const STAT_AVERAGE: HeroAbility = {
@@ -113,7 +114,7 @@ export function calculateStatistics(gears: Gear.Gear[]) {
   max.set('score', []);
   max.set('offScore', []);
   max.set('defScore', []);
-  Object.values(Gear.Stat).forEach((stat: Gear.Stat) => {
+  Constants.GearStat.PRIMITIVE.forEach((stat: Gear.Stat) => {
     max.set(stat.value, []);
   });
 
