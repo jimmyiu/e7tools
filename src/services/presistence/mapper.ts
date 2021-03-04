@@ -1,5 +1,6 @@
 import { Gear, Hero, OptimizationProfile } from '@/models';
-import { GearEntity, HeroEntity, OptimizationProfileEntity } from '@/models/persistence';
+import { GearEntity, HeroEntity, OptimizationProfileEntity, SuitEntity } from '@/models/persistence';
+import { HeroSuit } from '@/models/suit';
 import { gearService } from '@/services';
 
 export class GearMapper {
@@ -127,6 +128,32 @@ export class OptimizationPorfileMapper {
         brokenSet: profile.evaluation.brokenSet,
         lv85: profile.evaluation.lv85
       }
+    };
+  }
+}
+
+export class HeroSuitMapper {
+  static toObject(entity: SuitEntity): HeroSuit {
+    return {
+      heroSuitId: entity.id,
+      weaponId: entity.weaponId,
+      armorId: entity.armorId,
+      helmetId: entity.helmetId,
+      necklaceId: entity.necklaceId,
+      ringId: entity.ringId,
+      bootId: entity.bootId
+    };
+  }
+
+  static toEntity(suit: HeroSuit): SuitEntity {
+    return {
+      id: suit.heroSuitId,
+      weaponId: suit.weaponId,
+      armorId: suit.armorId,
+      helmetId: suit.helmetId,
+      necklaceId: suit.necklaceId,
+      ringId: suit.ringId,
+      bootId: suit.bootId
     };
   }
 }

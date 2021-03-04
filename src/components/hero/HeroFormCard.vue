@@ -7,12 +7,12 @@
             <v-img :src="hero.icon"></v-img>
           </v-avatar>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="5">
           <v-text-field
             v-model.number="form.tier"
             dense
             hide-details
-            label="Tier (1 = Highest)"
+            label="Tier (1 - Highest)"
             min="0"
             outlined
             type="number"
@@ -27,7 +27,7 @@
             <v-col class="d-flex justify-center align-center">
               <div class="mr-2">Basic Hero Ability</div>
               <v-divider />
-              <v-btn icon small @click="lockBasic = !lockBasic">
+              <v-btn icon x-small @click="lockBasic = !lockBasic">
                 <v-icon small>{{ lockBasic ? 'lock' : 'lock_open' }}</v-icon>
               </v-btn>
             </v-col>

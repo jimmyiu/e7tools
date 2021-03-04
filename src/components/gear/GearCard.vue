@@ -1,14 +1,5 @@
 <template>
-  <v-sheet
-    v-ripple
-    class="py-1"
-    :class="{ selectable: selectable }"
-    elevation="6"
-    max-width="351"
-    outlined
-    rounded
-    @click="onClick"
-  >
+  <v-sheet v-ripple class="py-1" :class="{ selectable: selectable }" max-width="351" outlined rounded @click="click">
     <div v-if="gear && gear.id">
       <v-row class="px-2" no-gutters>
         <v-col class="d-flex align-center" cols="4">
@@ -56,10 +47,15 @@
             {{ scores.offScore }}
           </div>
         </v-col>
-        <v-col class="d-flex align-center" cols="4">
-          <v-icon size="18">mdi-alpha-d-box</v-icon>
-          <div class="px-1" :class="{ 'highlight-1': isHighlight1('defScore') }">
-            {{ scores.defScore }}
+        <v-col class="d-flex align-center justify-space-between" cols="4">
+          <div class="d-flex">
+            <v-icon size="18">mdi-alpha-d-box</v-icon>
+            <div class="px-1" :class="{ 'highlight-1': isHighlight1('defScore') }">
+              {{ scores.defScore }}
+            </div>
+          </div>
+          <div v-if="selectable">
+            <v-icon small>mdi-checkbox-{{ selected ? 'marked' : 'blank' }}-outline</v-icon>
           </div>
         </v-col>
       </v-row>
@@ -84,7 +80,7 @@
   border-radius: 4px
 </style>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Model } from 'vue-property-decorator';
 import { GearSetIcon, GearStatIcon, GearTypeIcon } from './common';
 import { Gear, Hero } from '@/models';
 import { mapGetters } from 'vuex';
@@ -102,8 +98,8 @@ export default class GearCard extends Vue {
   @Prop() readonly gear!: Gear.Gear;
   @Prop() readonly refHeroId!: string;
   @Prop() readonly highlight1!: string | undefined;
-  @Prop() readonly selectable: boolean | undefined;
-  // model
+  @Prop({ type: Boolean, default: false }) readonly selectable!: boolean;
+  @Prop({ type: Boolean, required: false, default: false }) readonly selected!: boolean;
 
   // getter
   get refHero(): Hero | undefined {
@@ -114,14 +110,12 @@ export default class GearCard extends Vue {
     }
     return undefined;
   }
+
   get equippedHero(): Hero | undefined {
     if (this.gear.equippedHero) {
       return this.getHero(this.gear.equippedHero);
     }
     return undefined;
-  }
-  get stats() {
-    return Object.values(Gear.Stat);
   }
 
   get scores(): Gear.GearScore {
@@ -141,9 +135,10 @@ export default class GearCard extends Vue {
     return this.highlight1 == value;
   }
 
-  onClick() {
+  click() {
     if (this.selectable) {
-      this.$emit('select', this.gear);
+      this.$emit('click', this.gear);
+      this.$emit('select', true);
     }
   }
 }

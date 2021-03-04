@@ -195,7 +195,7 @@ export class DefaultGearOptimizer implements GearOptimizer {
         bootId: hero.suit.boot ? hero.suit.boot.id : undefined
       });
     }
-    return result;
+    return result.sort((a, b) => b.rating - a.rating);
   }
 
   performOptimize(): EquippedHero[] {

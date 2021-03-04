@@ -1,7 +1,8 @@
 import { Constants, Gear, Hero, OptimizationProfile, VuexData } from '@/models';
 import { BaseEntity, HeroEntity, PersistentData, PersistentDataKey } from '@/models/persistence';
+import { HeroSuit } from '@/models/suit';
 import { DataUpgrader } from '.';
-import { GearMapper, OptimizationPorfileMapper } from './mapper';
+import { GearMapper, HeroSuitMapper, OptimizationPorfileMapper } from './mapper';
 
 export interface PersistenceService {
   /**
@@ -21,7 +22,7 @@ export interface PersistenceService {
    */
   remove(data: BaseEntity): void;
 
-  replaceAll(data: BaseEntity[]): void;
+  replaceAll(data: any[]): void;
   /**
    * @param key the key in the PersistentData
    * @param index the index in the array
@@ -42,11 +43,12 @@ export class DefaultPersistenceService implements PersistenceService {
       version: Constants.CURRENT_PERSISTENT_DATA_VERSION,
       gears: [],
       heros: [],
-      profiles: []
+      profiles: [],
+      suits: []
     };
   }
 
-  replaceAll(data: BaseEntity[]): void {
+  replaceAll(data: any[]): void {
     // throw new Error('Method not implemented.');
     console.log('replaceAll::data =', data);
     if (data && data.length > 0 && data[0]) {
@@ -58,6 +60,8 @@ export class DefaultPersistenceService implements PersistenceService {
         this._data.profiles = (data as OptimizationProfile[]).map(x => OptimizationPorfileMapper.toProfileEntity(x));
       } else if (key == 'heros') {
         this._data.heros = Object.assign([], data);
+      } else if (key == 'suits') {
+        this._data.suits = (data as HeroSuit[]).map(x => HeroSuitMapper.toEntity(x));
       }
     }
     localStorage.setItem(Constants.KEY_VUEXDATA, JSON.stringify(this._data));
@@ -80,6 +84,8 @@ export class DefaultPersistenceService implements PersistenceService {
         entity = GearMapper.toGearEntity(data);
       } else if (key == 'profiles') {
         entity = OptimizationPorfileMapper.toProfileEntity(data);
+      } else if (key == 'suits') {
+        entity = HeroSuitMapper.toEntity(data);
       }
       this.persistEntity(key, entity);
     }
@@ -90,6 +96,7 @@ export class DefaultPersistenceService implements PersistenceService {
       gears: this._data.gears.map(x => GearMapper.toGear(x)),
       profiles: this._data.profiles.map(x => OptimizationPorfileMapper.toProfile(x)),
       heros: this._data.heros,
+      suits: this._data.suits.map(x => HeroSuitMapper.toObject(x)),
       state: {
         lastSelectedHeroId: Constants.DEFAULT_HERO_ID
       }
@@ -119,8 +126,10 @@ export class DefaultPersistenceService implements PersistenceService {
       return 'profiles';
     } else if ((data as HeroEntity).icon != undefined) {
       return 'heros';
+    } else if ((data as HeroSuit).heroSuitId != undefined) {
+      return 'suits';
     }
-    throw new Error('invalid data type');
+    throw new Error('invalid datHeroSuita type');
   }
 
   private persistEntity(key: keyof Omit<PersistentData, 'version'>, entity: BaseEntity) {

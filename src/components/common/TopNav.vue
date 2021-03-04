@@ -43,9 +43,6 @@
         <v-list-item link :to="{ name: 'hero' }">
           <v-list-item-title>Hero</v-list-item-title>
         </v-list-item>
-        <v-list-item link :to="{ name: 'tier' }">
-          <v-list-item-title>Tier</v-list-item-title>
-        </v-list-item>
       </v-list>
     </v-menu>
     <!-- <v-btn class="ml-1" depressed to="dev">

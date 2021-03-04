@@ -43,13 +43,13 @@
 </template>
 <style lang="sass" scoped>
 .hero-sheet-size
-  max-width: 260px
+  max-width: 300px
 .stat-sheet-size
   max-width: 340px
 .filter-sheet-size
-  max-width: 260px
+  max-width: 240px
 .eval-sheet-size
-  max-width: 260px
+  max-width: 240px
 </style>
 <script lang="ts">
 import { mapActions, mapGetters } from 'vuex';

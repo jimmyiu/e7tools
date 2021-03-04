@@ -8,29 +8,7 @@
     </v-row>
     <v-row dense>
       <v-col>
-        <v-autocomplete
-          v-model="hero.id"
-          hide-details
-          item-text="name"
-          item-value="id"
-          :items="heros"
-          label="Hero"
-          outlined
-          @change="changeHero"
-        >
-          <template v-slot:item="data">
-            <v-avatar class="mr-2" left size="32">
-              <v-img :src="data.item.icon"></v-img>
-            </v-avatar>
-            {{ data.item.name }} {{ data.item.tier ? `(${data.item.tier})` : '' }}
-          </template>
-          <template v-slot:selection="data">
-            <v-avatar class="mr-2" left size="32">
-              <v-img :src="data.item.icon"></v-img>
-            </v-avatar>
-            {{ data.item.name }} {{ data.item.tier ? `(${data.item.tier})` : '' }}
-          </template>
-        </v-autocomplete>
+        <hero-select v-model="hero.id" @change="changeHero" />
       </v-col>
     </v-row>
     <v-row dense>
@@ -51,12 +29,14 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
+import { HeroSelect } from '@/components';
 import { mapGetters } from 'vuex';
 import { Gear, Hero } from '@/models';
 
 @Component({
   name: 'optimization-hero-sheet',
-  computed: { ...mapGetters(['heros', 'getHero']) }
+  computed: { ...mapGetters(['heros', 'getHero']) },
+  components: { HeroSelect }
 })
 export default class OptimizationHeroCard extends Vue {
   // getHero!: (heroId: string) => Hero | undefined;

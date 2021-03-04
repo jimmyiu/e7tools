@@ -34,7 +34,7 @@
           dense
           hide-details
           item-text="label"
-          :items="stats.necklaces"
+          :items="$const.GearStat.NECKLACE_MAIN_STATS"
           label="Necklace Main Stat"
           multiple
           outlined
@@ -53,7 +53,7 @@
           dense
           hide-details
           item-text="label"
-          :items="stats.rings"
+          :items="$const.GearStat.RING_MAIN_STATS"
           label="Ring Main Stat"
           multiple
           outlined
@@ -72,7 +72,7 @@
           dense
           hide-details
           item-text="label"
-          :items="stats.boots"
+          :items="$const.GearStat.BOOT_MAIN_STATS"
           label="Boot Main Stat"
           multiple
           outlined
@@ -142,13 +142,5 @@ export default class OptimizationFilterSheet extends Vue {
       value: 3
     }
   ];
-
-  get stats() {
-    return {
-      necklaces: Constants.NECKLACE_STATS,
-      rings: Constants.RING_STATS,
-      boots: Constants.BOOT_STATS
-    };
-  }
 }
 </script>

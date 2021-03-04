@@ -46,7 +46,7 @@ export default class ImportSettingBtn extends Vue {
   importData() {
     if (this.isValid()) {
       localStorage.setItem(Constants.KEY_VUEXDATA, this.data);
-      this.$router.go(0);
+      location.reload();
     }
   }
 

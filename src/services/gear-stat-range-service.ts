@@ -55,6 +55,8 @@ function getRightMain(stat: Gear.Stat, level: number, enhance: number) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55][enhance - 1];
     } else if (stat.value == Gear.Stat.SPD.value) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35][enhance - 1];
+    } else if (stat.value == Gear.Stat.CRI.value) {
+      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45][enhance - 1];
     }
     return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50][enhance - 1];
   }
