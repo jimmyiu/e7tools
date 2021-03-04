@@ -9,7 +9,7 @@ export function equip(hero: Hero, suit: Suit): EquippedHero {
     cri: Math.trunc((hero.cri + suit.ability.cri + extra.cri) * 10) / 10,
     cdmg: hero.cdmg + suit.ability.cdmg + extra.cdmg,
     spd: Math.trunc(hero.spd * (1 + extra.spdp / 100)) + suit.ability.spd,
-    eff: hero.eff + suit.ability.eff + extra.eff,
+    eff: Math.trunc(((hero.eff + suit.ability.eff + extra.eff) * 10) / 10),
     res: hero.res + suit.ability.res + extra.res,
     damage: 0,
     ehp: 0,

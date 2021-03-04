@@ -47,7 +47,7 @@
       "eff": 7,
       "res": 25,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "sinful-angelica"
     },
     {
       "id": "i-4",
@@ -79,7 +79,7 @@
       "spd": 5,
       "eff": 16,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "falconer-kluri"
     },
     {
       "id": "i-6",
@@ -127,7 +127,7 @@
       "cri": 4,
       "cdmg": 5,
       "locked": false,
-      "equippedHero": "commander-lorina"
+      "equippedHero": "ervalen"
     },
     {
       "id": "i-9",
@@ -351,7 +351,7 @@
       "cdmg": 24,
       "eff": 14,
       "locked": false,
-      "equippedHero": "champion-zerato"
+      "equippedHero": ""
     },
     {
       "id": "i-G",
@@ -399,7 +399,7 @@
       "cdmg": 6,
       "res": 17,
       "locked": false,
-      "equippedHero": "ervalen"
+      "equippedHero": ""
     },
     {
       "id": "i-J",
@@ -479,7 +479,7 @@
       "spd": 9,
       "res": 16,
       "locked": false,
-      "equippedHero": "ray"
+      "equippedHero": "falconer-kluri"
     },
     {
       "id": "i-O",
@@ -671,7 +671,7 @@
       "spd": 4,
       "eff": 32,
       "locked": false,
-      "equippedHero": "champion-zerato"
+      "equippedHero": ""
     },
     {
       "id": "i-[",
@@ -687,7 +687,7 @@
       "cdmg": 16,
       "spd": 4,
       "locked": false,
-      "equippedHero": "sol"
+      "equippedHero": "ervalen"
     },
     {
       "id": "i-\\",
@@ -799,7 +799,7 @@
       "spd": 11,
       "eff": 14,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "falconer-kluri"
     },
     {
       "id": "i-c",
@@ -879,7 +879,7 @@
       "spd": 13,
       "res": 6,
       "locked": false,
-      "equippedHero": "challenger-dominiel"
+      "equippedHero": "sinful-angelica"
     },
     {
       "id": "i-h",
@@ -1151,7 +1151,7 @@
       "eff": 17,
       "res": 26,
       "locked": false,
-      "equippedHero": "falconer-kluri"
+      "equippedHero": ""
     },
     {
       "id": "i-y",
@@ -1535,7 +1535,7 @@
       "cdmg": 6,
       "spd": 16,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "falconer-kluri"
     },
     {
       "id": "i-zX",
@@ -1567,7 +1567,7 @@
       "atkp": 6,
       "spd": 8,
       "locked": false,
-      "equippedHero": "falconer-kluri"
+      "equippedHero": ""
     },
     {
       "id": "i-zZ",
@@ -1615,7 +1615,7 @@
       "cri": 8,
       "cdmg": 9,
       "locked": false,
-      "equippedHero": "landy"
+      "equippedHero": ""
     },
     {
       "id": "i-z]",
@@ -1759,7 +1759,7 @@
       "cdmg": 20,
       "spd": 45,
       "locked": false,
-      "equippedHero": "landy"
+      "equippedHero": ""
     },
     {
       "id": "i-zf",
@@ -1839,7 +1839,7 @@
       "spd": 45,
       "eff": 25,
       "locked": false,
-      "equippedHero": "auxiliary-lots"
+      "equippedHero": "falconer-kluri"
     },
     {
       "id": "i-zk",
@@ -1855,7 +1855,7 @@
       "spd": 45,
       "res": 13,
       "locked": false,
-      "equippedHero": "sinful-angelica"
+      "equippedHero": ""
     },
     {
       "id": "i-zl",
@@ -1903,7 +1903,7 @@
       "spd": 8,
       "res": 6,
       "locked": false,
-      "equippedHero": "commander-lorina"
+      "equippedHero": "ervalen"
     },
     {
       "id": "i-zo",
@@ -2095,7 +2095,7 @@
       "cdmg": 12,
       "eff": 11,
       "locked": false,
-      "equippedHero": "ervalen"
+      "equippedHero": ""
     },
     {
       "id": "i-zzA",
@@ -2143,7 +2143,7 @@
       "cdmg": 18,
       "spd": 4,
       "locked": false,
-      "equippedHero": "sol"
+      "equippedHero": "landy"
     },
     {
       "id": "i-zzD",
@@ -2223,7 +2223,7 @@
       "cri": 23,
       "spd": 5,
       "locked": false,
-      "equippedHero": "champion-zerato"
+      "equippedHero": ""
     },
     {
       "id": "i-zzI",
@@ -2445,7 +2445,7 @@
       "spd": 11,
       "res": 15,
       "locked": false,
-      "equippedHero": "sinful-angelica"
+      "equippedHero": ""
     },
     {
       "id": "i-zzY",
@@ -2765,7 +2765,7 @@
       "spd": 45,
       "res": 33,
       "locked": false,
-      "equippedHero": "ray"
+      "equippedHero": "sinful-angelica"
     },
     {
       "id": "i-zzm",
@@ -2829,7 +2829,7 @@
       "atkp": 24,
       "cdmg": 14,
       "locked": false,
-      "equippedHero": "champion-zerato"
+      "equippedHero": ""
     },
     {
       "id": "i-zzq",
@@ -2941,7 +2941,7 @@
       "cri": 6,
       "cdmg": 5,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "ervalen"
     },
     {
       "id": "i-zzx",
@@ -3073,14 +3073,14 @@
       "type": "Helmet",
       "set": "Speed",
       "grade": "Hero",
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": "hp",
-      "hp": 2700,
-      "atkp": 7,
-      "spd": 10,
-      "eff": 6,
-      "res": 17,
+      "hp": 2835,
+      "atkp": 8,
+      "spd": 12,
+      "eff": 7,
+      "res": 21,
       "locked": false,
       "equippedHero": "sinful-angelica"
     },
@@ -3178,7 +3178,7 @@
       "atkp": 13,
       "cri": 4,
       "locked": false,
-      "equippedHero": "falconer-kluri"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzO",
@@ -3289,7 +3289,7 @@
       "cri": 6,
       "spd": 13,
       "locked": false,
-      "equippedHero": "champion-zerato"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzX",
@@ -3305,7 +3305,7 @@
       "cri": 18,
       "spd": 5,
       "locked": false,
-      "equippedHero": "elena"
+      "equippedHero": "landy"
     },
     {
       "id": "i-zzzY",
@@ -3449,7 +3449,7 @@
       "spd": 5,
       "eff": 21,
       "locked": false,
-      "equippedHero": "champion-zerato"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzb",
@@ -3544,7 +3544,7 @@
       "spd": 7,
       "eff": 11,
       "locked": false,
-      "equippedHero": "falconer-kluri"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzh",
@@ -3576,7 +3576,7 @@
       "cdmg": 19,
       "spd": 45,
       "locked": false,
-      "equippedHero": "krau"
+      "equippedHero": "landy"
     },
     {
       "id": "i-zzzj",
@@ -3592,7 +3592,7 @@
       "spd": 15,
       "res": 14,
       "locked": false,
-      "equippedHero": "sinful-angelica"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzk",
@@ -3608,7 +3608,7 @@
       "cri": 8,
       "cdmg": 16,
       "locked": false,
-      "equippedHero": "ervalen"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzl",
@@ -4438,7 +4438,7 @@
       "cri": 29,
       "spd": 8,
       "locked": false,
-      "equippedHero": "landy"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzzl",
@@ -5361,7 +5361,7 @@
       "cri": 14,
       "cdmg": 70,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "landy"
     },
     {
       "id": "35c359g39d",
@@ -5930,9 +5930,9 @@
         "necklaces": ["cdmg"],
         "rings": ["atkp"],
         "boots": ["spd"],
-        "maxSize": 20,
+        "maxSize": 15,
         "enhanceMode": 2,
-        "equippedMode": 1
+        "equippedMode": 0
       },
       "stat": {
         "hp": {},
@@ -5956,7 +5956,7 @@
         "necklaces": [],
         "rings": [],
         "boots": ["spd"],
-        "maxSize": 10,
+        "maxSize": 12,
         "enhanceMode": 2,
         "equippedMode": 2
       },
@@ -5966,7 +5966,7 @@
         "atk": {},
         "cri": { "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": "261" },
+        "spd": { "min": 264 },
         "eff": { "min": "" },
         "res": {},
         "ehp": { "min": "" },
@@ -6029,18 +6029,6 @@
     {
       "id": "4",
       "hero": { "id": "seaside-bellona" },
-      "stat": {
-        "hp": {},
-        "def": {},
-        "atk": {},
-        "cri": { "min": "85", "max": 110 },
-        "cdmg": { "max": 360 },
-        "spd": { "min": "", "max": "" },
-        "eff": { "min": "", "max": "" },
-        "res": { "max": "" },
-        "ehp": { "min": "75000" },
-        "damage": { "min": "800" }
-      },
       "filter": {
         "sets": [],
         "necklaces": [],
@@ -6048,9 +6036,21 @@
         "boots": [],
         "maxSize": 30,
         "enhanceMode": 2,
-        "equippedMode": 3
+        "equippedMode": 1
       },
-      "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": false }
+      "stat": {
+        "hp": {},
+        "def": {},
+        "atk": {},
+        "cri": { "min": 90, "max": 110 },
+        "cdmg": { "max": 360 },
+        "spd": { "min": "", "max": "" },
+        "eff": { "min": "", "max": "" },
+        "res": { "max": "" },
+        "ehp": { "min": 78000 },
+        "damage": { "min": 828 }
+      },
+      "evaluation": { "forcedSets": ["Immunity"], "limit": 20000000, "brokenSet": false }
     },
     {
       "id": "5",
@@ -6185,122 +6185,110 @@
     {
       "id": "sinful-angelica",
       "hero": { "id": "sinful-angelica" },
+      "filter": {
+        "sets": [],
+        "necklaces": [],
+        "rings": [],
+        "boots": ["spd"],
+        "maxSize": 25,
+        "enhanceMode": null,
+        "equippedMode": 1
+      },
       "stat": {
         "hp": {},
         "def": {},
         "atk": {},
         "cri": { "min": "", "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": 235 },
+        "spd": { "min": 236 },
         "eff": { "min": "" },
-        "res": { "min": 160 },
+        "res": { "min": 180 },
         "ehp": { "min": "" },
         "damage": { "min": "" }
-      },
-      "filter": {
-        "sets": [],
-        "necklaces": [],
-        "rings": [],
-        "boots": [],
-        "maxSize": 20,
-        "enhanceMode": null,
-        "equippedMode": 3
       },
       "evaluation": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
     {
       "id": "falconer-kluri",
       "hero": { "id": "falconer-kluri" },
+      "filter": {
+        "sets": ["Speed", "Hit"],
+        "necklaces": [],
+        "rings": [],
+        "boots": ["spd"],
+        "maxSize": 0,
+        "enhanceMode": null,
+        "equippedMode": 1
+      },
       "stat": {
         "hp": {},
         "def": {},
         "atk": {},
         "cri": { "min": "", "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": 220 },
+        "spd": { "min": 230 },
         "eff": { "min": 90 },
         "res": {},
         "ehp": { "min": 95000 },
         "damage": { "min": "" }
-      },
-      "filter": {
-        "sets": ["Speed", "Hit"],
-        "necklaces": [],
-        "rings": [],
-        "boots": ["spd"],
-        "maxSize": 22,
-        "enhanceMode": null,
-        "equippedMode": 3
       },
       "evaluation": { "forcedSets": ["Speed", "Hit"], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "ervalen",
       "hero": { "id": "ervalen" },
-      "stat": {
-        "hp": {},
-        "def": {},
-        "atk": {},
-        "cri": { "max": 110, "min": "100" },
-        "cdmg": { "max": 360 },
-        "spd": {},
-        "eff": {},
-        "res": {},
-        "ehp": {},
-        "damage": { "min": "1300" }
-      },
       "filter": {
         "sets": ["Critical", "Destruction", "Attack"],
         "necklaces": ["atkp", "atk", "cri", "cdmg"],
         "rings": ["atkp", "atk"],
         "boots": ["atkp", "atk"],
-        "maxSize": 20,
+        "maxSize": 0,
         "enhanceMode": null,
-        "equippedMode": 3
+        "equippedMode": 1
+      },
+      "stat": {
+        "hp": {},
+        "def": {},
+        "atk": {},
+        "cri": { "min": "100", "max": 110 },
+        "cdmg": { "max": 360 },
+        "spd": {},
+        "eff": {},
+        "res": {},
+        "ehp": {},
+        "damage": { "min": 1400 }
       },
       "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "landy",
       "hero": { "id": "landy" },
+      "filter": {
+        "sets": ["Speed", "Critical"],
+        "necklaces": [],
+        "rings": ["hpp", "hp", "defp", "def", "atkp", "atk"],
+        "boots": ["spd"],
+        "maxSize": 18,
+        "enhanceMode": 2,
+        "equippedMode": 1
+      },
       "stat": {
         "hp": {},
         "def": {},
         "atk": {},
-        "cri": { "max": 110, "min": "85" },
+        "cri": { "min": 100, "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": "", "max": "" },
+        "spd": { "min": 199, "max": "" },
         "eff": { "min": "", "max": "" },
         "res": { "max": "20" },
-        "ehp": { "min": "75000" },
-        "damage": { "min": "800" }
-      },
-      "filter": {
-        "sets": ["Speed", "Critical"],
-        "necklaces": ["cdmg"],
-        "rings": ["hpp", "hp", "defp", "def", "atkp", "atk"],
-        "boots": ["spd"],
-        "maxSize": 0,
-        "enhanceMode": 2,
-        "equippedMode": 3
+        "ehp": { "min": 62000 },
+        "damage": { "min": 968 }
       },
       "evaluation": { "forcedSets": ["Speed", "Critical"], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "champion-zerato",
       "hero": { "id": "champion-zerato" },
-      "stat": {
-        "hp": {},
-        "def": {},
-        "atk": {},
-        "cri": { "max": 110, "min": "85" },
-        "cdmg": { "max": 360 },
-        "spd": { "min": "", "max": "" },
-        "eff": { "min": "", "max": "" },
-        "res": { "max": "20" },
-        "ehp": { "min": "75000" },
-        "damage": { "min": "800" }
-      },
       "filter": {
         "sets": [],
         "necklaces": [],
@@ -6308,9 +6296,21 @@
         "boots": [],
         "maxSize": 0,
         "enhanceMode": null,
-        "equippedMode": 3
+        "equippedMode": 1
       },
-      "evaluation": { "forcedSets": ["LifeSteal"], "limit": 20000000, "brokenSet": false, "lv85": false }
+      "stat": {
+        "hp": {},
+        "def": {},
+        "atk": {},
+        "cri": { "min": 77, "max": 110 },
+        "cdmg": { "max": 360 },
+        "spd": { "min": "", "max": "" },
+        "eff": { "min": "", "max": "" },
+        "res": { "max": "20" },
+        "ehp": { "min": 90000 },
+        "damage": { "min": 600 }
+      },
+      "evaluation": { "forcedSets": ["LifeSteal"], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
     {
       "id": "general-purrgis",
@@ -7512,18 +7512,9 @@
       "res": 0,
       "name": "Ervalen",
       "icon": "https://assets.epicsevendb.com/_source/face/c1108_s.png",
-      "tier": 3,
+      "tier": 2,
       "bonusAbility": { "hp": 416, "atk": 273 },
-      "abilityRating": {
-        "hp": "1",
-        "def": "1",
-        "atk": "3",
-        "cri": "3",
-        "cdmg": "3",
-        "spd": "0",
-        "eff": "0",
-        "res": "0"
-      }
+      "abilityRating": { "hp": "1", "def": "1", "atk": "3", "cri": "3", "cdmg": "3", "spd": "0", "eff": -1, "res": -1 }
     },
     {
       "id": "fairytale-tenebria",
@@ -7747,7 +7738,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c1109_s.png",
       "tier": 3,
       "bonusAbility": { "hp": 468, "atk": 195 },
-      "abilityRating": { "hp": 1, "def": 1, "atk": "1", "cri": "1", "cdmg": "1", "spd": "1", "eff": "0", "res": "0" }
+      "abilityRating": { "hp": 1, "def": 1, "atk": 2, "cri": 2, "cdmg": 2, "spd": 2, "eff": -1, "res": -1 }
     },
     {
       "id": "last-rider-krau",
@@ -8124,7 +8115,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c5071_s.png",
       "tier": 3,
       "bonusAbility": { "hp": 224, "atk": 147 },
-      "abilityRating": { "hp": "3", "def": "3", "atk": "2", "cri": "2", "cdmg": "2", "spd": "0", "eff": 1, "res": -1 }
+      "abilityRating": { "hp": "3", "def": "3", "atk": "2", "cri": "2", "cdmg": "2", "spd": "0", "eff": 0, "res": -1 }
     },
     {
       "id": "sez",
@@ -8613,7 +8604,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c2010_s.png",
       "tier": 3,
       "bonusAbility": { "hp": 601, "atk": 165, "eff": 13.6 },
-      "abilityRating": { "hp": "3", "def": "3", "atk": 1, "cri": "1", "cdmg": "0", "spd": "0", "eff": "2", "res": "-1" }
+      "abilityRating": { "hp": 3, "def": 3, "atk": 0, "cri": 1, "cdmg": 0, "spd": 0, "eff": 0, "res": "-1" }
     },
     {
       "id": "cidd",
@@ -9166,7 +9157,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c2062_s.png",
       "tier": 3,
       "bonusAbility": { "hp": 273, "atk": 182 },
-      "abilityRating": { "hp": "-1", "def": "-1", "atk": -1, "cri": -1, "cdmg": -1, "spd": "3", "eff": "1", "res": "3" }
+      "abilityRating": { "hp": "-1", "def": "-1", "atk": 0, "cri": 0, "cdmg": 0, "spd": "3", "eff": "1", "res": "3" }
     },
     {
       "id": "surin",
@@ -9694,7 +9685,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c4003_s.png",
       "tier": 3,
       "bonusAbility": { "hp": 532, "defp": 5, "atk": 63, "spd": 11 },
-      "abilityRating": { "hp": 2, "def": 2, "atk": -1, "cri": -1, "cdmg": -1, "spd": "3", "eff": "3", "res": 1 }
+      "abilityRating": { "hp": 2, "def": 2, "atk": -1, "cri": -1, "cdmg": -1, "spd": "3", "eff": 2, "res": 1 }
     },
     {
       "id": "glenn",

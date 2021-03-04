@@ -37,14 +37,15 @@
 
     <v-card>
       <v-card-text class="pa-2">
-        <v-row dense>
+        <!-- <v-row dense>
           <v-col v-for="(item, key) in selectedSuitGears" :key="key" cols="12" sm="4">
             <gear-card class="mx-auto" :gear="item" :ref-hero-id="form.profile.hero.id" />
           </v-col>
-          <!-- <v-col v-for="(item, key) in selectedSuitGears" :key="key">
+          <v-col v-for="(item, key) in selectedSuitGears" :key="key">
             <gear-detail-card :gear="item" :ref-hero-id="form.profile.hero.id" />
-          </v-col> -->
-        </v-row>
+          </v-col>
+        </v-row> -->
+        <suit-gear-view :suit="selectedSuit" />
         <v-row dense>
           <v-col cols="12" sm="4">
             <v-row dense>
@@ -130,7 +131,14 @@
 
 <script lang="ts">
 import TitleSheet from '@/components/common/TitleSheet.vue';
-import { GearCard, GearDetailCard, GearSetIcon, HeroDetailCard, OptimizationProfiler } from '@/components';
+import {
+  GearCard,
+  GearDetailCard,
+  GearSetIcon,
+  HeroDetailCard,
+  OptimizationProfiler,
+  SuitGearView
+} from '@/components';
 import { Gear, EquippedHero, Hero, Suit } from '@/models';
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
@@ -140,7 +148,7 @@ import { GearOptimizerProgress } from '@/services/gear-optimizer';
 
 @Component({
   name: 'optimizer-page',
-  components: { GearCard, GearDetailCard, GearSetIcon, HeroDetailCard, OptimizationProfiler, TitleSheet },
+  components: { GearCard, GearDetailCard, GearSetIcon, HeroDetailCard, OptimizationProfiler, TitleSheet, SuitGearView },
   computed: {
     ...mapGetters(['heros', 'gears', 'getEquippedHero', 'getHero', 'getGear', 'getSavedSuit'])
   },
@@ -233,7 +241,7 @@ export default class OptimizerPage extends Vue {
 
   async optimize() {
     console.log('optimize::start');
-    this.result.splice(0, this.result.length);
+    // this.result.splice(0, this.result.length);
     this.optimizing = true;
     this.worker.postMessage({
       action: 'optimize',

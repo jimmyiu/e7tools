@@ -16,6 +16,9 @@
         <v-btn v-for="(item, key) in $const.GearStat.PRIMITIVE" :key="key" icon @click="toggleSort(item.value)">
           <gear-stat-icon :stat="item" />
         </v-btn>
+        <v-btn v-for="(item, key) in $const.GearStat.SCORES" :key="`s${key}`" icon @click="toggleSort(item.value)">
+          <gear-stat-icon :stat="item" />
+        </v-btn>
       </v-col>
     </v-row>
   </v-card>
