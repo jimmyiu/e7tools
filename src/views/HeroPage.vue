@@ -1,61 +1,94 @@
 <template>
-  <div>
-    for testing<br />
-    <!-- <v-btn @click="refresh">refresh</v-btn> -->
-    <!-- <div v-if="result">{{ result }}</div> -->
-    <!-- <v-divider />
-    <div>Five star heros:</div>
-    <span v-for="(item, key) in fiveStarHeros" :key="key">
-      <img :src="item.icon" width="24" />
-    </span>
-    <br />Average HP: {{ average.hp }} <br />Average DEF: {{ average.def }} <br />Average ATK: {{ average.atk }} -->
-    <v-divider class="my-3" />
-    <v-btn @click="unlockAll">Unlock All</v-btn>
-  </div>
+  <v-row dense>
+    <v-col cols="12" lg="3">
+      <v-sheet v-for="(item, key) in tieredHeros" :key="key" class="mb-2 pa-2" rounded>
+        <div class="d-flex">
+          <v-avatar class="mt-1 mr-2" color="black" size="32"> T{{ item[0] }} </v-avatar>
+          <v-row dense>
+            <v-col v-for="(hero, index) in item[1]" :key="index" cols="auto">
+              <v-btn icon>
+                <v-avatar size="32" @click="changeHero(hero.id)">
+                  <v-img :src="hero.icon"></v-img>
+                </v-avatar>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </div>
+      </v-sheet>
+    </v-col>
+    <!-- <v-alert dense dismissible outlined type="info">Organize heros</v-alert> -->
+    <v-col>
+      <hero-select v-model="heroId" class="mb-2" @change="changeHero" />
+      <hero-form-card v-if="heroId" class="mb-2" :hero-id="heroId" />
+      <suit-mgt-card class="mb-2" :hero-id="heroId" />
+      <v-card>
+        <v-card-title class="py-3">
+          Saved Suit
+        </v-card-title>
+        <v-card-text class="pa-2">
+          <suit-gear-view :suit="savedSuit" />
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import { Gear } from '@/models';
-import { mapActions, mapGetters } from 'vuex';
+import { HeroFormCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard } from '@/components';
+import { mapGetters, mapActions } from 'vuex';
+import { EquippedHero, Gear, Hero, SiteState, Suit } from '@/models';
 
 @Component({
   name: 'hero-page',
-  computed: mapGetters(['gears']),
-  methods: mapActions(['saveGears'])
+  components: { HeroFormCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard },
+  computed: { ...mapGetters(['heros', 'siteState', 'getEquippedHero', 'getSavedSuit']) },
+  methods: mapActions(['updateState'])
 })
 export default class HeroPage extends Vue {
-  readonly gears!: Gear.Gear[];
-  saveGears!: (gear: Gear.Gear[]) => void;
-
-  unlockAll() {
-    this.gears.forEach(x => {
-      x.equippedHero = '';
-    });
-    this.saveGears(this.gears);
-  }
-  // heros!: Hero[];
+  getEquippedHero!: (heroId: string) => EquippedHero | undefined;
+  getSavedSuit!: (heroId: string) => Suit | undefined;
+  updateState!: (siteState: Partial<SiteState>) => void;
+  heros!: Hero[];
+  readonly siteState!: SiteState;
   //
-  // result: Hero[] = [];
+  heroId: string = '';
 
-  // get fiveStarHeros() {
-  //   return this.heros.filter(x => x.rarity == 5);
-  // }
+  get tieredHeros() {
+    const result = new Map<number, Hero[]>();
+    [...this.heros]
+      .filter(x => x.tier > 0)
+      .sort((a, b) => {
+        if (b.tier == 0 && a.tier != 0) {
+          return -1;
+        } else if (a.tier == 0 && b.tier != 0) {
+          return 1;
+        }
+        return a.tier - b.tier;
+      })
+      .forEach(x => {
+        if (!result.get(x.tier)) {
+          result.set(x.tier, []);
+        }
+        result.get(x.tier)?.push(x);
+      });
+    return result;
+  }
 
-  // get average() {
-  //   const result = {
-  //     hp: 0,
-  //     def: 0,
-  //     atk: 0
-  //   };
-  //   this.fiveStarHeros.forEach(x => {
-  //     result.hp += x.hp;
-  //     result.def += x.def;
-  //     result.atk += x.atk;
-  //   });
-  //   result.hp = result.hp / this.fiveStarHeros.length;
-  //   result.def = result.def / this.fiveStarHeros.length;
-  //   result.atk = result.atk / this.fiveStarHeros.length;
-  //   return result;
-  // }
+  get currentEquipped() {
+    return this.getEquippedHero(this.heroId);
+  }
+
+  get savedSuit() {
+    return this.getSavedSuit(this.heroId);
+  }
+
+  created() {
+    this.heroId = this.siteState.lastSelectedHeroId;
+  }
+
+  changeHero(heroId: string) {
+    this.heroId = heroId;
+    this.updateState({ lastSelectedHeroId: heroId });
+  }
 }
 </script>

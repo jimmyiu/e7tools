@@ -10,7 +10,7 @@
       </v-col>
       <v-col>
         <gear-action-card v-model="selectedGearId" />
-        <gear-list-view class="mt-2" :gears="filteredGears" :sort-col="filter.sortingColumn" @select="selectGear" />
+        <gear-list-view v-model="selectedGearId" class="mt-2" :gears="filteredGears" :sort-col="filter.sortingColumn" />
         <!-- <gear-table :gears="filteredGears" @edit-gear="editGear" /> -->
         <v-btn bottom class="hidden-sm-and-up" fab fixed right small @click="goToTop">
           <v-icon>mdi-chevron-up</v-icon>
@@ -31,7 +31,6 @@ import {
   GearFilterInputSheet,
   GearCard,
   GearStatisticsSheet,
-  GearListViewDisplayConfigSheet,
   GearListView
 } from '@/components';
 import { FilterMode, Gear } from '@/models';
@@ -46,8 +45,7 @@ import { SortingOrder } from '@/models/common';
     GearFilterInputSheet,
     GearCard,
     GearStatisticsSheet,
-    GearListView,
-    GearListViewDisplayConfigSheet
+    GearListView
   },
   computed: { ...mapGetters(['gears', 'getGear']) }
 })
@@ -155,10 +153,6 @@ export default class GearPage extends Vue {
       });
     }
     return result;
-  }
-
-  selectGear(gear: Gear.Gear) {
-    this.selectedGearId = gear.id;
   }
 
   goToTop() {

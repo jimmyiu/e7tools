@@ -88,7 +88,7 @@ export default class DataSettingListItem extends Vue {
     // localStorage.clear();
     localStorage.removeItem(Constants.KEY_VUEXDATA);
     this.clearDialog = false;
-    this.$router.go(0);
+    location.reload();
   }
 
   copy() {

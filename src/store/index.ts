@@ -52,7 +52,7 @@ export default new Vuex.Store({
       }
       return undefined;
     },
-    getLastEquippedSuit: (state, getters) => (heroId: string) => {
+    getSavedSuit: (state, getters) => (heroId: string) => {
       const heroSuit = state.data.suits.find(x => x.heroSuitId == heroId);
       const hero: Hero = getters.getHero(heroId);
       const builder = new SuitBuilder();

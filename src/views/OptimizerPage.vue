@@ -20,9 +20,17 @@
 
     <optimization-profiler v-model="form" class="mb-2" @optimize="optimize" />
 
-    <v-progress-linear v-if="progress.processTime >= 0" class="mb-2" height="50" :indeterminate="optimizing" striped>
+    <v-progress-linear
+      v-if="progress.processTime >= 0"
+      class="mb-2"
+      color="success"
+      height="70"
+      :indeterminate="optimizing"
+      striped
+    >
       <strong class="text-center">
-        Processed ({{ progress.proceeded | formatNumber }}) / Evaluated ({{ progress.evaluated | formatNumber }})<br />
+        Processed ({{ progress.proceeded | formatNumber }})<br />
+        Evaluated ({{ progress.evaluated | formatNumber }})<br />
         Found ({{ progress.found | formatNumber }}) in {{ progress.processTime }} seconds
       </strong>
     </v-progress-linear>
@@ -30,40 +38,62 @@
     <v-card>
       <v-card-text class="pa-2">
         <v-row dense>
-          <v-col cols="12" sm="auto">
-            Last
-            <hero-detail-card
-              v-if="lastEquipped && form.hero"
-              class="mb-2"
-              :hero="form.hero"
-              :suit="lastEquipped.suit"
-            />
-            Current
+          <v-col v-for="(item, key) in selectedSuitGears" :key="key" cols="12" sm="4">
+            <gear-card class="mx-auto" :gear="item" :ref-hero-id="form.profile.hero.id" />
+          </v-col>
+          <!-- <v-col v-for="(item, key) in selectedSuitGears" :key="key">
+            <gear-detail-card :gear="item" :ref-hero-id="form.profile.hero.id" />
+          </v-col> -->
+        </v-row>
+        <v-row dense>
+          <v-col cols="12" sm="4">
+            <v-row dense>
+              <v-col class="d-flex justify-center align-center px-6">
+                <div class="mr-2">Current</div>
+                <v-divider />
+              </v-col>
+            </v-row>
             <hero-detail-card
               v-if="currentEquipped && form.hero"
-              class="mb-2"
+              class="mx-auto"
               :hero="form.hero"
               :suit="currentEquipped.suit"
             />
-            Selected
-            <hero-detail-card v-if="selectionEquipped" :hero="form.hero" :suit="selectionEquipped.suit" />
           </v-col>
-          <v-col>
+          <v-col cols="12" sm="4">
             <v-row dense>
-              <v-col v-for="(item, key) in selectedSuitGears" :key="key" cols="12" sm="6">
-                <gear-card :gear="item" :ref-hero-id="form.profile.hero.id" />
+              <v-col class="d-flex justify-center align-center px-6">
+                <div class="mr-2">Selected`</div>
+                <v-divider />
               </v-col>
-              <!-- <v-col v-for="(item, key) in selectedSuitGears" :key="key">
-            <gear-detail-card :gear="item" :ref-hero-id="form.profile.hero.id" />
-          </v-col> -->
             </v-row>
+            <hero-detail-card
+              v-if="selectionEquipped"
+              class="mx-auto"
+              :hero="form.hero"
+              :suit="selectionEquipped.suit"
+            />
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-row dense>
+              <v-col class="d-flex justify-center align-center px-6">
+                <div class="mr-2">Saved Suit</div>
+                <v-divider />
+              </v-col>
+            </v-row>
+            <hero-detail-card
+              v-if="savedEquipped && form.hero"
+              class="mx-auto"
+              :hero="form.hero"
+              :suit="savedEquipped.suit"
+            />
           </v-col>
         </v-row>
       </v-card-text>
       <v-divider />
       <v-card-actions>
-        <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip All</v-btn>
-        <v-btn text @click="unequipAll">Unequip All</v-btn>
+        <v-btn class="font-weight-bold" color="primary" text @click="equipAll">Equip Selected</v-btn>
+        <v-btn text @click="unequipAll">Unequip Current</v-btn>
       </v-card-actions>
     </v-card>
 
@@ -112,7 +142,7 @@ import { GearOptimizerProgress } from '@/services/gear-optimizer';
   name: 'optimizer-page',
   components: { GearCard, GearDetailCard, GearSetIcon, HeroDetailCard, OptimizationProfiler, TitleSheet },
   computed: {
-    ...mapGetters(['heros', 'gears', 'getEquippedHero', 'getHero', 'getGear', 'getLastEquippedSuit'])
+    ...mapGetters(['heros', 'gears', 'getEquippedHero', 'getHero', 'getGear', 'getSavedSuit'])
   },
   methods: mapActions(['saveGears', 'updateState'])
 })
@@ -123,7 +153,7 @@ export default class OptimizerPage extends Vue {
   getEquippedHero!: (heroId: string) => EquippedHero | undefined;
   getGear!: (gearId: string) => Gear.Gear;
   getHero!: (heroId: string) => Hero;
-  getLastEquippedSuit!: (heroId: string) => Suit | undefined;
+  getSavedSuit!: (heroId: string) => Suit | undefined;
   saveGears!: (gear: Gear.Gear[]) => void;
 
   // worker
@@ -178,10 +208,10 @@ export default class OptimizerPage extends Vue {
     return this.getEquippedHero(this.form.hero.id);
   }
 
-  get lastEquipped() {
-    const lastEquipped = this.getLastEquippedSuit(this.form.hero.id);
-    if (lastEquipped) {
-      return HeroService.equip(this.form.hero, lastEquipped);
+  get savedEquipped() {
+    const savedEquipped = this.getSavedSuit(this.form.hero.id);
+    if (savedEquipped) {
+      return HeroService.equip(this.form.hero, savedEquipped);
     }
     return undefined;
   }

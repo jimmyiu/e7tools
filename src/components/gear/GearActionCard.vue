@@ -1,15 +1,15 @@
 <template>
   <v-card class="pa-1">
-    <div style="height: 96px">
+    <!-- <div style="height: 96px">
       <gear-card v-if="gearId" :gear="gear" />
       <div v-else class="pa-2" style="border: 1px dashed grey; border-radius: 4px; height: 100%">
         Click to select gear
       </div>
-    </div>
+    </div> -->
     <v-card-actions class="pa-0 mt-1 d-flex justify-space-between">
       <div>
         <v-btn class="font-weight-bold" color="primary" text @click="createGear">Create</v-btn>
-        <v-btn :disabled="!gear" text @click="clear">Clear</v-btn>
+        <!-- <v-btn :disabled="!gear" text @click="clear">Clear</v-btn> -->
       </div>
       <div>
         <v-btn :disabled="!gear" icon @click="copyGear"><v-icon>mdi-content-copy</v-icon></v-btn>
@@ -22,7 +22,8 @@
 </template>
 <script lang="ts">
 import { Gear } from '@/models';
-import { GearCard, GearFormBottomSheet } from '..';
+import GearCard from './GearCard.vue';
+import GearFormBottomSheet from './GearFormBottomSheet.vue';
 import { mapGetters, mapActions } from 'vuex';
 import { Vue, Component, Prop, Model } from 'vue-property-decorator';
 import { GearFormMode } from '@/models/gear/gear-form';
