@@ -49,7 +49,7 @@
         <v-col cols="12" md="4">
           <v-row dense>
             <v-col class="d-flex justify-center align-center">
-              <div class="mr-2">Bonus Ability (e.g. Artifact, Imprints)</div>
+              <div class="mr-2">Bonus Ability (e.g. Artifact)</div>
               <v-divider />
             </v-col>
           </v-row>

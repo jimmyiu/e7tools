@@ -16,6 +16,15 @@
           {{ statistics[item.value].max }}/{{ statistics[item.value].third }}
         </div>
       </v-col>
+      <v-col
+        v-for="(item, key) in $const.GearStat.SCORES"
+        :key="`${key}-2`"
+        class="d-flex align-center body-2"
+        cols="3"
+      >
+        <gear-stat-icon :stat="item" />
+        <div>{{ statistics[item.value].max }}/{{ statistics[item.value].third }}</div>
+      </v-col>
     </v-row>
     -- Speed --
     <v-row dense>
@@ -30,22 +39,6 @@
           {{ Math.round((100 * speed.distribution[item.key].equippedCount) / speed.distribution[item.key].count) }}%
         </v-col>
       </template>
-      <!-- <div>
-        17+: {{ speed.distribution.last.count }} ({{ speed.distribution.last.equippedCount }} /
-        {{ speed.distribution.last.unequippedCount }})
-      </div>
-      <div>
-        13-16: {{ speed.distribution.third.count }} ({{ speed.distribution.third.equippedCount }} /
-        {{ speed.distribution.third.unequippedCount }})
-      </div>
-      <div>
-        7-12: {{ speed.distribution.second.count }} ({{ speed.distribution.second.equippedCount }} /
-        {{ speed.distribution.second.unequippedCount }})
-      </div>
-      <div>
-        1-6: {{ speed.distribution.first.count }} ({{ speed.distribution.first.equippedCount }} /
-        {{ speed.distribution.first.unequippedCount }})
-      </div> -->
     </v-row>
     <!-- <div v-for="(item, key) in Object.keys(statistics)" :key="key">
       {{ item }}: {{ statistics[item].max }} / {{ statistics[item].third }}
@@ -61,6 +54,7 @@
   background-color: green
   border-radius: 4px
   padding: 0 2px
+  margin-left: -2px
 </style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';

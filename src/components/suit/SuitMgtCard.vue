@@ -4,6 +4,7 @@
       Current Suit
     </v-card-title>
     <v-card-text class="pa-2">
+      <hero-detail-card class="mb-2" :hero="currentEquipped.hero" :suit="currentEquipped.suit" />
       <suit-gear-view v-model="selectedIds" selectable :suit="currentEquipped.suit" />
     </v-card-text>
     <v-divider />
@@ -18,7 +19,7 @@
 <script lang="ts">
 import { EquippedHero, Gear, Suit } from '@/models';
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
-import { SuitGearView } from '@/components';
+import { SuitGearView, HeroDetailCard } from '@/components';
 import { mapActions, mapGetters } from 'vuex';
 
 /**
@@ -27,7 +28,7 @@ import { mapActions, mapGetters } from 'vuex';
 @Component({
   name: 'suit-mgt-card',
   computed: { ...mapGetters(['getEquippedHero', 'getGear']) },
-  components: { SuitGearView },
+  components: { SuitGearView, HeroDetailCard },
   methods: { ...mapActions(['saveGears']) }
 })
 export default class SuitMgtCard extends Vue {

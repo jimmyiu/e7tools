@@ -61,7 +61,7 @@ export const emptyOptimizationFilter: () => OptimizationFilter = () => {
     boots: [],
     maxSize: 0,
     enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
-    equippedMode: OptimizationFilterEquippedMode.NONE
+    equippedMode: OptimizationFilterEquippedMode.LOWER_TIER
   };
 };
 

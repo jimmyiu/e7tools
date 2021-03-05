@@ -96,7 +96,7 @@ function calculateOffScore(hero: HeroAbility, gear: Gear.Gear) {
 export function calculateSuitRating(equippedHero: EquippedHero) {
   let score = 0;
   if (equippedHero) {
-    score += (equippedHero.hp / equippedHero.hp - 1) * 100 * equippedHero.hero.abilityRating.hp;
+    score += (equippedHero.hp / equippedHero.hero.hp - 1) * 100 * equippedHero.hero.abilityRating.hp;
     score += (equippedHero.def / equippedHero.hero.def - 1) * 100 * equippedHero.hero.abilityRating.def;
     score += (equippedHero.atk / equippedHero.hero.atk - 1) * 100 * equippedHero.hero.abilityRating.atk;
     score += (Math.min(equippedHero.cri, 100) - equippedHero.hero.cri) * 1.6 * equippedHero.hero.abilityRating.cri;

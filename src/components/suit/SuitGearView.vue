@@ -35,7 +35,7 @@ export default class SuitGearView extends Vue {
 
   get suitGears() {
     if (this.suit) {
-      return [this.suit.weapon, this.suit.armor, this.suit.helmet, this.suit.necklace, this.suit.ring, this.suit.boot];
+      return [this.suit.weapon, this.suit.helmet, this.suit.armor, this.suit.necklace, this.suit.ring, this.suit.boot];
     }
     return [];
   }

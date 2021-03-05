@@ -45,7 +45,16 @@
     <v-row dense>
       <v-col cols="auto" style="margin: auto;"><div style="width: 18px"></div></v-col>
       <v-col>
-        <v-text-field v-model.number="value.ehp.min" dense hide-details label="EHP (min)" outlined type="number" />
+        <v-text-field
+          dense
+          hide-details
+          label="EHP (min)"
+          outlined
+          suffix=",000"
+          type="number"
+          :value="ehpMin"
+          @input="inputEhpMin"
+        />
       </v-col>
       <v-col cols="auto" style="margin: auto;"><div style="width: 18px"></div></v-col>
       <v-col>
@@ -106,16 +115,17 @@ export default class OptimizationStatCriteriaCard extends Vue {
     [Gear.Stat.CDMG, Gear.Stat.SPD],
     [Gear.Stat.EFF, Gear.Stat.RES]
   ];
-  // readonly stats = [
-  //   Gear.Stat.HP,
-  //   Gear.Stat.DEF,
-  //   Gear.Stat.ATK,
-  //   Gear.Stat.CRI,
-  //   Gear.Stat.CDMG,
-  //   Gear.Stat.SPD,
-  //   Gear.Stat.EFF,
-  //   Gear.Stat.RES
-  // ];
   @Model() readonly value!: OptimizationStatCriteria;
+
+  get ehpMin() {
+    if (this.value.ehp.min) {
+      return Math.trunc(this.value.ehp.min / 1000);
+    }
+    return undefined;
+  }
+
+  inputEhpMin(value: number) {
+    this.value.ehp.min = value * 1000;
+  }
 }
 </script>
