@@ -64,7 +64,7 @@
           <v-col cols="12" sm="4">
             <v-row dense>
               <v-col class="d-flex justify-center align-center px-6">
-                <div class="mr-2">Selected`</div>
+                <div class="mr-2" style="background-color:green">Selected</div>
                 <v-divider />
               </v-col>
             </v-row>

@@ -4,7 +4,6 @@
       Data &amp; Settings
       <div class="d-flex mt-1">
         <v-spacer />
-        <import-setting-btn />
         <v-dialog v-model="dialog.export">
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" class="mr-2" color="primary" dark small v-on="on">
@@ -30,6 +29,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <import-setting-btn />
         <v-dialog v-model="clearDialog" width="300">
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" color="error" dark small v-on="on">

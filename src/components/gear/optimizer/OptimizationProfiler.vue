@@ -130,9 +130,14 @@ export default class OptimizationProfiler extends Vue {
 
   resetProfile(heroId: string) {
     console.log('resetProfile::heroId = ' + heroId);
-    const profile = this.getProfile(heroId);
+    let profile = this.getProfile(heroId);
     console.log(`resetProfile::profile = ${JSON.stringify(profile)}`);
-    ObjectUtils.assignOptimizationProfile(this.form.profile, profile ?? ConstantService.emptyOptimizationProfile());
+    if (!profile) {
+      profile = ConstantService.emptyOptimizationProfile();
+      profile.id = heroId;
+      profile.hero.id = heroId;
+    }
+    ObjectUtils.assignOptimizationProfile(this.form.profile, profile);
   }
 
   changeHero() {
