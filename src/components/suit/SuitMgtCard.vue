@@ -4,7 +4,14 @@
       Current Suit
     </v-card-title>
     <v-card-text class="pa-2">
-      <suit-gear-view v-model="selectedIds" selectable :suit="currentEquipped.suit" />
+      <v-row dense>
+        <v-col cols="auto">
+          <hero-detail-card class="mb-2" :hero="currentEquipped.hero" :suit="currentEquipped.suit" />
+        </v-col>
+        <v-col>
+          <suit-gear-view v-model="selectedIds" selectable :suit="currentEquipped.suit" />
+        </v-col>
+      </v-row>
     </v-card-text>
     <v-divider />
     <v-card-actions>

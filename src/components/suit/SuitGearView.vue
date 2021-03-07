@@ -1,7 +1,32 @@
 <template>
   <v-row v-if="suit" dense>
+    <v-col class="d-flex justify-left" cols="12" lg="auto">
+      <gear-small-card
+        v-for="index in [0, 1, 2]"
+        :key="index"
+        :class="{ 'mr-2': index < 2 }"
+        :gear="suitGears[index]"
+        :selectable="selectable"
+        :selected="isSelectedGear(suitGears[index])"
+        @click="click"
+      />
+    </v-col>
+    <v-col class="d-flex" cols="12" lg="auto">
+      <gear-small-card
+        v-for="index in [3, 4, 5]"
+        :key="index"
+        :class="{ 'mr-2': index < 5 }"
+        :gear="suitGears[index]"
+        :selectable="selectable"
+        :selected="isSelectedGear(suitGears[index])"
+        @click="click"
+      />
+    </v-col>
+    <!-- </v-col>
+    <v-col cols="12">
+    </v-col>
+<v-col cols="12">
     <v-col v-for="(item, key) in suitGears" :key="key" cols="4" sm="auto">
-      <!--  -->
       <gear-small-card
         class="mx-auto"
         :gear="item"
@@ -10,6 +35,7 @@
         @click="click"
       />
     </v-col>
+    -->
   </v-row>
 </template>
 <script lang="ts">

@@ -3,7 +3,7 @@
     <v-col class="mb-1" cols="12">
       <v-sheet class="pa-1 pl-4 d-flex align-center">
         Special Actions
-        <v-btn class="font-weight-bold ml-4" color="primary" :disabled="lockActions" outlined @click="saveAll">
+        <v-btn class="font-weight-bold ml-2" color="primary" :disabled="lockActions" outlined @click="saveAll">
           Save All Suits
         </v-btn>
         <v-spacer />
@@ -16,20 +16,6 @@
       <v-sheet class="pa-2" rounded>
         <hero-select v-model="heroId" @change="changeHero" />
       </v-sheet>
-      <!-- <v-sheet v-for="(item, key) in tieredHeros" :key="key" class="mb-2 pa-2" rounded>
-        <div class="d-flex">
-          <v-avatar class="mt-1 mr-2" color="black" size="32"> T{{ item[0] }} </v-avatar>
-          <v-row dense>
-            <v-col v-for="(hero, index) in item[1]" :key="index" cols="auto">
-              <v-btn icon>
-                <v-avatar size="32" @click="changeHero(hero.id)">
-                  <v-img :src="hero.icon"></v-img>
-                </v-avatar>
-              </v-btn>
-            </v-col>
-          </v-row>
-        </div>
-      </v-sheet> -->
     </v-col>
     <!-- <v-alert dense dismissible outlined type="info">Organize heros</v-alert> -->
     <v-col>

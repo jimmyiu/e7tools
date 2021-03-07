@@ -27,7 +27,7 @@
       </template>
     </v-autocomplete>
     <!--  -->
-    <v-menu v-model="popup" left max-height="700px" offset-y transition="slide-y-transition">
+    <v-menu v-model="popup" left max-height="450px" offset-y transition="slide-y-transition">
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" class="ml-2" icon v-on="on"><v-icon>mdi-dots-vertical-circle-outline</v-icon></v-btn>
       </template>
@@ -122,7 +122,7 @@ export default class HeroSelect extends Vue {
   }
 
   change(heroId: string) {
-    if (this.value != heroId) {
+    if (this.value != heroId && heroId) {
       this.$emit('change', heroId);
     }
   }
