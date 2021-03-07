@@ -2,9 +2,9 @@ import { GearSetIcon, GearTypeIcon, GearStatIcon } from './gear/common';
 import GearActionCard from './gear/GearActionCard.vue';
 import GearSortingCard from './gear/GearSortingCard.vue';
 import GearCard from './gear/GearCard.vue';
+import GearSmallCard from './gear/GearSmallCard.vue';
 import GearDetailCard from './gear/GearDetailCard.vue';
 import GearFilterInputSheet from './gear/GearFilterInputSheet.vue';
-// import GearFormBottomSheet from './gear/GearFormBottomSheet.vue';
 import GearListView from './gear/GearListView.vue';
 import GearStatisticsSheet from './gear/GearStatisticsSheet.vue';
 import GearTable from './gear/GearTable.vue';
@@ -21,6 +21,7 @@ export {
   GearActionCard,
   GearSortingCard,
   GearCard,
+  GearSmallCard,
   GearDetailCard,
   GearFilterInputSheet,
   GearListView,

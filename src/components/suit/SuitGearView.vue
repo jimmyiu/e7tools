@@ -1,7 +1,8 @@
 <template>
   <v-row v-if="suit" dense>
-    <v-col v-for="(item, key) in suitGears" :key="key" cols="12" md="4" sm="6">
-      <gear-card
+    <v-col v-for="(item, key) in suitGears" :key="key" cols="4" sm="auto">
+      <!--  -->
+      <gear-small-card
         class="mx-auto"
         :gear="item"
         :selectable="selectable"
@@ -14,14 +15,14 @@
 <script lang="ts">
 import { Gear, Suit } from '@/models';
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
-import { GearCard } from '@/components';
+import { GearCard, GearSmallCard } from '@/components';
 
 /**
  * TODO: add slider
  */
 @Component({
   name: 'suit-gear-view',
-  components: { GearCard }
+  components: { GearCard, GearSmallCard }
 })
 export default class SuitGearView extends Vue {
   @Prop({ type: Boolean, default: false }) readonly selectable!: boolean;

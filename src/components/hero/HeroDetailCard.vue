@@ -50,13 +50,13 @@ import { gearService, HeroService } from '@/services';
 @Component({
   name: 'hero-detail-card',
   components: { GearSetIcon, GearStatIcon },
-  computed: mapGetters(['getHero'])
+  computed: mapGetters(['getHero', 'getEquippedHero'])
 })
 export default class HeroDetailCard extends Vue {
   // vuex
-  // getHero!: (heroId: string) => Hero | undefined;
+  getEquippedHero!: (heroId: string) => EquippedHero | undefined;
   // prop
-  // @Prop() readonly heroId!: string;
+  @Prop({ required: false, default: undefined }) readonly heroId!: string | undefined;
   @Prop() readonly suit!: Suit;
   @Prop() readonly hero!: Hero;
   // @Prop({ required: false }) readonly equippedHero!: EquippedHero | undefined;
@@ -73,6 +73,8 @@ export default class HeroDetailCard extends Vue {
   get equippedHero(): EquippedHero | undefined {
     if (this.suit && this.hero) {
       return HeroService.equip(this.hero, this.suit);
+    } else if (this.heroId) {
+      return this.getEquippedHero(this.heroId);
     }
     return undefined;
   }
