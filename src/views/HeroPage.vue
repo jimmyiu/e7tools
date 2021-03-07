@@ -1,8 +1,22 @@
 <template>
   <v-row dense>
-    <v-col cols="12" lg="3">
-      <hero-select v-model="heroId" class="mb-2" @change="changeHero" />
-      <v-sheet v-for="(item, key) in tieredHeros" :key="key" class="mb-2 pa-2" rounded>
+    <v-col class="mb-1" cols="12">
+      <v-sheet class="pa-1 pl-4 d-flex align-center">
+        Special Actions
+        <v-btn class="font-weight-bold ml-4" color="primary" :disabled="lockActions" outlined @click="saveAll">
+          Save All Suits
+        </v-btn>
+        <v-spacer />
+        <v-btn icon @click="lockActions = !lockActions">
+          <v-icon>{{ lockActions ? 'lock' : 'lock_open' }}</v-icon>
+        </v-btn>
+      </v-sheet>
+    </v-col>
+    <v-col cols="12">
+      <v-sheet class="pa-2" rounded>
+        <hero-select v-model="heroId" @change="changeHero" />
+      </v-sheet>
+      <!-- <v-sheet v-for="(item, key) in tieredHeros" :key="key" class="mb-2 pa-2" rounded>
         <div class="d-flex">
           <v-avatar class="mt-1 mr-2" color="black" size="32"> T{{ item[0] }} </v-avatar>
           <v-row dense>
@@ -15,16 +29,7 @@
             </v-col>
           </v-row>
         </div>
-      </v-sheet>
-      <v-sheet class="mb-2 pa-1 d-flex">
-        <v-btn class="font-weight-bold" color="primary" :disabled="lockActions" text @click="saveAll">
-          Save Suits
-        </v-btn>
-        <v-spacer />
-        <v-btn icon @click="lockActions = !lockActions">
-          <v-icon>{{ lockActions ? 'lock' : 'lock_open' }}</v-icon>
-        </v-btn>
-      </v-sheet>
+      </v-sheet> -->
     </v-col>
     <!-- <v-alert dense dismissible outlined type="info">Organize heros</v-alert> -->
     <v-col>
