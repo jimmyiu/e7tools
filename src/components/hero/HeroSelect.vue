@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex align-center">
     <v-autocomplete
+      dense
       hide-details
       item-text="name"
       item-value="id"
