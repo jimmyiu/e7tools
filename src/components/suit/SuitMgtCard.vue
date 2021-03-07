@@ -5,11 +5,14 @@
     </v-card-title>
     <v-card-text class="pa-2">
       <v-row dense>
-        <v-col cols="auto">
-          <hero-detail-card class="mb-2" :hero="currentEquipped.hero" :suit="currentEquipped.suit" />
-        </v-col>
-        <v-col>
-          <suit-gear-view v-model="selectedIds" selectable :suit="currentEquipped.suit" />
+        <v-col cols="12">
+          <suit-gear-view
+            v-model="selectedIds"
+            class="mx-auto"
+            :hero="currentEquipped.hero"
+            selectable
+            :suit="currentEquipped.suit"
+          />
         </v-col>
       </v-row>
     </v-card-text>

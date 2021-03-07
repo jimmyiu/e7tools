@@ -2,10 +2,11 @@
   <v-sheet
     class="pt-1"
     :class="{ selectable: selectable, 'blue-grey darken-4': selected }"
-    max-width="104"
-    min-width="104"
+    max-width="106"
+    min-width="106"
     outlined
     rounded
+    style="display: inline-block"
     @click="click"
   >
     <div v-if="gear && gear.id">
