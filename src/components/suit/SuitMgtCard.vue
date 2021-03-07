@@ -4,7 +4,6 @@
       Current Suit
     </v-card-title>
     <v-card-text class="pa-2">
-      <hero-detail-card class="mb-2" :hero="currentEquipped.hero" :suit="currentEquipped.suit" />
       <suit-gear-view v-model="selectedIds" selectable :suit="currentEquipped.suit" />
     </v-card-text>
     <v-divider />
@@ -12,6 +11,8 @@
       <v-btn class="font-weight-bold" color="primary" text>Save</v-btn>
       <!-- <v-btn class="font-weight-bold" color="success" :disabled="!selected" text @click="equip">Equip</v-btn> -->
       <v-btn class="font-weight-bold" color="warning" :disabled="!selected" text @click="unequip">Unequip</v-btn>
+      <v-spacer />
+      <!-- <v-btn class="font-weight-bold" text>All</v-btn> -->
       <v-btn :disabled="!selected" text @click="clear">Clear</v-btn>
     </v-card-actions>
   </v-card>

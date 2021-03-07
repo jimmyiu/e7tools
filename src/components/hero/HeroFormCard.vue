@@ -1,13 +1,9 @@
 <template>
   <v-card>
-    <v-card-title>
+    <v-card-text class="pa-2">
       <v-row dense>
-        <v-col>
-          <v-avatar class="mr-2" left size="40">
-            <v-img :src="hero.icon"></v-img>
-          </v-avatar>
-        </v-col>
-        <v-col cols="5">
+        <v-col cols="4">
+          <hero-detail-card class="mb-2" :hero-id="heroId" />
           <v-text-field
             v-model.number="form.tier"
             dense
@@ -18,74 +14,74 @@
             type="number"
           />
         </v-col>
-      </v-row>
-    </v-card-title>
-    <v-card-text>
-      <v-row dense>
-        <v-col cols="12" md="4">
+        <v-col cols="8">
           <v-row dense>
-            <v-col class="d-flex justify-center align-center">
-              <div class="mr-2">Basic Hero Ability</div>
-              <v-divider />
-              <v-btn icon x-small @click="lockBasic = !lockBasic">
-                <v-icon small>{{ lockBasic ? 'lock' : 'lock_open' }}</v-icon>
-              </v-btn>
+            <v-col cols="12" md="6">
+              <v-row dense>
+                <v-col class="d-flex justify-center align-center">
+                  <div class="mr-2">Basic Hero Ability</div>
+                  <v-divider />
+                  <v-btn icon x-small @click="lockBasic = !lockBasic">
+                    <v-icon small>{{ lockBasic ? 'lock' : 'lock_open' }}</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row dense>
+                <v-col v-for="(item, key) in $const.HERO_STATS" :key="key" cols="3">
+                  <v-text-field
+                    v-model.number="form.basic[item.value]"
+                    dense
+                    hide-details
+                    :label="item.label"
+                    outlined
+                    :readonly="lockBasic"
+                    type="number"
+                  />
+                </v-col>
+              </v-row>
             </v-col>
-          </v-row>
-          <v-row dense>
-            <v-col v-for="(item, key) in $const.HERO_STATS" :key="key" cols="3">
-              <v-text-field
-                v-model.number="form.basic[item.value]"
-                dense
-                hide-details
-                :label="item.label"
-                outlined
-                :readonly="lockBasic"
-                type="number"
-              />
+            <v-col cols="12" md="6">
+              <v-row dense>
+                <v-col class="d-flex justify-center align-center">
+                  <div class="mr-2">Bonus Ability (e.g. Artifact)</div>
+                  <v-divider />
+                </v-col>
+              </v-row>
+              <v-row dense>
+                <v-col v-for="(item, key) in $const.GearStat.PRIMITIVE" :key="key" cols="3">
+                  <v-text-field
+                    v-model.number="form.bonus[item.value]"
+                    dense
+                    hide-details
+                    :label="item.label"
+                    outlined
+                    type="number"
+                  />
+                </v-col>
+              </v-row>
             </v-col>
-          </v-row>
-        </v-col>
-        <v-col cols="12" md="4">
-          <v-row dense>
-            <v-col class="d-flex justify-center align-center">
-              <div class="mr-2">Bonus Ability (e.g. Artifact)</div>
-              <v-divider />
-            </v-col>
-          </v-row>
-          <v-row dense>
-            <v-col v-for="(item, key) in $const.GearStat.PRIMITIVE" :key="key" cols="3">
-              <v-text-field
-                v-model.number="form.bonus[item.value]"
-                dense
-                hide-details
-                :label="item.label"
-                outlined
-                type="number"
-              />
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col cols="12" md="4">
-          <v-row dense>
-            <v-col class="d-flex justify-center align-center">
-              <div class="mr-2">Suit Rating (for the Suit Optimizer)</div>
-              <v-divider />
-            </v-col>
-          </v-row>
-          <v-row dense>
-            <v-col v-for="(item, key) in $const.HERO_STATS" :key="key" cols="3">
-              <v-text-field
-                v-model.number="form.rating[item.value]"
-                dense
-                hide-details
-                :label="item.label"
-                max="3"
-                min="-1"
-                outlined
-                type="number"
-              />
-            </v-col>
+            <!-- <v-col cols="12" md="6">
+              <v-row dense>
+                <v-col class="d-flex justify-center align-center">
+                  <div class="mr-2">Suit Rating (for the Suit Optimizer)</div>
+                  <v-divider />
+                </v-col>
+              </v-row>
+              <v-row dense>
+                <v-col v-for="(item, key) in $const.HERO_STATS" :key="key" cols="3">
+                  <v-text-field
+                    v-model.number="form.rating[item.value]"
+                    dense
+                    hide-details
+                    :label="item.label"
+                    max="3"
+                    min="-1"
+                    outlined
+                    type="number"
+                  />
+                </v-col>
+              </v-row>
+            </v-col> -->
           </v-row>
         </v-col>
       </v-row>
@@ -103,6 +99,7 @@ import { mapActions, mapGetters } from 'vuex';
 import { Hero, HeroAbility } from '@/models';
 import { GearAbility } from '@/models/common';
 import { ConstantService, ObjectUtils } from '@/services';
+import { HeroDetailCard } from '@/components';
 
 type HeroForm = {
   tier: number;
@@ -114,6 +111,7 @@ type HeroForm = {
 @Component({
   name: 'hero-form-card',
   computed: { ...mapGetters(['getHero']) },
+  components: { HeroDetailCard },
   methods: { ...mapActions(['saveHeros']) }
 })
 export default class HeroFormCard extends Vue {

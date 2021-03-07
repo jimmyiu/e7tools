@@ -4,6 +4,7 @@ import { VuexData, Gear, Hero, OptimizationProfile, SiteState, HeroAbility } fro
 import E7dbDataHandler from '@/services/e7db-data-handler';
 import { persistenceService } from '@/services/presistence';
 import { ConstantService, HeroService, ObjectUtils, SuitBuilder } from '@/services';
+import { HeroSuit } from '@/models/suit';
 
 Vue.use(Vuex);
 
@@ -76,9 +77,6 @@ export default new Vuex.Store({
           }
         });
       }
-      // state.data.gears.filter(x => x.equippedHero == heroId).forEach(x => builder.setGear(x));
-      // return HeroService.equip(hero, builder.build());
-      // }
       return builder.build();
     }
   },
@@ -138,6 +136,10 @@ export default new Vuex.Store({
       state.data.heros = heros;
       persistenceService.replaceAll(heros);
     },
+    replaceSuits: (state, suits: HeroSuit[]) => {
+      state.data.suits.splice(0, state.data.suits.length, ...suits);
+      persistenceService.replaceAll(suits);
+    },
     //
     restoreData(state: any, value: VuexData) {
       Vue.set(state, 'data', value);
@@ -180,6 +182,9 @@ export default new Vuex.Store({
       if (data.heros.length == 0) {
         dispatch('refreshHeros');
       }
+    },
+    replaceSuits: ({ commit }, suits: HeroSuit[]) => {
+      commit('replaceSuits', suits);
     },
     refreshHeros: async ({ commit, dispatch, state }) => {
       dispatch('withLoading', async () => {
