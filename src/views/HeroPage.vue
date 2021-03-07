@@ -27,8 +27,8 @@
           </div>
           <v-expand-transition>
             <div v-if="$vuetify.breakpoint.lgAndUp || editHero">
-              <v-divider class="my-3" />
-              <hero-form-card :hero-id="heroId" />
+              <!-- <v-divider class="my-3" /> -->
+              <hero-form-card class="mt-3" :hero-id="heroId" />
             </div>
           </v-expand-transition>
         </v-sheet>
