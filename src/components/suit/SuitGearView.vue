@@ -1,28 +1,34 @@
 <template>
-  <v-row v-if="suit" dense>
-    <v-col class="d-flex justify-left" cols="12" lg="auto">
-      <gear-small-card
-        v-for="index in [0, 1, 2]"
-        :key="index"
-        :class="{ 'mr-2': index < 2 }"
-        :gear="suitGears[index]"
-        :selectable="selectable"
-        :selected="isSelectedGear(suitGears[index])"
-        @click="click"
-      />
-    </v-col>
-    <v-col class="d-flex" cols="12" lg="auto">
-      <gear-small-card
-        v-for="index in [3, 4, 5]"
-        :key="index"
-        :class="{ 'mr-2': index < 5 }"
-        :gear="suitGears[index]"
-        :selectable="selectable"
-        :selected="isSelectedGear(suitGears[index])"
-        @click="click"
-      />
-    </v-col>
-    <!-- </v-col>
+  <div v-if="suit" :class="{ size: $vuetify.breakpoint.mdAndDown }">
+    <v-row dense>
+      <v-col v-if="hero" cols="12" lg="auto">
+        <hero-detail-card :hero="hero" :suit="suit" />
+      </v-col>
+      <v-col class="d-flex justify-space-between" cols="12" lg="auto">
+        <gear-small-card
+          v-for="index in [0, 1, 2]"
+          :key="index"
+          :class="{ 'mx-2': index == 1 }"
+          :gear="suitGears[index]"
+          :selectable="selectable"
+          :selected="isSelectedGear(suitGears[index])"
+          @click="click"
+        />
+      </v-col>
+      <v-col class="d-flex justify-space-between" cols="12" lg="auto">
+        <!-- <div class="d-flex justify-space-between"> -->
+        <gear-small-card
+          v-for="index in [3, 4, 5]"
+          :key="index"
+          :class="{ 'mx-2': index == 4 }"
+          :gear="suitGears[index]"
+          :selectable="selectable"
+          :selected="isSelectedGear(suitGears[index])"
+          @click="click"
+        />
+        <!-- </div> -->
+      </v-col>
+      <!-- </v-col>
     <v-col cols="12">
     </v-col>
 <v-col cols="12">
@@ -36,22 +42,29 @@
       />
     </v-col>
     -->
-  </v-row>
+    </v-row>
+  </div>
 </template>
+<style lang="sass" scoped>
+.size
+  max-width: 336px
+  min-width: 336px
+</style>
 <script lang="ts">
-import { Gear, Suit } from '@/models';
+import { Gear, Hero, Suit } from '@/models';
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
-import { GearCard, GearSmallCard } from '@/components';
+import { GearCard, GearSmallCard, HeroDetailCard } from '@/components';
 
 /**
  * TODO: add slider
  */
 @Component({
   name: 'suit-gear-view',
-  components: { GearCard, GearSmallCard }
+  components: { GearCard, GearSmallCard, HeroDetailCard }
 })
 export default class SuitGearView extends Vue {
   @Prop({ type: Boolean, default: false }) readonly selectable!: boolean;
+  @Prop({ default: undefined, required: false }) readonly hero!: Hero | undefined;
   @Prop() readonly suit!: Suit;
   @Model('input', {
     default: () => {

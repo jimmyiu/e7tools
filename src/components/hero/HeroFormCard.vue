@@ -1,11 +1,11 @@
 <template>
-  <v-card>
-    <v-card-text class="pa-2">
+  <v-card flat outlined>
+    <v-card-text class="pa-3">
       <v-row dense>
-        <v-col cols="4">
-          <hero-detail-card class="mb-2" :hero-id="heroId" />
+        <v-col cols="12" md="4">
           <v-text-field
             v-model.number="form.tier"
+            class="mt-1"
             dense
             hide-details
             label="Tier (1 - Highest)"
@@ -14,7 +14,7 @@
             type="number"
           />
         </v-col>
-        <v-col cols="8">
+        <v-col cols="12">
           <v-row dense>
             <v-col cols="12" md="6">
               <v-row dense>
@@ -99,7 +99,6 @@ import { mapActions, mapGetters } from 'vuex';
 import { Hero, HeroAbility } from '@/models';
 import { GearAbility } from '@/models/common';
 import { ConstantService, ObjectUtils } from '@/services';
-import { HeroDetailCard } from '@/components';
 
 type HeroForm = {
   tier: number;
@@ -111,7 +110,6 @@ type HeroForm = {
 @Component({
   name: 'hero-form-card',
   computed: { ...mapGetters(['getHero']) },
-  components: { HeroDetailCard },
   methods: { ...mapActions(['saveHeros']) }
 })
 export default class HeroFormCard extends Vue {

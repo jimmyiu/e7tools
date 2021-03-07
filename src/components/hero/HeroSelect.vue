@@ -1,7 +1,6 @@
 <template>
   <div class="d-flex align-center">
     <v-autocomplete
-      dense
       hide-details
       item-text="name"
       item-value="id"
@@ -31,7 +30,7 @@
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" class="ml-2" icon v-on="on"><v-icon>mdi-dots-vertical-circle-outline</v-icon></v-btn>
       </template>
-      <v-sheet class="pa-2 mt-1" color="section" rounded>
+      <v-sheet class="pa-2" color="section" rounded>
         <v-row dense>
           <v-col v-for="(item, key) in tieredHeros" :key="key" cols="12" md="4" sm="6">
             <v-sheet class="pa-2" height="100%" rounded>
@@ -40,7 +39,7 @@
                 <v-row dense>
                   <v-col v-for="(hero, index) in item[1]" :key="index" cols="auto">
                     <v-btn icon>
-                      <v-avatar size="32" @click="input(hero.id) && change(hero.id)">
+                      <v-avatar size="32" @click="input(hero.id) || change(hero.id)">
                         <v-img :src="hero.icon"></v-img>
                       </v-avatar>
                     </v-btn>
@@ -122,7 +121,7 @@ export default class HeroSelect extends Vue {
   }
 
   change(heroId: string) {
-    if (this.value != heroId && heroId) {
+    if (heroId != undefined && this.value != heroId) {
       this.$emit('change', heroId);
     }
   }
