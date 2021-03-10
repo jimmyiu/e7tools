@@ -1,5 +1,5 @@
 <template>
-  <v-text-field autocomplete="false" dense hide-details outlined type="number" :value="value" @input="input">
+  <v-text-field autocomplete="off" dense hide-details outlined type="number" :value="value" @input="input">
     <template v-slot:prepend-inner>
       <gear-stat-icon :stat="stat" style="padding-top: 3px;" />
     </template>

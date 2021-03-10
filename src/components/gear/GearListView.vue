@@ -1,10 +1,7 @@
 <template>
-  <!-- <v-row no-gutters>
-    <v-col cols="12"> -->
-  <v-virtual-scroll :height="height" item-height="102" :items="gears">
+  <v-virtual-scroll :height="height" item-height="102" :items="gears" width="366">
     <template v-slot:default="{ item }">
       <gear-card
-        class="mx-auto"
         :gear="item"
         :highlight1="sortCol"
         :selectable="true"
@@ -23,10 +20,7 @@
   <!-- </v-col> -->
   <!-- </v-row> -->
 </template>
-<style lang="sass" scoped>
-::v-deep td
-  padding: 0 8px!important
-</style>
+<style lang="sass" scoped></style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
 import { Gear } from '@/models';

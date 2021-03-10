@@ -1,5 +1,11 @@
 <template>
-  <title-sheet :class="{ 'card-size': $vuetify.breakpoint.smAndUp }" title="Filtering" @reset="reset">
+  <title-sheet
+    class="pa-3"
+    :class="{ 'card-size': $vuetify.breakpoint.smAndUp }"
+    :collapsible="false"
+    title="Basic Filter"
+    @reset="reset"
+  >
     <v-row class="mt-1" dense>
       <v-col class="text-center" cols="12">
         <gear-type-select v-model="form.type" :figures="typeFigures" />
@@ -180,17 +186,17 @@ export default class GearFilterInputSheet extends Vue {
     this.form.levelMode = Gear.LevelFilterMode.ALL;
     this.form.enhanceMode = Gear.EnhanceModeFilter.ALL;
     this.form.equippedMode = FilterMode.ALL;
-    this.form.applyToMain = false;
-    Object.keys(this.form.minStat).forEach(key => Vue.set(this.form.minStat, key, undefined));
-    this.form.sortingColumn = 'level';
-    this.form.sortingOrder = SortingOrder.DESCENDING;
+    // this.form.applyToMain = false;
+    // Object.keys(this.form.minStat).forEach(key => Vue.set(this.form.minStat, key, undefined));
+    // this.form.sortingColumn = 'level';
+    // this.form.sortingOrder = SortingOrder.DESCENDING;
   }
 
   resetStat() {
     this.form.applyToMain = false;
     Object.keys(this.form.minStat).forEach(key => Vue.set(this.form.minStat, key, undefined));
-    this.form.sortingColumn = 'level';
-    this.form.sortingOrder = SortingOrder.DESCENDING;
+    // this.form.sortingColumn = 'level';
+    // this.form.sortingOrder = SortingOrder.DESCENDING;
   }
 }
 </script>
