@@ -1,26 +1,27 @@
 <template>
-  <v-row no-gutters>
-    <v-col cols="12">
-      <v-virtual-scroll height="606" item-height="102" :items="gears">
-        <template v-slot:default="{ item }">
-          <gear-card
-            :gear="item"
-            :highlight1="sortCol"
-            :selectable="true"
-            :selected="isSelected(item)"
-            @click="clickGear"
-          />
-        </template>
-      </v-virtual-scroll>
-    </v-col>
-    <!-- <v-col cols="12"> -->
-    <!-- Showing {{ gears.length }} gears: 1-15 of 363, page size = {{ pageSize }} -->
-    <!-- <div>
+  <!-- <v-row no-gutters>
+    <v-col cols="12"> -->
+  <v-virtual-scroll :height="height" item-height="102" :items="gears">
+    <template v-slot:default="{ item }">
+      <gear-card
+        class="mx-auto"
+        :gear="item"
+        :highlight1="sortCol"
+        :selectable="true"
+        :selected="isSelected(item)"
+        @click="clickGear"
+      />
+    </template>
+  </v-virtual-scroll>
+  <!-- </v-col> -->
+  <!-- <v-col cols="12"> -->
+  <!-- Showing {{ gears.length }} gears: 1-15 of 363, page size = {{ pageSize }} -->
+  <!-- <div>
         <v-text-field v-model.number="pageSize" dense hide-details label="Page Size" outlined type="number" />
       </div> -->
-    <!-- <v-pagination v-model="currentPage" :length="numOfPages" :total-visible="6"></v-pagination> -->
-    <!-- </v-col> -->
-  </v-row>
+  <!-- <v-pagination v-model="currentPage" :length="numOfPages" :total-visible="6"></v-pagination> -->
+  <!-- </v-col> -->
+  <!-- </v-row> -->
 </template>
 <style lang="sass" scoped>
 ::v-deep td
@@ -39,6 +40,7 @@ import { mapActions, mapGetters } from 'vuex';
 })
 export default class GearListView extends Vue {
   getGear!: (gearId: string) => Gear.Gear;
+  @Prop({ default: 506 }) readonly height!: number;
   @Prop() readonly gears!: Gear.Gear[];
   @Prop() readonly sortCol!: string | undefined;
   @Model('input') readonly selectedGearId!: string;
