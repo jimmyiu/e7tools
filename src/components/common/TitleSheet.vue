@@ -2,7 +2,7 @@
   <v-sheet class="pa-2" :class="{ 'card-size': $vuetify.breakpoint.smAndUp }" rounded>
     <v-row no-gutters>
       <v-col class="d-flex align-center" cols="12">
-        <v-btn icon small @click="visible = !visible">
+        <v-btn v-if="collapsible" icon small @click="visible = !visible">
           <v-icon>{{ visible ? 'mdi-chevron-down' : 'mdi-chevron-up' }}</v-icon>
         </v-btn>
         <div class="ml-1 mr-3">{{ title }}</div>
@@ -27,5 +27,6 @@ export default class TitleSheet extends Vue {
   visible: boolean = true;
   @Prop() readonly title!: string;
   @Prop({ required: false, default: true }) readonly reset!: boolean;
+  @Prop({ required: false, default: true }) readonly collapsible!: boolean;
 }
 </script>

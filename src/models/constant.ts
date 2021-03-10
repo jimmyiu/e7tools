@@ -8,6 +8,8 @@ type Constants = {
     NECKLACE_MAIN_STATS: Readonly<Gear.Stat[]>;
     RING_MAIN_STATS: Readonly<Gear.Stat[]>;
     BOOT_MAIN_STATS: Readonly<Gear.Stat[]>;
+    DEFENSIVE_STATS: Readonly<Gear.Stat[]>;
+    OFFENSIVE_STATS: Readonly<Gear.Stat[]>;
   };
   GearSet: {
     ALL: Readonly<Gear.Set[]>;
@@ -69,7 +71,9 @@ export const Constants: Constants = {
       Gear.Stat.ATKP,
       Gear.Stat.ATK,
       Gear.Stat.SPD
-    ])
+    ]),
+    DEFENSIVE_STATS: Object.freeze([Gear.Stat.HPP, Gear.Stat.HP, Gear.Stat.DEFP, Gear.Stat.DEF, Gear.Stat.RES]),
+    OFFENSIVE_STATS: Object.freeze([Gear.Stat.ATKP, Gear.Stat.ATK, Gear.Stat.CRI, Gear.Stat.CDMG, Gear.Stat.EFF])
   },
   GearSet: {
     ALL: Object.freeze([...Object.values(Gear.Set)])

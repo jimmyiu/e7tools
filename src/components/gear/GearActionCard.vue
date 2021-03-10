@@ -2,12 +2,12 @@
   <v-card class="pa-0" elevation="0" outlined>
     <v-card-actions class="pa-1 mt-0 d-flex justify-space-between">
       <div>
-        <v-btn icon @click="visible.overlay = true">
+        <v-btn class="hidden-md-and-up" icon @click="visible.overlay = true">
           <v-badge bordered color="primary" dot overlap :value="isFiltered">
             <v-icon>mdi-filter-variant</v-icon>
           </v-badge>
         </v-btn>
-        <v-btn icon @click="visible.sorting = !visible.sorting"><v-icon>mdi-sort</v-icon></v-btn>
+        <v-btn class="hidden-md-and-up" icon @click="toggleSorting"><v-icon>mdi-sort</v-icon></v-btn>
         <v-btn :disabled="!clearable" icon @click="clear"><v-icon>mdi-close-circle-outline</v-icon></v-btn>
         <!-- <v-btn icon><v-icon>mdi-chart-box-outline</v-icon></v-btn> -->
       </div>
@@ -18,20 +18,23 @@
         <v-btn :disabled="!gear" icon @click="deleteGear"><v-icon>delete</v-icon></v-btn>
       </div>
     </v-card-actions>
-    <v-scroll-y-transition>
-      <div v-if="visible.sorting">
-        <v-divider />
-        <gear-sorting-card v-model="filter" class="ma-1" />
-      </div>
-    </v-scroll-y-transition>
+    <div v-if="visible.sorting" class="hidden-md-and-up">
+      <v-divider />
+      <gear-sorting-card v-model="filter" class="ma-1" />
+    </div>
+    <div class="hidden-sm-and-down">
+      <v-divider />
+      <gear-sorting-card v-model="filter" class="ma-1" />
+      <v-divider />
+      <gear-filter-input-sheet v-model="filter" :gears="filteredGears" />
+    </div>
     <gear-form-bottom-sheet
       v-model="form.visible"
       :gear="gear"
       :mode="form.mode"
       @success="visible.completeMsg = true"
     />
-    <!-- <v-fade-transition> -->
-    <v-overlay class="pa-2" color="section" :opacity="0.85" :value="visible.overlay">
+    <v-overlay class="pa-2 hidden-md-and-up" color="section" :opacity="0.85" :value="visible.overlay">
       <gear-filter-input-sheet v-model="filter" :gears="filteredGears" />
       <v-btn class="mt-2 font-weight-bold" color="primary" width="100%" @click="visible.overlay = false">
         Close ({{ filteredGears.length }} Items)
@@ -41,7 +44,6 @@
       <div v-if="form.mode == 'edit'" class="text-center">A gear was updated</div>
       <div v-else class="text-center">A gear was created</div>
     </v-snackbar>
-    <!-- </v-fade-transition> -->
   </v-card>
 </template>
 <script lang="ts">
@@ -197,6 +199,11 @@ export default class GearActionCard extends Vue {
     }
     return result;
   }
+  toggleSorting() {
+    this.visible.sorting = !this.visible.sorting;
+    Vue.nextTick().then(() => this.$emit('resize'));
+    // this.$emit('resize');
+  }
 
   clear() {
     assignGearPageFilter(this.filter, emptyGearPageFilter());
@@ -230,9 +237,5 @@ export default class GearActionCard extends Vue {
       // this.clear();
     }
   }
-
-  // showFilter() {
-  //   this.$emit('show-filter', '');
-  // }
 }
 </script>

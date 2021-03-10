@@ -1,21 +1,24 @@
 <template>
   <div v-resize="onResize" class="mx-auto">
-    <gear-action-card
-      class="mb-2"
-      :selected-gear-id="selectedGearId"
-      @change-gears="changeGears"
-      @change-sorting="changeSorting"
-    />
     <v-row dense justify="center">
-      <!-- <v-col cols="12" sm="auto">
-        <gear-filter-input-sheet v-model="filter" class="mb-2" :gears="filteredGears" />
-      </v-col> -->
+      <v-col cols="12" md="auto">
+        <gear-action-card
+          id="testing123"
+          ref="gearActionCard"
+          :selected-gear-id="selectedGearId"
+          @change-gears="changeGears"
+          @change-sorting="changeSorting"
+          @resize="onResize"
+        />
+      </v-col>
       <!-- <v-col cols="12" sm="auto">
         <gear-statistics-sheet :gears="filteredGears" />
       </v-col> -->
-      <v-col cols="12">
+      <v-col cols="12" md="auto">
         <gear-list-view
+          ref="listView"
           v-model="selectedGearId"
+          class="mx-auto"
           :gears="filteredGears"
           :height="listViewHeight"
           :sort-col="sortingColumn"
@@ -29,7 +32,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
 import {
   GearActionCard,
@@ -71,17 +74,26 @@ export default class GearPage extends Vue {
     this.sortingColumn = sortingCol;
   }
 
-  goToTop() {
-    console.log('called');
-    // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    // this.$vuetify.goTo(0, { container: '#app' });
-    // this.$vuetify.goTo('#app', { offset: -100 });
-    (document.getElementById('app') as any).scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  }
+  // goToTop() {
+  //   console.log('called');
+  // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  // this.$vuetify.goTo(0, { container: '#app' });
+  // this.$vuetify.goTo('#app', { offset: -100 });
+  //   (document.getElementById('app') as any).scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  // }
 
   onResize() {
-    console.log('window.innerHeight =', window.innerHeight);
-    this.listViewHeight = window.innerHeight - (60 + 12 + 12 + 46 + 8);
+    // console.log('window.innerHeight =', window.innerHeight);
+    // setTimeout(() => {
+    // console.log(this.$refs.listView.$el.offsetTop);
+    // console.log(this.$refs.gearActionCard.$el.clientHeight);
+    // this.listViewHeight = window.innerHeight - (60 + 12 + 12 + this.$refs.gearActionCard.$el.clientHeight + 8);
+    // if (this.$vuetify.breakpoint.mdAndUp) {
+    //   this
+    // }
+    // console.log(this.$vuetify.breakpoint.mdAndUp);
+    this.listViewHeight = window.innerHeight - this.$refs.listView.$el.offsetTop - 60;
+    // }, 500);
   }
 }
 </script>
