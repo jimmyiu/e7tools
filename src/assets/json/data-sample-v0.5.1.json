@@ -1632,6 +1632,38 @@
       "eff": 7,
       "locked": false,
       "equippedHero": ""
+    },
+    {
+      "id": "fide3fje03",
+      "type": "Helmet",
+      "set": "Destruction",
+      "grade": "Epic",
+      "level": 78,
+      "enhance": 15,
+      "main": "hp",
+      "hpp": 11,
+      "hp": 2565,
+      "defp": 14,
+      "atkp": 15,
+      "spd": 11,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "412dea2ibf",
+      "type": "Helmet",
+      "set": "Speed",
+      "grade": "Epic",
+      "level": 90,
+      "enhance": 15,
+      "main": "hp",
+      "hpp": 12,
+      "hp": 2835,
+      "defp": 15,
+      "spd": 16,
+      "eff": 9,
+      "locked": false,
+      "equippedHero": ""
     }
   ],
   "profiles": [

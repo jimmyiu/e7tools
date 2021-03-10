@@ -3,9 +3,11 @@
     <div v-if="gear && gear.id">
       <v-row class="px-2" no-gutters>
         <v-col class="d-flex align-center" cols="4">
-          <gear-type-icon style="padding-bottom: 1px" :type="gear.type" />
+          <div :class="gear.grade.color" style="border-radius: 4px">
+            <gear-type-icon style="padding-bottom: 1px" :type="gear.type" />
+          </div>
           <gear-set-icon :set="gear.set" />
-          <div :style="'color: ' + gear.grade.color">{{ gear.level }}</div>
+          {{ gear.level }}
           <div class="caption">+{{ gear.enhance }}</div>
         </v-col>
         <v-col class="d-flex align-center" cols="4">

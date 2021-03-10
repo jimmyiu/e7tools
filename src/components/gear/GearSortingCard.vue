@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-1" :class="{ 'card-size': $vuetify.breakpoint.smAndUp }" elevation="0" outlined>
+  <v-card class="pa-0" :class="{ 'card-size': $vuetify.breakpoint.smAndUp }" elevation="0" flat>
     <v-row no-gutters>
       <v-col cols="auto">
         <v-btn icon @click="toggleSort()">

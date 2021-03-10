@@ -1,26 +1,26 @@
 <template>
-  <div class="mx-auto" style="max-width: 1000px">
-    <v-row dense>
-      <v-col cols="12" sm="auto">
+  <div class="mx-auto">
+    <v-row dense justify="center">
+      <!-- <v-col cols="12" sm="auto">
         <gear-filter-input-sheet v-model="filter" class="mb-2" :gears="filteredGears" />
-      </v-col>
-      <v-col cols="12" sm="auto">
+      </v-col> -->
+      <!-- <v-col cols="12" sm="auto">
         <gear-statistics-sheet :gears="filteredGears" />
-      </v-col>
+      </v-col> -->
       <v-col cols="12" sm="auto">
-        <gear-sorting-card v-model="filter" class="mb-2" />
-        <gear-action-card v-model="selectedGearId" class="mb-2" />
-
-        <gear-list-view v-model="selectedGearId" :gears="filteredGears" :sort-col="filter.sortingColumn" />
+        <gear-action-card
+          class="mb-2"
+          :selected-gear-id="selectedGearId"
+          @change-gears="changeGears"
+          @change-sorting="changeSorting"
+        />
+        <gear-list-view v-model="selectedGearId" :gears="filteredGears" :sort-col="sortingColumn" />
         <!-- <gear-table :gears="filteredGears" @edit-gear="editGear" /> -->
         <v-btn bottom class="hidden-sm-and-up" fab fixed right small @click="goToTop">
           <v-icon>mdi-chevron-up</v-icon>
         </v-btn>
       </v-col>
     </v-row>
-    <v-snackbar v-model="visible.completeMsg" bottom color="success" outlined timeout="1500">
-      <div class="text-center">A gear is updated</div>
-    </v-snackbar>
   </div>
 </template>
 <script lang="ts">
@@ -43,119 +43,26 @@ import { SortingOrder } from '@/models/common';
   name: 'gear-page',
   components: {
     GearActionCard,
-    GearSortingCard,
     GearTable,
-    GearFilterInputSheet,
     GearCard,
     GearStatisticsSheet,
     GearListView
-  },
-  computed: { ...mapGetters(['gears', 'getGear']) }
+  }
+  // computed: { ...mapGetters(['gears', 'getGear']) }
 })
 export default class GearPage extends Vue {
-  getGear!: (gearId: string) => Gear.Gear;
-
-  gears!: Gear.Gear[];
+  // getGear!: (gearId: string) => Gear.Gear;
+  // gears!: Gear.Gear[];
   selectedGearId: string = '';
-  visible = {
-    overlay: false,
-    completeMsg: false
-  };
-  filter: GearPageFilter = {
-    type: undefined,
-    sets: [],
-    levelMode: Gear.LevelFilterMode.ALL,
-    enhanceMode: Gear.EnhanceModeFilter.ALL,
-    equippedMode: FilterMode.ALL,
-    applyToMain: false,
-    minStat: {},
-    sortingColumn: 'level',
-    sortingOrder: SortingOrder.DESCENDING
-  };
+  sortingColumn: string = '';
+  filteredGears: Gear.Gear[] = [];
 
-  get filteredGears() {
-    let result = this.gears.filter(it => {
-      let type = this.filter.type == undefined || this.filter.type == it.type!!;
-      let set = this.filter.sets.length == 0 || this.filter.sets.indexOf(it.set!!) >= 0;
-      // let level = !this.filter.level || this.filter.level == it.level!!;
-      let level =
-        !this.filter.levelMode ||
-        (this.filter.levelMode == Gear.LevelFilterMode.LV85 && it.level == 85) ||
-        (this.filter.levelMode == Gear.LevelFilterMode.LV90 && it.level == 90) ||
-        (this.filter.levelMode == Gear.LevelFilterMode.OTHERS && it.level != 85 && it.level != 90);
-      let enhance =
-        !this.filter.enhanceMode ||
-        (this.filter.enhanceMode == Gear.EnhanceModeFilter.LESS_THAN_15 && it.enhance!! < 15) ||
-        (this.filter.enhanceMode == Gear.EnhanceModeFilter.ONLY_15 && it.enhance!! == 15);
-      let equipped =
-        !this.filter.equippedMode ||
-        (this.filter.equippedMode == FilterMode.YES && it.equippedHero != '') ||
-        (this.filter.equippedMode == FilterMode.NO && it.equippedHero == '');
+  changeGears(gears: Gear.Gear[]) {
+    this.filteredGears.splice(0, this.filteredGears.length, ...gears);
+  }
 
-      const minStatFilter = (stat: keyof GearStatFilter) => {
-        if (it.main.value == stat && !this.filter.applyToMain && (this.filter.minStat[stat] ?? 0) > 0) {
-          return false;
-        }
-        return (it[stat] ?? 0) >= (this.filter.minStat[stat] ?? 0);
-      };
-      let min =
-        minStatFilter('hpp') &&
-        minStatFilter('hp') &&
-        minStatFilter('defp') &&
-        minStatFilter('def') &&
-        minStatFilter('atkp') &&
-        minStatFilter('atk') &&
-        minStatFilter('cri') &&
-        minStatFilter('cdmg') &&
-        minStatFilter('spd') &&
-        minStatFilter('eff') &&
-        minStatFilter('res') &&
-        minStatFilter('score') &&
-        minStatFilter('offScore') &&
-        minStatFilter('defScore');
-      return type && set && level && enhance && equipped && min;
-    });
-    // if (!this.filter.main) {
-    //   result = result.map(x => {
-    //     let foo = Gear.Gear.clone(x);
-    //     Vue.set(foo, foo.main!!.value, undefined);
-    //     return foo;
-    //   });
-    // }
-    if (this.filter.sortingColumn) {
-      const defaultSort = (a: Gear.Gear, b: Gear.Gear) => {
-        let result = b.level - a.level;
-        if (result == 0) {
-          // TODO: sort grade
-          return b.enhance - a.enhance;
-        }
-        return result;
-      };
-      result.sort((a, b) => {
-        let aa = undefined;
-        let bb = undefined;
-        if (this.filter.applyToMain || a.main.value != this.filter.sortingColumn) {
-          aa = (a as any)[this.filter.sortingColumn!];
-        }
-        if (this.filter.applyToMain || b.main.value != this.filter.sortingColumn) {
-          bb = (b as any)[this.filter.sortingColumn!];
-        }
-        // console.log(`sort::aa = ${aa}, bb = ${bb}`);
-        if (!aa && !bb) {
-          return defaultSort(a, b);
-        } else if (!aa) {
-          return this.filter.sortingOrder == SortingOrder.DESCENDING ? 1 : -1;
-        } else if (!bb) {
-          return this.filter.sortingOrder == SortingOrder.DESCENDING ? -1 : 1;
-        } else if (aa - bb == 0) {
-          return defaultSort(a, b);
-        } else if (this.filter.sortingOrder == SortingOrder.DESCENDING) {
-          return bb - aa;
-        }
-        return aa - bb;
-      });
-    }
-    return result;
+  changeSorting(sortingCol: string) {
+    this.sortingColumn = sortingCol;
   }
 
   goToTop() {

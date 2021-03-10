@@ -1,3 +1,4 @@
+import { ObjectUtils } from '@/services';
 import { Gear, FilterMode } from '.';
 import { GearAbility, SortingOrder } from './common';
 
@@ -20,4 +21,43 @@ export type GearPageFilter = {
   minStat: GearStatFilter;
   sortingColumn?: SortingColumn;
   sortingOrder: SortingOrder;
+};
+
+export type GearActionCardModel = {
+  filter: GearPageFilter;
+  gearId: string;
+};
+
+export const emptyGearPageFilter: () => GearPageFilter = () => {
+  return {
+    type: undefined,
+    sets: [],
+    levelMode: Gear.LevelFilterMode.ALL,
+    enhanceMode: Gear.EnhanceModeFilter.ALL,
+    equippedMode: FilterMode.ALL,
+    applyToMain: false,
+    minStat: {},
+    sortingColumn: 'level',
+    sortingOrder: SortingOrder.DESCENDING
+  };
+};
+
+// (to: GearPageFilter, from: GearPageFilter) => void
+export const assignGearPageFilter = (to: GearPageFilter, from: GearPageFilter) => {
+  to.type = from.type;
+  to.sets.splice(0, to.sets.length, ...from.sets);
+  to.levelMode = from.levelMode;
+  to.enhanceMode = from.enhanceMode;
+  to.equippedMode = from.equippedMode;
+  to.applyToMain = from.applyToMain;
+  assignGearStatFilter(to.minStat, from.minStat);
+  to.sortingColumn = from.sortingColumn;
+  to.sortingOrder = from.sortingOrder;
+};
+
+export const assignGearStatFilter = (to: GearStatFilter, from: GearStatFilter) => {
+  ObjectUtils.assignGearAbility(to, from);
+  to.score = from.score;
+  to.offScore = from.offScore;
+  to.defScore = from.defScore;
 };

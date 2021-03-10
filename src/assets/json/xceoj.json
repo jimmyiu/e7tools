@@ -351,7 +351,7 @@
       "cdmg": 24,
       "eff": 14,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "schuri"
     },
     {
       "id": "i-G",
@@ -1455,7 +1455,7 @@
       "eff": 17,
       "res": 7,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "schuri"
     },
     {
       "id": "i-zS",
@@ -1711,7 +1711,7 @@
       "cdmg": 12,
       "spd": 7,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "schuri"
     },
     {
       "id": "i-zc",
@@ -2999,11 +2999,11 @@
       "level": 85,
       "enhance": 15,
       "main": "def",
-      "hpp": 8,
-      "defp": 26,
+      "hpp": 9,
+      "defp": 31,
       "def": 300,
-      "atkp": 17,
-      "cri": 3,
+      "atkp": 21,
+      "cri": 4,
       "locked": false,
       "equippedHero": "champion-zerato"
     },
@@ -3249,13 +3249,13 @@
       "set": "Hit",
       "grade": "Epic",
       "level": 85,
-      "enhance": 9,
+      "enhance": 12,
       "main": "atk",
-      "hp": 163,
-      "atkp": 14,
-      "atk": 280,
-      "cdmg": 9,
-      "eff": 16,
+      "hp": 170,
+      "atkp": 5,
+      "atk": 360,
+      "spd": 12,
+      "eff": 8,
       "locked": false,
       "equippedHero": ""
     },
@@ -3960,7 +3960,7 @@
       "cri": 16,
       "spd": 9,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "schuri"
     },
     {
       "id": "i-zzzzI",
@@ -4294,7 +4294,7 @@
       "cdmg": 65,
       "spd": 6,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "schuri"
     },
     {
       "id": "i-zzzza",
@@ -4525,14 +4525,14 @@
       "type": "Helmet",
       "set": "Critical",
       "grade": "Epic",
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": "hp",
-      "hp": 2700,
-      "defp": 17,
-      "atkp": 11,
-      "cri": 12,
-      "cdmg": 5,
+      "hp": 2835,
+      "defp": 21,
+      "atkp": 14,
+      "cri": 15,
+      "cdmg": 6,
       "locked": false,
       "equippedHero": "seaside-bellona"
     },
@@ -4908,14 +4908,14 @@
       "type": "Weapon",
       "set": "Immunity",
       "grade": "Epic",
-      "level": 85,
-      "enhance": 9,
+      "level": 90,
+      "enhance": 15,
       "main": "atk",
-      "hp": 182,
-      "atkp": 14,
-      "atk": 280,
-      "cdmg": 10,
-      "spd": 8,
+      "hp": 238,
+      "atkp": 17,
+      "atk": 525,
+      "cdmg": 20,
+      "spd": 14,
       "locked": false,
       "equippedHero": ""
     },
@@ -5329,7 +5329,7 @@
       "spd": 8,
       "eff": 9,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "schuri"
     },
     {
       "id": "aadh455aeh",
@@ -5847,10 +5847,11 @@
       "set": "Penetration",
       "grade": "Hero",
       "level": 85,
-      "enhance": 9,
+      "enhance": 15,
       "main": "atkp",
       "hp": 163,
-      "atkp": 34,
+      "atkp": 60,
+      "cdmg": 12,
       "spd": 13,
       "eff": 8,
       "locked": false,
@@ -6019,10 +6020,10 @@
       "type": "Helmet",
       "set": "Counter",
       "grade": "Epic",
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": "hp",
-      "hp": 2700,
+      "hp": 2835,
       "atkp": 23,
       "cdmg": 6,
       "spd": 10,
@@ -6043,6 +6044,38 @@
       "cri": 9,
       "spd": 40,
       "eff": 16,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "d6b80i0e91",
+      "type": "Armor",
+      "set": "Speed",
+      "grade": "Epic",
+      "level": 85,
+      "enhance": 15,
+      "main": "def",
+      "defp": 8,
+      "def": 300,
+      "spd": 9,
+      "eff": 7,
+      "res": 19,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "ebiacbfecb",
+      "type": "Helmet",
+      "set": "Hit",
+      "grade": "Epic",
+      "level": 85,
+      "enhance": 15,
+      "main": "hp",
+      "hp": 2700,
+      "atkp": 5,
+      "cri": 13,
+      "spd": 12,
+      "res": 7,
       "locked": false,
       "equippedHero": ""
     }
@@ -6288,7 +6321,7 @@
       "filter": {
         "sets": [],
         "necklaces": [],
-        "rings": ["eff"],
+        "rings": ["eff", "hpp", "hp", "defp", "def"],
         "boots": ["spd"],
         "maxSize": 20,
         "enhanceMode": 2,
@@ -6301,7 +6334,7 @@
         "cri": { "min": "", "max": 110 },
         "cdmg": { "max": 360 },
         "spd": { "min": 240 },
-        "eff": { "min": 120 },
+        "eff": { "min": 130 },
         "res": {},
         "ehp": { "min": 97000 },
         "damage": { "min": "" }
@@ -6656,7 +6689,7 @@
         "boots": ["spd", "defp", "def", "hpp", "hp"],
         "maxSize": 27,
         "enhanceMode": null,
-        "equippedMode": 2
+        "equippedMode": 3
       },
       "stat": {
         "hp": {},
@@ -6664,10 +6697,10 @@
         "atk": {},
         "cri": { "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": 200 },
+        "spd": { "min": 219 },
         "eff": {},
         "res": {},
-        "ehp": { "min": 106000 },
+        "ehp": { "min": 95000 },
         "damage": {}
       },
       "evaluation": { "forcedSets": ["Speed"], "limit": 25000000, "brokenSet": true, "lv85": false }
@@ -7295,6 +7328,32 @@
         "damage": { "min": 900 }
       },
       "evaluation": { "forcedSets": ["Attack"], "limit": 10000000, "brokenSet": false, "lv85": false }
+    },
+    {
+      "id": "schuri",
+      "hero": { "id": "schuri" },
+      "filter": {
+        "sets": [],
+        "necklaces": ["atkp", "atk", "cri", "cdmg"],
+        "rings": ["atkp", "atk"],
+        "boots": ["atkp", "atk"],
+        "maxSize": 0,
+        "enhanceMode": null,
+        "equippedMode": 1
+      },
+      "stat": {
+        "hp": {},
+        "def": {},
+        "atk": {},
+        "cri": { "min": 97, "max": 110 },
+        "cdmg": { "max": 360 },
+        "spd": {},
+        "eff": {},
+        "res": {},
+        "ehp": { "min": 40000 },
+        "damage": { "min": 860 }
+      },
+      "evaluation": { "forcedSets": [], "limit": 25000000, "brokenSet": true, "lv85": false }
     }
   ],
   "heros": [
@@ -7536,7 +7595,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c1081_s.png",
       "tier": 1,
       "bonusAbility": { "hp": 224, "atk": 147 },
-      "abilityRating": { "hp": "1", "def": "1", "atk": "0", "cri": 2, "cdmg": "0", "spd": "3", "eff": 3, "res": "-1" }
+      "abilityRating": { "hp": "1", "def": "1", "atk": "0", "cri": 2, "cdmg": "0", "spd": "3", "eff": 3, "res": 0 }
     },
     {
       "id": "cermia",
@@ -7744,7 +7803,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c1108_s.png",
       "tier": 2,
       "bonusAbility": { "hp": 416, "atk": 273 },
-      "abilityRating": { "hp": "1", "def": "1", "atk": "3", "cri": "3", "cdmg": "3", "spd": "0", "eff": -1, "res": -1 }
+      "abilityRating": { "hp": "1", "def": "1", "atk": "3", "cri": "3", "cdmg": "3", "spd": "0", "eff": 0, "res": 0 }
     },
     {
       "id": "fairytale-tenebria",
@@ -7760,7 +7819,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c5050_s.png",
       "tier": 2,
       "bonusAbility": {},
-      "abilityRating": { "hp": "2", "def": "2", "atk": 0, "cri": 0, "cdmg": 0, "spd": "3", "eff": 3, "res": -1 }
+      "abilityRating": { "hp": "2", "def": "2", "atk": 1, "cri": 1, "cdmg": 1, "spd": "3", "eff": 3, "res": 0 }
     },
     {
       "id": "faithless-lidica",
@@ -8336,7 +8395,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c5071_s.png",
       "tier": 3,
       "bonusAbility": { "hp": 224, "atk": 147 },
-      "abilityRating": { "hp": "3", "def": "3", "atk": "2", "cri": "2", "cdmg": "2", "spd": "0", "eff": 0, "res": 0 }
+      "abilityRating": { "hp": "3", "def": "3", "atk": "2", "cri": "2", "cdmg": "2", "spd": 1, "eff": 1, "res": 0 }
     },
     {
       "id": "sez",
@@ -8448,7 +8507,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c1067_s.png",
       "tier": 5,
       "bonusAbility": {},
-      "abilityRating": { "hp": 3, "def": 2, "atk": 0, "cri": 0, "cdmg": 0, "spd": 1, "eff": 0, "res": 1 }
+      "abilityRating": { "hp": 3, "def": 2, "atk": 0, "cri": 0, "cdmg": 0, "spd": 2, "eff": 0, "res": 1 }
     },
     {
       "id": "tenebria",
@@ -8816,7 +8875,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c2010_s.png",
       "tier": 3,
       "bonusAbility": { "hp": 418, "atk": 114, "eff": 13.6 },
-      "abilityRating": { "hp": 3, "def": 3, "atk": 0, "cri": 0, "cdmg": 0, "spd": 0, "eff": 1, "res": "-1" }
+      "abilityRating": { "hp": 3, "def": 3, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": "-1" }
     },
     {
       "id": "cidd",
@@ -9277,8 +9336,6 @@
     },
     {
       "id": "schuri",
-      "name": "Schuri",
-      "icon": "https://assets.epicsevendb.com/_source/face/c1020_s.png",
       "hp": 5650,
       "def": 536,
       "atk": 1068,
@@ -9287,9 +9344,11 @@
       "spd": 110,
       "eff": 0,
       "res": 0,
-      "tier": 0,
+      "name": "Schuri",
+      "icon": "https://assets.epicsevendb.com/_source/face/c1020_s.png",
+      "tier": 10,
       "bonusAbility": {},
-      "abilityRating": { "hp": 0, "def": 0, "atk": 0, "cri": 0, "cdmg": 0, "spd": 0, "eff": 0, "res": 0 }
+      "abilityRating": { "hp": 0, "def": 0, "atk": 3, "cri": 3, "cdmg": 3, "spd": 0, "eff": 0, "res": 0 }
     },
     {
       "id": "serila",

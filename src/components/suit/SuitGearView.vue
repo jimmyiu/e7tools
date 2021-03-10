@@ -1,6 +1,6 @@
 <template>
   <div v-if="suit" :class="{ size: $vuetify.breakpoint.mdAndDown }">
-    <v-row dense>
+    <v-row dense justify="center">
       <v-col v-if="hero" cols="12" lg="auto">
         <hero-detail-card :hero="hero" :suit="suit" />
       </v-col>

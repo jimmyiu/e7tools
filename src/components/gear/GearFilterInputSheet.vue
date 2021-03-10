@@ -90,12 +90,12 @@
 </template>
 <style lang="sass" scoped>
 .card-size
-  max-width: 320px
-  min-width: 320px
+  max-width: 328px
+  min-width: 328px
 </style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
-import { Constants, FilterMode, Gear } from '@/models';
+import { FilterMode, Gear } from '@/models';
 import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect, GearStatIcon, GearStatInput } from './common';
 import TitleSheet from '../common/TitleSheet.vue';
 import { GearPageFilter, GearStatFilter, SortingColumn } from '@/models/gear-page';

@@ -4,7 +4,10 @@
       <v-card-text class="pa-0">
         <v-row dense>
           <v-col class="d-flex pl-2 align-center">
-            <gear-type-icon style="padding-bottom: 1px" :type="gear.type" />
+            <div :class="gear.grade.color" style="border-radius: 4px">
+              <gear-type-icon style="padding-bottom: 1px" :type="gear.type" />
+            </div>
+            <!-- <gear-type-icon style="padding-bottom: 1px" :type="gear.type" /> -->
             <gear-set-icon :set="gear.set" />
             <div>
               <span :style="'color: ' + gear.grade.color">{{ gear.level }}</span>
