@@ -1,5 +1,11 @@
 <template>
-  <div class="mx-auto">
+  <div v-resize="onResize" class="mx-auto">
+    <gear-action-card
+      class="mb-2"
+      :selected-gear-id="selectedGearId"
+      @change-gears="changeGears"
+      @change-sorting="changeSorting"
+    />
     <v-row dense justify="center">
       <!-- <v-col cols="12" sm="auto">
         <gear-filter-input-sheet v-model="filter" class="mb-2" :gears="filteredGears" />
@@ -7,18 +13,17 @@
       <!-- <v-col cols="12" sm="auto">
         <gear-statistics-sheet :gears="filteredGears" />
       </v-col> -->
-      <v-col cols="12" sm="auto">
-        <gear-action-card
-          class="mb-2"
-          :selected-gear-id="selectedGearId"
-          @change-gears="changeGears"
-          @change-sorting="changeSorting"
+      <v-col cols="12">
+        <gear-list-view
+          v-model="selectedGearId"
+          :gears="filteredGears"
+          :height="listViewHeight"
+          :sort-col="sortingColumn"
         />
-        <gear-list-view v-model="selectedGearId" :gears="filteredGears" :sort-col="sortingColumn" />
         <!-- <gear-table :gears="filteredGears" @edit-gear="editGear" /> -->
-        <v-btn bottom class="hidden-sm-and-up" fab fixed right small @click="goToTop">
+        <!-- <v-btn bottom class="hidden-sm-and-up" fab fixed right small @click="goToTop">
           <v-icon>mdi-chevron-up</v-icon>
-        </v-btn>
+        </v-btn> -->
       </v-col>
     </v-row>
   </div>
@@ -56,6 +61,7 @@ export default class GearPage extends Vue {
   selectedGearId: string = '';
   sortingColumn: string = '';
   filteredGears: Gear.Gear[] = [];
+  listViewHeight = 500;
 
   changeGears(gears: Gear.Gear[]) {
     this.filteredGears.splice(0, this.filteredGears.length, ...gears);
@@ -71,6 +77,11 @@ export default class GearPage extends Vue {
     // this.$vuetify.goTo(0, { container: '#app' });
     // this.$vuetify.goTo('#app', { offset: -100 });
     (document.getElementById('app') as any).scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }
+
+  onResize() {
+    console.log('window.innerHeight =', window.innerHeight);
+    this.listViewHeight = window.innerHeight - (60 + 12 + 12 + 46 + 8);
   }
 }
 </script>
