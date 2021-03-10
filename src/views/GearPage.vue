@@ -32,7 +32,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator';
+import { Vue, Component, Watch, Ref } from 'vue-property-decorator';
 import { mapActions, mapGetters } from 'vuex';
 import {
   GearActionCard,
@@ -65,6 +65,7 @@ export default class GearPage extends Vue {
   sortingColumn: string = '';
   filteredGears: Gear.Gear[] = [];
   listViewHeight = 500;
+  @Ref('listView') readonly listView!: Vue;
 
   changeGears(gears: Gear.Gear[]) {
     this.filteredGears.splice(0, this.filteredGears.length, ...gears);
@@ -92,7 +93,8 @@ export default class GearPage extends Vue {
     //   this
     // }
     // console.log(this.$vuetify.breakpoint.mdAndUp);
-    this.listViewHeight = window.innerHeight - this.$refs.listView.$el.offsetTop - 60;
+    // console.log(this.listView);
+    this.listViewHeight = window.innerHeight - (this.listView.$el as HTMLElement).offsetTop - 60;
     // }, 500);
   }
 }
