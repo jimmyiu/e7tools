@@ -272,6 +272,7 @@ export default class GearFormBottomSheet extends Vue {
     console.log('submit::gear =', gear);
     this.saveGears([gear]);
     this.onClose();
+    this.$emit('success');
   }
 }
 </script>

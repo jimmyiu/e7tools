@@ -69,7 +69,7 @@ function getWeaponMain(level: number, enhance: number) {
   } else if (level == 88) {
     return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 515][enhance - 1];
   } else if (level == 85) {
-    return [0, 0, 0, 0, 0, 0, 0, 0, 280, 0, 0, 0, 0, 0, 500][enhance - 1];
+    return [0, 0, 0, 0, 0, 0, 0, 0, 280, 0, 0, 360, 0, 0, 500][enhance - 1];
   } else if (level == 78) {
     return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 475][enhance - 1];
   } else if (level == 75) {
