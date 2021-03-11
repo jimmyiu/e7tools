@@ -126,9 +126,9 @@ export default class GearStatisticsFilter extends Vue {
 
   get speed(): SpeedStatistics {
     const speeds = this.gears.filter(g => g.main != Gear.Stat.SPD && g.spd != undefined && g.spd > 0);
-    const first = speeds.filter(g => g.spd! >= 1 && g.spd! <= 6);
-    const second = speeds.filter(g => g.spd! >= 7 && g.spd! <= 12);
-    const third = speeds.filter(g => g.spd! >= 13 && g.spd! <= 16);
+    const first = speeds.filter(g => g.spd! >= 1 && g.spd! <= 9);
+    const second = speeds.filter(g => g.spd! >= 10 && g.spd! <= 13);
+    const third = speeds.filter(g => g.spd! >= 14 && g.spd! <= 16);
     const last = speeds.filter(g => g.spd! >= 17);
     return {
       ...this.toCountFigure(speeds),
@@ -148,15 +148,15 @@ export default class GearStatisticsFilter extends Vue {
     },
     {
       key: 'third',
-      label: '13-16'
+      label: '14-16'
     },
     {
       key: 'second',
-      label: '7-12'
+      label: '10-13'
     },
     {
       key: 'first',
-      label: '1-6'
+      label: '1-9'
     }
   ];
 

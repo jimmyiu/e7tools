@@ -47,7 +47,7 @@
       "eff": 7,
       "res": 25,
       "locked": false,
-      "equippedHero": "sinful-angelica"
+      "equippedHero": "auxiliary-lots"
     },
     {
       "id": "i-4",
@@ -95,7 +95,7 @@
       "cri": 6,
       "spd": 18,
       "locked": false,
-      "equippedHero": "auxiliary-lots"
+      "equippedHero": "last-rider-krau"
     },
     {
       "id": "i-7",
@@ -191,7 +191,7 @@
       "atk": 525,
       "res": 5,
       "locked": false,
-      "equippedHero": "last-rider-krau"
+      "equippedHero": ""
     },
     {
       "id": "i-=",
@@ -383,7 +383,7 @@
       "spd": 15,
       "res": 6,
       "locked": false,
-      "equippedHero": "last-rider-krau"
+      "equippedHero": "auxiliary-lots"
     },
     {
       "id": "i-I",
@@ -799,7 +799,7 @@
       "spd": 11,
       "eff": 14,
       "locked": false,
-      "equippedHero": "falconer-kluri"
+      "equippedHero": "fairytale-tenebria"
     },
     {
       "id": "i-c",
@@ -1231,7 +1231,7 @@
       "atkp": 17,
       "spd": 13,
       "locked": false,
-      "equippedHero": "fairytale-tenebria"
+      "equippedHero": "politis"
     },
     {
       "id": "i-zF",
@@ -1247,7 +1247,7 @@
       "spd": 14,
       "eff": 12,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "auxiliary-lots"
     },
     {
       "id": "i-zG",
@@ -1567,7 +1567,7 @@
       "spd": 13,
       "eff": 65,
       "locked": false,
-      "equippedHero": "auxiliary-lots"
+      "equippedHero": "fairytale-tenebria"
     },
     {
       "id": "i-z[",
@@ -1743,7 +1743,7 @@
       "cdmg": 20,
       "spd": 45,
       "locked": false,
-      "equippedHero": "little-queen-charlotte"
+      "equippedHero": "landy"
     },
     {
       "id": "i-zf",
@@ -1823,7 +1823,7 @@
       "spd": 45,
       "eff": 25,
       "locked": false,
-      "equippedHero": "falconer-kluri"
+      "equippedHero": "fairytale-tenebria"
     },
     {
       "id": "i-zk",
@@ -2461,7 +2461,7 @@
       "spd": 45,
       "res": 17,
       "locked": false,
-      "equippedHero": "politis"
+      "equippedHero": ""
     },
     {
       "id": "i-zz[",
@@ -3193,7 +3193,7 @@
       "spd": 11,
       "res": 17,
       "locked": false,
-      "equippedHero": "politis"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzS",
@@ -3216,16 +3216,16 @@
       "type": "Weapon",
       "set": "Hit",
       "grade": "Epic",
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": "atk",
-      "hp": 170,
-      "atkp": 12,
-      "atk": 500,
-      "spd": 12,
-      "eff": 8,
+      "hp": 226,
+      "atkp": 15,
+      "atk": 525,
+      "spd": 15,
+      "eff": 11,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "fairytale-tenebria"
     },
     {
       "id": "i-zzzV",
@@ -3273,7 +3273,7 @@
       "cri": 18,
       "spd": 5,
       "locked": false,
-      "equippedHero": "landy"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzY",
@@ -3480,7 +3480,7 @@
       "def": 35,
       "res": 7,
       "locked": false,
-      "equippedHero": "tamarinne"
+      "equippedHero": "last-rider-krau"
     },
     {
       "id": "i-zzzf",
@@ -3544,7 +3544,7 @@
       "cdmg": 19,
       "spd": 45,
       "locked": false,
-      "equippedHero": "landy"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzj",
@@ -3640,7 +3640,7 @@
       "cdmg": 24,
       "spd": 6,
       "locked": false,
-      "equippedHero": "landy"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzp",
@@ -4128,13 +4128,13 @@
       "set": "Speed",
       "grade": "Hero",
       "level": 85,
-      "enhance": 9,
+      "enhance": 15,
       "main": "def",
       "hpp": 9,
-      "def": 168,
-      "cdmg": 7,
-      "spd": 5,
-      "eff": 10,
+      "def": 300,
+      "cdmg": 16,
+      "spd": 7,
+      "eff": 13,
       "locked": false,
       "equippedHero": ""
     },
@@ -4774,7 +4774,7 @@
       "eff": 19,
       "res": 7,
       "locked": false,
-      "equippedHero": "politis"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzzzM",
@@ -4790,7 +4790,7 @@
       "atk": 152,
       "spd": 45,
       "locked": false,
-      "equippedHero": "last-rider-krau"
+      "equippedHero": ""
     },
     {
       "id": "i-zzzzzN",
@@ -5105,7 +5105,7 @@
       "cdmg": 7,
       "spd": 6,
       "locked": false,
-      "equippedHero": "archdemons-shadow"
+      "equippedHero": "landy"
     },
     {
       "id": "i-zzzzzc",
@@ -5121,7 +5121,7 @@
       "cdmg": 7,
       "spd": 7,
       "locked": false,
-      "equippedHero": "vivian"
+      "equippedHero": "landy"
     },
     {
       "id": "i-zzzzzd",
@@ -5137,7 +5137,7 @@
       "eff": 14,
       "res": 7,
       "locked": false,
-      "equippedHero": "fairytale-tenebria"
+      "equippedHero": "politis"
     },
     {
       "id": "i-01af8ib608",
@@ -5249,7 +5249,7 @@
       "cdmg": 14,
       "spd": 16,
       "locked": false,
-      "equippedHero": "auxiliary-lots"
+      "equippedHero": ""
     },
     {
       "id": "ef5i742bif",
@@ -5265,7 +5265,7 @@
       "spd": 17,
       "eff": 7,
       "locked": false,
-      "equippedHero": "fairytale-tenebria"
+      "equippedHero": ""
     },
     {
       "id": "bhc2e04ecb",
@@ -5457,7 +5457,7 @@
       "cri": 16,
       "cdmg": 20,
       "locked": false,
-      "equippedHero": "landy"
+      "equippedHero": ""
     },
     {
       "id": "efcaa8h0ea",
@@ -5633,7 +5633,7 @@
       "spd": 3,
       "eff": 65,
       "locked": false,
-      "equippedHero": "fairytale-tenebria"
+      "equippedHero": ""
     },
     {
       "id": "94f8b4bcb1",
@@ -5703,16 +5703,16 @@
       "type": "Weapon",
       "set": "Speed",
       "grade": "Epic",
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": "atk",
-      "hpp": 16,
-      "atkp": 17,
-      "atk": 500,
-      "cri": 10,
-      "cdmg": 7,
+      "hpp": 19,
+      "atkp": 21,
+      "atk": 525,
+      "cri": 13,
+      "cdmg": 8,
       "locked": false,
-      "equippedHero": "dizzy"
+      "equippedHero": "landy"
     },
     {
       "id": "342f66a5ci",
@@ -5775,7 +5775,7 @@
       "spd": 16,
       "eff": 14,
       "locked": false,
-      "equippedHero": "fairytale-tenebria"
+      "equippedHero": "politis"
     },
     {
       "id": "2eiii8hja8",
@@ -5949,7 +5949,7 @@
       "cri": 14,
       "spd": 45,
       "locked": false,
-      "equippedHero": "auxiliary-lots"
+      "equippedHero": ""
     },
     {
       "id": "f1fg0hg354",
@@ -6045,7 +6045,7 @@
       "atk": 51,
       "spd": 45,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "last-rider-krau"
     },
     {
       "id": "2ha5dcd67e",
@@ -6077,7 +6077,7 @@
       "spd": 6,
       "eff": 14,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "fairytale-tenebria"
     },
     {
       "id": "7a0f207666",
@@ -6123,6 +6123,38 @@
       "atkp": 34,
       "cdmg": 6,
       "res": 8,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "eg7ia10e1j",
+      "type": "Armor",
+      "set": "Hit",
+      "grade": "Epic",
+      "level": 85,
+      "enhance": 15,
+      "main": "def",
+      "hpp": 13,
+      "hp": 369,
+      "def": 300,
+      "cri": 8,
+      "spd": 11,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "gd32jh6j98",
+      "type": "Necklace",
+      "set": "Attack",
+      "grade": "Epic",
+      "level": 88,
+      "enhance": 15,
+      "main": "cdmg",
+      "hp": 225,
+      "atkp": 32,
+      "atk": 95,
+      "cdmg": 70,
+      "eff": 15,
       "locked": false,
       "equippedHero": ""
     }
@@ -6172,7 +6204,7 @@
         "atk": {},
         "cri": { "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": 264 },
+        "spd": { "min": 260 },
         "eff": { "min": "" },
         "res": {},
         "ehp": { "min": "" },
@@ -6253,7 +6285,7 @@
         "spd": { "min": "", "max": "" },
         "eff": { "min": "", "max": "" },
         "res": { "max": "" },
-        "ehp": { "min": 80000 },
+        "ehp": { "min": 86000 },
         "damage": { "min": 840 }
       },
       "evaluation": { "forcedSets": ["Immunity"], "limit": 20000000, "brokenSet": false }
@@ -6355,7 +6387,7 @@
         "cri": { "max": 110 },
         "cdmg": { "max": 360 },
         "spd": { "min": 228 },
-        "eff": { "min": 120 },
+        "eff": { "min": 130 },
         "res": { "min": "" },
         "ehp": { "min": 75000 },
         "damage": {}
@@ -6366,11 +6398,11 @@
       "id": "fairytale-tenebria",
       "hero": { "id": "fairytale-tenebria" },
       "filter": {
-        "sets": [],
+        "sets": ["Speed", "Hit"],
         "necklaces": [],
         "rings": ["eff", "hpp", "hp", "defp", "def"],
         "boots": ["spd"],
-        "maxSize": 20,
+        "maxSize": 25,
         "enhanceMode": 2,
         "equippedMode": 1
       },
@@ -6381,12 +6413,12 @@
         "cri": { "min": "", "max": 110 },
         "cdmg": { "max": 360 },
         "spd": { "min": 240 },
-        "eff": { "min": 130 },
+        "eff": { "min": 165 },
         "res": {},
-        "ehp": { "min": 97000 },
+        "ehp": { "min": 75000 },
         "damage": { "min": "" }
       },
-      "evaluation": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": true, "lv85": false }
+      "evaluation": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": false, "lv85": false }
     },
     {
       "id": "sinful-angelica",
@@ -6508,13 +6540,13 @@
         "hp": {},
         "def": {},
         "atk": {},
-        "cri": { "min": 77, "max": 110 },
+        "cri": { "min": 75, "max": 110 },
         "cdmg": { "max": 360 },
         "spd": { "min": "", "max": "" },
         "eff": { "min": "", "max": "" },
         "res": { "max": "20" },
-        "ehp": { "min": 92000 },
-        "damage": { "min": 600 }
+        "ehp": { "min": 75000 },
+        "damage": { "min": 700 }
       },
       "evaluation": { "forcedSets": ["LifeSteal"], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
@@ -8090,7 +8122,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c2070_s.png",
       "tier": 1,
       "bonusAbility": { "hp": 468, "atk": 195 },
-      "abilityRating": { "hp": "3", "def": "2", "atk": 1, "cri": "-1", "cdmg": "-1", "spd": "3", "eff": -1, "res": 0 }
+      "abilityRating": { "hp": "3", "def": "2", "atk": 1, "cri": "-1", "cdmg": "-1", "spd": "3", "eff": 0, "res": 0 }
     },
     {
       "id": "lidica",
@@ -8810,7 +8842,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c2031_s.png",
       "tier": 2,
       "bonusAbility": {},
-      "abilityRating": { "hp": 1, "def": 1, "atk": 0, "cri": 0, "cdmg": "0", "spd": "3", "eff": 1, "res": "0" }
+      "abilityRating": { "hp": 1, "def": 1, "atk": 0, "cri": 0, "cdmg": "0", "spd": "3", "eff": 2, "res": "0" }
     },
     {
       "id": "benevolent-romann",
@@ -8922,7 +8954,7 @@
       "icon": "https://assets.epicsevendb.com/_source/face/c2010_s.png",
       "tier": 3,
       "bonusAbility": { "hp": 418, "atk": 114, "eff": 13.6 },
-      "abilityRating": { "hp": 3, "def": 3, "atk": 1, "cri": 1, "cdmg": 1, "spd": 1, "eff": 1, "res": "-1" }
+      "abilityRating": { "hp": 2, "def": 2, "atk": 2, "cri": 2, "cdmg": 2, "spd": 1, "eff": 1, "res": "-1" }
     },
     {
       "id": "cidd",

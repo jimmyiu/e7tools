@@ -1,5 +1,5 @@
 <template>
-  <v-virtual-scroll :height="height" item-height="102" :items="gears" width="366">
+  <v-virtual-scroll :height="height" item-height="102" :items="gears" max-width="366" min-width="351">
     <template v-slot:default="{ item }">
       <gear-card
         :gear="item"
