@@ -37,10 +37,17 @@
 
     <v-card>
       <v-card-text class="pa-2">
-        <suit-gear-view :suit="selectedSuit" />
         <v-row dense>
+          <v-col class="flex-grow-1" cols="12" lg="12" sm="auto">
+            <!-- Saved -->
+            <suit-gear-view class="mx-auto" :hero="savedEquipped.hero" :suit="savedEquipped.suit" />
+          </v-col>
+          <v-col class="flex-grow-1" cols="12" lg="12" sm="auto">
+            <!-- Selected -->
+            <suit-gear-view class="mx-auto" :hero="selectionEquipped.hero" :suit="selectionEquipped.suit" />
+          </v-col>
           <v-col cols="12" sm="4">
-            <v-row dense>
+            <!-- <v-row dense>
               <v-col class="d-flex justify-center align-center px-6">
                 <div class="mr-2">Current</div>
                 <v-divider />
@@ -51,10 +58,10 @@
               class="mx-auto"
               :hero="form.hero"
               :suit="currentEquipped.suit"
-            />
+            /> -->
           </v-col>
           <v-col cols="12" sm="4">
-            <v-row dense>
+            <!-- <v-row dense>
               <v-col class="d-flex justify-center align-center px-6">
                 <div class="mr-2" style="background-color:green">Selected</div>
                 <v-divider />
@@ -65,10 +72,10 @@
               class="mx-auto"
               :hero="form.hero"
               :suit="selectionEquipped.suit"
-            />
+            /> -->
           </v-col>
           <v-col cols="12" sm="4">
-            <v-row dense>
+            <!-- <v-row dense>
               <v-col class="d-flex justify-center align-center px-6">
                 <div class="mr-2">Saved Suit</div>
                 <v-divider />
@@ -79,7 +86,7 @@
               class="mx-auto"
               :hero="form.hero"
               :suit="savedEquipped.suit"
-            />
+            /> -->
           </v-col>
         </v-row>
       </v-card-text>
