@@ -2,6 +2,13 @@
   <v-card class="pa-0" elevation="0" outlined>
     <v-card-actions class="pa-1 mt-0 d-flex justify-space-between">
       <div>
+        <v-divider vertical />
+        <v-btn icon @click="createGear"><v-icon color="primary">mdi-plus-circle</v-icon></v-btn>
+        <v-btn :disabled="!gear" icon @click="copyGear"><v-icon>mdi-content-copy</v-icon></v-btn>
+        <v-btn :disabled="!gear" icon @click="editGear"><v-icon>edit</v-icon></v-btn>
+        <v-btn :disabled="!gear" icon @click="deleteGear"><v-icon>delete</v-icon></v-btn>
+      </div>
+      <div>
         <v-btn class="hidden-md-and-up" icon @click="visible.overlay = true">
           <v-badge bordered color="primary" dot overlap :value="isFiltered">
             <v-icon>mdi-filter-variant</v-icon>
@@ -10,12 +17,6 @@
         <v-btn class="hidden-md-and-up" icon @click="toggleSorting"><v-icon>mdi-sort</v-icon></v-btn>
         <v-btn :disabled="!clearable" icon @click="clear"><v-icon>mdi-close-circle-outline</v-icon></v-btn>
         <!-- <v-btn icon><v-icon>mdi-chart-box-outline</v-icon></v-btn> -->
-      </div>
-      <div>
-        <v-btn icon @click="createGear"><v-icon color="primary">mdi-plus-circle</v-icon></v-btn>
-        <v-btn :disabled="!gear" icon @click="copyGear"><v-icon>mdi-content-copy</v-icon></v-btn>
-        <v-btn :disabled="!gear" icon @click="editGear"><v-icon>edit</v-icon></v-btn>
-        <v-btn :disabled="!gear" icon @click="deleteGear"><v-icon>delete</v-icon></v-btn>
       </div>
     </v-card-actions>
     <div v-if="visible.sorting" class="hidden-md-and-up">
@@ -199,10 +200,10 @@ export default class GearActionCard extends Vue {
     }
     return result;
   }
+
   toggleSorting() {
     this.visible.sorting = !this.visible.sorting;
     Vue.nextTick().then(() => this.$emit('resize'));
-    // this.$emit('resize');
   }
 
   clear() {
@@ -234,7 +235,6 @@ export default class GearActionCard extends Vue {
       window.confirm(`Are you sure to delete the gear with type = ${this.gear.type} and set = ${this.gear.set}?`)
     ) {
       this.removeGears([this.gear]);
-      // this.clear();
     }
   }
 }

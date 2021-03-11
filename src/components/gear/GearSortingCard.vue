@@ -1,6 +1,11 @@
 <template>
   <v-card class="pa-0" :class="{ 'card-size': $vuetify.breakpoint.smAndUp }" elevation="0" flat>
     <v-row no-gutters>
+      <v-col cols="auto">
+        <v-btn color="primary" icon @click="toggleSort()">
+          <v-icon>mdi-sort-numeric-{{ isDescending ? 'descending' : 'ascending' }} </v-icon>
+        </v-btn>
+      </v-col>
       <v-col>
         <!-- <v-btn-toggle dense>
           <v-btn v-for="(item, key) in $const.GearStat.DEFENSIVE_STATS" :key="key" icon @click="toggleSort(item.value)">
@@ -23,11 +28,6 @@
         </v-btn>
         <v-btn v-for="(item, key) in $const.GearStat.SCORES" :key="`s${key}`" icon @click="toggleSort(item.value)">
           <gear-stat-icon :stat="item" />
-        </v-btn>
-      </v-col>
-      <v-col cols="auto">
-        <v-btn color="primary" icon @click="toggleSort()">
-          <v-icon>mdi-sort-numeric-{{ isDescending ? 'descending' : 'ascending' }} </v-icon>
         </v-btn>
       </v-col>
     </v-row>

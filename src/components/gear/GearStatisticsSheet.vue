@@ -1,6 +1,6 @@
 <template>
   <title-sheet :class="{ 'card-size': $vuetify.breakpoint.smAndUp }" :reset="false" title="Statistic">
-    Count: {{ gears.length }} ({{ basic.equippedCount }} / {{ gears.length - basic.equippedCount }})<br />
+    <!-- Count: {{ gears.length }} ({{ basic.equippedCount }} / {{ gears.length - basic.equippedCount }})<br /> -->
     -- Equipped % --
     <v-row dense>
       <v-col v-for="(item, key) in basic.equippedPercent" :key="key" class="d-flex align-center body-2" cols="3">
