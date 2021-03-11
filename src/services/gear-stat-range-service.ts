@@ -86,7 +86,7 @@ function getHelmetMain(level: number, enhance: number) {
   } else if (level == 88) {
     return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2765][enhance - 1];
   } else if (level == 85) {
-    return [0, 0, 0, 0, 0, 0, 0, 0, 1512, 0, 0, 1944, 0, 0, 2700][enhance - 1];
+    return [0, 0, 0, 0, 0, 0, 0, 0, 1512, 0, 0, 1944, 2106, 0, 2700][enhance - 1];
   } else if (level == 78) {
     return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2565][enhance - 1];
   } else if (level == 75) {
@@ -101,7 +101,7 @@ function getArmorMain(level: number, enhance: number) {
   if (level == 90) {
     return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 310][enhance - 1];
   } else if (level == 88) {
-    return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 310][enhance - 1];
+    return [0, 0, 0, 0, 0, 0, 0, 0, 173, 0, 0, 0, 0, 0, 310][enhance - 1];
   } else if (level == 85) {
     return [0, 0, 0, 0, 0, 132, 144, 0, 168, 0, 0, 216, 0, 252, 300][enhance - 1];
   } else if (level == 78) {

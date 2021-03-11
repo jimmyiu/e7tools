@@ -1,6 +1,6 @@
 <template>
   <title-sheet
-    class="pa-3"
+    class="pa-2"
     :class="{ 'card-size': $vuetify.breakpoint.smAndUp }"
     :collapsible="false"
     title="Basic Filter"
@@ -17,24 +17,59 @@
         <v-row class="justify-center" dense>
           <v-col cols="auto">
             <div class="ml-1 caption">Level</div>
-            <v-btn-toggle v-model="form.levelMode" dense>
-              <v-btn depressed min-width="38" :value="1">85</v-btn>
-              <v-btn depressed min-width="38" :value="2">90</v-btn>
-              <v-btn depressed min-width="38" :value="3"><v-icon small>mdi-dots-horizontal</v-icon></v-btn>
+            <v-btn-toggle v-model="form.levelMode" class="gear-filter dense" dense>
+              <v-btn class="with-figure" depressed :value="1">
+                <div class="d-flex flex-column justify-center align-center">
+                  85
+                  <div class="caption figure">({{ otherFigures.lv85 }})</div>
+                </div>
+              </v-btn>
+              <v-btn class="with-figure" depressed :value="2">
+                <div class="d-flex flex-column justify-center align-center">
+                  90
+                  <div class="caption figure">({{ otherFigures.lv90 }})</div>
+                </div>
+              </v-btn>
+              <v-btn class="with-figure" depressed :value="3">
+                <div class="d-flex flex-column justify-center align-center">
+                  <v-icon small>mdi-dots-horizontal</v-icon>
+                  <div class="caption figure">({{ otherFigures.lvOthers }})</div>
+                </div>
+              </v-btn>
             </v-btn-toggle>
           </v-col>
           <v-col cols="auto">
             <div class="ml-1 caption">Enhance</div>
-            <v-btn-toggle v-model="form.enhanceMode" dense>
-              <v-btn depressed min-width="38" :value="2">15</v-btn>
-              <v-btn depressed min-width="38" :value="1"><v-icon small>mdi-dots-horizontal</v-icon></v-btn>
+            <v-btn-toggle v-model="form.enhanceMode" class="gear-filter dense" dense>
+              <v-btn class="with-figure" depressed :value="2">
+                <div class="d-flex flex-column justify-center align-center">
+                  15
+                  <div class="caption figure">({{ otherFigures.enhance15 }})</div>
+                </div>
+              </v-btn>
+              <v-btn class="with-figure" depressed :value="1">
+                <div class="d-flex flex-column justify-center align-center">
+                  <v-icon small>mdi-dots-horizontal</v-icon>
+                  <div class="caption figure">({{ otherFigures.enhanceOthers }})</div>
+                </div>
+              </v-btn>
             </v-btn-toggle>
           </v-col>
           <v-col cols="auto">
             <div class="ml-1 caption">Equipped</div>
-            <v-btn-toggle v-model="form.equippedMode" dense>
-              <v-btn depressed min-width="38" :value="2"><v-icon small>mdi-close-thick</v-icon></v-btn>
-              <v-btn depressed min-width="38" :value="1"><v-icon small>mdi-check-bold</v-icon></v-btn>
+            <v-btn-toggle v-model="form.equippedMode" class="gear-filter dense" dense>
+              <v-btn class="with-figure" depressed :value="2">
+                <div class="d-flex flex-column justify-center align-center">
+                  <v-icon small>mdi-close-thick</v-icon>
+                  <div class="caption figure">({{ otherFigures.unequipped }})</div>
+                </div>
+              </v-btn>
+              <v-btn class="with-figure" depressed :value="1">
+                <div class="d-flex flex-column justify-center align-center">
+                  <v-icon small>mdi-check-bold</v-icon>
+                  <div class="caption figure">({{ otherFigures.equipped }})</div>
+                </div>
+              </v-btn>
             </v-btn-toggle>
           </v-col>
           <v-col align-self="end" cols="auto"></v-col>
@@ -98,13 +133,22 @@
 .card-size
   max-width: 328px
   min-width: 328px
+.figure
+  margin-top: -2px
+  color: #EEEEEE
 </style>
 <script lang="ts">
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
 import { FilterMode, Gear } from '@/models';
 import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect, GearStatIcon, GearStatInput } from './common';
 import TitleSheet from '../common/TitleSheet.vue';
-import { GearPageFilter, GearStatFilter, SortingColumn } from '@/models/gear-page';
+import {
+  assignGearStatFilter,
+  emptyGearPageFilter,
+  GearPageFilter,
+  GearStatFilter,
+  SortingColumn
+} from '@/models/gear-page';
 import { SortingOrder } from '@/models/common';
 
 @Component({
@@ -176,6 +220,22 @@ export default class GearFilterInputSheet extends Vue {
     return result;
   }
 
+  get otherFigures() {
+    const equipped = this.gears.filter(x => x.equippedHero != '').length;
+    const lv85 = this.gears.filter(x => x.level == 85).length;
+    const lv90 = this.gears.filter(x => x.level == 90).length;
+    const enhance15 = this.gears.filter(x => x.enhance == 15).length;
+    return {
+      equipped: equipped,
+      unequipped: this.gears.length - equipped,
+      lv85: lv85,
+      lv90: lv90,
+      lvOthers: this.gears.length - lv85 - lv90,
+      enhance15: enhance15,
+      enhanceOthers: this.gears.length - enhance15
+    };
+  }
+
   get isDescending() {
     return this.form.sortingOrder == SortingOrder.DESCENDING;
   }
@@ -193,6 +253,7 @@ export default class GearFilterInputSheet extends Vue {
   }
 
   resetStat() {
+    // assignGearStatFilter(this.form.minStat, emptyGearPageFilter().minStat);
     this.form.applyToMain = false;
     Object.keys(this.form.minStat).forEach(key => Vue.set(this.form.minStat, key, undefined));
     // this.form.sortingColumn = 'level';
