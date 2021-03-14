@@ -45,13 +45,7 @@
               >
             </div>
             <div v-if="gear.getSubs().size == i + 1" class="d-flex justify-end" style="width: 100%">
-              <v-img
-                v-if="equippedHero"
-                :alt="equippedHero.id"
-                max-width="26"
-                :src="equippedHero.icon"
-                style="margin-top: -12px"
-              />
+              <v-img v-if="equippedHero" max-width="26" :src="equippedHero.icon" style="margin-top: -12px" />
             </div>
           </v-col>
         </template>

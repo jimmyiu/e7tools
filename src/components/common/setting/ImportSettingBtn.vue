@@ -7,13 +7,14 @@
     </template>
     <v-card>
       <v-toolbar color="success">Import</v-toolbar>
-      <v-card-text>
-        <br />Paste previous exported JSON here, and then click 'Import' <br />
+      <v-card-text class="pt-2">
         <span style="color: red">
           CAUTION: existing data will be replaced without backup, please make sure you have backup (exported) data
           properly
         </span>
-        <v-textarea ref="import-data" v-model="data" filled hide-details="" />
+        <br />Paste previous exported JSON here, and then click 'Import' <br />
+        <v-textarea ref="import-data" v-model="data" class="mb-2" filled hide-details />
+        <a @click="data = data1">Sample Data 1</a> | <a @click="data = data2">Sample Data 2</a>
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
@@ -41,7 +42,9 @@ export default class ImportSettingBtn extends Vue {
   initVuex!: (data: VuexData) => void;
   //
   dialog = false;
-  data: string = JSON.stringify(require('@/assets/json/xceoj.json'));
+  data: string = '';
+  data1: string = JSON.stringify(require('@/assets/json/xceoj.json'));
+  data2: string = JSON.stringify(require('@/assets/json/data-sample-v0.5.1.json'));
 
   importData() {
     if (this.isValid()) {
