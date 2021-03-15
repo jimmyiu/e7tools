@@ -5,10 +5,16 @@
         <div>
           <v-img :src="equippedHero.hero.icon" width="48"></v-img>
         </div>
-        <div class="d-flex flex-wrap" style="width: 54px">
+        <div class="d-flex flex-wrap" style="width: 52px">
           <gear-set-icon v-for="(set, key) in equippedHero.suit.sets" :key="key" :set="set" />
         </div>
+        <!-- <div class="d-flex align-center justify-space-between">
+          <gear-stat-icon stat="score" />
+          <div>{{ totalScore }}</div>
+        </div>
+        <div class="d-flex align-center justify-space-between"><gear-stat-icon stat="rating" /> {{ ratingScore }}</div> -->
       </v-col>
+      <v-divider class="mx-1" vertical />
       <v-col>
         <v-row no-gutters>
           <template v-for="(item, key) in stats">
@@ -22,17 +28,25 @@
               <span v-if="key < 3">
                 (+{{ Math.round(100 * (equippedHero[item.value] / equippedHero.hero[item.value] - 1)) }}%)
               </span>
-              <span v-else>(+{{ equippedHero[item.value] - equippedHero.hero[item.value] }})</span>
+              <span v-else-if="key < 8">(+{{ equippedHero[item.value] - equippedHero.hero[item.value] }})</span>
             </v-col>
           </template>
-          <v-col class="pl-1" cols="6">Damage: {{ equippedHero.damage }}</v-col>
-          <v-col class="pl-1" cols="6">EHP: {{ equippedHero.ehp }}</v-col>
+          <v-col class="d-flex align-center pl-1" cols="1">
+            <gear-stat-icon stat="score" />
+          </v-col>
+          <v-col class="text-right" cols="3">
+            {{ totalScore }}
+          </v-col>
+          <v-col cols="2"></v-col>
+          <v-col class="d-flex align-center pl-1" cols="1">
+            <gear-stat-icon stat="rating" />
+          </v-col>
+          <v-col class="text-right" cols="3">
+            {{ ratingScore }}
+          </v-col>
+          <v-col cols="2"></v-col>
         </v-row>
       </v-col>
-    </v-row>
-    <v-divider />
-    <v-row class="pa-1" no-gutters>
-      <v-col class="text-center">Score: {{ totalScore }} / Rating: {{ ratingScore }}</v-col>
     </v-row>
   </v-sheet>
 </template>
@@ -42,7 +56,7 @@
 </style>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { Constants, EquippedHero, Hero, HeroAbility, Suit } from '@/models';
+import { Constants, EquippedHero, Gear, Hero, HeroAbility, Suit } from '@/models';
 import { GearSetIcon, GearStatIcon } from '..';
 import { mapGetters } from 'vuex';
 import { gearService, HeroService } from '@/services';
@@ -62,14 +76,8 @@ export default class HeroDetailCard extends Vue {
   // @Prop({ required: false }) readonly equippedHero!: EquippedHero | undefined;
   // getter
   get stats() {
-    return Constants.HERO_STATS;
+    return [...this.$const.GearStat.HERO_PRIMITIVE, Gear.Stat.DAMAGE, Gear.Stat.EHP];
   }
-  // get hero(): Hero | undefined {
-  //   if (this.heroId) {
-  //     return this.getHero(this.heroId);
-  //   }
-  //   return undefined;
-  // }
   get equippedHero(): EquippedHero | undefined {
     if (this.suit && this.hero) {
       return HeroService.equip(this.hero, this.suit);
@@ -80,23 +88,20 @@ export default class HeroDetailCard extends Vue {
   }
   get totalScore() {
     if (this.equippedHero) {
-      return (
-        Math.round(
-          10 *
-            ((this.equippedHero.suit.weapon?.score ?? 0) +
-              (this.equippedHero.suit.helmet?.score ?? 0) +
-              (this.equippedHero.suit.armor?.score ?? 0) +
-              (this.equippedHero.suit.necklace?.score ?? 0) +
-              (this.equippedHero.suit.ring?.score ?? 0) +
-              (this.equippedHero.suit.boot?.score ?? 0))
-        ) / 10
+      return Math.round(
+        (this.equippedHero.suit.weapon?.score ?? 0) +
+          (this.equippedHero.suit.helmet?.score ?? 0) +
+          (this.equippedHero.suit.armor?.score ?? 0) +
+          (this.equippedHero.suit.necklace?.score ?? 0) +
+          (this.equippedHero.suit.ring?.score ?? 0) +
+          (this.equippedHero.suit.boot?.score ?? 0)
       );
     }
     return 0;
   }
   get ratingScore() {
     if (this.equippedHero) {
-      return gearService.calculateSuitRating(this.equippedHero);
+      return Math.round(gearService.calculateSuitRating(this.equippedHero));
     }
     return 0;
   }
