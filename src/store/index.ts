@@ -189,8 +189,14 @@ export default new Vuex.Store({
     refreshHeros: async ({ commit, dispatch, state }) => {
       dispatch('withLoading', async () => {
         console.log('refreshHeros::start');
-        const heros = await E7dbDataHandler.retrieveHeros();
-        console.log('refreshHeros::heros.length =', heros.length);
+        const newHeros = await E7dbDataHandler.retrieveHeros();
+        console.log('refreshHeros::heros.length =', newHeros.length);
+        const heros = [...state.data.heros];
+        newHeros.forEach(x => {
+          if (heros.findIndex(h => h.id == x.id) < 0) {
+            heros.push(x);
+          }
+        });
         commit('replaceHeros', heros);
       });
     }

@@ -26,7 +26,7 @@
       </template>
     </v-autocomplete>
     <!--  -->
-    <v-menu v-model="popup" left max-height="450px" offset-y transition="slide-y-transition">
+    <v-menu v-model="popup" eager left max-height="450px" offset-y transition="slide-y-transition">
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" class="ml-2" icon v-on="on"><v-icon>mdi-dots-vertical-circle-outline</v-icon></v-btn>
       </template>

@@ -1,6 +1,7 @@
 <template>
   <v-app-bar app dark dense flat>
-    <v-btn icon @click="goHomepage"><v-icon>mdi-home</v-icon></v-btn>
+    <!-- <v-btn icon @click="goHomepage"><v-icon>mdi-home</v-icon></v-btn> -->
+    <v-btn icon @click="toggleMenu"><v-icon>mdi-menu</v-icon></v-btn>
     <!-- <v-icon>mdi-home</v-icon> -->
     <!-- <site-icon /> -->
     <!-- <v-btn class="ml-1" depressed to="gear">
@@ -26,10 +27,13 @@
     <v-btn class="ml-1" depressed :to="{ name: 'gear' }">
       Gear
     </v-btn>
+    <v-btn class="ml-1" depressed :to="{ name: 'hero' }">
+      Hero
+    </v-btn>
     <v-btn class="ml-1" depressed :to="{ name: 'optimizer' }">
       Optimizer
     </v-btn>
-    <v-menu bottom offset-y open-on-hover>
+    <!-- <v-menu bottom offset-y open-on-hover>
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" class="ml-1" depressed v-on="on">
           Others
@@ -44,7 +48,7 @@
           <v-list-item-title>Import</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu> -->
     <!-- <v-btn class="ml-1" depressed to="dev">
       Dev
     </v-btn> -->
@@ -66,10 +70,11 @@
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { mapActions } from 'vuex';
 import SiteIcon from './SiteIcon.vue';
+import SiteMenu from './SiteMenu.vue';
 
 @Component({
   name: 'top-nav',
-  components: { SiteIcon }
+  components: { SiteIcon, SiteMenu }
 })
 export default class TopNav extends Vue {
   toggleDarkMode() {

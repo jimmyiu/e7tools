@@ -4561,10 +4561,10 @@
       "enhance": 15,
       "main": "atkp",
       "atkp": 65,
+      "atk": 37,
       "cri": 12,
       "cdmg": 6,
       "spd": 12,
-      "res": 6,
       "locked": false,
       "equippedHero": "kayron"
     },
