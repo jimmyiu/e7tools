@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <top-nav @toggle-menu="menu = !menu" @toggle-setting="setting = !setting" />
     <v-main>
       <top-nav @toggle-setting="setting = !setting" />
       <v-container>
@@ -13,18 +14,25 @@
         <v-progress-circular indeterminate />
       </v-overlay>
     </v-main>
+    <site-menu v-model="menu" />
+    <site-setting v-model="setting" />
+    <v-overlay v-if="loading" :value="loading">
+      <v-progress-circular indeterminate />
+    </v-overlay>
   </v-app>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { mapActions, mapState } from 'vuex';
-import { TopNav, SiteSetting } from '@/components';
+import TopNav from '@/components/common/TopNav.vue';
+import SiteSetting from '@/components/common/SiteSetting.vue';
+import SiteMenu from '@/components/common/SiteMenu.vue';
 import { persistenceService } from '@/services/presistence';
 import { VuexData } from './models';
 
 @Component({
   name: 'app',
-  components: { TopNav, SiteSetting },
+  components: { TopNav, SiteSetting, SiteMenu },
   computed: { ...mapState(['loading']) },
   methods: { ...mapActions(['initVuex']) }
 })
@@ -34,6 +42,7 @@ export default class App extends Vue {
   loading!: boolean;
   //
   setting = false;
+  menu = false;
 
   created() {
     const data = persistenceService.getVuexData();

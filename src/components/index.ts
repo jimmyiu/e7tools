@@ -13,10 +13,8 @@ import HeroFormCard from './hero/HeroFormCard.vue';
 import HeroSelect from './hero/HeroSelect.vue';
 import MessageBox from './common/MessageBox.vue';
 import OptimizationProfiler from './gear/optimizer/OptimizationProfiler.vue';
-import SiteSetting from './common/SiteSetting.vue';
 import SuitGearView from './suit/SuitGearView.vue';
 import SuitMgtCard from './suit/SuitMgtCard.vue';
-import TopNav from './common/TopNav.vue';
 export {
   GearActionCard,
   GearSortingCard,
@@ -35,8 +33,6 @@ export {
   HeroSelect,
   MessageBox,
   OptimizationProfiler,
-  SiteSetting,
   SuitGearView,
-  SuitMgtCard,
-  TopNav
+  SuitMgtCard
 };
