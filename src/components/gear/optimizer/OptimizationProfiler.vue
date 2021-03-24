@@ -1,32 +1,37 @@
 <template>
   <v-card>
-    <v-row no-gutters>
-      <v-col cols="12" sm="auto">
-        <optimization-hero-sheet
-          v-model="form.hero"
-          :class="{ 'hero-sheet-size': $vuetify.breakpoint.smAndUp }"
-          @change-hero="changeHero"
-        />
-      </v-col>
-      <v-col cols="12" sm="auto">
-        <optimization-stat-criteria-sheet
-          v-model="form.profile.stat"
-          :class="{ 'stat-sheet-size': $vuetify.breakpoint.smAndUp }"
-        />
-      </v-col>
-      <v-col cols="12" sm="auto">
-        <optimization-filter-sheet
-          v-model="form.profile.filter"
-          :class="{ 'filter-sheet-size': $vuetify.breakpoint.smAndUp }"
-        />
-      </v-col>
-      <v-col cols="12" sm="auto">
-        <optimization-evaluation-criteria-sheet
-          v-model="form.profile.evaluation"
-          :class="{ 'eval-sheet-size': $vuetify.breakpoint.smAndUp }"
-        />
-      </v-col>
-    </v-row>
+    <v-card-text class="pa-2">
+      <v-row dense>
+        <!-- <v-col cols="12">
+          <hero-select v-model="form.hero.id" />
+        </v-col> -->
+        <v-col cols="12" sm="auto">
+          <optimization-hero-sheet
+            v-model="form.hero"
+            :class="{ 'hero-sheet-size': $vuetify.breakpoint.smAndUp }"
+            @change-hero="changeHero"
+          />
+        </v-col>
+        <v-col cols="12" sm="auto">
+          <optimization-stat-criteria-sheet
+            v-model="form.profile.stat"
+            :class="{ 'stat-sheet-size': $vuetify.breakpoint.smAndUp }"
+          />
+        </v-col>
+        <v-col cols="12" sm="auto">
+          <optimization-filter-sheet
+            v-model="form.profile.filter"
+            :class="{ 'filter-sheet-size': $vuetify.breakpoint.smAndUp }"
+          />
+        </v-col>
+        <v-col cols="12" sm="auto">
+          <optimization-evaluation-criteria-sheet
+            v-model="form.profile.evaluation"
+            :class="{ 'eval-sheet-size': $vuetify.breakpoint.smAndUp }"
+          />
+        </v-col>
+      </v-row>
+    </v-card-text>
     <v-divider />
     <v-card-actions>
       <v-btn class="font-weight-bold" color="primary" text @click="optimize">Optimize</v-btn>
@@ -58,6 +63,7 @@ import OptimizationEvaluationCriteriaSheet from './OptimizationEvaluationCriteri
 import OptimizationFilterSheet from './OptimizationFilterSheet.vue';
 import OptimizationHeroSheet from './OptimizationHeroSheet.vue';
 import OptimizationStatCriteriaSheet from './OptimizationStatCriteriaSheet.vue';
+import { HeroSelect } from '@/components';
 import { OptimizationForm, OptimizationProfile } from '@/models/optimizer';
 import { Hero, SiteState } from '@/models';
 import { ConstantService, ObjectUtils } from '@/services';
@@ -65,6 +71,7 @@ import { ConstantService, ObjectUtils } from '@/services';
 @Component({
   name: 'optimization-profiler',
   components: {
+    HeroSelect,
     OptimizationEvaluationCriteriaSheet,
     OptimizationFilterSheet,
     OptimizationHeroSheet,

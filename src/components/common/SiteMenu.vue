@@ -41,7 +41,6 @@
 <script lang="ts">
 import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
 import { E7dbCacheSettingItem, DataSettingListItem } from './setting';
-import { Constants } from '@/models';
 
 @Component({
   name: 'site-menu',
@@ -49,10 +48,6 @@ import { Constants } from '@/models';
 })
 export default class SiteMenu extends Vue {
   @Model('input') readonly visible!: boolean;
-
-  get version() {
-    return Constants.CURRENT_PERSISTENT_DATA_VERSION;
-  }
 
   @Emit()
   input(value: boolean) {

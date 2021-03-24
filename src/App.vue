@@ -3,9 +3,6 @@
     <top-nav @toggle-menu="menu = !menu" @toggle-setting="setting = !setting" />
     <v-main>
       <v-container>
-        <!-- <v-alert class="hidden-sm-and-up" dense dismissible outlined type="error">
-          This tool is intended to design for desktop users.
-        </v-alert> -->
         <router-view />
       </v-container>
     </v-main>
