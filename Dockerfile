@@ -25,4 +25,4 @@ server {\
     rewrite ^(.+)$ /index.html last;\
   }\
 }' >> /etc/nginx/conf.d/default.conf
-COPY --from=builder /usr/local/src/dist /usr/share/nginx/html/
+COPY --from=builder /usr/local/src/docs /usr/share/nginx/html/e7tools

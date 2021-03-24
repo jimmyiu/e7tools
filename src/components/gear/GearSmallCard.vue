@@ -1,64 +1,76 @@
 <template>
-  <v-sheet
-    class="pt-1"
-    :class="{ selectable: selectable, 'blue-grey darken-4': selected }"
-    max-width="106"
-    min-width="106"
-    outlined
-    rounded
-    style="display: inline-block"
-    @click="click"
-  >
-    <div v-if="gear && gear.id">
-      <v-row class="px-2" no-gutters>
-        <v-col class="d-flex align-center" cols="12">
-          <div class="" :class="gear.grade.color" style="border-radius: 4px">
-            <gear-type-icon style="padding-bottom: 1px" :type="gear.type" />
-          </div>
-          <gear-set-icon :set="gear.set" />
-          {{ gear.level }}
-          <div class="caption">+{{ gear.enhance }}</div>
-        </v-col>
-      </v-row>
-      <v-divider />
-      <v-row class="px-2" no-gutters>
-        <v-col class="d-flex align-center" cols="12">
-          <gear-stat-icon :stat="gear.main" />
-          <div class="px-1 d-flex align-center" :class="{ 'highlight-1': isHighlight1(gear.main.value) }">
-            {{ gear[gear.main.value] }}
-            <span v-if="gear.main.percent">%</span>
-            <span v-else-if="showPercent(gear.main) && refHero" class="caption ml-1">
-              ({{ Math.round((100 * gear[gear.main.value]) / refHero[gear.main.value]) }}%)
-            </span>
-          </div>
-        </v-col>
-      </v-row>
-      <v-divider />
-      <v-row class="px-2" no-gutters>
-        <template v-for="(item, i) in gear.getSubs()">
-          <v-col :key="`${i}_1`" class="d-flex align-center" cols="12">
-            <gear-stat-icon :stat="item[0]" />
-            <div class="px-1 d-flex align-center" :class="{ 'highlight-1': isHighlight1(item[0].value) }">
-              {{ item[1] }}<span v-if="item[0].percent">%</span>
-              <span v-if="showPercent(item[0]) && refHero" class="caption ml-1"
-                >({{ Math.round((100 * gear[item[0].value]) / refHero[item[0].value]) }}%)</span
-              >
-            </div>
-            <div v-if="gear.getSubs().size == i + 1" class="d-flex justify-end" style="width: 100%">
-              <v-img v-if="equippedHero" max-width="26" :src="equippedHero.icon" style="margin-top: -12px" />
-            </div>
-          </v-col>
-        </template>
-        <!-- <v-col class="d-flex justify-end" cols="9">
+  <v-hover>
+    <template v-slot:default="{ hover }">
+      <v-card
+        class="pt-1"
+        :class="{ selectable: selectable, 'blue-grey darken-4': selected }"
+        max-width="106"
+        min-width="106"
+        outlined
+        rounded
+        style="display: inline-block"
+        @click="click"
+      >
+        <div v-if="gear && gear.id">
+          <v-row class="px-2" no-gutters>
+            <v-col class="d-flex align-center" cols="12">
+              <div class="" :class="gear.grade.color" style="border-radius: 4px">
+                <gear-type-icon style="padding-bottom: 1px" :type="gear.type" />
+              </div>
+              <gear-set-icon :set="gear.set" />
+              {{ gear.level }}
+              <div class="caption">+{{ gear.enhance }}</div>
+            </v-col>
+          </v-row>
+          <v-divider />
+          <v-row class="px-2" no-gutters>
+            <v-col class="d-flex align-center" cols="12">
+              <gear-stat-icon :stat="gear.main" />
+              <div class="px-1 d-flex align-center" :class="{ 'highlight-1': isHighlight1(gear.main.value) }">
+                {{ gear[gear.main.value] }}
+                <span v-if="gear.main.percent">%</span>
+                <span v-else-if="showPercent(gear.main) && refHero" class="caption ml-1">
+                  ({{ Math.round((100 * gear[gear.main.value]) / refHero[gear.main.value]) }}%)
+                </span>
+              </div>
+            </v-col>
+          </v-row>
+          <v-divider />
+          <v-row class="px-2" no-gutters>
+            <template v-for="(item, i) in gear.getSubs()">
+              <v-col :key="`${i}_1`" class="d-flex align-center" cols="12">
+                <gear-stat-icon :stat="item[0]" />
+                <div class="px-1 d-flex align-center" :class="{ 'highlight-1': isHighlight1(item[0].value) }">
+                  {{ item[1] }}<span v-if="item[0].percent">%</span>
+                  <span v-if="showPercent(item[0]) && refHero" class="caption ml-1"
+                    >({{ Math.round((100 * gear[item[0].value]) / refHero[item[0].value]) }}%)</span
+                  >
+                </div>
+                <div v-if="gear.getSubs().size == i + 1" class="d-flex justify-end" style="width: 100%">
+                  <v-img v-if="equippedHero" max-width="26" :src="equippedHero.icon" style="margin-top: -12px" />
+                </div>
+              </v-col>
+            </template>
+            <!-- <v-col class="d-flex justify-end" cols="9">
           
         </v-col> -->
-        <!-- <v-col class="d-flex align-center justify-end" cols="3">
+            <!-- <v-col class="d-flex align-center justify-end" cols="3">
           <v-img v-if="equippedHero" :alt="equippedHero.id" max-width="24" :src="equippedHero.icon" />
         </v-col> -->
-      </v-row>
-    </div>
-    <div v-else>TODO: EMPTY</div>
-  </v-sheet>
+          </v-row>
+        </div>
+        <div v-else>TODO: EMPTY</div>
+        <v-fade-transition>
+          <v-overlay v-if="hover && scores" absolute color="blue-grey darken-1" :opacity="0.92">
+            <div v-for="(item, key) in $const.GearStat.SCORES" :key="key" class="d-flex align-center">
+              <gear-stat-icon class="mr-1" :stat="item" />
+              <strong>{{ scores[item.value] }}</strong>
+            </div>
+          </v-overlay>
+        </v-fade-transition>
+      </v-card>
+    </template>
+  </v-hover>
 </template>
 <style lang="sass" scoped>
 .selectable
@@ -95,14 +107,14 @@ export default class GearSmallCard extends Vue {
   get refHero(): Hero | undefined {
     if (this.refHeroId) {
       return this.getHero(this.refHeroId);
-    } else if (this.gear.equippedHero) {
+    } else if (this.gear && this.gear.equippedHero) {
       return this.getHero(this.gear.equippedHero);
     }
     return undefined;
   }
 
   get equippedHero(): Hero | undefined {
-    if (this.gear.equippedHero) {
+    if (this.gear && this.gear.equippedHero) {
       return this.getHero(this.gear.equippedHero);
     }
     return undefined;

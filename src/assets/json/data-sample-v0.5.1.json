@@ -15,7 +15,7 @@
       "spd": 8,
       "eff": 14,
       "locked": false,
-      "equippedHero": "cerise"
+      "equippedHero": "politis"
     },
     {
       "id": "5e4ia6aj87",
@@ -63,7 +63,7 @@
       "cri": 7,
       "spd": 11,
       "locked": false,
-      "equippedHero": "schuri"
+      "equippedHero": ""
     },
     {
       "id": "ba475jc579",
@@ -111,7 +111,7 @@
       "cdmg": 11,
       "spd": 10,
       "locked": false,
-      "equippedHero": "karin"
+      "equippedHero": "schuri"
     },
     {
       "id": "e615di0e8f",
@@ -143,7 +143,7 @@
       "cdmg": 6,
       "spd": 9,
       "locked": false,
-      "equippedHero": "karin"
+      "equippedHero": "taranor-guard"
     },
     {
       "id": "b47e3i2fj0",
@@ -159,7 +159,7 @@
       "cdmg": 12,
       "spd": 8,
       "locked": false,
-      "equippedHero": "clarissa"
+      "equippedHero": "taranor-guard"
     },
     {
       "id": "1c7g2a7ag9",
@@ -175,7 +175,7 @@
       "spd": 6,
       "res": 20,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "blood-moon-haste"
     },
     {
       "id": "8007949d08",
@@ -207,7 +207,7 @@
       "spd": 4,
       "res": 7,
       "locked": false,
-      "equippedHero": "blood-moon-haste"
+      "equippedHero": "tamarinne"
     },
     {
       "id": "a6649b758g",
@@ -223,7 +223,7 @@
       "cri": 5,
       "spd": 6,
       "locked": false,
-      "equippedHero": "politis"
+      "equippedHero": "lilias"
     },
     {
       "id": "g2befaja2c",
@@ -239,7 +239,7 @@
       "cdmg": 22,
       "spd": 3,
       "locked": false,
-      "equippedHero": "landy"
+      "equippedHero": "alexa"
     },
     {
       "id": "407h3h65fb",
@@ -287,7 +287,7 @@
       "cri": 14,
       "cdmg": 10,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "taranor-guard"
     },
     {
       "id": "2ee1i0ea39",
@@ -303,7 +303,7 @@
       "cri": 3,
       "cdmg": 10,
       "locked": false,
-      "equippedHero": "lilias"
+      "equippedHero": ""
     },
     {
       "id": "278702258b",
@@ -335,7 +335,7 @@
       "spd": 6,
       "eff": 25,
       "locked": false,
-      "equippedHero": "tamarinne"
+      "equippedHero": "cerise"
     },
     {
       "id": "74hcb1h0ai",
@@ -367,7 +367,7 @@
       "cdmg": 12,
       "spd": 7,
       "locked": false,
-      "equippedHero": "karin"
+      "equippedHero": "taranor-guard"
     },
     {
       "id": "72c1230h1i",
@@ -383,7 +383,7 @@
       "cri": 3,
       "spd": 3,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "landy"
     },
     {
       "id": "jj28je7g32",
@@ -431,7 +431,7 @@
       "cdmg": 6,
       "spd": 9,
       "locked": false,
-      "equippedHero": "lilias"
+      "equippedHero": "schuri"
     },
     {
       "id": "hg09e4icji",
@@ -479,7 +479,7 @@
       "cdmg": 17,
       "eff": 13,
       "locked": false,
-      "equippedHero": "landy"
+      "equippedHero": ""
     },
     {
       "id": "36212gbic7",
@@ -543,23 +543,23 @@
       "spd": 6,
       "res": 21,
       "locked": false,
-      "equippedHero": "lilias"
+      "equippedHero": ""
     },
     {
       "id": "g50ehjffhi",
       "type": "Armor",
       "set": "Attack",
+      "grade": "Epic",
       "level": 70,
       "enhance": 15,
+      "main": "def",
       "hpp": 15,
       "def": 260,
       "cri": 11,
       "cdmg": 6,
       "spd": 4,
       "locked": false,
-      "equippedHero": "",
-      "grade": "Epic",
-      "main": "def"
+      "equippedHero": "taranor-guard"
     },
     {
       "id": "a651jgb1ec",
@@ -623,7 +623,7 @@
       "spd": 11,
       "res": 19,
       "locked": false,
-      "equippedHero": "falconer-kluri"
+      "equippedHero": "blood-moon-haste"
     },
     {
       "id": "gja32fc09g",
@@ -767,7 +767,7 @@
       "spd": 40,
       "eff": 6,
       "locked": false,
-      "equippedHero": "lilias"
+      "equippedHero": ""
     },
     {
       "id": "32a10991i5",
@@ -799,7 +799,7 @@
       "cri": 19,
       "eff": 7,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": ""
     },
     {
       "id": "44bffhj6d7",
@@ -815,7 +815,7 @@
       "cri": 4,
       "cdmg": 11,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "clarissa"
     },
     {
       "id": "10id467414",
@@ -847,7 +847,7 @@
       "spd": 5,
       "res": 12,
       "locked": false,
-      "equippedHero": "schuri"
+      "equippedHero": ""
     },
     {
       "id": "0741e69ccj",
@@ -879,7 +879,7 @@
       "cri": 11,
       "cdmg": 15,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": ""
     },
     {
       "id": "egg3351ib9",
@@ -895,7 +895,7 @@
       "cri": 11,
       "cdmg": 4,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "lilias"
     },
     {
       "id": "59di7d5714",
@@ -1007,7 +1007,7 @@
       "cdmg": 65,
       "res": 17,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": ""
     },
     {
       "id": "ae2i1864f5",
@@ -1039,7 +1039,7 @@
       "spd": 7,
       "res": 18,
       "locked": false,
-      "equippedHero": "blood-moon-haste"
+      "equippedHero": "falconer-kluri"
     },
     {
       "id": "g2jagh9i54",
@@ -1071,7 +1071,7 @@
       "cri": 11,
       "spd": 7,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "schuri"
     },
     {
       "id": "2a8b8b4e64",
@@ -1087,7 +1087,7 @@
       "cri": 7,
       "cdmg": 11,
       "locked": false,
-      "equippedHero": "schuri"
+      "equippedHero": ""
     },
     {
       "id": "dj150h0754",
@@ -1135,7 +1135,7 @@
       "cri": 14,
       "res": 21,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": ""
     },
     {
       "id": "dcffgb8707",
@@ -1151,7 +1151,7 @@
       "atkp": 20,
       "res": 13,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "lilias"
     },
     {
       "id": "3gc4be901j",
@@ -1266,22 +1266,6 @@
       "equippedHero": "politis"
     },
     {
-      "id": "j0fa6iac79",
-      "type": "Helmet",
-      "set": "Hit",
-      "level": 85,
-      "enhance": 9,
-      "hp": 1512,
-      "defp": 5,
-      "def": 57,
-      "atk": 80,
-      "spd": 8,
-      "locked": false,
-      "equippedHero": "",
-      "grade": "Epic",
-      "main": "hp"
-    },
-    {
       "id": "cbei0056b4",
       "type": "Boot",
       "set": "Speed",
@@ -1343,7 +1327,7 @@
       "spd": 45,
       "eff": 40,
       "locked": false,
-      "equippedHero": "cerise"
+      "equippedHero": "tamarinne"
     },
     {
       "id": "423gi1af14",
@@ -1433,13 +1417,13 @@
       "level": 85,
       "enhance": 15,
       "main": "spd",
-      "hpp": 15,
+      "hpp": 19,
       "hp": 361,
       "defp": 19,
       "cri": 5,
       "spd": 40,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "lilias"
     },
     {
       "id": "h506c0889b",
@@ -1519,7 +1503,7 @@
       "spd": 40,
       "eff": 8,
       "locked": false,
-      "equippedHero": "schuri"
+      "equippedHero": ""
     },
     {
       "id": "a6a01ge6c0",
@@ -1535,7 +1519,7 @@
       "cri": 8,
       "cdmg": 14,
       "locked": false,
-      "equippedHero": "alexa"
+      "equippedHero": "landy"
     },
     {
       "id": "aac727756d",
@@ -1583,7 +1567,7 @@
       "spd": 40,
       "eff": 18,
       "locked": false,
-      "equippedHero": "tamarinne"
+      "equippedHero": ""
     },
     {
       "id": "bhga7fi8bf",
@@ -1631,7 +1615,7 @@
       "atkp": 15,
       "spd": 11,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": ""
     },
     {
       "id": "412dea2ibf",
@@ -1711,7 +1695,7 @@
       "cri": 3,
       "spd": 7,
       "locked": false,
-      "equippedHero": "lilias"
+      "equippedHero": ""
     },
     {
       "id": "fdj018jedg",
@@ -1733,7 +1717,7 @@
       "id": "4dc3e1c82d",
       "type": "Helmet",
       "set": "Speed",
-      "grade": "Epic",
+      "grade": "Hero",
       "level": 85,
       "enhance": 15,
       "main": "hp",
@@ -1743,7 +1727,7 @@
       "cdmg": 4,
       "spd": 9,
       "locked": false,
-      "equippedHero": "cerise"
+      "equippedHero": "lilias"
     },
     {
       "id": "h52e82j30d",
@@ -1775,7 +1759,7 @@
       "cdmg": 11,
       "spd": 7,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": ""
     },
     {
       "id": "fg1a4ah661",
@@ -1902,6 +1886,134 @@
       "eff": 13,
       "locked": false,
       "equippedHero": "furious"
+    },
+    {
+      "id": "69jb675bg8",
+      "type": "Weapon",
+      "set": "Speed",
+      "grade": "Hero",
+      "level": 85,
+      "enhance": 15,
+      "main": "atk",
+      "hpp": 20,
+      "atkp": 16,
+      "atk": 500,
+      "cri": 8,
+      "cdmg": 5,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "a01h2004d6",
+      "type": "Necklace",
+      "set": "Critical",
+      "grade": "Hero",
+      "level": 85,
+      "enhance": 15,
+      "main": "cdmg",
+      "defp": 9,
+      "atk": 66,
+      "cri": 9,
+      "cdmg": 65,
+      "spd": 6,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "97b3739bj8",
+      "type": "Necklace",
+      "set": "Rage",
+      "grade": "Epic",
+      "level": 88,
+      "enhance": 15,
+      "main": "cdmg",
+      "defp": 12,
+      "atkp": 12,
+      "cri": 16,
+      "cdmg": 70,
+      "eff": 17,
+      "locked": false,
+      "equippedHero": "taranor-guard"
+    },
+    {
+      "id": "5b41ig2di1",
+      "type": "Helmet",
+      "set": "Speed",
+      "grade": "Hero",
+      "level": 90,
+      "enhance": 15,
+      "main": "hp",
+      "hpp": 17,
+      "hp": 2835,
+      "atkp": 8,
+      "spd": 15,
+      "eff": 8,
+      "locked": false,
+      "equippedHero": "cerise"
+    },
+    {
+      "id": "b35c3g1ifd",
+      "type": "Boot",
+      "set": "Speed",
+      "grade": "Epic",
+      "level": 85,
+      "enhance": 15,
+      "main": "spd",
+      "atkp": 27,
+      "cdmg": 8,
+      "spd": 40,
+      "eff": 8,
+      "res": 5,
+      "locked": false,
+      "equippedHero": "schuri"
+    },
+    {
+      "id": "fbd8940cb2",
+      "type": "Boot",
+      "set": "Speed",
+      "grade": "Epic",
+      "level": 90,
+      "enhance": 15,
+      "main": "spd",
+      "atkp": 8,
+      "cri": 16,
+      "spd": 45,
+      "eff": 20,
+      "res": 17,
+      "locked": false,
+      "equippedHero": "cerise"
+    },
+    {
+      "id": "b6a70fc23a",
+      "type": "Necklace",
+      "set": "Speed",
+      "grade": "Epic",
+      "level": 85,
+      "enhance": 15,
+      "main": "cdmg",
+      "hpp": 21,
+      "defp": 10,
+      "cri": 8,
+      "cdmg": 65,
+      "eff": 10,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "h1bg443e94",
+      "type": "Necklace",
+      "set": "Hit",
+      "grade": "Hero",
+      "level": 85,
+      "enhance": 12,
+      "main": "defp",
+      "hpp": 14,
+      "hp": 158,
+      "defp": 43,
+      "def": 30,
+      "spd": 9,
+      "locked": false,
+      "equippedHero": ""
     }
   ],
   "profiles": [
@@ -1938,8 +2050,8 @@
         "sets": [],
         "necklaces": [],
         "rings": [],
-        "boots": [],
-        "maxSize": 0,
+        "boots": ["spd"],
+        "maxSize": 20,
         "enhanceMode": null,
         "equippedMode": 0
       },
@@ -1949,11 +2061,11 @@
         "atk": {},
         "cri": { "min": 80, "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": 230, "max": "" },
+        "spd": { "min": 232, "max": "" },
         "eff": { "min": 30, "max": "" },
         "res": { "min": "", "max": "" },
         "ehp": { "min": "" },
-        "damage": { "min": 850 }
+        "damage": { "min": 880 }
       },
       "evaluation": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
@@ -1991,8 +2103,8 @@
         "necklaces": ["hpp", "hp", "defp", "def"],
         "rings": ["hpp", "hp", "defp", "def"],
         "boots": ["hpp", "hp", "defp", "def", "spd"],
-        "maxSize": "",
-        "enhanceMode": null,
+        "maxSize": 20,
+        "enhanceMode": 2,
         "equippedMode": 0
       },
       "stat": {
@@ -2053,10 +2165,10 @@
         "atk": { "min": "3200" },
         "cri": { "min": "70", "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": 205, "max": "" },
+        "spd": { "min": 215, "max": "" },
         "eff": { "min": 120, "max": "" },
         "res": { "min": "", "max": "" },
-        "ehp": { "min": 43000 },
+        "ehp": { "min": 40000 },
         "damage": { "min": 500 }
       },
       "evaluation": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": false, "lv85": false }
@@ -2199,8 +2311,8 @@
         "necklaces": [],
         "rings": [],
         "boots": ["spd"],
-        "maxSize": 0,
-        "enhanceMode": null,
+        "maxSize": 15,
+        "enhanceMode": 2,
         "equippedMode": 2
       },
       "stat": {
@@ -2209,8 +2321,8 @@
         "atk": {},
         "cri": { "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": 260 },
-        "eff": { "min": 60 },
+        "spd": { "min": 265 },
+        "eff": { "min": 65 },
         "res": {},
         "ehp": {},
         "damage": {}
@@ -2226,20 +2338,20 @@
         "rings": [],
         "boots": [],
         "maxSize": 0,
-        "enhanceMode": null,
-        "equippedMode": 2
+        "enhanceMode": 2,
+        "equippedMode": 1
       },
       "stat": {
         "hp": {},
         "def": {},
         "atk": {},
-        "cri": { "min": "85", "max": 110 },
+        "cri": { "min": 90, "max": 110 },
         "cdmg": { "max": 360 },
         "spd": { "min": 200 },
         "eff": {},
         "res": {},
         "ehp": { "min": 45000 },
-        "damage": { "min": "" }
+        "damage": { "min": 800 }
       },
       "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
@@ -2253,7 +2365,7 @@
         "boots": [],
         "maxSize": 0,
         "enhanceMode": null,
-        "equippedMode": 1
+        "equippedMode": 2
       },
       "stat": {
         "hp": { "min": 21000 },
@@ -2264,7 +2376,7 @@
         "spd": {},
         "eff": {},
         "res": {},
-        "ehp": { "min": 140000 },
+        "ehp": { "min": 135000 },
         "damage": {}
       },
       "evaluation": { "forcedSets": [], "limit": 20000000, "brokenSet": true, "lv85": false }
@@ -2279,7 +2391,7 @@
         "boots": [],
         "maxSize": 0,
         "enhanceMode": null,
-        "equippedMode": 2
+        "equippedMode": 1
       },
       "stat": {
         "hp": {},
@@ -2303,9 +2415,9 @@
         "necklaces": [],
         "rings": [],
         "boots": [],
-        "maxSize": 0,
+        "maxSize": 15,
         "enhanceMode": null,
-        "equippedMode": 2
+        "equippedMode": 1
       },
       "stat": {
         "hp": {},
@@ -2340,12 +2452,12 @@
         "cri": { "max": 110 },
         "cdmg": { "max": 360 },
         "spd": { "min": 200 },
-        "eff": { "min": "" },
+        "eff": { "min": 85 },
         "res": {},
-        "ehp": { "min": 80000 },
+        "ehp": { "min": 85000 },
         "damage": {}
       },
-      "evaluation": { "forcedSets": [], "limit": 10000000, "brokenSet": true, "lv85": false }
+      "evaluation": { "forcedSets": ["Speed"], "limit": 10000000, "brokenSet": true, "lv85": false }
     },
     {
       "id": "schuri",
@@ -2363,7 +2475,7 @@
         "hp": {},
         "def": {},
         "atk": {},
-        "cri": { "min": 99, "max": 110 },
+        "cri": { "min": 100, "max": 110 },
         "cdmg": { "max": 360 },
         "spd": { "min": 190 },
         "eff": {},
@@ -2434,22 +2546,22 @@
         "rings": [],
         "boots": [],
         "maxSize": 0,
-        "enhanceMode": 2,
+        "enhanceMode": null,
         "equippedMode": 2
       },
       "stat": {
         "hp": {},
-        "def": {},
+        "def": { "min": 1300 },
         "atk": {},
         "cri": { "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": 180 },
+        "spd": { "min": 200 },
         "eff": {},
         "res": {},
-        "ehp": { "min": 90000 },
+        "ehp": { "min": 120000 },
         "damage": {}
       },
-      "evaluation": { "forcedSets": [], "limit": 10000000, "brokenSet": false, "lv85": false }
+      "evaluation": { "forcedSets": [], "limit": 10000000, "brokenSet": true, "lv85": false }
     },
     {
       "id": "taranor-guard",
@@ -2459,15 +2571,15 @@
         "necklaces": [],
         "rings": [],
         "boots": [],
-        "maxSize": 0,
+        "maxSize": 15,
         "enhanceMode": null,
-        "equippedMode": 1
+        "equippedMode": 2
       },
       "stat": {
         "hp": {},
         "def": {},
-        "atk": {},
-        "cri": { "min": 88, "max": 110 },
+        "atk": { "min": 3000 },
+        "cri": { "min": 85, "max": 110 },
         "cdmg": { "max": 360 },
         "spd": {},
         "eff": {},
@@ -2684,7 +2796,7 @@
       "rarity": 5,
       "attribute": "dark",
       "role": "manauser",
-      "tier": 4,
+      "tier": 5,
       "bonusAbility": {},
       "abilityRating": { "hp": 3, "def": 2, "atk": 1, "cri": 0, "cdmg": 0, "spd": 1, "eff": 0, "res": 1 }
     },
@@ -3332,7 +3444,7 @@
       "role": "knight",
       "tier": 5,
       "bonusAbility": {},
-      "abilityRating": { "hp": 3, "def": 3, "atk": 0, "cri": 0, "cdmg": 0, "spd": 2, "eff": 0, "res": 0 }
+      "abilityRating": { "hp": 3, "def": 3, "atk": 0, "cri": 1, "cdmg": 0, "spd": 1, "eff": 0, "res": 0 }
     },
     {
       "id": "lilibet",
@@ -4318,9 +4430,9 @@
       "rarity": 4,
       "attribute": "ice",
       "role": "warrior",
-      "tier": 3,
+      "tier": 4,
       "bonusAbility": { "hp": 182, "atkp": 12, "atk": 208 },
-      "abilityRating": { "hp": 0, "def": 0, "atk": 2, "cri": 0, "cdmg": 2, "spd": 0, "eff": 0, "res": 0 }
+      "abilityRating": { "hp": 0, "def": 0, "atk": 2, "cri": 0, "cdmg": 2, "spd": 0, "eff": 1, "res": 0 }
     },
     {
       "id": "coli",
@@ -4565,7 +4677,7 @@
       "rarity": 4,
       "attribute": "ice",
       "role": "assassin",
-      "tier": 5,
+      "tier": 7,
       "bonusAbility": {},
       "abilityRating": { "hp": 0, "def": 0, "atk": 0, "cri": 0, "cdmg": 0, "spd": 0, "eff": 0, "res": 0 }
     },
@@ -5142,7 +5254,7 @@
     {
       "id": "alexa",
       "hp": 3642,
-      "def": 3642,
+      "def": 398,
       "atk": 828,
       "cri": 23,
       "cdmg": 150,
@@ -5545,7 +5657,7 @@
       "atk": 703,
       "cri": 15,
       "cdmg": 150,
-      "spd": 105,
+      "spd": 114,
       "eff": 18,
       "res": 0,
       "name": "Falconer Kluri",
@@ -5554,8 +5666,8 @@
       "attribute": "wind",
       "role": "knight",
       "tier": 4,
-      "bonusAbility": {},
-      "abilityRating": { "hp": 2, "def": 2, "atk": 0, "cri": 0, "cdmg": 0, "spd": 3, "eff": 3, "res": 0 }
+      "bonusAbility": { "defp": 5, "def": 72, "spd": 0 },
+      "abilityRating": { "hp": 3, "def": 3, "atk": 0, "cri": 0, "cdmg": 0, "spd": 3, "eff": 2, "res": 0 }
     },
     {
       "id": "glenn",
@@ -6275,9 +6387,9 @@
       "rarity": 3,
       "attribute": "ice",
       "role": "warrior",
-      "tier": 5,
+      "tier": 3,
       "bonusAbility": {},
-      "abilityRating": { "hp": 0, "def": 0, "atk": 0, "cri": 0, "cdmg": 0, "spd": 0, "eff": 0, "res": 0 }
+      "abilityRating": { "hp": 0, "def": 0, "atk": 3, "cri": 1, "cdmg": 3, "spd": 0, "eff": 0, "res": 0 }
     },
     {
       "id": "taranor-royal-guard",
@@ -6358,13 +6470,68 @@
   ],
   "suits": [
     {
-      "id": "iseria",
-      "weaponId": "278702258b",
-      "armorId": "0741e69ccj",
-      "helmetId": "9aha10e0a5",
-      "necklaceId": "ae2i1864f5",
-      "ringId": "3gc4be901j",
-      "bootId": "10id467414"
+      "id": "politis",
+      "weaponId": "0866b9daeb",
+      "armorId": "59di7d5714",
+      "helmetId": "jj28je7g32",
+      "necklaceId": "dadhc6f845",
+      "ringId": "a4hh53h93e",
+      "bootId": "1ajb5hf20d"
+    },
+    {
+      "id": "schuri",
+      "weaponId": "b2c0h83gjb",
+      "armorId": "cc0a21581i",
+      "helmetId": "jbbc071b7d",
+      "necklaceId": "0gg60ff467",
+      "ringId": "5ff337d44a",
+      "bootId": "b35c3g1ifd"
+    },
+    {
+      "id": "general-purrgis",
+      "weaponId": "54697ff443",
+      "armorId": "ad976a782b",
+      "helmetId": "ba475jc579",
+      "necklaceId": "a46hajj962",
+      "ringId": "6gdfc1bh6d",
+      "bootId": "ee39743ac8"
+    },
+    { "id": "karin", "weaponId": "aac727756d", "necklaceId": "e615di0e8f", "bootId": "2effccf6bh" },
+    {
+      "id": "taranor-guard",
+      "weaponId": "78g8566bi8",
+      "armorId": "g50ehjffhi",
+      "helmetId": "44jceahg76",
+      "necklaceId": "97b3739bj8",
+      "ringId": "319ahc07bc",
+      "bootId": "b47e3i2fj0"
+    },
+    {
+      "id": "blood-moon-haste",
+      "weaponId": "1c7g2a7ag9",
+      "armorId": "bb330f2ea4",
+      "helmetId": "74hcb1h0ai",
+      "necklaceId": "be2ad5091d",
+      "ringId": "6g3cg55a36",
+      "bootId": "9c64ch39b5"
+    },
+    {
+      "id": "tamarinne",
+      "weaponId": "2g5f5j8h81",
+      "armorId": "a6c3g9d14h",
+      "helmetId": "412dea2ibf",
+      "necklaceId": "bhga7fi8bf",
+      "ringId": "cjhe1a2d65",
+      "bootId": "fabd4e7b9d"
+    },
+    {
+      "id": "lilias",
+      "weaponId": "a6649b758g",
+      "armorId": "egg3351ib9",
+      "helmetId": "4dc3e1c82d",
+      "necklaceId": "88ii09eh06",
+      "ringId": "dcffgb8707",
+      "bootId": "2dj9795c7a"
     },
     {
       "id": "alexa",
@@ -6376,67 +6543,67 @@
       "bootId": "14ac1447dd"
     },
     {
-      "id": "tamarinne",
-      "weaponId": "2g5f5j8h81",
-      "armorId": "i2d1ecc1ai",
-      "helmetId": "36212gbic7",
-      "necklaceId": "dj150h0754",
-      "ringId": "82i3j51g0e",
-      "bootId": "2dj9795c7a"
+      "id": "clarissa",
+      "weaponId": "407h3h65fb",
+      "armorId": "fdj018jedg",
+      "helmetId": "423gi1af14",
+      "necklaceId": "f5gdjga268",
+      "ringId": "fg1a4ah661",
+      "bootId": "44bffhj6d7"
     },
     {
-      "id": "general-purrgis",
-      "weaponId": "1c7g2a7ag9",
-      "armorId": "bb330f2ea4",
-      "helmetId": "ba475jc579",
-      "necklaceId": "be2ad5091d",
-      "ringId": "dcffgb8707",
-      "bootId": "ee39743ac8"
+      "id": "falconer-kluri",
+      "weaponId": "hjad19375i",
+      "armorId": "a651jgb1ec",
+      "helmetId": "e6e68hbjgf",
+      "necklaceId": "dj150h0754",
+      "ringId": "82i3j51g0e",
+      "bootId": "jjab3gbbe7"
+    },
+    {
+      "id": "iseria",
+      "weaponId": "278702258b",
+      "armorId": "0741e69ccj",
+      "helmetId": "gd99e1ahgc",
+      "necklaceId": "ae2i1864f5",
+      "ringId": "ifi10g8ia4",
+      "bootId": "32a10991i5"
+    },
+    {
+      "id": "cerise",
+      "weaponId": "7c361g1hib",
+      "armorId": "i2d1ecc1ai",
+      "helmetId": "5b41ig2di1",
+      "necklaceId": "j58i2j9g43",
+      "ringId": "ii2971hj1f",
+      "bootId": "fbd8940cb2"
+    },
+    {
+      "id": "landy",
+      "weaponId": "a6a01ge6c0",
+      "armorId": "82f28h0f53",
+      "helmetId": "72c1230h1i",
+      "necklaceId": "b8hc01fdjc",
+      "ringId": "3gc4be901j",
+      "bootId": "h52e82j30d"
     },
     {
       "id": "silver-blade-aramintha",
       "weaponId": "h3568g4ic9",
-      "armorId": "a6c3g9d14h",
-      "helmetId": "hg09e4icji",
-      "necklaceId": "hg0gfde8ge",
-      "ringId": "2a8b8b4e64",
-      "bootId": "32a10991i5"
-    },
-    {
-      "id": "politis",
-      "weaponId": "7c361g1hib",
-      "armorId": "59di7d5714",
-      "helmetId": "jj28je7g32",
-      "necklaceId": "a46hajj962",
-      "ringId": "a4hh53h93e",
-      "bootId": "1ajb5hf20d"
-    },
-    {
-      "id": "cerise",
-      "weaponId": "0866b9daeb",
       "armorId": "14b41fddc2",
-      "helmetId": "c3079jee5f",
-      "necklaceId": "88ii09eh06",
-      "ringId": "6gdfc1bh6d",
-      "bootId": "fabd4e7b9d"
+      "helmetId": "e65geh73dh",
+      "necklaceId": "hg0gfde8ge",
+      "ringId": "g2jagh9i54",
+      "bootId": "10id467414"
     },
     {
-      "id": "landy",
-      "weaponId": "b2c0h83gjb",
-      "armorId": "cc0a21581i",
-      "helmetId": "44jceahg76",
-      "necklaceId": "b8hc01fdjc",
-      "ringId": "ifi10g8ia4",
-      "bootId": "b47e3i2fj0"
-    },
-    {
-      "id": "blood-moon-haste",
-      "weaponId": "2ee1i0ea39",
-      "armorId": "bgjg746fe9",
-      "helmetId": "74hcb1h0ai",
-      "necklaceId": "ff6i85g10h",
-      "ringId": "6g3cg55a36",
-      "bootId": "9c64ch39b5"
+      "id": "furious",
+      "weaponId": "1g9ge1d662",
+      "armorId": "fj92bgh27b",
+      "helmetId": "ibh8dc4585",
+      "necklaceId": "d8e592hj84",
+      "ringId": "29d84530f0",
+      "bootId": "cbei0056b4"
     }
   ]
 }

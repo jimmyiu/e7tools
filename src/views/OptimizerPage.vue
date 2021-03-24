@@ -9,13 +9,6 @@
         Math.ceil(((gearStore.numOfCombinations / 10000000) * 8) / 60) | formatNumber
       }}</strong>
       minutes
-      <!-- <v-icon>help_outlined</v-icon> -->
-      <!-- <i>
-          Remark:<br />
-          - only first {{ hardLimit | formatNumber }} combinations will be evaluated now (Performance
-          issue)<br />
-          - 10,000,000 combinations take around 7.1 seconds in the testing machine
-        </i> -->
     </v-sheet>
 
     <optimization-profiler v-model="form" class="mb-2" @optimize="optimize" />
