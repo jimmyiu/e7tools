@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer fixed right temporary :value="visible" @input="input">
+  <v-navigation-drawer app right temporary :value="visible" @input="input">
     <v-list-item>
       <v-list-item-title class="font-weight-bold">
         Settings

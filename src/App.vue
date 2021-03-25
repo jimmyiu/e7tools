@@ -6,8 +6,6 @@
         <router-view />
       </v-container>
     </v-main>
-    <!-- <site-menu v-model="menu" /> -->
-    <!-- <site-setting v-model="setting" /> -->
     <v-overlay v-if="loading" :value="loading">
       <v-progress-circular indeterminate />
     </v-overlay>
@@ -32,18 +30,10 @@ export default class App extends Vue {
   // vuex
   initVuex!: (data: VuexData) => void;
   loading!: boolean;
-  //
-  // setting = false;
-  // menu = false;
 
   created() {
     const data = persistenceService.getVuexData();
     this.initVuex(data);
   }
-
-  // toggle() {
-  //   console.log('toggle::called, menu = ' + this.menu);
-  //   this.menu = !this.menu;
-  // }
 }
 </script>
