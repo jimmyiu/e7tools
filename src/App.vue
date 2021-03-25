@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <top-nav @menu="toggle" @toggle-setting="setting = !setting" />
+    <top-nav />
     <v-main>
       <top-nav @toggle-setting="setting = !setting" />
       <v-container>
@@ -12,8 +12,8 @@
         <v-progress-circular indeterminate />
       </v-overlay>
     </v-main>
-    <site-menu v-model="menu" />
-    <site-setting v-model="setting" />
+    <!-- <site-menu v-model="menu" /> -->
+    <!-- <site-setting v-model="setting" /> -->
     <v-overlay v-if="loading" :value="loading">
       <v-progress-circular indeterminate />
     </v-overlay>
@@ -39,17 +39,24 @@ export default class App extends Vue {
   initVuex!: (data: VuexData) => void;
   loading!: boolean;
   //
-  setting = false;
-  menu = false;
+  // setting = false;
+  // menu = false;
 
   created() {
     const data = persistenceService.getVuexData();
     this.initVuex(data);
   }
 
+<<<<<<< HEAD
   toggle() {
     console.log('toggle::called, menu = ' + this.menu);
     this.menu = !this.menu;
   }
+=======
+  // toggle() {
+  //   console.log('toggle::called, menu = ' + this.menu);
+  //   this.menu = !this.menu;
+  // }
+>>>>>>> main
 }
 </script>

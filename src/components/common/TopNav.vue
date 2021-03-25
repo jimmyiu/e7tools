@@ -54,10 +54,11 @@
       Dev
     </v-btn> -->
       <v-spacer />
-      <v-btn icon @click="toggleSetting"><v-icon>mdi-cog</v-icon></v-btn>
+      <v-btn icon @click="setting = true"><v-icon>mdi-cog</v-icon></v-btn>
       <!-- <v-switch hide-details @change="toggleDarkMode"></v-switch> -->
     </v-app-bar>
     <site-menu v-model="menu" />
+    <site-setting v-model="setting" />
   </div>
 </template>
 <style lang="sass" scoped>
@@ -74,28 +75,30 @@ import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import { mapActions } from 'vuex';
 import SiteIcon from './SiteIcon.vue';
 import SiteMenu from './SiteMenu.vue';
+import SiteSetting from './SiteSetting.vue';
 
 @Component({
   name: 'top-nav',
-  components: { SiteIcon, SiteMenu }
+  components: { SiteIcon, SiteMenu, SiteSetting }
 })
 export default class TopNav extends Vue {
   menu = false;
+  setting = false;
 
   toggleDarkMode() {
     this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
   }
 
   // @Emit('toggle-menu')
-  toggleMenu() {
-    console.log('toggleMenu::called revise');
-    this.$emit('menu');
-  }
+  // toggleMenu() {
+  //   console.log('toggleMenu::called revise');
+  //   this.$emit('menu');
+  // }
 
-  @Emit('toggle-setting')
-  toggleSetting() {
-    this.$emit('toggle-menu');
-  }
+  // @Emit('toggle-setting')
+  // toggleSetting() {
+  //   this.$emit('toggle-menu');
+  // }
 
   goHomepage() {
     this.$router.push({ name: 'home' }).catch(err => {
