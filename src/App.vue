@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <top-nav @toggle-menu="menu = !menu" @toggle-setting="setting = !setting" />
+    <top-nav @toggle-menu="toggle" @toggle-setting="setting = !setting" />
     <v-main>
       <top-nav @toggle-setting="setting = !setting" />
       <v-container>
@@ -45,6 +45,11 @@ export default class App extends Vue {
   created() {
     const data = persistenceService.getVuexData();
     this.initVuex(data);
+  }
+
+  toggle() {
+    console.log('toggle::called, menu = ' + this.menu);
+    this.menu = !this.menu;
   }
 }
 </script>
