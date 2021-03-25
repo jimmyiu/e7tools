@@ -81,14 +81,16 @@ export default class TopNav extends Vue {
     this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
   }
 
-  @Emit('toggle-menu')
+  // @Emit('toggle-menu')
   toggleMenu() {
-    console.log('toggleMenu::called');
-    // this.$emit('toggle');
+    console.log('toggleMenu::called revise');
+    this.$emit('menu');
   }
 
   @Emit('toggle-setting')
-  toggleSetting() {}
+  toggleSetting() {
+    this.$emit('toggle-menu');
+  }
 
   goHomepage() {
     this.$router.push({ name: 'home' }).catch(err => {
