@@ -1,14 +1,15 @@
 <template>
-  <v-app-bar app dark dense flat>
-    <!-- <v-btn icon @click="goHomepage"><v-icon>mdi-home</v-icon></v-btn> -->
-    <v-btn icon @click="toggleMenu"><v-icon>mdi-menu</v-icon></v-btn>
-    <!-- <v-icon>mdi-home</v-icon> -->
-    <!-- <site-icon /> -->
-    <!-- <v-btn class="ml-1" depressed to="gear">
+  <div>
+    <v-app-bar app dark dense flat>
+      <!-- <v-btn icon @click="goHomepage"><v-icon>mdi-home</v-icon></v-btn> -->
+      <v-btn icon @click="menu = true"><v-icon>mdi-menu</v-icon></v-btn>
+      <!-- <v-icon>mdi-home</v-icon> -->
+      <!-- <site-icon /> -->
+      <!-- <v-btn class="ml-1" depressed to="gear">
       Gear
       <v-icon right>mdi-chevron-down</v-icon>
     </v-btn> -->
-    <!-- <v-menu bottom offset-y open-on-hover>
+      <!-- <v-menu bottom offset-y open-on-hover>
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" class="ml-1" depressed v-on="on">
           Gear
@@ -24,16 +25,16 @@
         </v-list-item>
       </v-list>
     </v-menu> -->
-    <v-btn class="ml-1" depressed :to="{ name: 'gear' }">
-      Gear
-    </v-btn>
-    <v-btn class="ml-1" depressed :to="{ name: 'hero' }">
-      Hero
-    </v-btn>
-    <v-btn class="ml-1" depressed :to="{ name: 'optimizer' }">
-      Optimizer
-    </v-btn>
-    <!-- <v-menu bottom offset-y open-on-hover>
+      <v-btn class="ml-1" depressed :to="{ name: 'gear' }">
+        Gear
+      </v-btn>
+      <v-btn class="ml-1" depressed :to="{ name: 'hero' }">
+        Hero
+      </v-btn>
+      <v-btn class="ml-1" depressed :to="{ name: 'optimizer' }">
+        Optimizer
+      </v-btn>
+      <!-- <v-menu bottom offset-y open-on-hover>
       <template v-slot:activator="{ on, attrs }">
         <v-btn v-bind="attrs" class="ml-1" depressed v-on="on">
           Others
@@ -49,13 +50,15 @@
         </v-list-item>
       </v-list>
     </v-menu> -->
-    <!-- <v-btn class="ml-1" depressed to="dev">
+      <!-- <v-btn class="ml-1" depressed to="dev">
       Dev
     </v-btn> -->
-    <v-spacer />
-    <v-btn icon @click="toggleSetting"><v-icon>mdi-cog</v-icon></v-btn>
-    <!-- <v-switch hide-details @change="toggleDarkMode"></v-switch> -->
-  </v-app-bar>
+      <v-spacer />
+      <v-btn icon @click="toggleSetting"><v-icon>mdi-cog</v-icon></v-btn>
+      <!-- <v-switch hide-details @change="toggleDarkMode"></v-switch> -->
+    </v-app-bar>
+    <site-menu v-model="menu" />
+  </div>
 </template>
 <style lang="sass" scoped>
 ::v-deep .v-btn.menu
@@ -77,6 +80,8 @@ import SiteMenu from './SiteMenu.vue';
   components: { SiteIcon, SiteMenu }
 })
 export default class TopNav extends Vue {
+  menu = false;
+
   toggleDarkMode() {
     this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
   }
