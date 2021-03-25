@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <top-nav @toggle-menu="toggle" @toggle-setting="setting = !setting" />
+    <top-nav @menu="toggle" @toggle-setting="setting = !setting" />
     <v-main>
       <v-container>
         {{ menu }} / {{ setting }}
