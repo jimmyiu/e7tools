@@ -49,14 +49,6 @@ import { E7dbCacheSettingItem, DataSettingListItem } from './setting';
 export default class SiteMenu extends Vue {
   @Model('input') readonly visible!: boolean;
 
-  created() {
-    console.log('created');
-  }
-
-  mounted() {
-    console.log('mounted');
-  }
-
   @Emit()
   input(value: boolean) {
     return value;
