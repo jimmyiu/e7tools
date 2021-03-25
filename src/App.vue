@@ -3,6 +3,7 @@
     <top-nav @toggle-menu="menu = !menu" @toggle-setting="setting = !setting" />
     <v-main>
       <v-container>
+        {{ menu }} / {{ setting }}
         <router-view />
       </v-container>
     </v-main>
