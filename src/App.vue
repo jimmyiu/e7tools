@@ -47,16 +47,9 @@ export default class App extends Vue {
     this.initVuex(data);
   }
 
-<<<<<<< HEAD
-  toggle() {
-    console.log('toggle::called, menu = ' + this.menu);
-    this.menu = !this.menu;
-  }
-=======
   // toggle() {
   //   console.log('toggle::called, menu = ' + this.menu);
   //   this.menu = !this.menu;
   // }
->>>>>>> main
 }
 </script>
