@@ -82,7 +82,9 @@ export default class TopNav extends Vue {
   }
 
   @Emit()
-  toggleMenu() {}
+  toggleMenu() {
+    console.log('toggleMenu::called');
+  }
 
   @Emit()
   toggleSetting() {}

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer fixed left temporary :value="visible" @input="input">
+  <v-navigation-drawer app left temporary :value="visible" @input="input">
     <v-list-item>
       <v-list-item-title class="font-weight-bold">
         Menu
@@ -48,6 +48,14 @@ import { E7dbCacheSettingItem, DataSettingListItem } from './setting';
 })
 export default class SiteMenu extends Vue {
   @Model('input') readonly visible!: boolean;
+
+  created() {
+    console.log('created');
+  }
+
+  mounted() {
+    console.log('mounted');
+  }
 
   @Emit()
   input(value: boolean) {

@@ -4,6 +4,7 @@
     <v-main>
       <top-nav @toggle-setting="setting = !setting" />
       <v-container>
+        {{ menu }} / {{ setting }}
         <router-view />
       </v-container>
       <site-setting v-model="setting" />
