@@ -28,6 +28,25 @@ export type GearActionCardModel = {
   gearId: string;
 };
 
+export const emptyGearStatFilter: () => GearStatFilter = () => {
+  return {
+    hpp: undefined,
+    hp: undefined,
+    defp: undefined,
+    def: undefined,
+    atkp: undefined,
+    atk: undefined,
+    cri: undefined,
+    cdmg: undefined,
+    spd: undefined,
+    eff: undefined,
+    res: undefined,
+    score: undefined,
+    defScore: undefined,
+    offScore: undefined
+  };
+};
+
 export const emptyGearPageFilter: () => GearPageFilter = () => {
   return {
     type: undefined,
@@ -36,7 +55,7 @@ export const emptyGearPageFilter: () => GearPageFilter = () => {
     enhanceMode: Gear.EnhanceModeFilter.ALL,
     equippedMode: FilterMode.ALL,
     applyToMain: false,
-    minStat: {},
+    minStat: emptyGearStatFilter(),
     sortingColumn: 'level',
     sortingOrder: SortingOrder.DESCENDING
   };

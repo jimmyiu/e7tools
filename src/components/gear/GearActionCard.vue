@@ -16,7 +16,6 @@
         </v-btn>
         <v-btn class="hidden-md-and-up" icon @click="toggleSorting"><v-icon>mdi-sort</v-icon></v-btn>
         <v-btn :disabled="!clearable" icon @click="clear"><v-icon>mdi-close-circle-outline</v-icon></v-btn>
-        <!-- <v-btn icon><v-icon>mdi-chart-box-outline</v-icon></v-btn> -->
       </div>
     </v-card-actions>
     <div v-if="visible.sorting" class="hidden-md-and-up">
