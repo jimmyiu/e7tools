@@ -20,9 +20,20 @@ export const assignHeroAbility: (to: HeroAbility, from: HeroAbility) => void = (
 };
 
 export const assignGearAbility: (to: GearAbility, from: GearAbility) => void = (to: GearAbility, from: GearAbility) => {
-  (Constants.GearStat.PRIMITIVE.map(x => x.value) as (keyof GearAbility)[]).forEach(x => {
-    to[x] = from[x];
-  });
+  to.hpp = from.hpp;
+  to.hp = from.hp;
+  to.defp = from.defp;
+  to.def = from.def;
+  to.atkp = from.atkp;
+  to.atk = from.atk;
+  to.cri = from.cri;
+  to.cdmg = from.cdmg;
+  to.spd = from.spd;
+  to.eff = from.eff;
+  to.res = from.res;
+  // (Constants.GearStat.PRIMITIVE.map(x => x.value) as (keyof GearAbility)[]).forEach(x => {
+  //   to[x] = from[x];
+  // });
 };
 
 export const assignHero: (to: Hero, from: Hero) => void = (to: Hero, from: Hero) => {
