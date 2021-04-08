@@ -24,6 +24,20 @@ export function mergeGears(original: Gear.Gear[], extra: Gear.Gear[]) {
   return Array.from(map.values());
 }
 
+export function replaceGears(original: Gear.Gear[], extra: Gear.Gear[]) {
+  let map = new Map<String, Gear.Gear>();
+  if (extra) {
+    extra.forEach(it => {
+      const origin = original.find(x => x.id == it.id);
+      if (origin) {
+        it.equippedHero = origin.equippedHero;
+      }
+      map.set(it.id, it);
+    });
+  }
+  return Array.from(map.values());
+}
+
 export function calculateScores(hero: HeroAbility, gear: Gear.Gear): Gear.GearScore {
   return {
     score: calculateScore(hero, gear),

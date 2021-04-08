@@ -88,7 +88,7 @@ export default new Vuex.Store({
       Object.assign(state.data.state, siteState);
     },
     saveGear(state: any, value: Gear.Gear) {
-      console.log('saveGear::value = ', value);
+      // console.log('saveGear::value = ', value);
       const index = state.data.gears.findIndex((x: Gear.Gear) => x.id == value.id);
       if (index < 0) {
         state.data.gears.push(value);
@@ -98,7 +98,7 @@ export default new Vuex.Store({
       persistenceService.save(value);
     },
     removeGear(state: any, value: Gear.Gear) {
-      console.log('removeGear::value = ', value);
+      // console.log('removeGear::value = ', value);
       if (value && value.id) {
         const index = state.data.gears.findIndex((x: Gear.Gear) => x.id == value.id);
         if (index >= 0) {
@@ -131,6 +131,10 @@ export default new Vuex.Store({
         state.data.heros.splice(index, 1, shadow);
         persistenceService.save(shadow);
       }
+    },
+    replaceGears: (state, gears: Gear.Gear[]) => {
+      state.data.gears.splice(0, state.data.gears.length, ...gears);
+      persistenceService.replaceAll(gears);
     },
     replaceHeros: (state, heros: Hero[]) => {
       state.data.heros = heros;
@@ -185,6 +189,9 @@ export default new Vuex.Store({
     },
     replaceSuits: ({ commit }, suits: HeroSuit[]) => {
       commit('replaceSuits', suits);
+    },
+    replaceGears: ({ commit }, gears: Gear.Gear[]) => {
+      commit('replaceGears', gears);
     },
     refreshHeros: async ({ commit, dispatch, state }) => {
       dispatch('withLoading', async () => {
