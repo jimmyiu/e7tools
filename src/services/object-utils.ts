@@ -44,6 +44,7 @@ export const assignHero: (to: Hero, from: Hero) => void = (to: Hero, from: Hero)
   to.rarity = from.rarity;
   to.attribute = from.attribute;
   to.role = from.role;
+  to.order = from.order;
   to.tier = from.tier;
   assignGearAbility(to.bonusAbility, from.bonusAbility);
   assignHeroAbility(to.abilityRating, from.abilityRating);

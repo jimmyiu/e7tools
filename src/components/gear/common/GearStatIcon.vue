@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex align-center">
     <v-img v-if="isImage" :max-height="18" :max-width="18" :src="require(`@/assets/img/stat/${imageName}.png`)" />
     <v-icon v-else-if="isIcon" size="18">{{ imageName }}</v-icon>
     <!-- <div v-if="isPercentImage" style="display:inline-block;font-size: 10px; color: #BBB; top: -10">%</div> -->

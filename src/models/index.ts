@@ -14,7 +14,7 @@ export { Hero, HeroAbility, EquippedHero };
 export { OptimizationProfile, OptimizationStatCriteria, OptimizationEvaluationCriteria, OptimizationHero };
 
 export const Constants = {
-  CURRENT_PERSISTENT_DATA_VERSION: '0.5.1',
+  CURRENT_PERSISTENT_DATA_VERSION: '0.5.2',
   OPTIMIZATION_PROCESS_LIMIT: 20000000,
   DEFAULT_HERO_ID: 'arbiter-vildred', // 'iseria',
   KEY_VUEXDATA: 'vuex.data',

@@ -107,6 +107,20 @@ function calculateOffScore(hero: HeroAbility, gear: Gear.Gear) {
   return Math.round(score * 10) / 10;
 }
 
+export function calculateSubsScore(equippedHero: EquippedHero | undefined) {
+  if (equippedHero) {
+    return Math.round(
+      (equippedHero.suit.weapon?.score ?? 0) +
+      (equippedHero.suit.helmet?.score ?? 0) +
+      (equippedHero.suit.armor?.score ?? 0) +
+      (equippedHero.suit.necklace?.score ?? 0) +
+      (equippedHero.suit.ring?.score ?? 0) +
+      (equippedHero.suit.boot?.score ?? 0)
+    );
+  }
+  return 0;
+}
+
 export function calculateSuitRating(equippedHero: EquippedHero) {
   let score = 0;
   if (equippedHero) {

@@ -39,6 +39,7 @@ class E7dbDataHandler {
       spd: detail.calculatedStatus.lv60SixStarFullyAwakened.spd,
       eff: Math.trunc(detail.calculatedStatus.lv60SixStarFullyAwakened.eff * 100),
       res: Math.trunc(detail.calculatedStatus.lv60SixStarFullyAwakened.efr * 100),
+      order: 0,
       tier: 0,
       bonusAbility: ConstantService.emptyGearAbility(),
       abilityRating: {

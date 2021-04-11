@@ -5,6 +5,7 @@ import { DataConverter_0_3_0 } from './data-converter-v0.3.0';
 import { DataConverter_0_4_0 } from './data-converter-v0.4.0';
 import { DataConverter_0_5_0 } from './data-converter-v0.5.0';
 import { DataConverter_0_5_1 } from './data-converter-v0.5.1';
+import { DataConverter_0_5_2 } from './data-converter-v0.5.2';
 
 export interface DataConverter {
   convert(data: BasePersistentData): BasePersistentData;
@@ -24,6 +25,8 @@ export class DataConverterFactory {
         return new DataConverter_0_5_0();
       case '0.5.0':
         return new DataConverter_0_5_1();
+      case '0.5.1':
+        return new DataConverter_0_5_2();
     }
     throw new Error('Invalid version number');
   }

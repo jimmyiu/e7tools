@@ -1,11 +1,6 @@
 <template>
   <div>
-    <draggable>
-      <hero-small-card :hero="heros[0]" />
-      <hero-small-card :hero="heros[1]" />
-      <hero-small-card :hero="heros[2]" />
-    </draggable>
-    <!-- <v-row dense>
+    <v-row dense>
       <v-col cols="12">
         <v-sheet class="pa-2 mb-1" rounded>
           <div class="d-flex align-center">
@@ -16,6 +11,7 @@
           </div>
           <v-expand-transition>
             <div v-if="$vuetify.breakpoint.lgAndUp || editHero">
+              <!-- <v-divider class="my-3" /> -->
               <hero-form-card class="mt-3" :hero-id="heroId" />
             </div>
           </v-expand-transition>
@@ -36,24 +32,23 @@
           </v-card-text>
         </v-card>
       </v-col>
-    </v-row> -->
+    </v-row>
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import { HeroFormCard, HeroSmallCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard } from '@/components';
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import { HeroFormCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard } from '@/components';
 import { mapGetters, mapActions } from 'vuex';
 import { EquippedHero, Gear, Hero, SiteState, Suit } from '@/models';
 import { HeroSuit } from '@/models/suit';
-import draggable from 'vuedraggable';
 
 @Component({
-  name: 'new-hero-page',
-  components: { HeroSmallCard, HeroFormCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard, draggable },
+  name: 'view-hero-page',
+  components: { HeroFormCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard },
   computed: { ...mapGetters(['gears', 'heros', 'siteState', 'getEquippedHero', 'getSavedSuit']) },
   methods: mapActions(['updateState'])
 })
-export default class NewHeroPage extends Vue {
+export default class ViewHeroPage extends Vue {
   replaceSuits!: (suits: HeroSuit[]) => void;
   getEquippedHero!: (heroId: string) => EquippedHero | undefined;
   getSavedSuit!: (heroId: string) => Suit | undefined;
@@ -62,7 +57,7 @@ export default class NewHeroPage extends Vue {
   gears!: Gear.Gear[];
   readonly siteState!: SiteState;
   //
-  heroId: string = '';
+  @Prop() heroId!: string;
   editHero: boolean = false;
 
   get tieredHeros() {
@@ -95,12 +90,14 @@ export default class NewHeroPage extends Vue {
   }
 
   created() {
-    this.heroId = this.siteState.lastSelectedHeroId;
+    console.log('created::', this.heroId);
+    this.updateState({ lastSelectedHeroId: this.heroId });
+    // this.heroId = this.siteState.lastSelectedHeroId;
   }
 
   changeHero(heroId: string) {
-    this.heroId = heroId;
-    this.updateState({ lastSelectedHeroId: heroId });
+    // this.heroId = heroId;
+    this.$router.push({ name: 'view-hero', params: { heroId: heroId } });
   }
 }
 </script>

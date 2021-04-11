@@ -9,6 +9,7 @@ export type Hero = HeroAbility & {
   attribute: string;
   role: string;
   // 0.5.0
+  order: number;
   tier: number;
   bonusAbility: GearAbility;
   abilityRating: HeroAbility;

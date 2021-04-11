@@ -54,9 +54,9 @@ export type OptimizationResult = HeroAbility & {
 
 export enum OptimizationFilterEquippedMode {
   ALL = 0,
-  SAME_TIER = 1,
-  LOWER_TIER = 2,
-  NONE = 3
+  // SAME_TIER = 1,
+  LOWER_ORDER = 1,
+  NONE = 2
 }
 
 export type OptimizationFilter = {

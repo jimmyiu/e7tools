@@ -47,7 +47,7 @@
       "spd": 7,
       "res": 9,
       "locked": false,
-      "equippedHero": "watcher-schuri"
+      "equippedHero": "schuri"
     },
     {
       "id": "2543634371",
@@ -89,13 +89,13 @@
       "level": 85,
       "enhance": 9,
       "main": "hp",
-      "hp": 1512,
+      "hp": 2700,
       "defp": 14,
       "def": 68,
       "spd": 6,
       "eff": 4,
       "locked": false,
-      "equippedHero": "furious"
+      "equippedHero": ""
     },
     {
       "id": "2547187676",
@@ -143,7 +143,7 @@
       "cdmg": 12,
       "spd": 13,
       "locked": false,
-      "equippedHero": "alexa"
+      "equippedHero": "challenger-dominiel"
     },
     {
       "id": "2547187679",
@@ -159,7 +159,7 @@
       "cdmg": 12,
       "spd": 7,
       "locked": false,
-      "equippedHero": "celine"
+      "equippedHero": "commander-lorina"
     },
     {
       "id": "2547187680",
@@ -191,7 +191,7 @@
       "cdmg": 13,
       "spd": 7,
       "locked": false,
-      "equippedHero": "celine"
+      "equippedHero": "schuri"
     },
     {
       "id": "2549637508",
@@ -207,7 +207,7 @@
       "cdmg": 5,
       "eff": 9,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "taranor-guard"
     },
     {
       "id": "2553626979",
@@ -271,7 +271,7 @@
       "cdmg": 15,
       "spd": 6,
       "locked": false,
-      "equippedHero": "chloe"
+      "equippedHero": "commander-lorina"
     },
     {
       "id": "2579428986",
@@ -287,7 +287,7 @@
       "cdmg": 15,
       "spd": 9,
       "locked": false,
-      "equippedHero": "celine"
+      "equippedHero": "commander-lorina"
     },
     {
       "id": "2579428987",
@@ -319,7 +319,7 @@
       "cdmg": 55,
       "eff": 13,
       "locked": false,
-      "equippedHero": "sol"
+      "equippedHero": ""
     },
     {
       "id": "2579428991",
@@ -399,7 +399,7 @@
       "cri": 4,
       "spd": 7,
       "locked": false,
-      "equippedHero": "vivian"
+      "equippedHero": ""
     },
     {
       "id": "2607280902",
@@ -575,7 +575,7 @@
       "cdmg": 6,
       "eff": 11,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": ""
     },
     {
       "id": "2625345025",
@@ -703,7 +703,7 @@
       "spd": 40,
       "res": 16,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "watcher-schuri"
     },
     {
       "id": "2641926666",
@@ -831,7 +831,7 @@
       "atk": 111,
       "spd": 12,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "challenger-dominiel"
     },
     {
       "id": "2652471706",
@@ -927,7 +927,7 @@
       "cri": 4,
       "spd": 8,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "challenger-dominiel"
     },
     {
       "id": "2667175485",
@@ -1039,7 +1039,7 @@
       "eff": 16,
       "res": 5,
       "locked": false,
-      "equippedHero": "celine"
+      "equippedHero": ""
     },
     {
       "id": "2673899723",
@@ -1183,7 +1183,7 @@
       "spd": 40,
       "eff": 21,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "furious"
     },
     {
       "id": "2681672809",
@@ -1199,7 +1199,7 @@
       "cdmg": 5,
       "spd": 9,
       "locked": false,
-      "equippedHero": "watcher-schuri"
+      "equippedHero": ""
     },
     {
       "id": "2689743634",
@@ -1295,7 +1295,7 @@
       "cdmg": 24,
       "eff": 14,
       "locked": false,
-      "equippedHero": "alexa"
+      "equippedHero": "sigret"
     },
     {
       "id": "2695691937",
@@ -1327,7 +1327,7 @@
       "spd": 40,
       "eff": 10,
       "locked": false,
-      "equippedHero": "furious"
+      "equippedHero": ""
     },
     {
       "id": "2697264786",
@@ -1359,7 +1359,7 @@
       "cdmg": 23,
       "spd": 4,
       "locked": false,
-      "equippedHero": "sigret"
+      "equippedHero": "schuri"
     },
     {
       "id": "2702323700",
@@ -1534,7 +1534,7 @@
       "spd": 8,
       "res": 14,
       "locked": false,
-      "equippedHero": "challenger-dominiel"
+      "equippedHero": "sigret"
     },
     {
       "id": "2718238176",
@@ -1582,7 +1582,7 @@
       "spd": 45,
       "res": 13,
       "locked": false,
-      "equippedHero": "challenger-dominiel"
+      "equippedHero": "elphelt"
     },
     {
       "id": "2723736699",
@@ -1790,7 +1790,7 @@
       "spd": 7,
       "eff": 14,
       "locked": false,
-      "equippedHero": "furious"
+      "equippedHero": "taranor-guard"
     },
     {
       "id": "2786865095",
@@ -1822,7 +1822,7 @@
       "spd": 6,
       "eff": 7,
       "locked": false,
-      "equippedHero": "basar"
+      "equippedHero": ""
     },
     {
       "id": "2796879750",
@@ -1838,7 +1838,7 @@
       "spd": 8,
       "eff": 15,
       "locked": false,
-      "equippedHero": "dizzy"
+      "equippedHero": "holiday-yufine"
     },
     {
       "id": "2797433620",
@@ -1902,7 +1902,7 @@
       "spd": 7,
       "eff": 7,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "vivian"
     },
     {
       "id": "2825519207",
@@ -1966,7 +1966,7 @@
       "cri": 6,
       "cdmg": 17,
       "locked": false,
-      "equippedHero": "challenger-dominiel"
+      "equippedHero": "watcher-schuri"
     },
     {
       "id": "2834961564",
@@ -2046,7 +2046,7 @@
       "eff": 17,
       "res": 7,
       "locked": false,
-      "equippedHero": "sol"
+      "equippedHero": "sigret"
     },
     {
       "id": "2841595081",
@@ -2094,7 +2094,7 @@
       "cdmg": 14,
       "spd": 7,
       "locked": false,
-      "equippedHero": "chloe"
+      "equippedHero": "challenger-dominiel"
     },
     {
       "id": "2856870464",
@@ -2190,7 +2190,7 @@
       "cri": 8,
       "cdmg": 15,
       "locked": false,
-      "equippedHero": "commander-lorina"
+      "equippedHero": ""
     },
     {
       "id": "2886085069",
@@ -2238,7 +2238,7 @@
       "spd": 8,
       "res": 13,
       "locked": false,
-      "equippedHero": "watcher-schuri"
+      "equippedHero": ""
     },
     {
       "id": "2903147980",
@@ -2270,7 +2270,7 @@
       "spd": 4,
       "res": 10,
       "locked": false,
-      "equippedHero": "commander-lorina"
+      "equippedHero": ""
     },
     {
       "id": "2904159017",
@@ -2334,7 +2334,7 @@
       "cdmg": 18,
       "eff": 8,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": "celine"
     },
     {
       "id": "2905333749",
@@ -2350,7 +2350,7 @@
       "cdmg": 20,
       "eff": 12,
       "locked": false,
-      "equippedHero": "celine"
+      "equippedHero": "alexa"
     },
     {
       "id": "2907892292",
@@ -2382,7 +2382,7 @@
       "cri": 4,
       "cdmg": 65,
       "locked": false,
-      "equippedHero": "chloe"
+      "equippedHero": "commander-lorina"
     },
     {
       "id": "2915562621",
@@ -2398,7 +2398,7 @@
       "cdmg": 12,
       "spd": 45,
       "locked": false,
-      "equippedHero": "vivian"
+      "equippedHero": "schuri"
     },
     {
       "id": "2929695975",
@@ -2462,7 +2462,7 @@
       "spd": 4,
       "res": 15,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "celine"
     },
     {
       "id": "2947822362",
@@ -2478,7 +2478,7 @@
       "spd": 11,
       "eff": 9,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": "furious"
     },
     {
       "id": "2949137618",
@@ -2510,7 +2510,7 @@
       "cdmg": 55,
       "spd": 11,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "challenger-dominiel"
     },
     {
       "id": "2964570029",
@@ -2574,7 +2574,7 @@
       "cdmg": 12,
       "eff": 11,
       "locked": false,
-      "equippedHero": "commander-lorina"
+      "equippedHero": "celine"
     },
     {
       "id": "2971261117",
@@ -2846,7 +2846,7 @@
       "cdmg": 65,
       "eff": 13,
       "locked": false,
-      "equippedHero": "celine"
+      "equippedHero": "sol"
     },
     {
       "id": "3022096254",
@@ -2990,7 +2990,7 @@
       "spd": 6,
       "eff": 7,
       "locked": false,
-      "equippedHero": "commander-lorina"
+      "equippedHero": "watcher-schuri"
     },
     {
       "id": "3040402153",
@@ -3294,7 +3294,7 @@
       "atkp": 60,
       "cdmg": 21,
       "locked": false,
-      "equippedHero": "holiday-yufine"
+      "equippedHero": ""
     },
     {
       "id": "3142934301",
@@ -3406,7 +3406,7 @@
       "cri": 18,
       "spd": 5,
       "locked": false,
-      "equippedHero": "watcher-schuri"
+      "equippedHero": ""
     },
     {
       "id": "3150953531",
@@ -3470,7 +3470,7 @@
       "cdmg": 17,
       "spd": 5,
       "locked": false,
-      "equippedHero": "alexa"
+      "equippedHero": "sol"
     },
     {
       "id": "3159859444",
@@ -3502,7 +3502,7 @@
       "spd": 45,
       "eff": 8,
       "locked": false,
-      "equippedHero": "sigret"
+      "equippedHero": "challenger-dominiel"
     },
     {
       "id": "3171070593",
@@ -3518,7 +3518,7 @@
       "eff": 24,
       "res": 8,
       "locked": false,
-      "equippedHero": "holiday-yufine"
+      "equippedHero": "sigret"
     },
     {
       "id": "3171982930",
@@ -3678,7 +3678,7 @@
       "cdmg": 7,
       "spd": 11,
       "locked": false,
-      "equippedHero": "watcher-schuri"
+      "equippedHero": ""
     },
     {
       "id": "3212389923",
@@ -3757,7 +3757,7 @@
       "cdmg": 24,
       "spd": 6,
       "locked": false,
-      "equippedHero": "challenger-dominiel"
+      "equippedHero": "alexa"
     },
     {
       "id": "3222590899",
@@ -3773,7 +3773,7 @@
       "cri": 12,
       "cdmg": 12,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "watcher-schuri"
     },
     {
       "id": "3230126801",
@@ -3821,7 +3821,7 @@
       "cri": 8,
       "cdmg": 16,
       "locked": false,
-      "equippedHero": "commander-lorina"
+      "equippedHero": "celine"
     },
     {
       "id": "3251837283",
@@ -3945,11 +3945,11 @@
       "main": "cdmg",
       "defp": 12,
       "atkp": 7,
-      "cdmg": 36,
+      "cdmg": 65,
       "spd": 4,
       "eff": 18,
       "locked": false,
-      "equippedHero": "watcher-schuri"
+      "equippedHero": "furious"
     },
     {
       "id": "3296854277",
@@ -4061,7 +4061,7 @@
       "cdmg": 9,
       "spd": 9,
       "locked": false,
-      "equippedHero": "schuri"
+      "equippedHero": "commander-lorina"
     },
     {
       "id": "3306831896",
@@ -4125,7 +4125,7 @@
       "cdmg": 13,
       "spd": 5,
       "locked": false,
-      "equippedHero": "schuri"
+      "equippedHero": "watcher-schuri"
     },
     {
       "id": "3315895253",
@@ -4189,7 +4189,7 @@
       "cdmg": 17,
       "spd": 4,
       "locked": false,
-      "equippedHero": "schuri"
+      "equippedHero": "commander-lorina"
     },
     {
       "id": "3339239514",
@@ -4221,7 +4221,7 @@
       "cdmg": 7,
       "spd": 4,
       "locked": false,
-      "equippedHero": "commander-lorina"
+      "equippedHero": "taranor-guard"
     },
     {
       "id": "3372571109",
@@ -4364,7 +4364,7 @@
       "atk": 525,
       "cdmg": 22,
       "locked": false,
-      "equippedHero": "sigret"
+      "equippedHero": "watcher-schuri"
     },
     {
       "id": "3406636579",
@@ -4460,7 +4460,7 @@
       "cdmg": 70,
       "spd": 4,
       "locked": false,
-      "equippedHero": "challenger-dominiel"
+      "equippedHero": "sigret"
     },
     {
       "id": "3411661051",
@@ -4714,7 +4714,7 @@
       "cdmg": 20,
       "eff": 22,
       "locked": false,
-      "equippedHero": "taranor-guard"
+      "equippedHero": "celine"
     },
     {
       "id": "3451113318",
@@ -4746,7 +4746,7 @@
       "cdmg": 7,
       "spd": 6,
       "locked": false,
-      "equippedHero": "sigret"
+      "equippedHero": "holiday-yufine"
     },
     {
       "id": "3466247313",
@@ -4762,7 +4762,7 @@
       "spd": 10,
       "eff": 19,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "basar"
     },
     {
       "id": "3473361165",
@@ -5159,7 +5159,7 @@
       "spd": 6,
       "eff": 20,
       "locked": false,
-      "equippedHero": "furious"
+      "equippedHero": ""
     },
     {
       "id": "3538270730",
@@ -5173,7 +5173,7 @@
       "atkp": 14,
       "cdmg": 5,
       "spd": 9,
-      "eff": 34,
+      "eff": 60,
       "locked": false,
       "equippedHero": ""
     },
@@ -5255,7 +5255,7 @@
       "spd": 12,
       "eff": 17,
       "locked": false,
-      "equippedHero": "basar"
+      "equippedHero": ""
     },
     {
       "id": "3574505722",
@@ -5383,7 +5383,7 @@
       "spd": 2,
       "eff": 28,
       "locked": false,
-      "equippedHero": "sigret"
+      "equippedHero": "taranor-guard"
     },
     {
       "id": "3601047580",
@@ -5591,21 +5591,21 @@
       "cri": 3,
       "spd": 6,
       "locked": false,
-      "equippedHero": "holiday-yufine"
+      "equippedHero": ""
     },
     {
       "id": "3655585493",
       "type": "Necklace",
       "set": "Critical",
       "grade": "Epic",
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": "cdmg",
-      "hpp": 20,
-      "def": 97,
-      "atkp": 7,
-      "cri": 9,
-      "cdmg": 65,
+      "hpp": 24,
+      "def": 124,
+      "atkp": 8,
+      "cri": 11,
+      "cdmg": 70,
       "locked": false,
       "equippedHero": "seaside-bellona"
     },
@@ -5846,7 +5846,7 @@
       "cri": 14,
       "spd": 45,
       "locked": false,
-      "equippedHero": "elphelt"
+      "equippedHero": "holiday-yufine"
     },
     {
       "id": "3713610402",
@@ -6051,7 +6051,7 @@
       "cdmg": 17,
       "spd": 45,
       "locked": false,
-      "equippedHero": "schuri"
+      "equippedHero": "vivian"
     },
     {
       "id": "3743855395",
@@ -6122,16 +6122,16 @@
       "type": "Ring",
       "set": "Critical",
       "grade": "Epic",
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": "atkp",
-      "atkp": 60,
-      "atk": 88,
-      "cdmg": 12,
-      "spd": 11,
-      "res": 10,
+      "atkp": 65,
+      "atk": 110,
+      "cdmg": 14,
+      "spd": 13,
+      "res": 13,
       "locked": false,
-      "equippedHero": "challenger-dominiel"
+      "equippedHero": "alexa"
     },
     {
       "id": "3756721687",
@@ -6388,6 +6388,22 @@
       "equippedHero": ""
     },
     {
+      "id": "3808211901",
+      "type": "Weapon",
+      "set": "Destruction",
+      "grade": "Epic",
+      "level": 85,
+      "enhance": 12,
+      "main": "atk",
+      "hpp": 19,
+      "hp": 200,
+      "atkp": 14,
+      "atk": 500,
+      "cdmg": 11,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
       "id": "3812288112",
       "type": "Necklace",
       "set": "Hit",
@@ -6514,6 +6530,22 @@
       "equippedHero": "tamarinne"
     },
     {
+      "id": "3832124246",
+      "type": "Helmet",
+      "set": "Speed",
+      "grade": "Hero",
+      "level": 85,
+      "enhance": 15,
+      "main": "hp",
+      "hpp": 5,
+      "hp": 2700,
+      "cri": 14,
+      "cdmg": 17,
+      "spd": 4,
+      "locked": false,
+      "equippedHero": "vivian"
+    },
+    {
       "id": "3832438481",
       "type": "Helmet",
       "set": "Critical",
@@ -6534,16 +6566,16 @@
       "type": "Boot",
       "set": "Speed",
       "grade": "Epic",
-      "level": 85,
+      "level": 90,
       "enhance": 15,
       "main": "spd",
-      "defp": 11,
-      "atkp": 4,
-      "cri": 13,
-      "cdmg": 13,
-      "spd": 40,
+      "defp": 14,
+      "atkp": 5,
+      "cri": 16,
+      "cdmg": 16,
+      "spd": 45,
       "locked": false,
-      "equippedHero": ""
+      "equippedHero": "auxiliary-lots"
     },
     {
       "id": "3833106941",
@@ -6642,20 +6674,68 @@
       "equippedHero": ""
     },
     {
-      "id": "6jj8229dbd",
-      "type": "Helmet",
+      "id": "3844110012",
+      "type": "Necklace",
+      "set": "Critical",
+      "grade": "Epic",
+      "level": 88,
+      "enhance": 15,
+      "main": "cdmg",
+      "hpp": 10,
+      "atkp": 22,
+      "cri": 12,
+      "cdmg": 70,
+      "res": 6,
+      "locked": false,
+      "equippedHero": "celine"
+    },
+    {
+      "id": "3844137359",
+      "type": "Ring",
       "set": "Speed",
       "grade": "Epic",
-      "level": 90,
-      "enhance": 15,
-      "main": "hp",
-      "hpp": 6,
-      "hp": 2835,
-      "cri": 17,
-      "cdmg": 20,
+      "level": 78,
+      "enhance": 9,
+      "main": "hpp",
+      "hpp": 60,
+      "atkp": 17,
+      "cri": 5,
       "spd": 4,
+      "eff": 6,
       "locked": false,
-      "equippedHero": "vivian"
+      "equippedHero": "furious"
+    },
+    {
+      "id": "3844138502",
+      "type": "Ring",
+      "set": "Speed",
+      "grade": "Epic",
+      "level": 78,
+      "enhance": 15,
+      "main": "hpp",
+      "hpp": 60,
+      "def": 62,
+      "atkp": 5,
+      "spd": 5,
+      "res": 27,
+      "locked": false,
+      "equippedHero": ""
+    },
+    {
+      "id": "3844139147",
+      "type": "Ring",
+      "set": "Speed",
+      "grade": "Epic",
+      "level": 78,
+      "enhance": 15,
+      "main": "hpp",
+      "hpp": 60,
+      "hp": 360,
+      "atk": 35,
+      "cri": 8,
+      "spd": 12,
+      "locked": false,
+      "equippedHero": "basar"
     }
   ],
   "profiles": [
@@ -6784,7 +6864,7 @@
         "spd": { "min": "", "max": "" },
         "eff": { "min": "", "max": "" },
         "res": { "max": "" },
-        "ehp": { "min": 85000 },
+        "ehp": { "min": 84000 },
         "damage": { "min": 840 }
       },
       "evaluation": { "forcedSets": ["Immunity"], "limit": 20000000, "brokenSet": false }
@@ -7080,12 +7160,12 @@
       "hero": { "id": "challenger-dominiel" },
       "filter": {
         "sets": [],
-        "necklaces": ["atkp", "atk", "cri", "cdmg"],
+        "necklaces": ["atkp", "atk", "cdmg"],
         "rings": ["atkp", "atk"],
         "boots": ["atk", "atkp", "spd"],
         "maxSize": 20,
         "enhanceMode": 2,
-        "equippedMode": 2
+        "equippedMode": 1
       },
       "stat": {
         "hp": {},
@@ -7093,13 +7173,13 @@
         "atk": {},
         "cri": { "min": 37, "max": 110 },
         "cdmg": { "max": 360 },
-        "spd": { "min": 200 },
+        "spd": { "min": 197 },
         "eff": {},
         "res": {},
         "ehp": {},
-        "damage": { "min": 1150 }
+        "damage": { "min": 950 }
       },
-      "evaluation": { "forcedSets": ["Speed"], "limit": 20000000, "brokenSet": true, "lv85": false }
+      "evaluation": { "forcedSets": ["Attack"], "limit": 20000000, "brokenSet": true, "lv85": false }
     },
     {
       "id": "archdemons-shadow",
@@ -7117,7 +7197,7 @@
         "hp": {},
         "def": {},
         "atk": { "min": 3500 },
-        "cri": { "min": 75, "max": 110 },
+        "cri": { "min": 80, "max": 110 },
         "cdmg": { "max": 360 },
         "spd": { "min": 230 },
         "eff": { "min": 100 },
@@ -7487,7 +7567,7 @@
         "eff": {},
         "res": {},
         "ehp": { "min": 67000 },
-        "damage": { "min": 1020 }
+        "damage": { "min": 1050 }
       },
       "evaluation": { "forcedSets": ["Attack"], "limit": 25000000, "brokenSet": false, "lv85": false }
     },
@@ -7677,7 +7757,7 @@
       "id": "watcher-schuri",
       "hero": { "id": "watcher-schuri" },
       "filter": {
-        "sets": [],
+        "sets": ["Speed", "Critical", "Destruction", "Attack"],
         "necklaces": ["atkp", "atk", "cdmg", "cri"],
         "rings": ["atkp", "atk"],
         "boots": ["atkp", "atk", "spd"],
@@ -7695,7 +7775,7 @@
         "eff": {},
         "res": {},
         "ehp": {},
-        "damage": { "min": 700 }
+        "damage": { "min": 760 }
       },
       "evaluation": { "forcedSets": [], "limit": 30000000, "brokenSet": true, "lv85": false }
     },
@@ -7917,7 +7997,7 @@
         "boots": ["atkp", "atk", "spd"],
         "maxSize": 20,
         "enhanceMode": 2,
-        "equippedMode": 2
+        "equippedMode": 1
       },
       "stat": {
         "hp": {},
@@ -7948,14 +8028,14 @@
       "stat": {
         "hp": {},
         "def": {},
-        "atk": { "min": 3500 },
+        "atk": { "min": "" },
         "cri": { "min": 84, "max": 110 },
         "cdmg": { "max": 360 },
         "spd": {},
         "eff": { "min": 85 },
         "res": {},
         "ehp": {},
-        "damage": { "min": 850 }
+        "damage": { "min": 758 }
       },
       "evaluation": { "forcedSets": ["Unity"], "limit": 10000000, "brokenSet": true, "lv85": false }
     },
@@ -7969,7 +8049,7 @@
         "boots": ["spd"],
         "maxSize": 22,
         "enhanceMode": null,
-        "equippedMode": 1
+        "equippedMode": 2
       },
       "stat": {
         "hp": {},
@@ -8085,9 +8165,9 @@
         "eff": {},
         "res": {},
         "ehp": {},
-        "damage": { "min": 1000 }
+        "damage": { "min": 800 }
       },
-      "evaluation": { "forcedSets": ["Attack"], "limit": 10000000, "brokenSet": true, "lv85": false }
+      "evaluation": { "forcedSets": ["Destruction"], "limit": 10000000, "brokenSet": true, "lv85": false }
     }
   ],
   "heros": [
@@ -8519,7 +8599,7 @@
       "res": 0,
       "name": "Elphelt",
       "icon": "https://assets.epicsevendb.com/_source/face/c1105_s.png",
-      "tier": 9,
+      "tier": 8,
       "bonusAbility": {},
       "abilityRating": { "hp": 0, "def": 0, "atk": 2, "cri": 0, "cdmg": 2, "spd": 3, "eff": 2, "res": 0 }
     },
@@ -9591,7 +9671,7 @@
       "res": 0,
       "name": "Challenger Dominiel",
       "icon": "https://assets.epicsevendb.com/_source/face/c2037_s.png",
-      "tier": 8,
+      "tier": 9,
       "bonusAbility": { "hp": 315, "atk": 84 },
       "abilityRating": { "hp": 0, "def": 0, "atk": "3", "cri": 0, "cdmg": "3", "spd": "2", "eff": 0, "res": 0 }
     },
@@ -10593,7 +10673,7 @@
       "name": "Commander Lorina",
       "icon": "https://assets.epicsevendb.com/_source/face/c4035_s.png",
       "tier": 11,
-      "bonusAbility": { "hp": 442, "atkp": 2, "atk": 112, "cri": 9.8, "cdmg": 2 },
+      "bonusAbility": { "hp": 442, "atkp": 2, "atk": 112, "cri": 9.8, "cdmg": 26 },
       "abilityRating": { "hp": 0, "def": 0, "atk": 3, "cri": 1, "cdmg": 3, "spd": 0, "eff": 0, "res": 0 }
     },
     {
@@ -11286,9 +11366,9 @@
     },
     {
       "id": "taranor-guard",
-      "hp": 5517,
-      "def": 583,
-      "atk": 951,
+      "hp": 4171,
+      "def": 469,
+      "atk": 762,
       "cri": 15,
       "cdmg": 150,
       "spd": 104,
@@ -11297,7 +11377,7 @@
       "name": "Taranor Guard",
       "icon": "https://assets.epicsevendb.com/_source/face/c3032_s.png",
       "tier": 6,
-      "bonusAbility": { "hp": 264, "atk": 176, "cri": 11.2 },
+      "bonusAbility": { "hp": 273, "atk": 182, "cri": 11.2 },
       "abilityRating": { "hp": 0, "def": 0, "atk": 3, "cri": 2, "cdmg": 2, "spd": 0, "eff": 2, "res": 0 }
     },
     {
@@ -11367,401 +11447,417 @@
   ],
   "suits": [
     {
-      "id": "sigret",
-      "weaponId": "i-2",
-      "armorId": "i-zzzo",
-      "helmetId": "i-F",
-      "necklaceId": "35c359g39d",
-      "ringId": "965cce3810",
-      "bootId": "i-zzzy"
-    },
-    {
-      "id": "auxiliary-lots",
-      "weaponId": "i-3",
-      "armorId": "i-i",
-      "helmetId": "i-H",
-      "necklaceId": "i-zzzb",
-      "ringId": "i-zzJ"
-    },
-    {
-      "id": "adventurer-ras",
-      "weaponId": "i-5",
-      "armorId": "i-zzzzX",
-      "helmetId": "dae50fi1i3",
-      "necklaceId": "i-zz\\",
-      "ringId": "i-zY",
-      "bootId": "i-zzzzzd"
-    },
-    {
-      "id": "last-rider-krau",
-      "weaponId": "i-6",
-      "armorId": "i-zzT",
-      "helmetId": "i-zzze",
-      "necklaceId": "i-v",
-      "ringId": "i-zQ",
-      "bootId": "g58fbhd203"
-    },
-    {
-      "id": "ervalen",
-      "weaponId": "i-8",
-      "armorId": "i-[",
-      "helmetId": "i-zzw",
-      "necklaceId": "i-y",
-      "ringId": "i-zzzu",
-      "bootId": "i-zn"
-    },
-    {
       "id": "ray",
-      "weaponId": "i-:",
-      "armorId": "i-zzzzV",
-      "helmetId": "5i5f83be1h",
-      "necklaceId": "i-zzzzza",
-      "ringId": "i-zH",
-      "bootId": "487ab07658"
+      "weaponId": "2543634365",
+      "armorId": "3315049417",
+      "helmetId": "3479390940",
+      "necklaceId": "3508310545",
+      "ringId": "2904159017",
+      "bootId": "3648952693"
     },
     {
-      "id": "holiday-yufine",
-      "weaponId": "i-;",
-      "armorId": "i-zzY",
-      "helmetId": "i-zzzH",
-      "necklaceId": "dg70df11gf",
-      "ringId": "i-zzzt",
-      "bootId": "djj4c6h98d"
-    },
-    {
-      "id": "magic-scholar-doris",
-      "weaponId": "i-<",
-      "armorId": "i-zzzzzP",
-      "helmetId": "i-zzA",
-      "necklaceId": "i-zzzr",
-      "ringId": "i-zzE",
-      "bootId": "eg35d031g9"
-    },
-    {
-      "id": "ravi",
-      "weaponId": "i-=",
-      "armorId": "i-\\",
-      "helmetId": "i-zzzzT",
-      "necklaceId": "2g21h2ch8b",
-      "ringId": "7a0f207666",
-      "bootId": "i-zs"
-    },
-    {
-      "id": "dizzy",
-      "weaponId": "i-@",
-      "armorId": "827f349ggh",
-      "helmetId": "i-zzzN",
-      "necklaceId": "i-x",
-      "ringId": "fg99h698dg",
-      "bootId": "77gh1e072c"
-    },
-    {
-      "id": "alencia",
-      "weaponId": "i-A",
-      "armorId": "6j582i2acg",
-      "helmetId": "i-zzz\\",
-      "necklaceId": "i-p",
-      "ringId": "i-zzF",
-      "bootId": "2eiii8hja8"
-    },
-    {
-      "id": "little-queen-charlotte",
-      "weaponId": "i-zza",
-      "armorId": "i-_",
-      "helmetId": "i-G",
-      "necklaceId": "i-s",
-      "ringId": "i-zM",
-      "bootId": "i-zh"
-    },
-    {
-      "id": "sol",
-      "weaponId": "i-zz]",
-      "armorId": "i-zzu",
-      "helmetId": "i-I",
-      "necklaceId": "i-m",
-      "ringId": "i-zz[",
-      "bootId": "i-zz`"
-    },
-    {
-      "id": "champion-zerato",
-      "weaponId": "i-zzH",
-      "armorId": "i-zzzzI",
-      "helmetId": "i-J",
-      "necklaceId": "i-zzp",
-      "ringId": "i-zzzzb",
-      "bootId": "i-zzza"
-    },
-    {
-      "id": "schuri",
-      "weaponId": "i-zzzzk",
-      "armorId": "i-zzzzU",
-      "helmetId": "i-K",
-      "necklaceId": "i-zzr",
-      "ringId": "i-zL",
-      "bootId": "i-zzzY"
-    },
-    {
-      "id": "falconer-kluri",
-      "weaponId": "i-zzzU",
-      "armorId": "ef5i742bif",
-      "helmetId": "i-L",
-      "necklaceId": "1f4jfcef2i",
-      "ringId": "i-zzzzK",
-      "bootId": "i-zzzzzM"
-    },
-    {
-      "id": "challenger-dominiel",
-      "weaponId": "i-zzzK",
-      "armorId": "i-zzzzW",
-      "helmetId": "i-M",
-      "necklaceId": "i-zzzV",
-      "ringId": "2ha5dcd67e",
-      "bootId": "i-zzzl"
-    },
-    {
-      "id": "archdemons-shadow",
-      "weaponId": "i-zzzzzS",
-      "armorId": "i-zzzzC",
-      "helmetId": "i-N",
-      "necklaceId": "i-zzzzy",
-      "ringId": "i-z[",
-      "bootId": "i-zzzi"
-    },
-    {
-      "id": "cerise",
-      "weaponId": "i-zzd",
-      "armorId": "92a682874c",
-      "helmetId": "i-O",
-      "necklaceId": "i-zzzza",
-      "ringId": "i-zzzzzF",
-      "bootId": "i-zzzzzN"
-    },
-    {
-      "id": "commander-lorina",
-      "weaponId": "i-zzzzH",
-      "armorId": "i-zz_",
-      "helmetId": "i-Q",
-      "necklaceId": "i-n",
-      "ringId": "i-zS",
-      "bootId": "i-zz"
-    },
-    {
-      "id": "kitty-clarissa",
-      "weaponId": "12dh3773e1",
-      "armorId": "d6b80i0e91",
-      "helmetId": "i-R",
-      "necklaceId": "i-zzzF",
-      "ringId": "i-zP",
-      "bootId": "f231dh4ci5"
-    },
-    {
-      "id": "celine",
-      "weaponId": "i-01af8ib608",
-      "armorId": "i-`",
-      "helmetId": "i-V",
-      "necklaceId": "i-zzQ",
-      "ringId": "i-zR",
-      "bootId": "i-zb"
-    },
-    {
-      "id": "alexa",
-      "weaponId": "eaa9c4if51",
-      "armorId": "i-]",
-      "helmetId": "i-zzc",
-      "necklaceId": "gd32jh6j98",
-      "ringId": "i-zzz_",
-      "bootId": "i-zm"
-    },
-    {
-      "id": "general-purrgis",
-      "weaponId": "i-zzP",
-      "armorId": "i-^",
-      "helmetId": "i-zzk",
-      "necklaceId": "i-q",
-      "ringId": "i-zK",
-      "bootId": "i-zc"
-    },
-    {
-      "id": "fairytale-tenebria",
-      "weaponId": "ai7269gjdh",
-      "armorId": "i-b",
-      "helmetId": "6je7j13adg",
-      "necklaceId": "i-zC",
-      "ringId": "i-zZ",
-      "bootId": "i-zj"
-    },
-    {
-      "id": "vivian",
-      "weaponId": "i-zzzzN",
-      "armorId": "i-c",
-      "helmetId": "d567596bh3",
-      "necklaceId": "i-zzzz_",
-      "ringId": "i-zV",
-      "bootId": "982f15jdid"
-    },
-    {
-      "id": "charles",
-      "weaponId": "i-zzm",
-      "armorId": "i-e",
-      "helmetId": "i-zzzZ",
-      "necklaceId": "i-zzzzzJ",
-      "ringId": "i-zzzzz^",
-      "bootId": "i-zzzzD"
-    },
-    {
-      "id": "arbiter-vildred",
-      "weaponId": "i-zzs",
-      "armorId": "i-f",
-      "helmetId": "342f66a5ci",
-      "necklaceId": "i-zzzzr",
-      "ringId": "i-zzq",
-      "bootId": "i-zi"
-    },
-    {
-      "id": "sinful-angelica",
-      "weaponId": "i-zzX",
-      "armorId": "i-g",
-      "helmetId": "i-zzzG",
-      "necklaceId": "i-zzzzzE",
-      "ringId": "i-zO",
-      "bootId": "i-zzl"
-    },
-    {
-      "id": "krau",
-      "weaponId": "i-zzzzzA",
-      "armorId": "i-k",
-      "helmetId": "i-zzL",
-      "necklaceId": "i-zzzzzQ",
-      "ringId": "i-zW",
-      "bootId": "i-zr"
-    },
-    { "id": "watcher-schuri", "weaponId": "71h936cahi", "necklaceId": "i-r", "ringId": "i-h5ci86h5c9" },
-    {
-      "id": "roana",
-      "weaponId": "jhjfi30664",
-      "armorId": "c75996e0d9",
-      "helmetId": "724ia8ci38",
-      "necklaceId": "i-t",
-      "ringId": "i-zzh",
-      "bootId": "jg3ff916fj"
-    },
-    {
-      "id": "basar",
-      "weaponId": "i-zzzI",
-      "armorId": "i-zx",
-      "helmetId": "i-zzn",
-      "necklaceId": "i-z",
-      "ringId": "22ega5f4d9",
-      "bootId": "i-zzzf"
-    },
-    {
-      "id": "taranor-guard",
-      "weaponId": "i-zzz[",
-      "armorId": "i-zzj",
-      "helmetId": "i-zzzzzI",
-      "necklaceId": "i-zA",
-      "ringId": "i-zN",
-      "bootId": "i-zzzB"
-    },
-    {
-      "id": "angelic-montmorancy",
-      "weaponId": "i-zzzC",
-      "armorId": "i-zzz]",
-      "helmetId": "i-zzzzF",
-      "necklaceId": "i-zB",
-      "ringId": "i-zy",
-      "bootId": "i-zk"
-    },
-    {
-      "id": "kayron",
-      "weaponId": "i-zzzzL",
-      "armorId": "i-zzzzz_",
-      "helmetId": "3973545g99",
-      "necklaceId": "i-zzU",
-      "ringId": "i-zJ",
-      "bootId": "i-zzzzw"
-    },
-    {
-      "id": "seaside-bellona",
-      "weaponId": "i-zzzzA",
-      "armorId": "i-zzzzz`",
-      "helmetId": "i-zzzzs",
-      "necklaceId": "i-zzzzj",
-      "ringId": "i-zT",
-      "bootId": "i-zzzw"
-    },
-    {
-      "id": "tamarinne",
-      "weaponId": "9ca32d6g6d",
-      "armorId": "eg7ia10e1j",
-      "helmetId": "f1fg0hg354",
-      "necklaceId": "h2142g85b8",
-      "ringId": "47ecffg89b",
-      "bootId": "i-zd"
-    },
-    {
-      "id": "landy",
-      "weaponId": "i657afg8cd",
-      "armorId": "i-zzzzzc",
-      "helmetId": "i-zzzzzb",
-      "necklaceId": "aadh455aeh",
-      "ringId": "i-zzC",
-      "bootId": "i-ze"
-    },
-    {
-      "id": "tenebria",
-      "weaponId": "i-zzzm",
-      "armorId": "efcaa8h0ea",
-      "helmetId": "ebiacbfecb",
-      "necklaceId": "i-zzD",
-      "ringId": "i-zzz^",
-      "bootId": "d9d9f3a7h8"
-    },
-    {
-      "id": "politis",
-      "weaponId": "i-zzzzzL",
-      "armorId": "fa8gfi8ba6",
-      "helmetId": "i-zzzzB",
-      "necklaceId": "i-zzzQ",
-      "ringId": "i-zzzzv",
-      "bootId": "i-zzZ"
-    },
-    {
-      "id": "elena",
-      "weaponId": "gfjgae15f3",
-      "armorId": "i-zzzj",
-      "helmetId": "872jib62hg",
-      "necklaceId": "8e3cd977bh",
-      "ringId": "i-zzf",
-      "bootId": "ab8e2h9259"
+      "id": "watcher-schuri",
+      "weaponId": "3150953028",
+      "armorId": "2543634369",
+      "helmetId": "3209284193",
+      "necklaceId": "3296824154",
+      "ringId": "2681672809",
+      "bootId": "2898867532"
     },
     {
       "id": "furious",
-      "weaponId": "aj80i75dd1",
-      "armorId": "i4aeha93ga",
-      "helmetId": "chj702dhch",
-      "necklaceId": "i-zzzzE",
-      "ringId": "i-zzzz",
-      "bootId": "i-zzz"
+      "weaponId": "3620111986",
+      "armorId": "3536539674",
+      "helmetId": "3215978194",
+      "necklaceId": "2543634373",
+      "ringId": "2782998124",
+      "bootId": "2695714051"
     },
-    { "id": "diene", "armorId": "jj80dghfgi", "necklaceId": "fbih80f9ea", "ringId": "i-zzzA" },
+    {
+      "id": "alexa",
+      "weaponId": "3581082113",
+      "armorId": "2547187678",
+      "helmetId": "2695680543",
+      "necklaceId": "3758021081",
+      "ringId": "3154872994",
+      "bootId": "2778802663"
+    },
+    {
+      "id": "celine",
+      "weaponId": "2672747657",
+      "armorId": "2579428986",
+      "helmetId": "2905333749",
+      "necklaceId": "3021877112",
+      "ringId": "2547187681",
+      "bootId": "2547187679"
+    },
+    {
+      "id": "alencia",
+      "weaponId": "3713610402",
+      "armorId": "2673899723",
+      "helmetId": "3274769913",
+      "necklaceId": "2547187680",
+      "ringId": "3009337552",
+      "bootId": "3430061678"
+    },
+    {
+      "id": "sinful-angelica",
+      "weaponId": "2607958391",
+      "armorId": "2831132517",
+      "helmetId": "2834497100",
+      "necklaceId": "3451113318",
+      "ringId": "2578017524",
+      "bootId": "2723736699"
+    },
+    {
+      "id": "chloe",
+      "weaponId": "3648855584",
+      "armorId": "3130646212",
+      "helmetId": "2579428984",
+      "necklaceId": "2915125942",
+      "ringId": "2852134409",
+      "bootId": "2667175491"
+    },
+    {
+      "id": "sol",
+      "weaponId": "3045323479",
+      "armorId": "3045323481",
+      "helmetId": "2767182104",
+      "necklaceId": "2579428988",
+      "ringId": "2841592247",
+      "bootId": "3045323484"
+    },
+    {
+      "id": "vivian",
+      "weaponId": "2606992744",
+      "armorId": "3619185070",
+      "helmetId": "6jj8229dbd",
+      "necklaceId": "3006108182",
+      "ringId": "3487836541",
+      "bootId": "2915562621"
+    },
+    {
+      "id": "tamarinne",
+      "weaponId": "3479390935",
+      "armorId": "3830508388",
+      "helmetId": "3297059081",
+      "necklaceId": "2607280902",
+      "ringId": "3132360949",
+      "bootId": "3479390942"
+    },
+    {
+      "id": "landy",
+      "weaponId": "3274769667",
+      "armorId": "3518535113",
+      "helmetId": "3658618032",
+      "necklaceId": "3108307229",
+      "ringId": "2608967140",
+      "bootId": "2625345025"
+    },
+    {
+      "id": "magic-scholar-doris",
+      "weaponId": "2821629245",
+      "armorId": "3658785901",
+      "helmetId": "3309661755",
+      "necklaceId": "3784135546",
+      "ringId": "2622112483",
+      "bootId": "2691687720"
+    },
+    {
+      "id": "taranor-guard",
+      "weaponId": "3159859444",
+      "armorId": "2947822362",
+      "helmetId": "3444913095",
+      "necklaceId": "2622195137",
+      "ringId": "2905200957",
+      "bootId": "3146069040"
+    },
+    {
+      "id": "charles",
+      "weaponId": "3297059079",
+      "armorId": "3508310046",
+      "helmetId": "3150953531",
+      "necklaceId": "3473361165",
+      "ringId": "2971261117",
+      "bootId": "2626030285"
+    },
+    {
+      "id": "last-rider-krau",
+      "weaponId": "2964570029",
+      "armorId": "3024595025",
+      "helmetId": "2634009215",
+      "necklaceId": "2907892292",
+      "ringId": "3377693498",
+      "bootId": "3755754937"
+    },
+    {
+      "id": "roana",
+      "weaponId": "3698435841",
+      "armorId": "2781544471",
+      "helmetId": "2706837872",
+      "necklaceId": "2634303609",
+      "ringId": "3521486182",
+      "bootId": "3770740355"
+    },
+    {
+      "id": "champion-zerato",
+      "weaponId": "2989028840",
+      "armorId": "3214508145",
+      "helmetId": "2646371473",
+      "necklaceId": "3091372081",
+      "ringId": "3005977752",
+      "bootId": "3202004727"
+    },
+    {
+      "id": "adventurer-ras",
+      "weaponId": "3212455963",
+      "armorId": "2646385409",
+      "helmetId": "3786012890",
+      "necklaceId": "2834961564",
+      "ringId": "3315895253",
+      "bootId": "3495058414"
+    },
+    {
+      "id": "little-queen-charlotte",
+      "weaponId": "3438578624",
+      "armorId": "2667175489",
+      "helmetId": "2667175485",
+      "necklaceId": "3372571109",
+      "ringId": "2667175493",
+      "bootId": "2647656724"
+    },
+    {
+      "id": "basar",
+      "weaponId": "3819278678",
+      "armorId": "2989289880",
+      "helmetId": "2786865101",
+      "necklaceId": "2654035505",
+      "ringId": "3574039407",
+      "bootId": "3408314485"
+    },
+    {
+      "id": "dizzy",
+      "weaponId": "2886085069",
+      "armorId": "3483513561",
+      "helmetId": "3744619226",
+      "necklaceId": "2796879750",
+      "ringId": "3706385398",
+      "bootId": "2660095355"
+    },
+    {
+      "id": "auxiliary-lots",
+      "weaponId": "2662218351",
+      "armorId": "2695691937",
+      "helmetId": "3432800911",
+      "necklaceId": "3202062574",
+      "ringId": "2859803219"
+    },
+    {
+      "id": "elphelt",
+      "weaponId": "2706837415",
+      "armorId": "3485087894",
+      "helmetId": "3406636579",
+      "necklaceId": "2667175492",
+      "ringId": "3519209170",
+      "bootId": "3711888283"
+    },
+    {
+      "id": "ravi",
+      "weaponId": "3594452574",
+      "armorId": "2667936735",
+      "helmetId": "3673073208",
+      "necklaceId": "3594445507",
+      "ringId": "3812399011",
+      "bootId": "3274520891"
+    },
+    {
+      "id": "angelic-montmorancy",
+      "weaponId": "2675086499",
+      "armorId": "3734934298",
+      "helmetId": "2675086502",
+      "necklaceId": "3490041708",
+      "ringId": "3012443745",
+      "bootId": "3619378918"
+    },
+    {
+      "id": "general-purrgis",
+      "weaponId": "2964570371",
+      "armorId": "2675086501",
+      "helmetId": "3076622683",
+      "necklaceId": "2675086504",
+      "ringId": "2675086506",
+      "bootId": "2905008576"
+    },
     {
       "id": "lilias",
-      "weaponId": "i-zzzX",
-      "armorId": "iad9ceha2e",
-      "helmetId": "91e0d52efj",
-      "necklaceId": "99094306jh",
-      "ringId": "i-zzzW",
-      "bootId": "i-zzzze"
+      "weaponId": "3796014876",
+      "armorId": "3444438222",
+      "helmetId": "2681285464",
+      "necklaceId": "3716249580",
+      "ringId": "3098466211",
+      "bootId": "3723351975"
+    },
+    {
+      "id": "falconer-kluri",
+      "weaponId": "3621331020",
+      "armorId": "3583075043",
+      "helmetId": "2692249820",
+      "necklaceId": "3756721687",
+      "ringId": "3152869289",
+      "bootId": "3024116388"
+    },
+    {
+      "id": "politis",
+      "weaponId": "3432769078",
+      "armorId": "3720630096",
+      "helmetId": "2693110230",
+      "necklaceId": "3838279261",
+      "ringId": "3818809225",
+      "bootId": "3296854277"
+    },
+    {
+      "id": "fairytale-tenebria",
+      "weaponId": "3723308209",
+      "armorId": "2697264786",
+      "helmetId": "3481991720",
+      "necklaceId": "2838847698",
+      "ringId": "2712092221",
+      "bootId": "2841589725"
+    },
+    {
+      "id": "sigret",
+      "weaponId": "2702319112",
+      "armorId": "2825519207",
+      "helmetId": "3463669100",
+      "necklaceId": "3597162378",
+      "ringId": "3400772200",
+      "bootId": "3163666143"
+    },
+    {
+      "id": "ervalen",
+      "weaponId": "2759988102",
+      "armorId": "2965541545",
+      "helmetId": "3132528272",
+      "necklaceId": "2706832387",
+      "ringId": "3257190489",
+      "bootId": "2893420023"
+    },
+    {
+      "id": "schuri",
+      "weaponId": "3306825772",
+      "armorId": "3315050402",
+      "helmetId": "2713421670",
+      "necklaceId": "3009456649",
+      "ringId": "3337275780",
+      "bootId": "3739123327"
+    },
+    {
+      "id": "challenger-dominiel",
+      "weaponId": "2716906918",
+      "armorId": "3221343590",
+      "helmetId": "2834901210",
+      "necklaceId": "3411647670",
+      "ringId": "3756632098",
+      "bootId": "2721477738"
     },
     {
       "id": "fallen-cecilia",
-      "weaponId": "8dde46g90g",
-      "armorId": "i-zzzzzK",
-      "helmetId": "i-zzzzm",
-      "necklaceId": "hj2b4j9d22",
-      "ringId": "i-zzzzl",
-      "bootId": "i-zzzzd"
+      "weaponId": "3574505722",
+      "armorId": "3565822065",
+      "helmetId": "3400226529",
+      "necklaceId": "2718238176",
+      "ringId": "3834654545",
+      "bootId": "3334984498"
+    },
+    {
+      "id": "cerise",
+      "weaponId": "3008275884",
+      "armorId": "3699273379",
+      "helmetId": "2781454804",
+      "necklaceId": "2721073427",
+      "ringId": "3493164605",
+      "bootId": "3743855395"
+    },
+    {
+      "id": "elena",
+      "weaponId": "2757035998",
+      "armorId": "3667800756",
+      "helmetId": "3551753806",
+      "necklaceId": "3639535884",
+      "ringId": "3506404349",
+      "bootId": "2996341161"
+    },
+    {
+      "id": "tenebria",
+      "weaponId": "3620111662",
+      "armorId": "3306831896",
+      "helmetId": "3040402153",
+      "necklaceId": "2786865095",
+      "ringId": "2779541249",
+      "bootId": "3193810429"
+    },
+    {
+      "id": "kayron",
+      "weaponId": "3336900483",
+      "armorId": "3506429135",
+      "helmetId": "3698374340",
+      "necklaceId": "3030776737",
+      "ringId": "2797433620",
+      "bootId": "3419614770"
+    },
+    {
+      "id": "arbiter-vildred",
+      "weaponId": "3018654407",
+      "armorId": "2841595081",
+      "helmetId": "3718534006",
+      "necklaceId": "3601047580",
+      "ringId": "3108240468",
+      "bootId": "3603484101"
+    },
+    {
+      "id": "commander-lorina",
+      "weaponId": "3232537228",
+      "armorId": "3355735707",
+      "helmetId": "2883767378",
+      "necklaceId": "3038061725",
+      "ringId": "2903865688",
+      "bootId": "2965541548"
+    },
+    {
+      "id": "krau",
+      "weaponId": "3382729289",
+      "armorId": "3479390937",
+      "helmetId": "3091537012",
+      "necklaceId": "3594655232",
+      "ringId": "3013923883",
+      "bootId": "3149448886"
+    },
+    {
+      "id": "seaside-bellona",
+      "weaponId": "3034932701",
+      "armorId": "3797057382",
+      "helmetId": "3414210196",
+      "necklaceId": "3655585493",
+      "ringId": "3036491577",
+      "bootId": "3297059083"
+    },
+    {
+      "id": "holiday-yufine",
+      "weaponId": "3339239514",
+      "armorId": "3297059082",
+      "helmetId": "3654676281",
+      "necklaceId": "3142039081",
+      "ringId": "3207493141",
+      "bootId": "3171070593"
+    },
+    {
+      "id": "archdemons-shadow",
+      "weaponId": "3392416251",
+      "armorId": "3523076769",
+      "helmetId": "3716548772",
+      "necklaceId": "3416424824",
+      "ringId": "3416198045",
+      "bootId": "3251837283"
     }
   ]
 }

@@ -61,7 +61,7 @@ export const emptyOptimizationFilter: () => OptimizationFilter = () => {
     boots: [],
     maxSize: 0,
     enhanceMode: Gear.EnhanceModeFilter.ONLY_15,
-    equippedMode: OptimizationFilterEquippedMode.LOWER_TIER
+    equippedMode: OptimizationFilterEquippedMode.LOWER_ORDER
   };
 };
 
@@ -95,6 +95,7 @@ export const emptyHero: () => Hero = () => {
     rarity: 0,
     attribute: '',
     role: '',
+    order: 0,
     tier: 0,
     bonusAbility: emptyGearAbility(),
     abilityRating: emptyHeroAbility()

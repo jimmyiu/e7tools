@@ -26,14 +26,15 @@ const routes = [
     component: () => import(/* webpackChunkName: "other" */ '../views/ImportPage.vue')
   },
   {
+    path: '/view-hero/:heroId',
+    name: 'view-hero',
+    props: true,
+    component: () => import(/* webpackChunkName: "other" */ '../views/ViewHeroPage.vue')
+  },
+  {
     path: '/hero',
     name: 'hero',
     component: () => import(/* webpackChunkName: "other" */ '../views/HeroPage.vue')
-  },
-  {
-    path: '/hero2',
-    name: 'hero2',
-    component: () => import(/* webpackChunkName: "other" */ '../views/NewHeroPage.vue')
   },
   {
     path: '/other',

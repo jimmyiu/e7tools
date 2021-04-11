@@ -39,33 +39,23 @@ function filter(gears: Gear.Gear[], filter: OptimizationFilter, params: { hero: 
   }
   let equiped = noopFilter;
   if (filter.equippedMode) {
-    const getGearTier = (gear: Gear.Gear) => {
+    const getGearOrder = (gear: Gear.Gear) => {
       if (gear.equippedHero) {
         const hero = params.heros.find(x => x.id == gear.equippedHero);
-        return hero ? hero.tier : 0;
+        return hero ? hero.order : 0;
       }
       return 0;
     };
     if (filter.equippedMode == OptimizationFilterEquippedMode.NONE) {
       equiped = (it: Gear.Gear) => it.equippedHero == '' || it.equippedHero == params.hero.id;
-    } else if (filter.equippedMode == OptimizationFilterEquippedMode.LOWER_TIER) {
+    } else if (filter.equippedMode == OptimizationFilterEquippedMode.LOWER_ORDER) {
       equiped = (it: Gear.Gear) => {
-        const tier = getGearTier(it);
+        const order = getGearOrder(it);
         return (
           it.equippedHero == '' ||
           it.equippedHero == params.hero.id ||
-          tier == 0 ||
-          (params.hero.tier > 0 && tier > params.hero.tier)
-        );
-      };
-    } else if (filter.equippedMode == OptimizationFilterEquippedMode.SAME_TIER) {
-      equiped = (it: Gear.Gear) => {
-        const tier = getGearTier(it);
-        return (
-          it.equippedHero == '' ||
-          it.equippedHero == params.hero.id ||
-          tier == 0 ||
-          (params.hero.tier > 0 && tier >= params.hero.tier)
+          order == 0 ||
+          (params.hero.order > 0 && order > params.hero.order)
         );
       };
     }
