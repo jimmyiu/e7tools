@@ -24,6 +24,20 @@ export function mergeGears(original: Gear.Gear[], extra: Gear.Gear[]) {
   return Array.from(map.values());
 }
 
+export function replaceGears(original: Gear.Gear[], extra: Gear.Gear[]) {
+  let map = new Map<String, Gear.Gear>();
+  if (extra) {
+    extra.forEach(it => {
+      const origin = original.find(x => x.id == it.id);
+      if (origin) {
+        it.equippedHero = origin.equippedHero;
+      }
+      map.set(it.id, it);
+    });
+  }
+  return Array.from(map.values());
+}
+
 export function calculateScores(hero: HeroAbility, gear: Gear.Gear): Gear.GearScore {
   return {
     score: calculateScore(hero, gear),
@@ -91,6 +105,20 @@ function calculateOffScore(hero: HeroAbility, gear: Gear.Gear) {
     }
   });
   return Math.round(score * 10) / 10;
+}
+
+export function calculateSubsScore(equippedHero: EquippedHero | undefined) {
+  if (equippedHero) {
+    return Math.round(
+      (equippedHero.suit.weapon?.score ?? 0) +
+      (equippedHero.suit.helmet?.score ?? 0) +
+      (equippedHero.suit.armor?.score ?? 0) +
+      (equippedHero.suit.necklace?.score ?? 0) +
+      (equippedHero.suit.ring?.score ?? 0) +
+      (equippedHero.suit.boot?.score ?? 0)
+    );
+  }
+  return 0;
 }
 
 export function calculateSuitRating(equippedHero: EquippedHero) {

@@ -33,18 +33,7 @@
       [2021-03-04] enhance gear page<br />
       [2021-03-03] add tier support for hero and optimizer<br />
       [2021-03-02] enhance gear management page<br />
-      [2021-02-28] enhance gear management page to support mobile<br />
-      [2021-02-24] add rating for optimization<br />
-      [2021-02-22] add hero bonus stat and rating filter in optimizer<br />
-      [2021-02-21] add number of gears in gear page<br />
-      [2021-02-19] add broken set flag in optimizer<br />
-      [2021-02-17] complete revising persistent data<br />
-      [2021-02-10] start to revise persistence data<br />
-      [2021-02-01] add equipped and locked flags<br />
-      [2021-02-08] complete basic optimizer<br />
-      [2021-02-03] adopt web worker for optimizer calculation<br />
-      [2021-02-02] start gear optimizer<br />
-      [2021-02-01] complete edit gear<br />
+      [2020-02] complete basic optimizer and hero setup<br />
       [2020-01] no progress<br />
       [2020-12] foundation setup, including data structure and settings<br />
       [2020-12-06] project kick start

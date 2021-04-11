@@ -17,7 +17,7 @@ export function getMain(type: Gear.Type, stat: Gear.Stat, level: number, enhance
 function getRightMain(stat: Gear.Stat, level: number, enhance: number) {
   if (level >= 75 && level <= 85) {
     if (stat.value == Gear.Stat.CDMG.value) {
-      return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65][enhance - 1];
+      return [0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 0, 65][enhance - 1];
     } else if (stat.value == Gear.Stat.CRI.value) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55][enhance - 1];
     } else if (stat.value == Gear.Stat.SPD.value) {

@@ -111,7 +111,7 @@
 import { Vue, Component, Prop, Emit, Model } from 'vue-property-decorator';
 import { Constants, Gear } from '@/models';
 import { GearSetIcon, GearSetSelect, GearTypeIcon, GearTypeSelect } from '../common';
-import { OptimizationFilter } from '@/models/optimizer';
+import { OptimizationFilter, OptimizationFilterEquippedMode } from '@/models/optimizer';
 
 @Component({
   name: 'optimization-filter-sheet',
@@ -127,19 +127,15 @@ export default class OptimizationFilterSheet extends Vue {
   readonly equippedModes = [
     {
       label: 'All',
-      value: 0
+      value: OptimizationFilterEquippedMode.ALL
     },
     {
-      label: 'Same Or Lower Tiers',
-      value: 1
-    },
-    {
-      label: 'Lower Tiers',
-      value: 2
+      label: 'Lower Order',
+      value: OptimizationFilterEquippedMode.LOWER_ORDER
     },
     {
       label: 'None',
-      value: 3
+      value: OptimizationFilterEquippedMode.NONE
     }
   ];
 }
