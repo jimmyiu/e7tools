@@ -60,27 +60,6 @@ export default class ViewHeroPage extends Vue {
   @Prop() heroId!: string;
   editHero: boolean = false;
 
-  get tieredHeros() {
-    const result = new Map<number, Hero[]>();
-    [...this.heros]
-      .filter(x => x.tier > 0)
-      .sort((a, b) => {
-        if (b.tier == 0 && a.tier != 0) {
-          return -1;
-        } else if (a.tier == 0 && b.tier != 0) {
-          return 1;
-        }
-        return a.tier - b.tier;
-      })
-      .forEach(x => {
-        if (!result.get(x.tier)) {
-          result.set(x.tier, []);
-        }
-        result.get(x.tier)?.push(x);
-      });
-    return result;
-  }
-
   get currentEquipped() {
     return this.getEquippedHero(this.heroId);
   }
