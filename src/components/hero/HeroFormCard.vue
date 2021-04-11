@@ -2,18 +2,6 @@
   <v-card flat outlined>
     <v-card-text class="pa-3">
       <v-row dense>
-        <v-col cols="12" md="4">
-          <v-text-field
-            v-model.number="form.tier"
-            class="mt-1"
-            dense
-            hide-details
-            label="Tier (1 - Highest)"
-            min="0"
-            outlined
-            type="number"
-          />
-        </v-col>
         <v-col cols="12">
           <v-row dense>
             <v-col cols="12" md="6">
@@ -90,7 +78,12 @@
     <v-card-actions>
       <v-btn class="font-weight-bold" color="primary" text @click="save">Save</v-btn>
       <v-btn text @click="resetForm">Reset</v-btn>
+      <v-spacer />
+      <v-btn class="font-weight-bold" color="success" text @click="clearOrder">Clear Order</v-btn>
     </v-card-actions>
+    <v-snackbar v-model="msg" color="success" timeout="1500">
+      <span v-if="msg == 1">Order Cleared</span>
+    </v-snackbar>
   </v-card>
 </template>
 <script lang="ts">
@@ -101,7 +94,6 @@ import { GearAbility } from '@/models/common';
 import { ConstantService, ObjectUtils } from '@/services';
 
 type HeroForm = {
-  tier: number;
   basic: HeroAbility;
   bonus: GearAbility;
   rating: HeroAbility;
@@ -118,6 +110,7 @@ export default class HeroFormCard extends Vue {
   saveHeros!: (heros: Hero[]) => void;
   form = this.defaultForm();
   lockBasic = true;
+  msg = 0;
 
   get hero() {
     return this.getHero(this.heroId);
@@ -133,7 +126,7 @@ export default class HeroFormCard extends Vue {
 
   defaultForm(): HeroForm {
     return {
-      tier: 0,
+      // tier: 0,
       basic: ConstantService.emptyHeroAbility(),
       bonus: ConstantService.emptyGearAbility(),
       rating: ConstantService.emptyHeroAbility()
@@ -143,14 +136,11 @@ export default class HeroFormCard extends Vue {
   resetForm() {
     this.lockBasic = true;
     if (this.hero) {
-      this.form.tier = this.hero.tier;
       ObjectUtils.assignHeroAbility(this.form.basic, this.hero);
       ObjectUtils.assignGearAbility(this.form.bonus, this.hero.bonusAbility);
       ObjectUtils.assignHeroAbility(this.form.rating, this.hero.abilityRating);
     } else {
       const defaultFrom = this.defaultForm();
-      this.form.tier = defaultFrom.tier;
-
       ObjectUtils.assignHeroAbility(this.form.basic, defaultFrom.basic);
       ObjectUtils.assignGearAbility(this.form.bonus, defaultFrom.bonus);
       ObjectUtils.assignHeroAbility(this.form.rating, defaultFrom.rating);
@@ -160,11 +150,18 @@ export default class HeroFormCard extends Vue {
   save() {
     console.log(`save, form = ${JSON.stringify(this.form)}`);
     const shadow: Hero = JSON.parse(JSON.stringify(this.hero));
-    shadow.tier = this.form.tier;
+    // shadow.tier = this.form.tier;
     ObjectUtils.assignHeroAbility(shadow, this.form.basic);
     ObjectUtils.assignGearAbility(shadow.bonusAbility, this.form.bonus);
     ObjectUtils.assignHeroAbility(shadow.abilityRating, this.form.rating);
     this.saveHeros([shadow]);
+  }
+
+  clearOrder() {
+    const shadow: Hero = JSON.parse(JSON.stringify(this.hero));
+    shadow.order = 0;
+    this.saveHeros([shadow]);
+    this.msg = 1;
   }
 }
 </script>

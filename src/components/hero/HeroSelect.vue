@@ -71,24 +71,22 @@ export default class HeroSelect extends Vue {
 
   get heroSelectItems() {
     const sortedHeros = [...this.heros].sort((a, b) => {
-      if (b.tier == 0 && a.tier != 0) {
-        return -1;
-      } else if (a.tier == 0 && b.tier != 0) {
+      if (b.order == 0 && a.order != 0) {
         return 1;
+      } else if (a.order == 0 && b.order != 0) {
+        return -1;
       }
-      return a.tier - b.tier;
+      return a.order - b.order;
     });
     const result: any[] = [];
     let i = 0;
-    let tier = 0;
-    while (sortedHeros[i].tier > 0) {
-      if (tier != sortedHeros[i].tier) {
-        tier = sortedHeros[i].tier;
-        result.push({ header: `Tier ${tier}` });
-      }
+
+    result.push({ header: 'No Order' });
+    while (sortedHeros[i].order == 0) {
       result.push(sortedHeros[i++]);
     }
-    result.push({ header: 'No Tier' });
+
+    result.push({ header: `Ordered` });
     result.push(...sortedHeros.slice(i, sortedHeros.length));
     return result;
   }
@@ -96,20 +94,21 @@ export default class HeroSelect extends Vue {
   get tieredHeros() {
     const result = new Map<number, Hero[]>();
     [...this.heros]
-      .filter(x => x.tier > 0)
+      .filter(x => x.order > 0)
       .sort((a, b) => {
-        if (b.tier == 0 && a.tier != 0) {
+        if (b.order == 0 && a.order != 0) {
           return -1;
-        } else if (a.tier == 0 && b.tier != 0) {
+        } else if (a.order == 0 && b.order != 0) {
           return 1;
         }
-        return a.tier - b.tier;
+        return a.order - b.order;
       })
       .forEach(x => {
-        if (!result.get(x.tier)) {
-          result.set(x.tier, []);
+        const tier = Math.ceil(x.order / 5);
+        if (!result.get(tier)) {
+          result.set(tier, []);
         }
-        result.get(x.tier)?.push(x);
+        result.get(tier)?.push(x);
       });
     return result;
   }
