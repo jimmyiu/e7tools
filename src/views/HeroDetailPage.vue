@@ -1,80 +1,76 @@
 <template>
-  <div>
-    <v-row dense>
-      <v-col cols="12">
-        <v-sheet class="pa-2 mb-1" rounded>
-          <div class="d-flex align-center">
-            <v-avatar class="mr-2" color="black" size="36">{{ currentEquipped.hero.order }}</v-avatar>
-            <v-avatar class="mr-2" left size="36">
-              <v-img :src="currentEquipped.hero.icon" />
-            </v-avatar>
-            {{ currentEquipped.hero.name }}
-            <v-spacer />
-            <v-btn class="hidden-lg-and-up ml-1" :color="editHero ? '' : 'primary'" icon @click="editHero = !editHero">
-              <v-icon>{{ editHero ? 'mdi-chevron-up-circle-outline' : 'edit' }}</v-icon>
-            </v-btn>
-            <!-- <v-btn icon>
-              <v-icon>delete</v-icon>
-            </v-btn> -->
-          </div>
-          <v-expand-transition>
-            <div v-if="$vuetify.breakpoint.lgAndUp || editHero">
-              <!-- <v-divider class="my-3" /> -->
-              <hero-form-card class="mt-3" :hero-id="heroId" />
-            </div>
-          </v-expand-transition>
-        </v-sheet>
-      </v-col>
-    </v-row>
-    <v-row dense>
-      <v-col cols="12">
-        <v-tabs v-model="tab" color="white">
-          <v-tabs-slider color="white"></v-tabs-slider>
-          <v-tab>Current</v-tab>
-          <v-tab>Past</v-tab>
-          <v-tab>Compare</v-tab>
-        </v-tabs>
-        <v-tabs-items v-model="tab">
-          <v-tab-item>
-            <suit-mgt-card :hero-id="heroId" />
-          </v-tab-item>
-          <v-tab-item>
-            <v-card>
-              <v-card-text class="pa-2">
-                <suit-gear-view class="mx-auto" :hero="currentEquipped.hero" :suit="savedSuit" />
-              </v-card-text>
-            </v-card>
-          </v-tab-item>
-        </v-tabs-items>
-      </v-col>
-    </v-row>
-    <v-row dense>
-      <!-- <v-col class="flex-grow-1" cols="12" lg="12" sm="auto">
-        <suit-mgt-card :hero-id="heroId" />
-      </v-col> -->
-      <v-col class="flex-grow-1" cols="12" lg="12" sm="auto"> </v-col>
-    </v-row>
-    <v-footer app color="section">
-      <v-btn :disabled="currentEquipped.hero.order <= 1" icon @click="changeHero(currentEquipped.hero.order - 1)">
-        <v-icon>mdi-arrow-left-bold</v-icon>
-      </v-btn>
-      <v-spacer />
-      <v-btn icon @click="changeHero(currentEquipped.hero.order + 1)">
-        <v-icon>mdi-arrow-right-bold</v-icon>
-      </v-btn>
-    </v-footer>
+  <div style="padding-top: 42px">
+    <v-sheet class="toolbar pa-2" outlined>
+      <div class="d-flex align-center justify-space-between">
+        <div>
+          <v-btn :disabled="currentEquipped.hero.order <= 1" icon @click="changeHero(currentEquipped.hero.order - 1)">
+            <v-icon>mdi-arrow-left-bold</v-icon>
+          </v-btn>
+          <v-avatar class="mr-2" color="black" size="36">{{ currentEquipped.hero.order }}</v-avatar>
+        </div>
+        <div class="d-flex align-center">
+          <v-avatar class="mr-2" left size="36">
+            <v-img :src="currentEquipped.hero.icon" />
+          </v-avatar>
+          {{ currentEquipped.hero.name }}
+        </div>
+        <div>
+          <v-btn class="hidden-lg-and-up ml-1" :color="editHero ? '' : 'primary'" icon @click="editHero = !editHero">
+            <v-icon>{{ editHero ? 'mdi-chevron-up-circle-outline' : 'edit' }}</v-icon>
+          </v-btn>
+          <v-btn icon @click="changeHero(currentEquipped.hero.order + 1)">
+            <v-icon>mdi-arrow-right-bold</v-icon>
+          </v-btn>
+        </div>
+      </div>
+    </v-sheet>
+    <div class="mt-3">
+      <v-expand-transition>
+        <div v-if="$vuetify.breakpoint.lgAndUp || editHero">
+          <hero-form-card class="mb-3" :hero-id="heroId" />
+        </div>
+      </v-expand-transition>
+      <v-tabs v-model="tab" color="white">
+        <v-tabs-slider color="white"></v-tabs-slider>
+        <v-tab>Current</v-tab>
+        <v-tab>Past</v-tab>
+        <v-tab>Compare</v-tab>
+      </v-tabs>
+      <v-tabs-items v-model="tab">
+        <v-tab-item>
+          <suit-mgt-card :hero-id="heroId" />
+        </v-tab-item>
+        <v-tab-item>
+          <v-card>
+            <v-card-text class="pa-2">
+              <suit-gear-view class="mx-auto" :hero="currentEquipped.hero" :suit="savedSuit" />
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <suit-compare-view :hero-id="heroId" />
+        </v-tab-item>
+      </v-tabs-items>
+    </div>
   </div>
 </template>
+<style lang="sass" scoped>
+.toolbar
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+</style>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { HeroFormCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard } from '@/components';
+import { HeroFormCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard, SuitCompareView } from '@/components';
 import { mapGetters, mapActions } from 'vuex';
 import { EquippedHero, Gear, Hero, SiteState, Suit } from '@/models';
 import { HeroSuit } from '@/models/suit';
 
 @Component({
   name: 'view-hero-page',
-  components: { HeroFormCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard },
+  components: { HeroFormCard, HeroSelect, GearCard, SuitGearView, SuitMgtCard, SuitCompareView },
   computed: { ...mapGetters(['gears', 'heros', 'siteState', 'getEquippedHero', 'getSavedSuit']) },
   methods: mapActions(['updateState'])
 })

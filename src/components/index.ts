@@ -14,6 +14,7 @@ import HeroOverviewCard from './hero/HeroOverviewCard.vue';
 import HeroSelect from './hero/HeroSelect.vue';
 import MessageBox from './common/MessageBox.vue';
 import OptimizationProfiler from './gear/optimizer/OptimizationProfiler.vue';
+import SuitCompareView from './suit/SuitCompareView.vue';
 import SuitGearView from './suit/SuitGearView.vue';
 import SuitMgtCard from './suit/SuitMgtCard.vue';
 export {
@@ -35,6 +36,7 @@ export {
   HeroSelect,
   MessageBox,
   OptimizationProfiler,
+  SuitCompareView,
   SuitGearView,
   SuitMgtCard
 };
