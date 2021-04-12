@@ -1,8 +1,8 @@
 <template>
   <v-card>
-    <v-card-title class="py-3">
+    <!-- <v-card-title class="py-3">
       Current Suit
-    </v-card-title>
+    </v-card-title> -->
     <v-card-text class="pa-2">
       <v-row dense>
         <v-col cols="12">

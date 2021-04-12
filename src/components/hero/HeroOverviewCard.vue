@@ -70,7 +70,7 @@ export default class HeroSmallCard extends Vue {
   editHero() {
     console.log(this.heroId);
     if (this.heroId) {
-      this.$router.push({ name: 'view-hero', params: { heroId: this.heroId } });
+      this.$router.push({ name: 'hero-detail', params: { heroId: this.heroId } });
     }
   }
 

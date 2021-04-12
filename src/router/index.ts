@@ -32,6 +32,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "other" */ '../views/ViewHeroPage.vue')
   },
   {
+    path: '/hero-detail/:heroId',
+    name: 'hero-detail',
+    props: true,
+    component: () => import(/* webpackChunkName: "other" */ '../views/HeroDetailPage.vue')
+  },
+  {
     path: '/hero',
     name: 'hero',
     component: () => import(/* webpackChunkName: "other" */ '../views/HeroPage.vue')
