@@ -68,15 +68,17 @@ export default class HeroPage extends Vue {
   addHero() {
     if (this.heroId) {
       const hero = this.getHero(this.heroId);
-      hero.order = this.heros.reduce((max, current) => (current.order > max.order ? current : max)).order + 1;
-      console.log(`${hero.id} new order = ${hero.order}`);
-      this.saveHeros([hero]);
-      this.$nextTick(() => {
-        (document.getElementById('app') as any).scrollTo({
-          top: document.getElementById('app')?.scrollHeight,
-          behavior: 'smooth'
+      if (hero.order == 0) {
+        hero.order = this.heros.reduce((max, current) => (current.order > max.order ? current : max)).order + 1;
+        console.log(`${hero.id} new order = ${hero.order}`);
+        this.saveHeros([hero]);
+        this.$nextTick(() => {
+          (document.getElementById('app') as any).scrollTo({
+            top: document.getElementById('app')?.scrollHeight,
+            behavior: 'smooth'
+          });
         });
-      });
+      }
     }
   }
 
